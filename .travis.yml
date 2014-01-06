@@ -1,3 +1,10 @@
 language: ruby
 rvm:
 - 2.1.0
+deploy:
+  provider: heroku
+  api_key:
+    secure: YG+AVN/kERRVHzJOhXc7ou21GvjqrcssuWeKRWrc+DhEm42zYxHJ6hBPYN48rj9hu3JVUJFP7W21RskOrUO0EAEf69pOeC7is/PjrLTLLg+7itEy9ykUKBgVGJJ1MFR9wgrAIAa9BClOoB+zWQDRanbk03C8Vsvvg+ufGv3WXjw=
+  app: votebot
+  on:
+    repo: openpolitics/votebot
