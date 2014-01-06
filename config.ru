@@ -1,0 +1,2 @@
+require './votebot'
+run Votebot
