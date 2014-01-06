@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/openpolitics/votebot.png?branch=master)](https://travis-ci.org/openpolitics/votebot)
+
 votebot
 =======
 
