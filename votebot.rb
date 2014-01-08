@@ -17,12 +17,22 @@ class Votebot < Sinatra::Base
   post '/' do
     case env['HTTP_X_GITHUB_EVENT']
     when "issue_comment"
-      200
+      on_issue_comment(JSON.parse(params[:payload]))
     when "pull_request"
-      200
+      on_pull_request(JSON.parse(params[:payload]))
     else
       400
     end
   end
   
+  private
+  
+  def on_issue_comment(json)
+    200
+  end
+  
+  def on_pull_request(json)
+    200
+  end
+
 end

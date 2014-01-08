@@ -14,15 +14,15 @@ describe "index page" do
     last_response.should be_bad_request
   end
   
-  it "/ should accept Github issue comment posts" do
+  it "/ should parse github issue comments correctly" do
     header 'X-Github-Event', "issue_comment"
-    post '/'
+    post '/', payload: load_fixture('requests/issue_comment')
     last_response.should be_ok
   end
 
-  it "/ should accept Github pull request posts" do
+  it "/ should parse github pull requests correctly" do
     header 'X-Github-Event', "pull_request"
-    post '/'
+    post '/', payload: load_fixture('requests/pull_request')
     last_response.should be_ok
   end
 
