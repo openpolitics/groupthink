@@ -4,6 +4,7 @@ ruby "2.1.0"
 
 gem "rake"
 gem "sinatra"
+gem "redis"
 
 group :development do
   gem "travis"
