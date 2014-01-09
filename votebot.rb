@@ -14,7 +14,7 @@ class Votebot < Sinatra::Base
     "Nothing to see here; visit <a href='http://openpolitics.org.uk'>openpolitics.org.uk</a> instead!"
   end
   
-  post '/' do
+  post '/webhook' do
     case env['HTTP_X_GITHUB_EVENT']
     when "issue_comment"
       on_issue_comment(JSON.parse(params[:payload]))

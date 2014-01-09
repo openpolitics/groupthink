@@ -4,7 +4,7 @@ require 'json'
 describe "webhook POST" do
   
   it "/ should reject unknown posts" do
-    post '/'
+    post '/webhook'
     last_response.should be_bad_request
   end
   
@@ -13,7 +13,7 @@ describe "webhook POST" do
     Votebot.any_instance.should_receive(:update_pr).with(32).once
     # Set POST
     header 'X-Github-Event', "issue_comment"
-    post '/', payload: load_fixture('requests/issue_comment')
+    post '/webhook', payload: load_fixture('requests/issue_comment')
     # Check response
     last_response.should be_ok
   end
@@ -23,14 +23,14 @@ describe "webhook POST" do
     Votebot.any_instance.should_receive(:update_pr).with(43).once
     # Set POST
     header 'X-Github-Event', "pull_request"
-    post '/', payload: load_fixture('requests/pull_request')
+    post '/webhook', payload: load_fixture('requests/pull_request')
     # Check response
     last_response.should be_ok
   end
 
   it "/ should not accept other Github posts" do
     header 'X-Github-Event', "something_else"
-    post '/'
+    post '/webhook'
     last_response.should be_bad_request
   end
 
