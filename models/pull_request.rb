@@ -17,10 +17,18 @@ class PullRequest
   
   def initialize(number)
     @number = number
+    @state = REDIS.get(db_key)
   end
   
   def update_from_github!
     @state = "passed"
+    REDIS.set(db_key, @state)
   end
+  
+  def db_key
+    [self.class.name, number.to_s].join(':')
+  end
+  
+  
   
 end
