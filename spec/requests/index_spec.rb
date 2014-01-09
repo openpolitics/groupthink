@@ -15,14 +15,22 @@ describe "index page" do
   end
   
   it "/ should parse github issue comments correctly" do
+    # Should result in PR 32 being updated
+    Votebot.any_instance.should_receive(:update_pr).with(32).once
+    # Set POST
     header 'X-Github-Event', "issue_comment"
     post '/', payload: load_fixture('requests/issue_comment')
+    # Check response
     last_response.should be_ok
   end
 
   it "/ should parse github pull requests correctly" do
+    # Should result in PR 43 being updated
+    Votebot.any_instance.should_receive(:update_pr).with(43).once
+    # Set POST
     header 'X-Github-Event', "pull_request"
     post '/', payload: load_fixture('requests/pull_request')
+    # Check response
     last_response.should be_ok
   end
 
