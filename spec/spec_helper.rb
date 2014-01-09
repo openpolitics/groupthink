@@ -1,6 +1,8 @@
 # spec/spec_helper.rb
 require 'rack/test'
 
+ENV["RACK_ENV"] = "test"
+
 require File.expand_path '../../votebot.rb', __FILE__
 
 module RSpecMixin

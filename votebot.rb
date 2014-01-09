@@ -1,4 +1,5 @@
 require 'sinatra/base'
+require_relative 'environments'
 require_relative 'models'
 
 class Votebot < Sinatra::Base
