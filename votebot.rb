@@ -1,5 +1,6 @@
 require 'sinatra/base'
 require 'redis'
+require_relative 'models'
 
 if ENV['RACK_ENV'] != "production" 
   ENV["REDISTOGO_URL"] = 'redis://localhost'
@@ -46,16 +47,12 @@ class Votebot < Sinatra::Base
   def on_issue_comment_created(json)
     issue = json['issue']
     if issue['state'] == 'open' && issue['pull_request']
-      update_pr(issue['number'])
+      PullRequest.update_from_github!(issue['number'])
     end
   end
 
   def on_pull_request_opened(json)
-    update_pr(json['number'])
+    PullRequest.update_from_github!(json['number'])
   end
   
-  def update_pr(number)
-    puts number.inspect
-  end
-
 end
