@@ -29,18 +29,24 @@ class PullRequest
   
   def initialize(number)
     @number = number
-    @state = redis.get(db_key)
+    data = JSON.parse(redis.get(db_key))
+    @state = data['state']
   end
   
   def update_from_github!
     @state = "passed"
-    redis.set(db_key, @state)
+    save!
   end
   
   def db_key
     [self.class.name, number.to_s].join(':')
   end
   
+  def save!
+    redis.set(db_key, {
+      'state' => @state,
+    }.to_json)
+  end
   
   private
   
