@@ -1,4 +1,5 @@
 require 'github_api'
+require 'json'
 
 class PullRequest
 
@@ -28,11 +29,14 @@ class PullRequest
   
   def initialize(number)
     @number = number
-    data = JSON.parse(redis.get(db_key)) rescue {}
-    @state = data['state']
-    @title = data['title']
-    @agree = data['agree']
-    @disagree = data['disagree']
+    data = redis.get(db_key)
+    if data
+      data = JSON.parse(data)
+      @state = data['state']
+      @title = data['title']
+      @agree = data['agree']
+      @disagree = data['disagree']
+    end
   end
   
   def update_from_github!
