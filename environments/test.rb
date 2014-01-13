@@ -1,5 +1,5 @@
-# require 'mock-redis'
-# 
-# Redis = MockRedis
+require 'mock_redis'
+
+Redis = MockRedis
 
 require_relative 'development'

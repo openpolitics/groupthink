@@ -1,5 +1,6 @@
 # spec/spec_helper.rb
 require 'rack/test'
+require 'database_cleaner'
 
 ENV["RACK_ENV"] = "test"
 
@@ -9,6 +10,8 @@ module RSpecMixin
   include Rack::Test::Methods
   def app() Votebot end
 end
+
+DatabaseCleaner.strategy = :truncation
 
 RSpec.configure do |config|
   config.include RSpecMixin
@@ -22,6 +25,15 @@ RSpec.configure do |config|
   # the seed, which is printed after each run.
   #     --seed 1234
   config.order = 'random'
+  
+  config.before(:each) do
+    DatabaseCleaner.start
+  end
+    
+  config.after(:each) do
+    DatabaseCleaner.clean    
+  end
+  
 end
 
 def load_fixture(filename)

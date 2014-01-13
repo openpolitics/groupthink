@@ -4,7 +4,14 @@ ruby "2.1.0"
 
 gem "rake"
 gem "sinatra"
-gem "redis"
+
+group :development, :production do
+  gem "redis"
+end  
+
+group :test do
+  gem "mock_redis"
+end  
 
 group :development do
   gem "travis"
@@ -13,4 +20,5 @@ end
 group :development, :test do
   gem "rspec"
   gem "rack-test"
+  gem "database_cleaner"
 end

@@ -4,6 +4,7 @@ GEM
     addressable (2.3.5)
     backports (3.4.0)
     coderay (1.1.0)
+    database_cleaner (1.2.0)
     diff-lcs (1.2.5)
     ethon (0.6.2)
       ffi (>= 1.3.0)
@@ -25,6 +26,7 @@ GEM
       addressable (~> 2.3)
     method_source (0.8.2)
     mime-types (1.25.1)
+    mock_redis (0.10.0)
     multi_json (1.8.2)
     multipart-post (1.2.0)
     net-http-persistent (2.9)
@@ -75,6 +77,8 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  database_cleaner
+  mock_redis
   rack-test
   rake
   redis
