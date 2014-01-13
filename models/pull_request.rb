@@ -21,7 +21,7 @@ class PullRequest
   end
   
   def self.find_all
-    redis.keys.select{|x| x =~ /^PullRequest:/}.map{|key| PullRequest.new(key.split(':')[1])}
+    redis.keys.select{|x| x =~ /^PullRequest:/}.map{|key| PullRequest.new(key.split(':')[1])}.sort_by{|x| x.number}
   end
   
   attr_accessor :number
