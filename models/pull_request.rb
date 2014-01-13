@@ -24,17 +24,30 @@ class PullRequest
     redis.keys.select{|x| x =~ /^PullRequest:/}.map{|key| PullRequest.new(key.split(':')[1])}.sort_by{|x| x.number}
   end
   
-  attr_accessor :number
-  attr_accessor :state
+  attr_accessor :number, :state, :title, :agree, :disagree
   
   def initialize(number)
     @number = number
-    data = JSON.parse(redis.get(db_key))
+    data = JSON.parse(redis.get(db_key)) rescue {}
     @state = data['state']
+    @title = data['title']
+    @agree = data['agree']
+    @disagree = data['disagree']
   end
   
   def update_from_github!
-    @state = "passed"
+    pr = self.class.github.pull_requests.get('openpolitics', 'manifesto', @number)
+    comments = self.class.github.issues.comments.list 'openpolitics', 'manifesto', issue_id: @number
+    @agree = comments.select{|x| x.body.include?(':+1:') || x.body.include?(':thumbsup:')}.count
+    @disagree = comments.select{|x| x.body.include?(':-1:') || x.body.include?(':thumbsdown:')}.count
+    if @disagree > 0
+      @state = "blocked"
+    elsif @agree >= 3
+      @state = "passed"
+    else
+      @state = "waiting"
+    end
+    @title = pr.title
     save!
   end
   
@@ -45,6 +58,9 @@ class PullRequest
   def save!
     redis.set(db_key, {
       'state' => @state,
+      'title' => @title,
+      'agree' => @agree,
+      'disagree' => @disagree,
     }.to_json)
   end
   
