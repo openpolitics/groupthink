@@ -68,6 +68,10 @@ class PullRequest
     }.to_json)
   end
   
+  def delete!
+    redis.del(db_key)
+  end
+  
   private
   
   def self.github

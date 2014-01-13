@@ -53,6 +53,8 @@ class Votebot < Sinatra::Base
     case json['action']
     when 'opened'
       on_pull_request_opened(json)
+    when 'close'
+      on_pull_request_closed(json)
     end
   end
 
@@ -65,6 +67,10 @@ class Votebot < Sinatra::Base
 
   def on_pull_request_opened(json)
     PullRequest.update_from_github!(json['number'])
+  end
+  
+  def on_pull_request_closed(json)
+    PullRequest.new(json['number']).delete!
   end
   
 end
