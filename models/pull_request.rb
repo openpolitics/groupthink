@@ -20,6 +20,10 @@ class PullRequest
     pr
   end
   
+  def self.find_all
+    redis.keys.select{|x| x =~ /^PullRequest:/}.map{|key| PullRequest.new(key.split(':')[1])}
+  end
+  
   attr_accessor :number
   attr_accessor :state
   
