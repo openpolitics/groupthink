@@ -1,7 +1,16 @@
-<% @pull_requests.each do |pr| %>
-
-<div class='alert'>
-  <%= pr.number %>: <%= pr.state %>
-</div>
-
-<% end %>
+<table class='table'>
+  <tr>
+    <th>Title</th>
+    <th>Agree</th>
+    <th>Disagree</th>
+    <th>State</th>
+  </tr>
+  <% @pull_requests.each do |pr| %>
+    <tr class='<%= row_class(pr) %>'>
+      <td><a href='http://github.com/openpolitics/manifesto/pull/<%= pr.number %>'><%= pr.title %></a></td> 
+      <td><%= pr.agree %></td>
+      <td><%= pr.disagree %></td>
+      <td><%= pr.state %></td>
+    </tr>
+  <% end %>
+</table>

@@ -4,8 +4,12 @@ require_relative 'models'
 
 class Votebot < Sinatra::Base
   
-  get '/' do
+  get '/update' do
     PullRequest.update_all_from_github!
+    200
+  end
+
+  get '/' do
     @pull_requests = PullRequest.find_all
     erb :index
   end
@@ -20,6 +24,19 @@ class Votebot < Sinatra::Base
       200
     else
       400
+    end
+  end
+  
+  helpers do
+    def row_class(pr)
+      case pr.state
+      when 'passed'
+        'success'
+      when 'waiting'
+        'warning'
+      when 'blocked'
+        'danger'
+      end
     end
   end
   
