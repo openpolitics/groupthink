@@ -1,0 +1,7 @@
+<% @pull_requests.each do |pr| %>
+
+<div class='alert'>
+  <%= pr.number %>: <%= pr.state %>
+</div>
+
+<% end %>

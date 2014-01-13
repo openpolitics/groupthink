@@ -5,7 +5,9 @@ require_relative 'models'
 class Votebot < Sinatra::Base
   
   get '/' do
-    "Nothing to see here; visit <a href='http://openpolitics.org.uk'>openpolitics.org.uk</a> instead!"
+    PullRequest.update_all_from_github!
+    @pull_requests = PullRequest.find_all
+    erb :index
   end
   
   post '/webhook' do
