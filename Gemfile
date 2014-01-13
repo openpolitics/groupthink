@@ -4,6 +4,7 @@ ruby "2.1.0"
 
 gem "rake"
 gem "sinatra"
+gem "github_api"
 
 group :development, :production do
   gem "redis"

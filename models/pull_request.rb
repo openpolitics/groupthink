@@ -1,3 +1,5 @@
+require 'github_api'
+
 class PullRequest
 
   States = [
@@ -6,6 +8,12 @@ class PullRequest
     "blocked"
   ]
   
+  def self.update_all_from_github!
+    github.pull_requests.list.each do |pr|
+      update_from_github!(pr["number"])
+    end
+  end
+
   def self.update_from_github!(number)
     pr = PullRequest.new(number)
     pr.update_from_github!
@@ -30,5 +38,10 @@ class PullRequest
   end
   
   
+  private
+  
+  def self.github
+    @@github = Github.new user: 'openpolitics', repo: 'manifesto', oauth_token: ENV['GITHUB_OAUTH_TOKEN']    
+  end
   
 end
