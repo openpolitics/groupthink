@@ -12,6 +12,8 @@ end
 
 group :test do
   gem "mock_redis"
+  gem "vcr"
+  gem "webmock"
 end  
 
 group :development do

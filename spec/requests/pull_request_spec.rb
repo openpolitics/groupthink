@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe PullRequest do
+describe PullRequest, :vcr do
   
   it "should update pull requests on demand" do
     pr = PullRequest.update_from_github!(43)
