@@ -1,10 +1,30 @@
 <h1>#<%= @pull_request.number %>: <%= @pull_request.title %></h1>
 
 <div>
-  <%= @pull_request.state %> (agree: <%= @pull_request.agree %>, disagree: <%= @pull_request.disagree %>)
+  State: <%= @pull_request.state.capitalize %>
 </div>
 
-<div>
+<% if @pull_request.agree.count > 0 %>
+  <div>
+    <h2>Agree:</h2>
+
+    <% @pull_request.agree.each do |user| %>
+      <a href='<%= user['html_url']%>'><img src='<%= user['avatar_url'] %>' alt='<%= user['login'] %>' class="img-rounded"/></a>
+    <% end %>
+  </div>
+<% end %>
+
+<% if @pull_request.disagree.count > 0 %>
+  <div>
+    <h2>Disagree:</h2>
+
+    <% @pull_request.disagree.each do |user| %>
+      <a href='<%= user['html_url']%>'><img src='<%= user['avatar_url'] %>' alt='<%= user['login'] %>' class="img-rounded"/></a>
+    <% end %>
+  </div>
+<% end %>
+
+<div style='margin-top: 30px'>
   <form action='/<%= @pull_request.number %>/update' method='POST'>
     <button type='submit' class='btn btn-warning'>Update</button>
   </form>

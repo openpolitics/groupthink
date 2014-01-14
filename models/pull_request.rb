@@ -47,15 +47,15 @@ class PullRequest
   def update_from_github!
     pr = self.class.github.pull_requests.get('openpolitics', 'manifesto', @number)
     comments = self.class.github.issues.comments.list 'openpolitics', 'manifesto', issue_id: @number
-    @agree = comments.select{|x| x.body.include?(':+1:') || x.body.include?(':thumbsup:')}.count
-    @disagree = comments.select{|x| x.body.include?(':-1:') || x.body.include?(':thumbsdown:')}.count
+    @agree = comments.select{|x| x.body.include?(':+1:') || x.body.include?(':thumbsup:')}.map{|x| x.user}.uniq
+    @disagree = comments.select{|x| x.body.include?(':-1:') || x.body.include?(':thumbsdown:')}.map{|x| x.user}.uniq
     github_state = nil
     github_description = nil
-    if @disagree > 0
+    if @disagree.count > 0
       @state = "blocked"
       github_state = "failure"
       github_description = "The change is blocked"
-    elsif @agree >= 3
+    elsif @agree.count >= 3
       @state = "passed"
       github_state = "success"
       github_description = "The change is approved and ready to merge"
