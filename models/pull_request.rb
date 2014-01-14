@@ -56,7 +56,7 @@ class PullRequest
       @state = "blocked"
       github_state = "failure"
       github_description = "The change is blocked"
-    elsif @agree.count >= 3
+    elsif @agree.count >= 2
       @state = "passed"
       github_state = "success"
       github_description = "The change is approved and ready to merge"
