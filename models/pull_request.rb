@@ -44,15 +44,28 @@ class PullRequest
     comments = self.class.github.issues.comments.list 'openpolitics', 'manifesto', issue_id: @number
     @agree = comments.select{|x| x.body.include?(':+1:') || x.body.include?(':thumbsup:')}.count
     @disagree = comments.select{|x| x.body.include?(':-1:') || x.body.include?(':thumbsdown:')}.count
+    github_state = nil
+    github_description = nil
     if @disagree > 0
       @state = "blocked"
+      github_state = "failure"
+      github_description = "The change is blocked"
     elsif @agree >= 3
       @state = "passed"
+      github_state = "success"
+      github_description = "The change is approved and ready to merge"
     else
       @state = "waiting"
+      github_state = "pending"
+      github_description = "The change is waiting for more votes"
     end
     @title = pr.title
     save!
+    # Update github commit status
+    self.class.github.repos.statuses.create 'openpolitics', 'manifesto', pr['head']['sha'],
+      "state" =>  github_state,
+      "target_url" => "http://votebot.openpolitics.org.uk",
+      "description" => github_description
   end
   
   def db_key
