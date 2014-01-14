@@ -19,6 +19,12 @@ class Votebot < Sinatra::Base
     erb :show
   end
   
+  post '/:number/update' do
+    @pull_request = PullRequest.find(params[:number])
+    @pull_request.update_from_github!
+    redirect "/#{params[:number]}"
+  end
+
   post '/webhook' do
     case env['HTTP_X_GITHUB_EVENT']
     when "issue_comment"

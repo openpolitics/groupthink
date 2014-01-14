@@ -3,3 +3,9 @@
 <div>
   <%= @pull_request.state %> (agree: <%= @pull_request.agree %>, disagree: <%= @pull_request.disagree %>)
 </div>
+
+<div>
+  <form action='/<%= @pull_request.number %>/update' method='POST'>
+    <button type='submit' class='btn btn-warning'>Update</button>
+  </form>
+</div>
