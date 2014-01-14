@@ -4,7 +4,7 @@ require_relative 'models'
 
 class Votebot < Sinatra::Base
   
-  get '/update' do
+  post '/update' do
     PullRequest.update_all_from_github!
     200
   end
