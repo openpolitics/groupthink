@@ -25,6 +25,11 @@ class PullRequest
     redis.keys.select{|x| x =~ /^PullRequest:/}.map{|key| PullRequest.new(key.split(':')[1])}.sort_by{|x| x.number}
   end
   
+  def self.find(number)
+    pr = PullRequest.new(number)
+    pr.state ? pr : nil
+  end
+  
   attr_accessor :number, :state, :title, :agree, :disagree
   
   def initialize(number)
@@ -64,7 +69,7 @@ class PullRequest
     # Update github commit status
     self.class.github.repos.statuses.create 'openpolitics', 'manifesto', pr['head']['sha'],
       "state" =>  github_state,
-      "target_url" => "http://votebot.openpolitics.org.uk",
+      "target_url" => "http://votebot.openpolitics.org.uk/#{@number}",
       "description" => github_description
   end
   

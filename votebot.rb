@@ -14,6 +14,11 @@ class Votebot < Sinatra::Base
     erb :index
   end
   
+  get '/:number' do
+    @pull_request = PullRequest.find(params[:number])
+    erb :show
+  end
+  
   post '/webhook' do
     case env['HTTP_X_GITHUB_EVENT']
     when "issue_comment"
