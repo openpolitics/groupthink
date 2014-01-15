@@ -2,7 +2,9 @@ GEM
   remote: https://rubygems.org/
   specs:
     addressable (2.3.5)
+    atomic (1.1.14)
     backports (3.4.0)
+    buftok (0.2.0)
     coderay (1.1.0)
     crack (0.4.1)
       safe_yaml (~> 0.9.0)
@@ -10,6 +12,7 @@ GEM
     descendants_tracker (0.0.3)
     diff-lcs (1.2.5)
     dotenv (0.9.0)
+    equalizer (0.0.9)
     ethon (0.6.2)
       ffi (>= 1.3.0)
       mime-types (~> 1.18)
@@ -35,11 +38,17 @@ GEM
       oauth2
     hashie (2.0.5)
     highline (1.6.20)
+    http (0.5.0)
+      http_parser.rb
+    http_parser.rb (0.6.0)
     httpauth (0.2.0)
+    json (1.8.1)
     jwt (0.1.10)
       multi_json (>= 1.5)
     launchy (2.4.2)
       addressable (~> 2.3)
+    memoizable (0.4.0)
+      thread_safe (~> 0.1.3)
     method_source (0.8.2)
     mime-types (1.25.1)
     mini_portile (0.5.2)
@@ -80,11 +89,14 @@ GEM
       diff-lcs (>= 1.1.3, < 2.0)
     rspec-mocks (2.14.4)
     safe_yaml (0.9.7)
+    simple_oauth (0.2.0)
     sinatra (1.4.4)
       rack (~> 1.4)
       rack-protection (~> 1.4)
       tilt (~> 1.3, >= 1.3.4)
     slop (3.4.7)
+    thread_safe (0.1.3)
+      atomic
     tilt (1.4.1)
     travis (1.6.6)
       addressable (~> 2.3)
@@ -97,6 +109,17 @@ GEM
       pry (~> 0.9)
       pusher-client (~> 0.4)
       typhoeus (~> 0.6)
+    twitter (5.5.1)
+      addressable (~> 2.3)
+      buftok (~> 0.2.0)
+      descendants_tracker (~> 0.0.3)
+      equalizer (~> 0.0.9)
+      faraday (>= 0.8, < 0.10)
+      http (~> 0.5.0)
+      http_parser.rb (~> 0.6.0)
+      json (~> 1.8)
+      memoizable (~> 0.4.0)
+      simple_oauth (~> 0.2.0)
     typhoeus (0.6.7)
       ethon (~> 0.6.2)
     vcr (2.8.0)
@@ -119,5 +142,6 @@ DEPENDENCIES
   rspec
   sinatra
   travis
+  twitter
   vcr
   webmock
