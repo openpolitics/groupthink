@@ -1,4 +1,4 @@
-<h1>#<%= @pull_request.number %>: <%= @pull_request.title %></h1>
+<h1><a href='http://github.com/openpolitics/manifesto/pull/<%= @pull_request.number %>'>#<%= @pull_request.number %>: <%= @pull_request.title %></a></h1>
 
 <div>
   State: <%= @pull_request.state.capitalize %>
