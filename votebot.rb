@@ -64,7 +64,7 @@ class Votebot < Sinatra::Base
     case json['action']
     when 'opened'
       on_pull_request_opened(json)
-    when 'close'
+    when 'closed'
       on_pull_request_closed(json)
     end
   end
