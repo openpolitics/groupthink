@@ -1,5 +1,6 @@
 <table class='table'>
   <tr>
+    <th>Proposer</th>
     <th>Title</th>
     <th>Agree</th>
     <th>Disagree</th>
@@ -7,6 +8,7 @@
   </tr>
   <% @pull_requests.each do |pr| %>
     <tr class='<%= row_class(pr) %>'>
+      <td><a href='<%= pr.proposer['html_url'] %>'><%= image_tag pr.proposer['avatar_url'], alt: pr.proposer['login'], height: '24px' %></a></td> 
       <td><a href='/<%= pr.number %>'><%= pr.title %></a></td> 
       <td><%= pr.agree.count %></td>
       <td><%= pr.disagree.count %></td>
