@@ -31,13 +31,14 @@ class PullRequest
     pr.state ? pr : nil
   end
   
-  attr_accessor :number, :state, :title, :agree, :disagree
+  attr_accessor :number, :state, :title, :agree, :disagree, :proposer
   
   def initialize(number)
     @number = number
     data = redis.get(db_key)
     if data
       data = JSON.parse(data)
+      @proposer = data['proposer']
       @state = data['state']
       @title = data['title']
       @agree = data['agree']
@@ -48,6 +49,7 @@ class PullRequest
   def update_from_github!
     pr = self.class.github.pull_requests.get('openpolitics', 'manifesto', @number)
     comments = self.class.github.issues.comments.list 'openpolitics', 'manifesto', issue_id: @number
+    @proposer = pr.user
     @agree = comments.select{|x| x.body.include?(':+1:') || x.body.include?(':thumbsup:')}.map{|x| x.user}.uniq
     @disagree = comments.select{|x| x.body.include?(':-1:') || x.body.include?(':thumbsdown:')}.map{|x| x.user}.uniq
     github_state = nil
@@ -80,6 +82,7 @@ class PullRequest
   
   def save!
     redis.set(db_key, {
+      'proposer' => @proposer,
       'state' => @state,
       'title' => @title,
       'agree' => @agree,
