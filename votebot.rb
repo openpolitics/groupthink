@@ -4,6 +4,8 @@ require_relative 'models'
 
 class Votebot < Sinatra::Base
   
+  set :protection, :frame_options => 'ALLOW FROM http://openpolitics.org.uk'
+  
   post '/update' do
     PullRequest.update_all_from_github!
     200
