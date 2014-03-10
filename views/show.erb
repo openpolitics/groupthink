@@ -1,6 +1,10 @@
 <h1><a href='http://github.com/openpolitics/manifesto/pull/<%= @pull_request.number %>'>#<%= @pull_request.number %>: <%= @pull_request.title %></a></h1>
 
 <div>
+  Proposer: <a href='<%= pr.proposer['html_url'] %>'><img src='<%= pr.proposer['avatar_url'] %>' alt='<%= pr.proposer['login'] %>' height='24px' /></a>
+</div>
+
+<div>
   State: <%= @pull_request.state.capitalize %>
 </div>
 
