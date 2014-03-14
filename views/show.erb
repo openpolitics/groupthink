@@ -28,6 +28,16 @@
   </div>
 <% end %>
 
+<% if @pull_request.abstain.count > 0 %>
+  <div>
+    <h2>Abstentions:</h2>
+
+    <% @pull_request.abstain.each do |user| %>
+      <a href='<%= user['html_url']%>'><img src='<%= user['avatar_url'] %>' alt='<%= user['login'] %>' class="img-rounded"/></a>
+    <% end %>
+  </div>
+<% end %>
+
 <div style='margin-top: 30px'>
   <form action='/<%= @pull_request.number %>/update' method='POST'>
     <button type='submit' class='btn btn-warning'>Update</button>

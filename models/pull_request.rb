@@ -31,7 +31,7 @@ class PullRequest
     pr.state ? pr : nil
   end
   
-  attr_accessor :number, :state, :title, :agree, :disagree, :proposer
+  attr_accessor :number, :state, :title, :agree, :disagree, :abstain, :proposer
   
   def initialize(number)
     @number = number
@@ -43,6 +43,7 @@ class PullRequest
       @title = data['title']
       @agree = data['agree']
       @disagree = data['disagree']
+      @abstain = data['abstain']
     end
   end
   
@@ -52,6 +53,7 @@ class PullRequest
     @proposer = pr.user
     @agree = comments.select{|x| x.body.include?(':+1:') || x.body.include?(':thumbsup:')}.map{|x| x.user}.uniq
     @disagree = comments.select{|x| x.body.include?(':-1:') || x.body.include?(':thumbsdown:')}.map{|x| x.user}.uniq
+    @abstain = comments.select{|x| x.body.include?(':hand:')}.map{|x| x.user}.uniq
     github_state = nil
     github_description = nil
     if @disagree.count > 0
@@ -87,6 +89,7 @@ class PullRequest
       'title' => @title,
       'agree' => @agree,
       'disagree' => @disagree,
+      'abstain' => @abstain,
     }.to_json)
   end
   
