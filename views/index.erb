@@ -6,6 +6,7 @@
     <th>Title</th>
     <th>Agree</th>
     <th>Disagree</th>
+    <th>Abstain</th>
     <th>State</th>
   </tr>
   <% @pull_requests.each do |pr| %>
@@ -14,6 +15,7 @@
       <td><a href='/<%= pr.number %>'><%= pr.title %></a></td> 
       <td><%= pr.agree.count %></td>
       <td><%= pr.disagree.count %></td>
+      <td><%= pr.abstain.count %></td>
       <td><%= pr.state %></td>
     </tr>
   <% end %>
