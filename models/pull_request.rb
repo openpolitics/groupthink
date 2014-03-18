@@ -31,7 +31,7 @@ class PullRequest
     pr.state ? pr : nil
   end
   
-  attr_accessor :number, :state, :title, :agree, :disagree, :abstain, :proposer
+  attr_accessor :number, :state, :title, :agree, :disagree, :abstain, :proposer, :participants
   
   def initialize(number)
     @number = number
@@ -41,6 +41,7 @@ class PullRequest
       @proposer = data['proposer']
       @state = data['state']
       @title = data['title']
+      @participants = data['participants']
       @agree = data['agree']
       @disagree = data['disagree']
       @abstain = data['abstain']
@@ -51,6 +52,7 @@ class PullRequest
     pr = self.class.github.pull_requests.get('openpolitics', 'manifesto', @number)
     comments = self.class.github.issues.comments.list 'openpolitics', 'manifesto', issue_id: @number
     @proposer = pr.user
+    @participants = comments.map{|x| x.user}.uniq
     @agree = comments.select{|x| x.body.include?(':+1:') || x.body.include?(':thumbsup:')}.map{|x| x.user}.uniq
     @disagree = comments.select{|x| x.body.include?(':-1:') || x.body.include?(':thumbsdown:')}.map{|x| x.user}.uniq
     @abstain = comments.select{|x| x.body.include?(':hand:')}.map{|x| x.user}.uniq
@@ -87,6 +89,7 @@ class PullRequest
       'proposer' => @proposer,
       'state' => @state,
       'title' => @title,
+      'participants' => @participants,
       'agree' => @agree,
       'disagree' => @disagree,
       'abstain' => @abstain,

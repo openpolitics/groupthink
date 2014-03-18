@@ -4,6 +4,7 @@
   <tr>
     <th>Proposer</th>
     <th>Title</th>
+    <th>Participants</th>
     <th>Agree</th>
     <th>Disagree</th>
     <th>Abstain</th>
@@ -13,6 +14,7 @@
     <tr class='<%= row_class(pr) %>'>
       <td><a href='<%= pr.proposer['html_url'] %>'><img src='<%= pr.proposer['avatar_url'] %>' alt='<%= pr.proposer['login'] %>' height='24px' /></a></td> 
       <td><a href='/<%= pr.number %>'><%= pr.title %></a></td> 
+      <td><%= pr.participants.count %></td>
       <td><%= pr.agree.count %></td>
       <td><%= pr.disagree.count %></td>
       <td><%= pr.abstain.count %></td>
