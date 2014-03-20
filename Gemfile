@@ -6,6 +6,7 @@ gem "rake"
 gem "sinatra"
 gem "github_api"
 gem "twitter"
+gem "sinatra-partial"
 
 group :development, :production do
   gem "redis"
