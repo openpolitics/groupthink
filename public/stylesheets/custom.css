@@ -1,0 +1,11 @@
+table.vote-list td.proposer img {
+  height: 24px;
+}
+
+div.proposer img {
+  height: 48px;
+}
+
+div.agree img, div.disagree img, div.abstain img {
+  height: 48px;
+}

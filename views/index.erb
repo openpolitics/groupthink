@@ -1,6 +1,6 @@
 <h1>Open Votes</h1>
 
-<table class='table'>
+<table class='table vote-list'>
   <tr>
     <th>Proposer</th>
     <th>Title</th>
@@ -12,7 +12,7 @@
   </tr>
   <% @pull_requests.each do |pr| %>
     <tr class='<%= row_class(pr) %>'>
-      <td class="text-center"><a href='<%= pr.proposer['html_url'] %>'><img src='<%= pr.proposer['avatar_url'] %>' title='<%= pr.proposer['login'] %>' alt='<%= pr.proposer['login'] %>' height='24px' class='img-rounded' /></a></td> 
+      <td class="proposer text-center"><%= partial :person, locals: {person: pr.proposer } %></td> 
       <td><a href='/<%= pr.number %>'><%= pr.title %></a></td> 
       <td class="text-center"><%= pr.participants.count %></td>
       <td class="text-center"><%= pr.agree.count %></td>

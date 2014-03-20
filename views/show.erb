@@ -1,7 +1,7 @@
 <h1><a href='http://github.com/openpolitics/manifesto/pull/<%= @pull_request.number %>'>#<%= @pull_request.number %>: <%= @pull_request.title %></a></h1>
 
-<div>
-  Proposer: <a href='<%= @pull_request.proposer['html_url'] %>'><img src='<%= @pull_request.proposer['avatar_url'] %>' alt='<%= @pull_request.proposer['login'] %>' height='24px' /></a>
+<div class='proposer'>
+  Proposer: <%= partial :person, locals: {person: @pull_request.proposer } %>
 </div>
 
 <div>
@@ -9,32 +9,23 @@
 </div>
 
 <% if @pull_request.agree.count > 0 %>
-  <div>
+  <div class='agree'>
     <h2>Agree:</h2>
-
-    <% @pull_request.agree.each do |user| %>
-      <a href='<%= user['html_url']%>'><img src='<%= user['avatar_url'] %>' alt='<%= user['login'] %>' class="img-rounded"/></a>
-    <% end %>
+    <%= partial :person, collection: @pull_request.agree %>
   </div>
 <% end %>
 
 <% if @pull_request.disagree.count > 0 %>
-  <div>
+  <div class='disagree'>
     <h2>Disagree:</h2>
-
-    <% @pull_request.disagree.each do |user| %>
-      <a href='<%= user['html_url']%>'><img src='<%= user['avatar_url'] %>' alt='<%= user['login'] %>' class="img-rounded"/></a>
-    <% end %>
+    <%= partial :person, collection: @pull_request.disagree %>
   </div>
 <% end %>
 
 <% if @pull_request.abstain.count > 0 %>
-  <div>
+  <div class='abstain'>
     <h2>Abstentions:</h2>
-
-    <% @pull_request.abstain.each do |user| %>
-      <a href='<%= user['html_url']%>'><img src='<%= user['avatar_url'] %>' alt='<%= user['login'] %>' class="img-rounded"/></a>
-    <% end %>
+    <%= partial :person, collection: @pull_request.abstain %>
   </div>
 <% end %>
 
