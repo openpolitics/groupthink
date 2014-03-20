@@ -5,29 +5,48 @@
 </div>
 
 <div>
-  State: <%= @pull_request.state.capitalize %>
+  State: <span class='label label-<%= row_class(@pull_request) %>'><%= @pull_request.state.capitalize %></span>
 </div>
 
-<% if @pull_request.agree.count > 0 %>
-  <div class='agree'>
-    <h2>Agree:</h2>
-    <%= partial :person, collection: @pull_request.agree %>
-  </div>
-<% end %>
+<div class='row'>
 
-<% if @pull_request.disagree.count > 0 %>
-  <div class='disagree'>
-    <h2>Disagree:</h2>
-    <%= partial :person, collection: @pull_request.disagree %>
+  <div class='col-md-4'>
+    <div class='panel panel-success agree'>
+      <div class="panel-heading">
+        <img src='https://github.global.ssl.fastly.net/images/icons/emoji/+1.png?v5' title='Agree'/>
+        Agree
+      </div>
+      <div class='panel-body'>
+        <%= partial :person, collection: @pull_request.agree %>
+      </div>
+    </div>
   </div>
-<% end %>
 
-<% if @pull_request.abstain.count > 0 %>
-  <div class='abstain'>
-    <h2>Abstentions:</h2>
-    <%= partial :person, collection: @pull_request.abstain %>
+  <div class='col-md-4'>
+    <div class='panel panel-info abstain'>
+      <div class="panel-heading">
+        <img src='https://github.global.ssl.fastly.net/images/icons/emoji/hand.png?v5' title='Abstain'/>
+        Abstaining
+      </div>
+      <div class='panel-body'>
+        <%= partial :person, collection: @pull_request.abstain %>
+      </div>
+    </div>
   </div>
-<% end %>
+
+  <div class='col-md-4'>
+    <div class='panel panel-danger disagree'>
+      <div class="panel-heading">
+        <img src='https://github.global.ssl.fastly.net/images/icons/emoji/-1.png?v5' title='Disagree'/>
+        Disagree
+      </div>
+      <div class='panel-body'>
+        <%= partial :person, collection: @pull_request.disagree %>
+      </div>
+    </div>
+  </div>
+
+</div>
 
 <div style='margin-top: 30px'>
   <form action='/<%= @pull_request.number %>/update' method='POST'>

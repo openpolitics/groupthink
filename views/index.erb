@@ -2,23 +2,23 @@
 
 <table class='table vote-list'>
   <tr>
-    <th>Proposer</th>
+    <th class="text-center">State</th>
     <th>Title</th>
     <th>Participants</th>
-    <th>Agree</th>
-    <th>Disagree</th>
-    <th>Abstain</th>
-    <th>State</th>
+    <th><img src='https://github.global.ssl.fastly.net/images/icons/emoji/+1.png?v5' title='Agree'/></th>
+    <th><img src='https://github.global.ssl.fastly.net/images/icons/emoji/hand.png?v5' title='Abstain'/></th>
+    <th><img src='https://github.global.ssl.fastly.net/images/icons/emoji/-1.png?v5' title='Disagree'/></th>
+    <th>Proposer</th>
   </tr>
   <% @pull_requests.each do |pr| %>
     <tr class='<%= row_class(pr) %>'>
-      <td class="proposer text-center"><%= partial :person, locals: {person: pr.proposer } %></td> 
+      <td class="text-center"><span class='label label-<%= row_class(pr) %>'><%= pr.state.capitalize %></span></td>
       <td><a href='/<%= pr.number %>'><%= pr.title %></a></td> 
       <td class="text-center"><%= pr.participants.count %></td>
       <td class="text-center"><%= pr.agree.count %></td>
-      <td class="text-center"><%= pr.disagree.count %></td>
       <td class="text-center"><%= pr.abstain.count %></td>
-      <td><%= pr.state %></td>
+      <td class="text-center"><%= pr.disagree.count %></td>
+      <td class="proposer text-center"><%= partial :person, locals: {person: pr.proposer } %></td> 
     </tr>
   <% end %>
 </table>

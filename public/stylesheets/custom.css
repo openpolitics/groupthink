@@ -6,6 +6,14 @@ div.proposer img {
   height: 48px;
 }
 
-div.agree img, div.disagree img, div.abstain img {
+.panel-heading img, th img {
+  height: 24px;
+}
+
+div.agree .panel-body img, div.disagree .panel-body img, div.abstain .panel-body img {
   height: 48px;
+}
+
+div.agree .panel-body, div.disagree .panel-body, div.abstain .panel-body {
+  min-height: 150px;
 }
