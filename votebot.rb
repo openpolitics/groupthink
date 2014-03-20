@@ -17,7 +17,7 @@ class Votebot < Sinatra::Base
   end
 
   get '/' do
-    @pull_requests = PullRequest.find_all
+    @pull_requests = PullRequest.find_all.sort_by{|x| x.number.to_i}.reverse
     erb :index
   end
   
