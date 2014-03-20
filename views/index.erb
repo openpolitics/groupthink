@@ -12,12 +12,12 @@
   </tr>
   <% @pull_requests.each do |pr| %>
     <tr class='<%= row_class(pr) %>'>
-      <td><a href='<%= pr.proposer['html_url'] %>'><img src='<%= pr.proposer['avatar_url'] %>' alt='<%= pr.proposer['login'] %>' height='24px' /></a></td> 
+      <td class="text-center"><a href='<%= pr.proposer['html_url'] %>'><img src='<%= pr.proposer['avatar_url'] %>' title='<%= pr.proposer['login'] %>' alt='<%= pr.proposer['login'] %>' height='24px' class='img-rounded' /></a></td> 
       <td><a href='/<%= pr.number %>'><%= pr.title %></a></td> 
-      <td><%= pr.participants.count %></td>
-      <td><%= pr.agree.count %></td>
-      <td><%= pr.disagree.count %></td>
-      <td><%= pr.abstain.count %></td>
+      <td class="text-center"><%= pr.participants.count %></td>
+      <td class="text-center"><%= pr.agree.count %></td>
+      <td class="text-center"><%= pr.disagree.count %></td>
+      <td class="text-center"><%= pr.abstain.count %></td>
       <td><%= pr.state %></td>
     </tr>
   <% end %>
