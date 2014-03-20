@@ -1,11 +1,20 @@
-<h1><a href='http://github.com/openpolitics/manifesto/pull/<%= @pull_request.number %>'>#<%= @pull_request.number %>: <%= @pull_request.title %></a></h1>
+<ol class="breadcrumb">
+  <li><a href="/">All Votes</a></li>
+  <li class="active">#<%= @pull_request.number %></li>
+</ol>
 
-<div class='proposer'>
-  Proposer: <%= partial :person, locals: {person: @pull_request.proposer } %>
-</div>
+<h1><a href='http://github.com/openpolitics/manifesto/pull/<%= @pull_request.number %>'><%= @pull_request.title %></a></h1>
 
-<div>
-  State: <span class='label label-<%= row_class(@pull_request) %>'><%= @pull_request.state.capitalize %></span>
+<div class='well'>
+
+  <div class='proposer pull-right'>
+    Proposer: <%= partial :person, locals: {person: @pull_request.proposer } %>
+  </div>
+
+  <div class='status'>
+    <h1><span class='label label-<%= row_class(@pull_request) %>'><%= @pull_request.state.capitalize %></span></h1>
+  </div>
+  
 </div>
 
 <div class='row'>

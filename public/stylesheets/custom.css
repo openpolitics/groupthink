@@ -17,3 +17,7 @@ div.agree .panel-body img, div.disagree .panel-body img, div.abstain .panel-body
 div.agree .panel-body, div.disagree .panel-body, div.abstain .panel-body {
   min-height: 150px;
 }
+
+.status h1 {
+  margin-top: 10px;
+}
