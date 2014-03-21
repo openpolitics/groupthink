@@ -26,4 +26,9 @@ describe PullRequest, :vcr do
     pr.agree.map{|x| x['login']}.sort.should == ["PaulJRobinson", "philipjohn"]
   end
 
+  it "should ignore votes from proposer" do
+    pr = PullRequest.update_from_github!(74)
+    pr.agree.count.should == 0
+  end
+
 end

@@ -85,17 +85,19 @@ class PullRequest
     @disagree = []
     comments.each do |comment|
       user = comment.user
-      @participants << user
-      case comment.body
-      when /:thumbsup:|:\+1:/
-        remove_votes(user)
-        @agree << user
-      when /:hand:/
-        remove_votes(user)
-        @abstain << user
-      when /:thumbsdown:|:\-1:/
-        remove_votes(user)
-        @disagree << user
+      if user != @proposer
+        @participants << user
+        case comment.body
+        when /:thumbsup:|:\+1:/
+          remove_votes(user)
+          @agree << user
+        when /:hand:/
+          remove_votes(user)
+          @abstain << user
+        when /:thumbsdown:|:\-1:/
+          remove_votes(user)
+          @disagree << user
+        end
       end
     end
     @participants.uniq!
