@@ -51,12 +51,8 @@ class PullRequest
   
   def update_from_github!
     pr = self.class.github.pull_requests.get('openpolitics', 'manifesto', @number)
-    comments = self.class.github.issues.comments.list 'openpolitics', 'manifesto', issue_id: @number
     @proposer = pr.user
-    @participants = comments.map{|x| x.user}.uniq
-    @agree = comments.select{|x| x.body.include?(':+1:') || x.body.include?(':thumbsup:')}.map{|x| x.user}.uniq
-    @disagree = comments.select{|x| x.body.include?(':-1:') || x.body.include?(':thumbsdown:')}.map{|x| x.user}.uniq
-    @abstain = comments.select{|x| x.body.include?(':hand:')}.map{|x| x.user}.uniq
+    process_comments
     github_state = nil
     github_description = nil
     if @disagree.count > 0
@@ -81,6 +77,36 @@ class PullRequest
       "description" => github_description
   end
   
+  def process_comments
+    comments = self.class.github.issues.comments.list 'openpolitics', 'manifesto', issue_id: @number
+    @participants = []
+    @agree = []
+    @abstain = []
+    @disagree = []
+    comments.each do |comment|
+      user = comment.user
+      @participants << user
+      case comment.body
+      when /:thumbsup:|:\+1:/
+        remove_votes(user)
+        @agree << user
+      when /:hand:/
+        remove_votes(user)
+        @abstain << user
+      when /:thumbsdown:|:\-1:/
+        remove_votes(user)
+        @disagree << user
+      end
+    end
+    @participants.uniq!
+  end
+  
+  def remove_votes(user)
+    @agree.delete(user)
+    @abstain.delete(user)
+    @disagree.delete(user)
+  end
+
   def db_key
     [self.class.name, number.to_s].join(':')
   end
