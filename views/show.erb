@@ -23,7 +23,7 @@
     <div class='panel panel-success agree'>
       <div class="panel-heading">
         <img src='https://github.global.ssl.fastly.net/images/icons/emoji/+1.png?v5' title='Agree'/>
-        Agree
+        Agree: <%= @pull_request.agree.count %>
       </div>
       <div class='panel-body'>
         <%= partial :person, collection: @pull_request.agree %>
@@ -35,7 +35,7 @@
     <div class='panel panel-info abstain'>
       <div class="panel-heading">
         <img src='https://github.global.ssl.fastly.net/images/icons/emoji/hand.png?v5' title='Abstain'/>
-        Abstaining
+        Abstaining: <%= @pull_request.abstain.count %>
       </div>
       <div class='panel-body'>
         <%= partial :person, collection: @pull_request.abstain %>
@@ -47,7 +47,7 @@
     <div class='panel panel-danger disagree'>
       <div class="panel-heading">
         <img src='https://github.global.ssl.fastly.net/images/icons/emoji/-1.png?v5' title='Disagree'/>
-        Disagree
+        Disagree: <%= @pull_request.disagree.count %>
       </div>
       <div class='panel-body'>
         <%= partial :person, collection: @pull_request.disagree %>
