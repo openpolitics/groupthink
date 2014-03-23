@@ -25,7 +25,7 @@ class Votebot < Sinatra::Base
     @user = User.find(params[:login])
     @pull_requests = PullRequest.find_all.sort_by{|x| x.number.to_i}.reverse
     @proposed, @pull_requests = @pull_requests.partition{|x| x.proposer['login'] == @user.login}
-    @pull_requests, @need_input = @pull_requests.partition{|x| @user.participating.include?(x.number.to_i)}
+    @voted, @not_voted = @pull_requests.partition{|x| @user.voted.include?(x.number.to_i)}
     erb :user
   end
   

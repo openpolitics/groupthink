@@ -1,6 +1,6 @@
 class User
   
-  attr_accessor :login, :avatar_url, :agree, :disagree, :abstain, :participating
+  attr_accessor :login, :avatar_url, :agree, :disagree, :abstain, :participating, :voted
 
   def initialize(login)
     @login = login
@@ -13,11 +13,13 @@ class User
       @disagree      = data['disagree'] || []
       @abstain       = data['abstain'] || []
       @participating = data['participating'] || []
+      @voted         = data['voted'] || []
     else
       @agree         = []
       @disagree      = []
       @abstain       = []
       @participating = []
+      @voted         = []
     end
   end
 
@@ -30,33 +32,42 @@ class User
   end
   
   def agree!(pr)
+    pr = pr.to_i
     remove!(pr)
     @agree << pr
     @participating << pr
+    @voted << pr
     save!
   end
 
   def disagree!(pr)
+    pr = pr.to_i
     remove!(pr)
     @disagree << pr
     @participating << pr
+    @voted << pr
     save!
   end
 
   def abstain!(pr)
+    pr = pr.to_i
     remove!(pr)
     @abstain << pr
     @participating << pr
+    @voted << pr
     save!
   end
 
   def participating!(pr)
+    pr = pr.to_i
     remove!(pr)
     @participating << pr
     save!
   end
 
   def remove!(pr)
+    pr = pr.to_i
+    @voted.delete(pr)
     @participating.delete(pr)
     @disagree.delete(pr)
     @agree.delete(pr)
@@ -80,6 +91,7 @@ class User
       'disagree'      => @disagree,
       'abstain'       => @abstain,
       'participating' => @participating,
+      'voted'         => @voted,
     }.to_json)
   end
   

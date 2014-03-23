@@ -87,8 +87,10 @@ class PullRequest
       user = comment.user
       db_user = User.find(user.login)
       if user != @proposer
-        @participants << user
-        db_user.participating!(@number)
+        unless @participants.include?(user)
+          @participants << user
+          db_user.participating!(@number)
+        end
         case comment.body
         when /:thumbsup:|:\+1:/
           remove_votes(user)

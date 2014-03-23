@@ -6,11 +6,11 @@
 
 <h1><a href='http://github.com/<%= @user.login %>'><%= @user.login %></a></h1>
 
-<h2>Input needed:</h2>
+<h2>Not voted on:</h2>
 
-<%= partial :pr_list, locals: {pull_requests: @need_input} %>
+<%= partial :pr_list, locals: {pull_requests: @not_voted} %>
 
-<h2>Participating in:</h2>
+<h2>Voted on:</h2>
 
 <table class='table vote-list'>
   <tr>
@@ -19,7 +19,7 @@
     <th class="text-center"><%= @user.login %>'s vote</th>
     <th>Proposer</th>
   </tr>
-  <% @pull_requests.each do |pr| %>
+  <% @voted.each do |pr| %>
     <tr class='<%= user_row_class(@user.state(pr.number)) %>'>
       <td class="text-center"><span class='label label-<%= row_class(pr) %>'><%= pr.state.capitalize %></span></td>
       <td><a href='/<%= pr.number %>'><%= pr.title %></a></td> 
