@@ -3,3 +3,5 @@
 /.env
 
 /tmp/
+
+/dump.rdb
