@@ -56,6 +56,18 @@ class Votebot < Sinatra::Base
         'danger'
       end
     end
+    def state_image(state)
+      case state
+      when 'agree'
+        "<img src='https://github.global.ssl.fastly.net/images/icons/emoji/+1.png?v5' title='Agree'/>"
+      when 'abstain'
+        "<img src='https://github.global.ssl.fastly.net/images/icons/emoji/hand.png?v5' title='Abstain'/>"
+      when 'disagree'
+        "<img src='https://github.global.ssl.fastly.net/images/icons/emoji/-1.png?v5' title='Disagree'/>"
+      else
+        ""
+      end
+    end
   end
   
   private
