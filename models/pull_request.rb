@@ -85,18 +85,23 @@ class PullRequest
     @disagree = []
     comments.each do |comment|
       user = comment.user
+      db_user = User.find(user.login)
       if user != @proposer
         @participants << user
+        db_user.participating!(@number)
         case comment.body
         when /:thumbsup:|:\+1:/
           remove_votes(user)
           @agree << user
+          db_user.agree!(@number)
         when /:hand:/
           remove_votes(user)
           @abstain << user
+          db_user.abstain!(@number)
         when /:thumbsdown:|:\-1:/
           remove_votes(user)
           @disagree << user
+          db_user.disagree!(@number)
         end
       end
     end
@@ -107,6 +112,7 @@ class PullRequest
     @agree.delete(user)
     @abstain.delete(user)
     @disagree.delete(user)
+    User.find(user.login).remove!(@number)
   end
 
   def db_key
@@ -126,6 +132,9 @@ class PullRequest
   end
   
   def delete!
+    participants.each do |user|
+      User.find(user.login).remove!(@number)
+    end
     redis.del(db_key)
   end
   
