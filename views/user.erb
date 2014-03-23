@@ -1,0 +1,34 @@
+<ol class="breadcrumb">
+  <li><a href="/">All Votes</a></li>
+  <li>Users</a></li>
+  <li class="active"><%= @user.login %></li>
+</ol>
+
+<h1><a href='http://github.com/<%= @user.login %>'><%= @user.login %></a></h1>
+
+<h2>Input needed:</h2>
+
+<%= partial :pr_list, locals: {pull_requests: @need_input} %>
+
+<h2>Participating in:</h2>
+
+<table class='table vote-list'>
+  <tr>
+    <th class="text-center">State</th>
+    <th>Title</th>
+    <th class="text-center"><%= @user.login %>'s vote</th>
+    <th>Proposer</th>
+  </tr>
+  <% @pull_requests.each do |pr| %>
+    <tr class='<%= user_row_class(@user.state(pr.number)) %>'>
+      <td class="text-center"><span class='label label-<%= row_class(pr) %>'><%= pr.state.capitalize %></span></td>
+      <td><a href='/<%= pr.number %>'><%= pr.title %></a></td> 
+      <td class="text-center"><%= state_image(@user.state(pr.number)) %></td> 
+      <td class="proposer text-center"><%= partial :person, locals: {person: pr.proposer } %></td> 
+    </tr>
+  <% end %>
+</table>
+
+<h2>Proposed:</h2>
+
+<%= partial :pr_list, locals: {pull_requests: @proposed} %>

@@ -21,6 +21,14 @@ class Votebot < Sinatra::Base
     erb :index
   end
   
+  get '/users/:login' do
+    @user = User.find(params[:login])
+    @pull_requests = PullRequest.find_all.sort_by{|x| x.number.to_i}.reverse
+    @proposed, @pull_requests = @pull_requests.partition{|x| x.proposer['login'] == @user.login}
+    @pull_requests, @need_input = @pull_requests.partition{|x| @user.participating.include?(x.number.to_i)}
+    erb :user
+  end
+  
   get '/:number' do
     @pull_request = PullRequest.find(params[:number])
     erb :show
@@ -54,6 +62,18 @@ class Votebot < Sinatra::Base
         'warning'
       when 'blocked'
         'danger'
+      end
+    end
+    def user_row_class(state)
+      case state
+      when 'agree'
+        'success'
+      when 'abstain', 'participating'
+        'warning'
+      when 'disagree'
+        'danger'
+      else
+        ''
       end
     end
     def state_image(state)
