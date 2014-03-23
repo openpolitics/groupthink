@@ -2,11 +2,11 @@
   <tr>
     <th class="text-center">State</th>
     <th>Title</th>
-    <th>Participants</th>
-    <th><%= state_image('agree')%></th>
-    <th><%= state_image('abstain')%></th>
-    <th><%= state_image('disagree')%></th>
-    <th>Proposer</th>
+    <th class="text-center">Participants</th>
+    <th class="text-center"><%= state_image('agree')%></th>
+    <th class="text-center"><%= state_image('abstain')%></th>
+    <th class="text-center"><%= state_image('disagree')%></th>
+    <th class="text-center">Proposer</th>
   </tr>
   <% pull_requests.each do |pr| %>
     <tr class='<%= row_class(pr) %>'>
