@@ -17,7 +17,7 @@
     <th class="text-center">State</th>
     <th>Title</th>
     <th class="text-center"><%= @user.login %>'s vote</th>
-    <th>Proposer</th>
+    <th class="text-center">Proposer</th>
   </tr>
   <% @voted.each do |pr| %>
     <tr class='<%= user_row_class(@user.state(pr.number)) %>'>
