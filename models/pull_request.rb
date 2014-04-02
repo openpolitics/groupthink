@@ -8,7 +8,7 @@ class PullRequest
     "waiting",
     "blocked"
   ]
-  
+
   def self.update_all_from_github!
     keys = redis.keys('PullRequest:*')
     redis.del(keys) unless keys.empty?
@@ -22,18 +22,18 @@ class PullRequest
     pr.update_from_github!
     pr
   end
-  
+
   def self.find_all
     redis.keys.select{|x| x =~ /^PullRequest:/}.map{|key| PullRequest.new(key.split(':')[1])}.sort_by{|x| x.number}
   end
-  
+
   def self.find(number)
     pr = PullRequest.new(number)
     pr.state ? pr : nil
   end
-  
+
   attr_accessor :number, :state, :title, :agree, :disagree, :abstain, :proposer, :participants
-  
+
   def initialize(number)
     @number = number
     data = redis.get(db_key)
@@ -48,7 +48,7 @@ class PullRequest
       @abstain = data['abstain']
     end
   end
-  
+
   def update_from_github!
     pr = self.class.github.pull_requests.get('openpolitics', 'manifesto', @number)
     @proposer = pr.user
@@ -76,7 +76,7 @@ class PullRequest
       "target_url" => "http://votebot.openpolitics.org.uk/#{@number}",
       "description" => github_description
   end
-  
+
   def process_comments
     comments = self.class.github.issues.comments.list 'openpolitics', 'manifesto', issue_id: @number
     @participants = []
@@ -109,7 +109,7 @@ class PullRequest
     end
     @participants.uniq!
   end
-  
+
   def remove_votes(user)
     @agree.delete(user)
     @abstain.delete(user)
@@ -120,7 +120,7 @@ class PullRequest
   def db_key
     [self.class.name, number.to_s].join(':')
   end
-  
+
   def save!
     redis.set(db_key, {
       'proposer' => @proposer,
@@ -132,18 +132,19 @@ class PullRequest
       'abstain' => @abstain,
     }.to_json)
   end
-  
+
   def delete!
-    participants.each do |user|
-      User.find(user.login).remove!(@number)
+    (participants||[]).each do |user|
+      u = User.find(user.is_a?(Hash) ? user['login'] : user.login)
+      u.remove!(@number) if u
     end
     redis.del(db_key)
   end
-  
+
   private
-  
+
   def self.github
-    @@github = Github.new user: 'openpolitics', repo: 'manifesto', oauth_token: ENV['GITHUB_OAUTH_TOKEN']    
+    @@github = Github.new user: 'openpolitics', repo: 'manifesto', oauth_token: ENV['GITHUB_OAUTH_TOKEN']
   end
-  
+
 end

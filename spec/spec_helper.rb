@@ -34,15 +34,15 @@ RSpec.configure do |config|
   # the seed, which is printed after each run.
   #     --seed 1234
   config.order = 'random'
-  
+
   config.before(:each) do
     DatabaseCleaner.start
   end
-    
+
   config.after(:each) do
-    DatabaseCleaner.clean    
+    DatabaseCleaner.clean
   end
-  
+
 end
 
 def load_fixture(filename)
