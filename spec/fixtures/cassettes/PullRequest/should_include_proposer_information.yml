@@ -1075,4 +1075,90 @@ http_interactions:
         change is approved and ready to merge\",\"target_url\":\"http://votebot.openpolitics.org.uk/43\",\"creator\":{\"login\":\"Floppy\",\"id\":3565,\"avatar_url\":\"https://gravatar.com/avatar/c150a49c7709fa40bffca545ecf8942d?d=https%3A%2F%2Fidenticons.github.com%2Fe6e713296627dff6475085cc6a224464.png&r=x\",\"gravatar_id\":\"c150a49c7709fa40bffca545ecf8942d\",\"url\":\"https://api.github.com/users/Floppy\",\"html_url\":\"https://github.com/Floppy\",\"followers_url\":\"https://api.github.com/users/Floppy/followers\",\"following_url\":\"https://api.github.com/users/Floppy/following{/other_user}\",\"gists_url\":\"https://api.github.com/users/Floppy/gists{/gist_id}\",\"starred_url\":\"https://api.github.com/users/Floppy/starred{/owner}{/repo}\",\"subscriptions_url\":\"https://api.github.com/users/Floppy/subscriptions\",\"organizations_url\":\"https://api.github.com/users/Floppy/orgs\",\"repos_url\":\"https://api.github.com/users/Floppy/repos\",\"events_url\":\"https://api.github.com/users/Floppy/events{/privacy}\",\"received_events_url\":\"https://api.github.com/users/Floppy/received_events\",\"type\":\"User\",\"site_admin\":false},\"created_at\":\"2014-03-10T20:43:31Z\",\"updated_at\":\"2014-03-10T20:43:31Z\"}"
     http_version: 
   recorded_at: Mon, 10 Mar 2014 20:43:31 GMT
+- request:
+    method: get
+    uri: https://api.github.com/repos/openpolitics/manifesto/commits/8a85d0d2d2583543423ebe29ca1c0fc1e07e56c9?access_token=<GITHUB_OAUTH_TOKEN>
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept:
+      - application/vnd.github.v3+json,application/vnd.github.beta+json;q=0.5,application/json;q=0.1
+      Accept-Charset:
+      - utf-8
+      User-Agent:
+      - Github Ruby Gem 0.11.3
+      Authorization:
+      - Token token="<GITHUB_OAUTH_TOKEN>"
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - GitHub.com
+      Date:
+      - Wed, 02 Apr 2014 21:15:47 GMT
+      Content-Type:
+      - application/json; charset=utf-8
+      Transfer-Encoding:
+      - chunked
+      Status:
+      - 200 OK
+      X-Ratelimit-Limit:
+      - '5000'
+      X-Ratelimit-Remaining:
+      - '4830'
+      X-Ratelimit-Reset:
+      - '1396475243'
+      Cache-Control:
+      - private, max-age=60, s-maxage=60
+      Last-Modified:
+      - Wed, 08 Jan 2014 18:25:26 GMT
+      Etag:
+      - "\"744882cfbc224cb11d9e9058c206feab\""
+      X-Oauth-Scopes:
+      - gist, repo, user
+      X-Accepted-Oauth-Scopes:
+      - ''
+      Vary:
+      - Accept, Authorization, Cookie, X-GitHub-OTP
+      - Accept-Encoding
+      X-Github-Media-Type:
+      - github.v3; format=json
+      X-Content-Type-Options:
+      - nosniff
+      Access-Control-Allow-Credentials:
+      - 'true'
+      Access-Control-Expose-Headers:
+      - ETag, Link, X-GitHub-OTP, X-RateLimit-Limit, X-RateLimit-Remaining, X-RateLimit-Reset,
+        X-OAuth-Scopes, X-Accepted-OAuth-Scopes, X-Poll-Interval
+      Access-Control-Allow-Origin:
+      - "*"
+      X-Github-Request-Id:
+      - 569C3641:5DB3:1698EB6:533C7E03
+      X-Served-By:
+      - 6d7de9e645814cac34ea2a8d72ba3141
+    body:
+      encoding: UTF-8
+      string: "{\"sha\":\"8a85d0d2d2583543423ebe29ca1c0fc1e07e56c9\",\"commit\":{\"author\":{\"name\":\"James
+        Smith\",\"email\":\"james@floppy.org.uk\",\"date\":\"2014-01-08T18:25:26Z\"},\"committer\":{\"name\":\"James
+        Smith\",\"email\":\"james@floppy.org.uk\",\"date\":\"2014-01-08T18:25:26Z\"},\"message\":\"small
+        improvements to stamp duty\",\"tree\":{\"sha\":\"4758ea9cd00cfe3bb42e359fb4c4fd80b9dc3919\",\"url\":\"https://api.github.com/repos/openpolitics/manifesto/git/trees/4758ea9cd00cfe3bb42e359fb4c4fd80b9dc3919\"},\"url\":\"https://api.github.com/repos/openpolitics/manifesto/git/commits/8a85d0d2d2583543423ebe29ca1c0fc1e07e56c9\",\"comment_count\":0},\"url\":\"https://api.github.com/repos/openpolitics/manifesto/commits/8a85d0d2d2583543423ebe29ca1c0fc1e07e56c9\",\"html_url\":\"https://github.com/openpolitics/manifesto/commit/8a85d0d2d2583543423ebe29ca1c0fc1e07e56c9\",\"comments_url\":\"https://api.github.com/repos/openpolitics/manifesto/commits/8a85d0d2d2583543423ebe29ca1c0fc1e07e56c9/comments\",\"author\":{\"login\":\"Floppy\",\"id\":3565,\"avatar_url\":\"https://avatars.githubusercontent.com/u/3565?\",\"gravatar_id\":\"c150a49c7709fa40bffca545ecf8942d\",\"url\":\"https://api.github.com/users/Floppy\",\"html_url\":\"https://github.com/Floppy\",\"followers_url\":\"https://api.github.com/users/Floppy/followers\",\"following_url\":\"https://api.github.com/users/Floppy/following{/other_user}\",\"gists_url\":\"https://api.github.com/users/Floppy/gists{/gist_id}\",\"starred_url\":\"https://api.github.com/users/Floppy/starred{/owner}{/repo}\",\"subscriptions_url\":\"https://api.github.com/users/Floppy/subscriptions\",\"organizations_url\":\"https://api.github.com/users/Floppy/orgs\",\"repos_url\":\"https://api.github.com/users/Floppy/repos\",\"events_url\":\"https://api.github.com/users/Floppy/events{/privacy}\",\"received_events_url\":\"https://api.github.com/users/Floppy/received_events\",\"type\":\"User\",\"site_admin\":false},\"committer\":{\"login\":\"Floppy\",\"id\":3565,\"avatar_url\":\"https://avatars.githubusercontent.com/u/3565?\",\"gravatar_id\":\"c150a49c7709fa40bffca545ecf8942d\",\"url\":\"https://api.github.com/users/Floppy\",\"html_url\":\"https://github.com/Floppy\",\"followers_url\":\"https://api.github.com/users/Floppy/followers\",\"following_url\":\"https://api.github.com/users/Floppy/following{/other_user}\",\"gists_url\":\"https://api.github.com/users/Floppy/gists{/gist_id}\",\"starred_url\":\"https://api.github.com/users/Floppy/starred{/owner}{/repo}\",\"subscriptions_url\":\"https://api.github.com/users/Floppy/subscriptions\",\"organizations_url\":\"https://api.github.com/users/Floppy/orgs\",\"repos_url\":\"https://api.github.com/users/Floppy/repos\",\"events_url\":\"https://api.github.com/users/Floppy/events{/privacy}\",\"received_events_url\":\"https://api.github.com/users/Floppy/received_events\",\"type\":\"User\",\"site_admin\":false},\"parents\":[{\"sha\":\"59c82bd9a741a52293c596013760de2610c60a86\",\"url\":\"https://api.github.com/repos/openpolitics/manifesto/commits/59c82bd9a741a52293c596013760de2610c60a86\",\"html_url\":\"https://github.com/openpolitics/manifesto/commit/59c82bd9a741a52293c596013760de2610c60a86\"}],\"stats\":{\"total\":2,\"additions\":1,\"deletions\":1},\"files\":[{\"sha\":\"af44f9382c0f7b50ebec2ed0a96b177bc0dd51cb\",\"filename\":\"economy.md\",\"status\":\"modified\",\"additions\":1,\"deletions\":1,\"changes\":2,\"blob_url\":\"https://github.com/openpolitics/manifesto/blob/8a85d0d2d2583543423ebe29ca1c0fc1e07e56c9/economy.md\",\"raw_url\":\"https://github.com/openpolitics/manifesto/raw/8a85d0d2d2583543423ebe29ca1c0fc1e07e56c9/economy.md\",\"contents_url\":\"https://api.github.com/repos/openpolitics/manifesto/contents/economy.md?ref=8a85d0d2d2583543423ebe29ca1c0fc1e07e56c9\",\"patch\":\"@@
+        -14,4 +14,4 @@ The personal income tax allowance will be set at the level
+        of a full time living\\n \\n ## Housing\\n \\n-Stamp Duty Land Tax (paid on
+        house purchases) should be reformed, with tax band thresholds based on the
+        regional average house price. Purchases up to the regional average price should
+        be zero-rated. In addition, the 'slab' approach of current taxation will be
+        changed to an incremental approach, where only the amount above a threshold
+        is taxed at that rate. \\n\\\\ No newline at end of file\\n+Stamp Duty Land
+        Tax (paid on house purchases) should be reformed, with tax band thresholds
+        linked to the regional average house price. Purchases up to the regional average
+        house price should be zero-rated. In addition, the 'slab' approach of current
+        taxation will be changed to an incremental approach, where only the amount
+        above a threshold is taxed at that rate. \\n\\\\ No newline at end of file\"}]}"
+    http_version: 
+  recorded_at: Wed, 02 Apr 2014 21:15:47 GMT
 recorded_with: VCR 2.8.0

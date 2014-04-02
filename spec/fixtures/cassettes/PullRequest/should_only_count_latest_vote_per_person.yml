@@ -244,4 +244,96 @@ http_interactions:
         change is waiting for more votes\",\"target_url\":\"http://votebot.openpolitics.org.uk/100\",\"creator\":{\"login\":\"Floppy\",\"id\":3565,\"avatar_url\":\"https://avatars.githubusercontent.com/u/3565?\",\"gravatar_id\":\"c150a49c7709fa40bffca545ecf8942d\",\"url\":\"https://api.github.com/users/Floppy\",\"html_url\":\"https://github.com/Floppy\",\"followers_url\":\"https://api.github.com/users/Floppy/followers\",\"following_url\":\"https://api.github.com/users/Floppy/following{/other_user}\",\"gists_url\":\"https://api.github.com/users/Floppy/gists{/gist_id}\",\"starred_url\":\"https://api.github.com/users/Floppy/starred{/owner}{/repo}\",\"subscriptions_url\":\"https://api.github.com/users/Floppy/subscriptions\",\"organizations_url\":\"https://api.github.com/users/Floppy/orgs\",\"repos_url\":\"https://api.github.com/users/Floppy/repos\",\"events_url\":\"https://api.github.com/users/Floppy/events{/privacy}\",\"received_events_url\":\"https://api.github.com/users/Floppy/received_events\",\"type\":\"User\",\"site_admin\":false},\"created_at\":\"2014-03-21T09:54:46Z\",\"updated_at\":\"2014-03-21T09:54:46Z\"}"
     http_version: 
   recorded_at: Fri, 21 Mar 2014 09:54:47 GMT
+- request:
+    method: get
+    uri: https://api.github.com/repos/openpolitics/manifesto/commits/918bcbafc762b88fb56a3d5748ff4a87f22a63f6?access_token=<GITHUB_OAUTH_TOKEN>
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept:
+      - application/vnd.github.v3+json,application/vnd.github.beta+json;q=0.5,application/json;q=0.1
+      Accept-Charset:
+      - utf-8
+      User-Agent:
+      - Github Ruby Gem 0.11.3
+      Authorization:
+      - Token token="<GITHUB_OAUTH_TOKEN>"
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - GitHub.com
+      Date:
+      - Wed, 02 Apr 2014 21:15:49 GMT
+      Content-Type:
+      - application/json; charset=utf-8
+      Transfer-Encoding:
+      - chunked
+      Status:
+      - 200 OK
+      X-Ratelimit-Limit:
+      - '5000'
+      X-Ratelimit-Remaining:
+      - '4828'
+      X-Ratelimit-Reset:
+      - '1396475243'
+      Cache-Control:
+      - private, max-age=60, s-maxage=60
+      Last-Modified:
+      - Thu, 13 Feb 2014 14:47:03 GMT
+      Etag:
+      - "\"06b046a279ae1cb2499acacae8a823bf\""
+      X-Oauth-Scopes:
+      - gist, repo, user
+      X-Accepted-Oauth-Scopes:
+      - ''
+      Vary:
+      - Accept, Authorization, Cookie, X-GitHub-OTP
+      - Accept-Encoding
+      X-Github-Media-Type:
+      - github.v3; format=json
+      X-Content-Type-Options:
+      - nosniff
+      Access-Control-Allow-Credentials:
+      - 'true'
+      Access-Control-Expose-Headers:
+      - ETag, Link, X-GitHub-OTP, X-RateLimit-Limit, X-RateLimit-Remaining, X-RateLimit-Reset,
+        X-OAuth-Scopes, X-Accepted-OAuth-Scopes, X-Poll-Interval
+      Access-Control-Allow-Origin:
+      - "*"
+      X-Github-Request-Id:
+      - 569C3641:5DB5:227ECF9:533C7E04
+      X-Served-By:
+      - 03d91026ad8428f4d9966d7434f9d82e
+    body:
+      encoding: UTF-8
+      string: "{\"sha\":\"918bcbafc762b88fb56a3d5748ff4a87f22a63f6\",\"commit\":{\"author\":{\"name\":\"Paul
+        Robinson\",\"email\":\"robinson.pauljames@gmail.com\",\"date\":\"2014-02-13T14:47:03Z\"},\"committer\":{\"name\":\"Paul
+        Robinson\",\"email\":\"robinson.pauljames@gmail.com\",\"date\":\"2014-02-13T14:47:03Z\"},\"message\":\"Update
+        democracy.md\",\"tree\":{\"sha\":\"68c30b399629ddaec520056d8a8cdb60e1e3c2d3\",\"url\":\"https://api.github.com/repos/openpolitics/manifesto/git/trees/68c30b399629ddaec520056d8a8cdb60e1e3c2d3\"},\"url\":\"https://api.github.com/repos/openpolitics/manifesto/git/commits/918bcbafc762b88fb56a3d5748ff4a87f22a63f6\",\"comment_count\":0},\"url\":\"https://api.github.com/repos/openpolitics/manifesto/commits/918bcbafc762b88fb56a3d5748ff4a87f22a63f6\",\"html_url\":\"https://github.com/openpolitics/manifesto/commit/918bcbafc762b88fb56a3d5748ff4a87f22a63f6\",\"comments_url\":\"https://api.github.com/repos/openpolitics/manifesto/commits/918bcbafc762b88fb56a3d5748ff4a87f22a63f6/comments\",\"author\":{\"login\":\"PaulJRobinson\",\"id\":4026234,\"avatar_url\":\"https://avatars.githubusercontent.com/u/4026234?\",\"gravatar_id\":\"c65ff1e22e2481b7410dfdc90649310d\",\"url\":\"https://api.github.com/users/PaulJRobinson\",\"html_url\":\"https://github.com/PaulJRobinson\",\"followers_url\":\"https://api.github.com/users/PaulJRobinson/followers\",\"following_url\":\"https://api.github.com/users/PaulJRobinson/following{/other_user}\",\"gists_url\":\"https://api.github.com/users/PaulJRobinson/gists{/gist_id}\",\"starred_url\":\"https://api.github.com/users/PaulJRobinson/starred{/owner}{/repo}\",\"subscriptions_url\":\"https://api.github.com/users/PaulJRobinson/subscriptions\",\"organizations_url\":\"https://api.github.com/users/PaulJRobinson/orgs\",\"repos_url\":\"https://api.github.com/users/PaulJRobinson/repos\",\"events_url\":\"https://api.github.com/users/PaulJRobinson/events{/privacy}\",\"received_events_url\":\"https://api.github.com/users/PaulJRobinson/received_events\",\"type\":\"User\",\"site_admin\":false},\"committer\":{\"login\":\"PaulJRobinson\",\"id\":4026234,\"avatar_url\":\"https://avatars.githubusercontent.com/u/4026234?\",\"gravatar_id\":\"c65ff1e22e2481b7410dfdc90649310d\",\"url\":\"https://api.github.com/users/PaulJRobinson\",\"html_url\":\"https://github.com/PaulJRobinson\",\"followers_url\":\"https://api.github.com/users/PaulJRobinson/followers\",\"following_url\":\"https://api.github.com/users/PaulJRobinson/following{/other_user}\",\"gists_url\":\"https://api.github.com/users/PaulJRobinson/gists{/gist_id}\",\"starred_url\":\"https://api.github.com/users/PaulJRobinson/starred{/owner}{/repo}\",\"subscriptions_url\":\"https://api.github.com/users/PaulJRobinson/subscriptions\",\"organizations_url\":\"https://api.github.com/users/PaulJRobinson/orgs\",\"repos_url\":\"https://api.github.com/users/PaulJRobinson/repos\",\"events_url\":\"https://api.github.com/users/PaulJRobinson/events{/privacy}\",\"received_events_url\":\"https://api.github.com/users/PaulJRobinson/received_events\",\"type\":\"User\",\"site_admin\":false},\"parents\":[{\"sha\":\"2f55b64acf32a2c29cde95877eecab287665a2f0\",\"url\":\"https://api.github.com/repos/openpolitics/manifesto/commits/2f55b64acf32a2c29cde95877eecab287665a2f0\",\"html_url\":\"https://github.com/openpolitics/manifesto/commit/2f55b64acf32a2c29cde95877eecab287665a2f0\"}],\"stats\":{\"total\":4,\"additions\":2,\"deletions\":2},\"files\":[{\"sha\":\"f18853899b9ed3d22ad07ab51e17816bcaca799a\",\"filename\":\"democracy.md\",\"status\":\"modified\",\"additions\":2,\"deletions\":2,\"changes\":4,\"blob_url\":\"https://github.com/openpolitics/manifesto/blob/918bcbafc762b88fb56a3d5748ff4a87f22a63f6/democracy.md\",\"raw_url\":\"https://github.com/openpolitics/manifesto/raw/918bcbafc762b88fb56a3d5748ff4a87f22a63f6/democracy.md\",\"contents_url\":\"https://api.github.com/repos/openpolitics/manifesto/contents/democracy.md?ref=918bcbafc762b88fb56a3d5748ff4a87f22a63f6\",\"patch\":\"@@
+        -31,7 +31,7 @@ Allow for full and proper recall of MPs: any e-petition to
+        recall their MP suppo\\n \\n Introduce an 'None of the Above' box on all ballot
+        papers to formally and positively register abstention.\\n \\n-Introduce voting
+        by proportional representation uing the Single Transferable Vote (STV) method
+        in all General and Local Elections. Given each EU member country has right
+        to select the electoral system they use to elect their own MEPs, STV will
+        also be used for elections to the European Parliament.\\n+Introduce voting
+        by proportional representation using the Single Transferable Vote (STV) method
+        in all General and Local Elections. Given each EU member country has right
+        to select the electoral system they use to elect their own MEPs, STV will
+        also be used for elections to the European Parliament.\\n \\n Investigate
+        feasability of electronic voting at all elections, with a view to increasing
+        accessibility and turnout.\\n \\n@@ -87,4 +87,4 @@ Ban unelected Lords from
+        serving in Government.\\n \\n ## References\\n \\n-[^1]: [Do we need a written
+        constitution?](http://www.consoc.org.uk/discover-the-facts/do-we-need-a-written-constitution/)
+        - The Constitution Society\\n\\\\ No newline at end of file\\n+[^1]: [Do we
+        need a written constitution?](http://www.consoc.org.uk/discover-the-facts/do-we-need-a-written-constitution/)
+        - The Constitution Society\"}]}"
+    http_version: 
+  recorded_at: Wed, 02 Apr 2014 21:15:49 GMT
 recorded_with: VCR 2.8.0

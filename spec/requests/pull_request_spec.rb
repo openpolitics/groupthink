@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 describe PullRequest, :vcr do
-  
+
   it "should update pull requests on demand" do
     pr = PullRequest.update_from_github!(43)
     pr.state.should == 'passed'
@@ -28,6 +28,11 @@ describe PullRequest, :vcr do
 
   it "should ignore votes from proposer" do
     pr = PullRequest.update_from_github!(74)
+    pr.agree.count.should == 0
+  end
+
+  it "should ignore votes before last commit" do
+    pr = PullRequest.update_from_github!(135)
     pr.agree.count.should == 0
   end
 

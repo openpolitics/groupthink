@@ -52,7 +52,7 @@ class PullRequest
   def update_from_github!
     pr = self.class.github.pull_requests.get('openpolitics', 'manifesto', @number)
     @proposer = pr.user
-    process_comments
+    process_comments(pr.head.sha)
     github_state = nil
     github_description = nil
     if @disagree.count > 0
@@ -77,8 +77,14 @@ class PullRequest
       "description" => github_description
   end
 
-  def process_comments
+  def process_comments(sha = nil)
     comments = self.class.github.issues.comments.list 'openpolitics', 'manifesto', issue_id: @number
+    if sha
+      commit = self.class.github.repos.commits.get 'openpolitics', 'manifesto', sha
+      cutoff = DateTime.parse(commit.commit.committer.date)
+    else
+      cutoff = DateTime.new(1970)
+    end
     @participants = []
     @agree = []
     @abstain = []
@@ -93,6 +99,7 @@ class PullRequest
         end
         case comment.body
         when /:thumbsup:|:\+1:/
+          next if DateTime.parse(comment.created_at) < cutoff
           remove_votes(user)
           @agree << user
           db_user.agree!(@number)

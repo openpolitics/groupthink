@@ -261,4 +261,108 @@ http_interactions:
         change is waiting for more votes\",\"target_url\":\"http://votebot.openpolitics.org.uk/74\",\"creator\":{\"login\":\"Floppy\",\"id\":3565,\"avatar_url\":\"https://avatars.githubusercontent.com/u/3565?\",\"gravatar_id\":\"c150a49c7709fa40bffca545ecf8942d\",\"url\":\"https://api.github.com/users/Floppy\",\"html_url\":\"https://github.com/Floppy\",\"followers_url\":\"https://api.github.com/users/Floppy/followers\",\"following_url\":\"https://api.github.com/users/Floppy/following{/other_user}\",\"gists_url\":\"https://api.github.com/users/Floppy/gists{/gist_id}\",\"starred_url\":\"https://api.github.com/users/Floppy/starred{/owner}{/repo}\",\"subscriptions_url\":\"https://api.github.com/users/Floppy/subscriptions\",\"organizations_url\":\"https://api.github.com/users/Floppy/orgs\",\"repos_url\":\"https://api.github.com/users/Floppy/repos\",\"events_url\":\"https://api.github.com/users/Floppy/events{/privacy}\",\"received_events_url\":\"https://api.github.com/users/Floppy/received_events\",\"type\":\"User\",\"site_admin\":false},\"created_at\":\"2014-03-21T10:51:16Z\",\"updated_at\":\"2014-03-21T10:51:16Z\"}"
     http_version: 
   recorded_at: Fri, 21 Mar 2014 10:51:17 GMT
+- request:
+    method: get
+    uri: https://api.github.com/repos/openpolitics/manifesto/commits/d269c658ed6d056dfa71ed47e28fbdc44c3c6b01?access_token=<GITHUB_OAUTH_TOKEN>
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept:
+      - application/vnd.github.v3+json,application/vnd.github.beta+json;q=0.5,application/json;q=0.1
+      Accept-Charset:
+      - utf-8
+      User-Agent:
+      - Github Ruby Gem 0.11.3
+      Authorization:
+      - Token token="<GITHUB_OAUTH_TOKEN>"
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - GitHub.com
+      Date:
+      - Wed, 02 Apr 2014 21:15:48 GMT
+      Content-Type:
+      - application/json; charset=utf-8
+      Transfer-Encoding:
+      - chunked
+      Status:
+      - 200 OK
+      X-Ratelimit-Limit:
+      - '5000'
+      X-Ratelimit-Remaining:
+      - '4829'
+      X-Ratelimit-Reset:
+      - '1396475243'
+      Cache-Control:
+      - private, max-age=60, s-maxage=60
+      Last-Modified:
+      - Mon, 13 Jan 2014 20:01:28 GMT
+      Etag:
+      - "\"e83bc2e58f29498884463ca3eede9f6f\""
+      X-Oauth-Scopes:
+      - gist, repo, user
+      X-Accepted-Oauth-Scopes:
+      - ''
+      Vary:
+      - Accept, Authorization, Cookie, X-GitHub-OTP
+      - Accept-Encoding
+      X-Github-Media-Type:
+      - github.v3; format=json
+      X-Content-Type-Options:
+      - nosniff
+      Access-Control-Allow-Credentials:
+      - 'true'
+      Access-Control-Expose-Headers:
+      - ETag, Link, X-GitHub-OTP, X-RateLimit-Limit, X-RateLimit-Remaining, X-RateLimit-Reset,
+        X-OAuth-Scopes, X-Accepted-OAuth-Scopes, X-Poll-Interval
+      Access-Control-Allow-Origin:
+      - "*"
+      X-Github-Request-Id:
+      - 569C3641:5DB3:1698FE3:533C7E04
+      X-Served-By:
+      - 88d924ed861736d2749ce1a55766cb53
+    body:
+      encoding: UTF-8
+      string: "{\"sha\":\"d269c658ed6d056dfa71ed47e28fbdc44c3c6b01\",\"commit\":{\"author\":{\"name\":\"Philip
+        John\",\"email\":\"phil@philipjohn.co.uk\",\"date\":\"2014-01-13T20:01:28Z\"},\"committer\":{\"name\":\"Philip
+        John\",\"email\":\"phil@philipjohn.co.uk\",\"date\":\"2014-01-13T20:01:28Z\"},\"message\":\"Local
+        democracy proposal\",\"tree\":{\"sha\":\"33424cc5bfecc245de82e4e3b7a8bcde726cb0d9\",\"url\":\"https://api.github.com/repos/openpolitics/manifesto/git/trees/33424cc5bfecc245de82e4e3b7a8bcde726cb0d9\"},\"url\":\"https://api.github.com/repos/openpolitics/manifesto/git/commits/d269c658ed6d056dfa71ed47e28fbdc44c3c6b01\",\"comment_count\":0},\"url\":\"https://api.github.com/repos/openpolitics/manifesto/commits/d269c658ed6d056dfa71ed47e28fbdc44c3c6b01\",\"html_url\":\"https://github.com/openpolitics/manifesto/commit/d269c658ed6d056dfa71ed47e28fbdc44c3c6b01\",\"comments_url\":\"https://api.github.com/repos/openpolitics/manifesto/commits/d269c658ed6d056dfa71ed47e28fbdc44c3c6b01/comments\",\"author\":{\"login\":\"philipjohn\",\"id\":136342,\"avatar_url\":\"https://avatars.githubusercontent.com/u/136342?\",\"gravatar_id\":\"c69525bb0df6c234216b9e2aa32f7727\",\"url\":\"https://api.github.com/users/philipjohn\",\"html_url\":\"https://github.com/philipjohn\",\"followers_url\":\"https://api.github.com/users/philipjohn/followers\",\"following_url\":\"https://api.github.com/users/philipjohn/following{/other_user}\",\"gists_url\":\"https://api.github.com/users/philipjohn/gists{/gist_id}\",\"starred_url\":\"https://api.github.com/users/philipjohn/starred{/owner}{/repo}\",\"subscriptions_url\":\"https://api.github.com/users/philipjohn/subscriptions\",\"organizations_url\":\"https://api.github.com/users/philipjohn/orgs\",\"repos_url\":\"https://api.github.com/users/philipjohn/repos\",\"events_url\":\"https://api.github.com/users/philipjohn/events{/privacy}\",\"received_events_url\":\"https://api.github.com/users/philipjohn/received_events\",\"type\":\"User\",\"site_admin\":false},\"committer\":{\"login\":\"philipjohn\",\"id\":136342,\"avatar_url\":\"https://avatars.githubusercontent.com/u/136342?\",\"gravatar_id\":\"c69525bb0df6c234216b9e2aa32f7727\",\"url\":\"https://api.github.com/users/philipjohn\",\"html_url\":\"https://github.com/philipjohn\",\"followers_url\":\"https://api.github.com/users/philipjohn/followers\",\"following_url\":\"https://api.github.com/users/philipjohn/following{/other_user}\",\"gists_url\":\"https://api.github.com/users/philipjohn/gists{/gist_id}\",\"starred_url\":\"https://api.github.com/users/philipjohn/starred{/owner}{/repo}\",\"subscriptions_url\":\"https://api.github.com/users/philipjohn/subscriptions\",\"organizations_url\":\"https://api.github.com/users/philipjohn/orgs\",\"repos_url\":\"https://api.github.com/users/philipjohn/repos\",\"events_url\":\"https://api.github.com/users/philipjohn/events{/privacy}\",\"received_events_url\":\"https://api.github.com/users/philipjohn/received_events\",\"type\":\"User\",\"site_admin\":false},\"parents\":[{\"sha\":\"457528e8492e11443d4cc375d6a0bac347c8f6df\",\"url\":\"https://api.github.com/repos/openpolitics/manifesto/commits/457528e8492e11443d4cc375d6a0bac347c8f6df\",\"html_url\":\"https://github.com/openpolitics/manifesto/commit/457528e8492e11443d4cc375d6a0bac347c8f6df\"}],\"stats\":{\"total\":18,\"additions\":17,\"deletions\":1},\"files\":[{\"sha\":\"a66666996c4938951bd5e1c103b42b2d98c5929d\",\"filename\":\"democracy.md\",\"status\":\"modified\",\"additions\":17,\"deletions\":1,\"changes\":18,\"blob_url\":\"https://github.com/openpolitics/manifesto/blob/d269c658ed6d056dfa71ed47e28fbdc44c3c6b01/democracy.md\",\"raw_url\":\"https://github.com/openpolitics/manifesto/raw/d269c658ed6d056dfa71ed47e28fbdc44c3c6b01/democracy.md\",\"contents_url\":\"https://api.github.com/repos/openpolitics/manifesto/contents/democracy.md?ref=d269c658ed6d056dfa71ed47e28fbdc44c3c6b01\",\"patch\":\"@@
+        -40,4 +40,20 @@ Require all MPs to publish details of any meeting with any
+        individual or group w\\n \\n ## Devolution\\n \\n-Devolve all legislative
+        powers currently enjoyed by the Scottish Parliament to equivalent devolved
+        Parliaments in England, Wales and (eventually) Northern Ireland. The UK Parliament
+        to retain control over macro-economic, foreign, and defence policy.\\n\\\\
+        No newline at end of file\\n+Devolve all legislative powers currently enjoyed
+        by the Scottish Parliament to equivalent devolved Parliaments in England,
+        Wales and (eventually) Northern Ireland. The UK Parliament to retain control
+        over macro-economic, foreign, and defence policy.\\n+\\n+## Local Democracy\\n+\\n+###
+        Structure\\n+\\n+The current three-tier structure of local democracy (county,
+        local and parish councils) will be reformed to remove the county and parish-level
+        councils. Local authorities, as the current council tax collecting bodies,
+        will take over responsibilities from county and parish councils.\\n+\\n+Existing
+        city-wide councils, such as Birmingham, will be split up into smaller town
+        and district authorities.\\n+\\n+Local authorities will be encouraged to share
+        services and pool resources in order to save costs and provide a more efficient
+        service.\\n+\\n+New neighbourhood associations would be formed to replace
+        parish councils but with no responsibility to deliver services, acting instead
+        as a citizen-led accountability check on local authorities. As part of this,
+        neighbourhood associations will be led by elected representatives. However,
+        the party system will not apply - candidates will not be able to campaign
+        as a party representative nor receive assistance from the local party branch.
+        This will help to change the focus to local representatives rather than elections
+        become pseudo-referenda.\\n+\\n+### Funding\\n+\\n+Local authorities will
+        collect and retain council tax and business rates in their area. Additionally,
+        there will be a \\\"citizen premium\\\" to ensure that there isn't a wide
+        disparity in income between authorities. Any authority whose income fails
+        to meet the level of the citizen premium will recieve a central government
+        grant. Equally, any authority making a surplus will send that surplus to central
+        government.\"}]}"
+    http_version: 
+  recorded_at: Wed, 02 Apr 2014 21:15:48 GMT
 recorded_with: VCR 2.8.0

@@ -1,0 +1,373 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: https://api.github.com/repos/openpolitics/manifesto/pulls/135?access_token=<GITHUB_OAUTH_TOKEN>
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept:
+      - application/vnd.github.v3+json,application/vnd.github.beta+json;q=0.5,application/json;q=0.1
+      Accept-Charset:
+      - utf-8
+      User-Agent:
+      - Github Ruby Gem 0.11.3
+      Authorization:
+      - Token token="<GITHUB_OAUTH_TOKEN>"
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - GitHub.com
+      Date:
+      - Wed, 02 Apr 2014 20:42:50 GMT
+      Content-Type:
+      - application/json; charset=utf-8
+      Transfer-Encoding:
+      - chunked
+      Status:
+      - 200 OK
+      X-Ratelimit-Limit:
+      - '5000'
+      X-Ratelimit-Remaining:
+      - '4438'
+      X-Ratelimit-Reset:
+      - '1396471642'
+      Cache-Control:
+      - private, max-age=60, s-maxage=60
+      Last-Modified:
+      - Wed, 02 Apr 2014 20:40:12 GMT
+      Etag:
+      - "\"66ace6b29e475ed48bb1879ff52cc1fe\""
+      X-Oauth-Scopes:
+      - gist, repo, user
+      X-Accepted-Oauth-Scopes:
+      - ''
+      Vary:
+      - Accept, Authorization, Cookie, X-GitHub-OTP
+      - Accept-Encoding
+      X-Github-Media-Type:
+      - github.v3; format=json
+      X-Content-Type-Options:
+      - nosniff
+      Access-Control-Allow-Credentials:
+      - 'true'
+      Access-Control-Expose-Headers:
+      - ETag, Link, X-GitHub-OTP, X-RateLimit-Limit, X-RateLimit-Remaining, X-RateLimit-Reset,
+        X-OAuth-Scopes, X-Accepted-OAuth-Scopes, X-Poll-Interval
+      Access-Control-Allow-Origin:
+      - "*"
+      X-Github-Request-Id:
+      - 569C3641:5DB3:15ED761:533C7649
+      X-Served-By:
+      - 3061975e1f37121b3751604ad153c687
+    body:
+      encoding: UTF-8
+      string: "{\"url\":\"https://api.github.com/repos/openpolitics/manifesto/pulls/135\",\"id\":13819496,\"html_url\":\"https://github.com/openpolitics/manifesto/pull/135\",\"diff_url\":\"https://github.com/openpolitics/manifesto/pull/135.diff\",\"patch_url\":\"https://github.com/openpolitics/manifesto/pull/135.patch\",\"issue_url\":\"https://api.github.com/repos/openpolitics/manifesto/issues/135\",\"number\":135,\"state\":\"open\",\"title\":\"Resist
+        antidemocractic ISDS treaties\",\"user\":{\"login\":\"Floppy\",\"id\":3565,\"avatar_url\":\"https://avatars.githubusercontent.com/u/3565?\",\"gravatar_id\":\"c150a49c7709fa40bffca545ecf8942d\",\"url\":\"https://api.github.com/users/Floppy\",\"html_url\":\"https://github.com/Floppy\",\"followers_url\":\"https://api.github.com/users/Floppy/followers\",\"following_url\":\"https://api.github.com/users/Floppy/following{/other_user}\",\"gists_url\":\"https://api.github.com/users/Floppy/gists{/gist_id}\",\"starred_url\":\"https://api.github.com/users/Floppy/starred{/owner}{/repo}\",\"subscriptions_url\":\"https://api.github.com/users/Floppy/subscriptions\",\"organizations_url\":\"https://api.github.com/users/Floppy/orgs\",\"repos_url\":\"https://api.github.com/users/Floppy/repos\",\"events_url\":\"https://api.github.com/users/Floppy/events{/privacy}\",\"received_events_url\":\"https://api.github.com/users/Floppy/received_events\",\"type\":\"User\",\"site_admin\":false},\"body\":\"\",\"created_at\":\"2014-03-21T00:41:32Z\",\"updated_at\":\"2014-04-02T20:40:12Z\",\"closed_at\":null,\"merged_at\":null,\"merge_commit_sha\":\"19a3e2dc3a31a2a6514fcfc046c037c142a5f7fa\",\"assignee\":null,\"milestone\":null,\"commits_url\":\"https://api.github.com/repos/openpolitics/manifesto/pulls/135/commits\",\"review_comments_url\":\"https://api.github.com/repos/openpolitics/manifesto/pulls/135/comments\",\"review_comment_url\":\"https://api.github.com/repos/openpolitics/manifesto/pulls/comments/{number}\",\"comments_url\":\"https://api.github.com/repos/openpolitics/manifesto/issues/135/comments\",\"statuses_url\":\"https://api.github.com/repos/openpolitics/manifesto/statuses/cf875cab11384f68c0034263ea10abe5d8c6cbfe\",\"head\":{\"label\":\"openpolitics:anti-isds\",\"ref\":\"anti-isds\",\"sha\":\"cf875cab11384f68c0034263ea10abe5d8c6cbfe\",\"user\":{\"login\":\"openpolitics\",\"id\":5188717,\"avatar_url\":\"https://avatars.githubusercontent.com/u/5188717?\",\"gravatar_id\":\"73f0882a7113d5e8b0f71a2d2ed4dd56\",\"url\":\"https://api.github.com/users/openpolitics\",\"html_url\":\"https://github.com/openpolitics\",\"followers_url\":\"https://api.github.com/users/openpolitics/followers\",\"following_url\":\"https://api.github.com/users/openpolitics/following{/other_user}\",\"gists_url\":\"https://api.github.com/users/openpolitics/gists{/gist_id}\",\"starred_url\":\"https://api.github.com/users/openpolitics/starred{/owner}{/repo}\",\"subscriptions_url\":\"https://api.github.com/users/openpolitics/subscriptions\",\"organizations_url\":\"https://api.github.com/users/openpolitics/orgs\",\"repos_url\":\"https://api.github.com/users/openpolitics/repos\",\"events_url\":\"https://api.github.com/users/openpolitics/events{/privacy}\",\"received_events_url\":\"https://api.github.com/users/openpolitics/received_events\",\"type\":\"Organization\",\"site_admin\":false},\"repo\":{\"id\":11972085,\"name\":\"manifesto\",\"full_name\":\"openpolitics/manifesto\",\"owner\":{\"login\":\"openpolitics\",\"id\":5188717,\"avatar_url\":\"https://avatars.githubusercontent.com/u/5188717?\",\"gravatar_id\":\"73f0882a7113d5e8b0f71a2d2ed4dd56\",\"url\":\"https://api.github.com/users/openpolitics\",\"html_url\":\"https://github.com/openpolitics\",\"followers_url\":\"https://api.github.com/users/openpolitics/followers\",\"following_url\":\"https://api.github.com/users/openpolitics/following{/other_user}\",\"gists_url\":\"https://api.github.com/users/openpolitics/gists{/gist_id}\",\"starred_url\":\"https://api.github.com/users/openpolitics/starred{/owner}{/repo}\",\"subscriptions_url\":\"https://api.github.com/users/openpolitics/subscriptions\",\"organizations_url\":\"https://api.github.com/users/openpolitics/orgs\",\"repos_url\":\"https://api.github.com/users/openpolitics/repos\",\"events_url\":\"https://api.github.com/users/openpolitics/events{/privacy}\",\"received_events_url\":\"https://api.github.com/users/openpolitics/received_events\",\"type\":\"Organization\",\"site_admin\":false},\"private\":false,\"html_url\":\"https://github.com/openpolitics/manifesto\",\"description\":\"A
+        collaborative political manifesto\",\"fork\":false,\"url\":\"https://api.github.com/repos/openpolitics/manifesto\",\"forks_url\":\"https://api.github.com/repos/openpolitics/manifesto/forks\",\"keys_url\":\"https://api.github.com/repos/openpolitics/manifesto/keys{/key_id}\",\"collaborators_url\":\"https://api.github.com/repos/openpolitics/manifesto/collaborators{/collaborator}\",\"teams_url\":\"https://api.github.com/repos/openpolitics/manifesto/teams\",\"hooks_url\":\"https://api.github.com/repos/openpolitics/manifesto/hooks\",\"issue_events_url\":\"https://api.github.com/repos/openpolitics/manifesto/issues/events{/number}\",\"events_url\":\"https://api.github.com/repos/openpolitics/manifesto/events\",\"assignees_url\":\"https://api.github.com/repos/openpolitics/manifesto/assignees{/user}\",\"branches_url\":\"https://api.github.com/repos/openpolitics/manifesto/branches{/branch}\",\"tags_url\":\"https://api.github.com/repos/openpolitics/manifesto/tags\",\"blobs_url\":\"https://api.github.com/repos/openpolitics/manifesto/git/blobs{/sha}\",\"git_tags_url\":\"https://api.github.com/repos/openpolitics/manifesto/git/tags{/sha}\",\"git_refs_url\":\"https://api.github.com/repos/openpolitics/manifesto/git/refs{/sha}\",\"trees_url\":\"https://api.github.com/repos/openpolitics/manifesto/git/trees{/sha}\",\"statuses_url\":\"https://api.github.com/repos/openpolitics/manifesto/statuses/{sha}\",\"languages_url\":\"https://api.github.com/repos/openpolitics/manifesto/languages\",\"stargazers_url\":\"https://api.github.com/repos/openpolitics/manifesto/stargazers\",\"contributors_url\":\"https://api.github.com/repos/openpolitics/manifesto/contributors\",\"subscribers_url\":\"https://api.github.com/repos/openpolitics/manifesto/subscribers\",\"subscription_url\":\"https://api.github.com/repos/openpolitics/manifesto/subscription\",\"commits_url\":\"https://api.github.com/repos/openpolitics/manifesto/commits{/sha}\",\"git_commits_url\":\"https://api.github.com/repos/openpolitics/manifesto/git/commits{/sha}\",\"comments_url\":\"https://api.github.com/repos/openpolitics/manifesto/comments{/number}\",\"issue_comment_url\":\"https://api.github.com/repos/openpolitics/manifesto/issues/comments/{number}\",\"contents_url\":\"https://api.github.com/repos/openpolitics/manifesto/contents/{+path}\",\"compare_url\":\"https://api.github.com/repos/openpolitics/manifesto/compare/{base}...{head}\",\"merges_url\":\"https://api.github.com/repos/openpolitics/manifesto/merges\",\"archive_url\":\"https://api.github.com/repos/openpolitics/manifesto/{archive_format}{/ref}\",\"downloads_url\":\"https://api.github.com/repos/openpolitics/manifesto/downloads\",\"issues_url\":\"https://api.github.com/repos/openpolitics/manifesto/issues{/number}\",\"pulls_url\":\"https://api.github.com/repos/openpolitics/manifesto/pulls{/number}\",\"milestones_url\":\"https://api.github.com/repos/openpolitics/manifesto/milestones{/number}\",\"notifications_url\":\"https://api.github.com/repos/openpolitics/manifesto/notifications{?since,all,participating}\",\"labels_url\":\"https://api.github.com/repos/openpolitics/manifesto/labels{/name}\",\"releases_url\":\"https://api.github.com/repos/openpolitics/manifesto/releases{/id}\",\"created_at\":\"2013-08-08T08:56:40Z\",\"updated_at\":\"2014-04-02T20:39:29Z\",\"pushed_at\":\"2014-04-02T20:39:30Z\",\"git_url\":\"git://github.com/openpolitics/manifesto.git\",\"ssh_url\":\"git@github.com:openpolitics/manifesto.git\",\"clone_url\":\"https://github.com/openpolitics/manifesto.git\",\"svn_url\":\"https://github.com/openpolitics/manifesto\",\"homepage\":\"http://openpolitics.org.uk\",\"size\":3538,\"stargazers_count\":17,\"watchers_count\":17,\"language\":\"JavaScript\",\"has_issues\":true,\"has_downloads\":true,\"has_wiki\":false,\"forks_count\":18,\"mirror_url\":null,\"open_issues_count\":31,\"forks\":18,\"open_issues\":31,\"watchers\":17,\"default_branch\":\"gh-pages\",\"master_branch\":\"gh-pages\"}},\"base\":{\"label\":\"openpolitics:gh-pages\",\"ref\":\"gh-pages\",\"sha\":\"81688346a301728636ea21b1b41c5a6b83534065\",\"user\":{\"login\":\"openpolitics\",\"id\":5188717,\"avatar_url\":\"https://avatars.githubusercontent.com/u/5188717?\",\"gravatar_id\":\"73f0882a7113d5e8b0f71a2d2ed4dd56\",\"url\":\"https://api.github.com/users/openpolitics\",\"html_url\":\"https://github.com/openpolitics\",\"followers_url\":\"https://api.github.com/users/openpolitics/followers\",\"following_url\":\"https://api.github.com/users/openpolitics/following{/other_user}\",\"gists_url\":\"https://api.github.com/users/openpolitics/gists{/gist_id}\",\"starred_url\":\"https://api.github.com/users/openpolitics/starred{/owner}{/repo}\",\"subscriptions_url\":\"https://api.github.com/users/openpolitics/subscriptions\",\"organizations_url\":\"https://api.github.com/users/openpolitics/orgs\",\"repos_url\":\"https://api.github.com/users/openpolitics/repos\",\"events_url\":\"https://api.github.com/users/openpolitics/events{/privacy}\",\"received_events_url\":\"https://api.github.com/users/openpolitics/received_events\",\"type\":\"Organization\",\"site_admin\":false},\"repo\":{\"id\":11972085,\"name\":\"manifesto\",\"full_name\":\"openpolitics/manifesto\",\"owner\":{\"login\":\"openpolitics\",\"id\":5188717,\"avatar_url\":\"https://avatars.githubusercontent.com/u/5188717?\",\"gravatar_id\":\"73f0882a7113d5e8b0f71a2d2ed4dd56\",\"url\":\"https://api.github.com/users/openpolitics\",\"html_url\":\"https://github.com/openpolitics\",\"followers_url\":\"https://api.github.com/users/openpolitics/followers\",\"following_url\":\"https://api.github.com/users/openpolitics/following{/other_user}\",\"gists_url\":\"https://api.github.com/users/openpolitics/gists{/gist_id}\",\"starred_url\":\"https://api.github.com/users/openpolitics/starred{/owner}{/repo}\",\"subscriptions_url\":\"https://api.github.com/users/openpolitics/subscriptions\",\"organizations_url\":\"https://api.github.com/users/openpolitics/orgs\",\"repos_url\":\"https://api.github.com/users/openpolitics/repos\",\"events_url\":\"https://api.github.com/users/openpolitics/events{/privacy}\",\"received_events_url\":\"https://api.github.com/users/openpolitics/received_events\",\"type\":\"Organization\",\"site_admin\":false},\"private\":false,\"html_url\":\"https://github.com/openpolitics/manifesto\",\"description\":\"A
+        collaborative political manifesto\",\"fork\":false,\"url\":\"https://api.github.com/repos/openpolitics/manifesto\",\"forks_url\":\"https://api.github.com/repos/openpolitics/manifesto/forks\",\"keys_url\":\"https://api.github.com/repos/openpolitics/manifesto/keys{/key_id}\",\"collaborators_url\":\"https://api.github.com/repos/openpolitics/manifesto/collaborators{/collaborator}\",\"teams_url\":\"https://api.github.com/repos/openpolitics/manifesto/teams\",\"hooks_url\":\"https://api.github.com/repos/openpolitics/manifesto/hooks\",\"issue_events_url\":\"https://api.github.com/repos/openpolitics/manifesto/issues/events{/number}\",\"events_url\":\"https://api.github.com/repos/openpolitics/manifesto/events\",\"assignees_url\":\"https://api.github.com/repos/openpolitics/manifesto/assignees{/user}\",\"branches_url\":\"https://api.github.com/repos/openpolitics/manifesto/branches{/branch}\",\"tags_url\":\"https://api.github.com/repos/openpolitics/manifesto/tags\",\"blobs_url\":\"https://api.github.com/repos/openpolitics/manifesto/git/blobs{/sha}\",\"git_tags_url\":\"https://api.github.com/repos/openpolitics/manifesto/git/tags{/sha}\",\"git_refs_url\":\"https://api.github.com/repos/openpolitics/manifesto/git/refs{/sha}\",\"trees_url\":\"https://api.github.com/repos/openpolitics/manifesto/git/trees{/sha}\",\"statuses_url\":\"https://api.github.com/repos/openpolitics/manifesto/statuses/{sha}\",\"languages_url\":\"https://api.github.com/repos/openpolitics/manifesto/languages\",\"stargazers_url\":\"https://api.github.com/repos/openpolitics/manifesto/stargazers\",\"contributors_url\":\"https://api.github.com/repos/openpolitics/manifesto/contributors\",\"subscribers_url\":\"https://api.github.com/repos/openpolitics/manifesto/subscribers\",\"subscription_url\":\"https://api.github.com/repos/openpolitics/manifesto/subscription\",\"commits_url\":\"https://api.github.com/repos/openpolitics/manifesto/commits{/sha}\",\"git_commits_url\":\"https://api.github.com/repos/openpolitics/manifesto/git/commits{/sha}\",\"comments_url\":\"https://api.github.com/repos/openpolitics/manifesto/comments{/number}\",\"issue_comment_url\":\"https://api.github.com/repos/openpolitics/manifesto/issues/comments/{number}\",\"contents_url\":\"https://api.github.com/repos/openpolitics/manifesto/contents/{+path}\",\"compare_url\":\"https://api.github.com/repos/openpolitics/manifesto/compare/{base}...{head}\",\"merges_url\":\"https://api.github.com/repos/openpolitics/manifesto/merges\",\"archive_url\":\"https://api.github.com/repos/openpolitics/manifesto/{archive_format}{/ref}\",\"downloads_url\":\"https://api.github.com/repos/openpolitics/manifesto/downloads\",\"issues_url\":\"https://api.github.com/repos/openpolitics/manifesto/issues{/number}\",\"pulls_url\":\"https://api.github.com/repos/openpolitics/manifesto/pulls{/number}\",\"milestones_url\":\"https://api.github.com/repos/openpolitics/manifesto/milestones{/number}\",\"notifications_url\":\"https://api.github.com/repos/openpolitics/manifesto/notifications{?since,all,participating}\",\"labels_url\":\"https://api.github.com/repos/openpolitics/manifesto/labels{/name}\",\"releases_url\":\"https://api.github.com/repos/openpolitics/manifesto/releases{/id}\",\"created_at\":\"2013-08-08T08:56:40Z\",\"updated_at\":\"2014-04-02T20:39:29Z\",\"pushed_at\":\"2014-04-02T20:39:30Z\",\"git_url\":\"git://github.com/openpolitics/manifesto.git\",\"ssh_url\":\"git@github.com:openpolitics/manifesto.git\",\"clone_url\":\"https://github.com/openpolitics/manifesto.git\",\"svn_url\":\"https://github.com/openpolitics/manifesto\",\"homepage\":\"http://openpolitics.org.uk\",\"size\":3538,\"stargazers_count\":17,\"watchers_count\":17,\"language\":\"JavaScript\",\"has_issues\":true,\"has_downloads\":true,\"has_wiki\":false,\"forks_count\":18,\"mirror_url\":null,\"open_issues_count\":31,\"forks\":18,\"open_issues\":31,\"watchers\":17,\"default_branch\":\"gh-pages\",\"master_branch\":\"gh-pages\"}},\"_links\":{\"self\":{\"href\":\"https://api.github.com/repos/openpolitics/manifesto/pulls/135\"},\"html\":{\"href\":\"https://github.com/openpolitics/manifesto/pull/135\"},\"issue\":{\"href\":\"https://api.github.com/repos/openpolitics/manifesto/issues/135\"},\"comments\":{\"href\":\"https://api.github.com/repos/openpolitics/manifesto/issues/135/comments\"},\"review_comments\":{\"href\":\"https://api.github.com/repos/openpolitics/manifesto/pulls/135/comments\"},\"review_comment\":{\"href\":\"https://api.github.com/repos/openpolitics/manifesto/pulls/comments/{number}\"},\"commits\":{\"href\":\"https://api.github.com/repos/openpolitics/manifesto/pulls/135/commits\"},\"statuses\":{\"href\":\"https://api.github.com/repos/openpolitics/manifesto/statuses/cf875cab11384f68c0034263ea10abe5d8c6cbfe\"}},\"merged\":false,\"mergeable\":true,\"mergeable_state\":\"unstable\",\"merged_by\":null,\"comments\":9,\"review_comments\":0,\"commits\":2,\"additions\":11,\"deletions\":5,\"changed_files\":2}"
+    http_version: 
+  recorded_at: Wed, 02 Apr 2014 20:42:50 GMT
+- request:
+    method: get
+    uri: https://api.github.com/repos/openpolitics/manifesto/issues/135/comments?access_token=<GITHUB_OAUTH_TOKEN>
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept:
+      - application/vnd.github.v3+json,application/vnd.github.beta+json;q=0.5,application/json;q=0.1
+      Accept-Charset:
+      - utf-8
+      User-Agent:
+      - Github Ruby Gem 0.11.3
+      Authorization:
+      - Token token="<GITHUB_OAUTH_TOKEN>"
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - GitHub.com
+      Date:
+      - Wed, 02 Apr 2014 20:42:50 GMT
+      Content-Type:
+      - application/json; charset=utf-8
+      Transfer-Encoding:
+      - chunked
+      Status:
+      - 200 OK
+      X-Ratelimit-Limit:
+      - '5000'
+      X-Ratelimit-Remaining:
+      - '4437'
+      X-Ratelimit-Reset:
+      - '1396471642'
+      Cache-Control:
+      - private, max-age=60, s-maxage=60
+      Etag:
+      - "\"75393218d4e8ca208c63431651f25120\""
+      X-Oauth-Scopes:
+      - gist, repo, user
+      X-Accepted-Oauth-Scopes:
+      - ''
+      Vary:
+      - Accept, Authorization, Cookie, X-GitHub-OTP
+      - Accept-Encoding
+      X-Github-Media-Type:
+      - github.v3; format=json
+      X-Content-Type-Options:
+      - nosniff
+      Access-Control-Allow-Credentials:
+      - 'true'
+      Access-Control-Expose-Headers:
+      - ETag, Link, X-GitHub-OTP, X-RateLimit-Limit, X-RateLimit-Remaining, X-RateLimit-Reset,
+        X-OAuth-Scopes, X-Accepted-OAuth-Scopes, X-Poll-Interval
+      Access-Control-Allow-Origin:
+      - "*"
+      X-Github-Request-Id:
+      - 569C3641:5DB2:F4F8F7:533C764A
+      X-Served-By:
+      - c436b2b44345c72ff906059f604991e7
+    body:
+      encoding: UTF-8
+      string: "[{\"url\":\"https://api.github.com/repos/openpolitics/manifesto/issues/comments/38335621\",\"html_url\":\"https://github.com/openpolitics/manifesto/pull/135#issuecomment-38335621\",\"issue_url\":\"https://api.github.com/repos/openpolitics/manifesto/issues/135\",\"id\":38335621,\"user\":{\"login\":\"philipjohn\",\"id\":136342,\"avatar_url\":\"https://avatars.githubusercontent.com/u/136342?\",\"gravatar_id\":\"c69525bb0df6c234216b9e2aa32f7727\",\"url\":\"https://api.github.com/users/philipjohn\",\"html_url\":\"https://github.com/philipjohn\",\"followers_url\":\"https://api.github.com/users/philipjohn/followers\",\"following_url\":\"https://api.github.com/users/philipjohn/following{/other_user}\",\"gists_url\":\"https://api.github.com/users/philipjohn/gists{/gist_id}\",\"starred_url\":\"https://api.github.com/users/philipjohn/starred{/owner}{/repo}\",\"subscriptions_url\":\"https://api.github.com/users/philipjohn/subscriptions\",\"organizations_url\":\"https://api.github.com/users/philipjohn/orgs\",\"repos_url\":\"https://api.github.com/users/philipjohn/repos\",\"events_url\":\"https://api.github.com/users/philipjohn/events{/privacy}\",\"received_events_url\":\"https://api.github.com/users/philipjohn/received_events\",\"type\":\"User\",\"site_admin\":false},\"created_at\":\"2014-03-21T23:37:42Z\",\"updated_at\":\"2014-03-21T23:37:42Z\",\"body\":\"I
+        understand and agree with the motive here, but the blanket approach could
+        result in government being able to stifle legitimate challenges to it's authority.\"},{\"url\":\"https://api.github.com/repos/openpolitics/manifesto/issues/comments/38365098\",\"html_url\":\"https://github.com/openpolitics/manifesto/pull/135#issuecomment-38365098\",\"issue_url\":\"https://api.github.com/repos/openpolitics/manifesto/issues/135\",\"id\":38365098,\"user\":{\"login\":\"Floppy\",\"id\":3565,\"avatar_url\":\"https://avatars.githubusercontent.com/u/3565?\",\"gravatar_id\":\"c150a49c7709fa40bffca545ecf8942d\",\"url\":\"https://api.github.com/users/Floppy\",\"html_url\":\"https://github.com/Floppy\",\"followers_url\":\"https://api.github.com/users/Floppy/followers\",\"following_url\":\"https://api.github.com/users/Floppy/following{/other_user}\",\"gists_url\":\"https://api.github.com/users/Floppy/gists{/gist_id}\",\"starred_url\":\"https://api.github.com/users/Floppy/starred{/owner}{/repo}\",\"subscriptions_url\":\"https://api.github.com/users/Floppy/subscriptions\",\"organizations_url\":\"https://api.github.com/users/Floppy/orgs\",\"repos_url\":\"https://api.github.com/users/Floppy/repos\",\"events_url\":\"https://api.github.com/users/Floppy/events{/privacy}\",\"received_events_url\":\"https://api.github.com/users/Floppy/received_events\",\"type\":\"User\",\"site_admin\":false},\"created_at\":\"2014-03-22T21:43:11Z\",\"updated_at\":\"2014-03-22T21:43:11Z\",\"body\":\"Would
+        it be more acceptable if the text limited itself to attempts to make the government
+        liable to \\\"companies registered outside the UK\\\" rather than \\\"investors\\\"
+        as it currently says?\"},{\"url\":\"https://api.github.com/repos/openpolitics/manifesto/issues/comments/38376882\",\"html_url\":\"https://github.com/openpolitics/manifesto/pull/135#issuecomment-38376882\",\"issue_url\":\"https://api.github.com/repos/openpolitics/manifesto/issues/135\",\"id\":38376882,\"user\":{\"login\":\"philipjohn\",\"id\":136342,\"avatar_url\":\"https://avatars.githubusercontent.com/u/136342?\",\"gravatar_id\":\"c69525bb0df6c234216b9e2aa32f7727\",\"url\":\"https://api.github.com/users/philipjohn\",\"html_url\":\"https://github.com/philipjohn\",\"followers_url\":\"https://api.github.com/users/philipjohn/followers\",\"following_url\":\"https://api.github.com/users/philipjohn/following{/other_user}\",\"gists_url\":\"https://api.github.com/users/philipjohn/gists{/gist_id}\",\"starred_url\":\"https://api.github.com/users/philipjohn/starred{/owner}{/repo}\",\"subscriptions_url\":\"https://api.github.com/users/philipjohn/subscriptions\",\"organizations_url\":\"https://api.github.com/users/philipjohn/orgs\",\"repos_url\":\"https://api.github.com/users/philipjohn/repos\",\"events_url\":\"https://api.github.com/users/philipjohn/events{/privacy}\",\"received_events_url\":\"https://api.github.com/users/philipjohn/received_events\",\"type\":\"User\",\"site_admin\":false},\"created_at\":\"2014-03-23T08:27:54Z\",\"updated_at\":\"2014-03-23T08:27:54Z\",\"body\":\"Actually
+        you've given me an idea that might work when better. How about a public interest
+        test, where legal action is possible but must be in the public interest? \"},{\"url\":\"https://api.github.com/repos/openpolitics/manifesto/issues/comments/38377531\",\"html_url\":\"https://github.com/openpolitics/manifesto/pull/135#issuecomment-38377531\",\"issue_url\":\"https://api.github.com/repos/openpolitics/manifesto/issues/135\",\"id\":38377531,\"user\":{\"login\":\"Floppy\",\"id\":3565,\"avatar_url\":\"https://avatars.githubusercontent.com/u/3565?\",\"gravatar_id\":\"c150a49c7709fa40bffca545ecf8942d\",\"url\":\"https://api.github.com/users/Floppy\",\"html_url\":\"https://github.com/Floppy\",\"followers_url\":\"https://api.github.com/users/Floppy/followers\",\"following_url\":\"https://api.github.com/users/Floppy/following{/other_user}\",\"gists_url\":\"https://api.github.com/users/Floppy/gists{/gist_id}\",\"starred_url\":\"https://api.github.com/users/Floppy/starred{/owner}{/repo}\",\"subscriptions_url\":\"https://api.github.com/users/Floppy/subscriptions\",\"organizations_url\":\"https://api.github.com/users/Floppy/orgs\",\"repos_url\":\"https://api.github.com/users/Floppy/repos\",\"events_url\":\"https://api.github.com/users/Floppy/events{/privacy}\",\"received_events_url\":\"https://api.github.com/users/Floppy/received_events\",\"type\":\"User\",\"site_admin\":false},\"created_at\":\"2014-03-23T09:11:25Z\",\"updated_at\":\"2014-03-23T09:11:25Z\",\"body\":\"That
+        seems reasonable, but we'd still need to resist the international stuff that
+        keeps trying to be imposed if it threatened to overrule even that. If I remember
+        correctly, international treaties supercede domestic law. \"},{\"url\":\"https://api.github.com/repos/openpolitics/manifesto/issues/comments/38377535\",\"html_url\":\"https://github.com/openpolitics/manifesto/pull/135#issuecomment-38377535\",\"issue_url\":\"https://api.github.com/repos/openpolitics/manifesto/issues/135\",\"id\":38377535,\"user\":{\"login\":\"Floppy\",\"id\":3565,\"avatar_url\":\"https://avatars.githubusercontent.com/u/3565?\",\"gravatar_id\":\"c150a49c7709fa40bffca545ecf8942d\",\"url\":\"https://api.github.com/users/Floppy\",\"html_url\":\"https://github.com/Floppy\",\"followers_url\":\"https://api.github.com/users/Floppy/followers\",\"following_url\":\"https://api.github.com/users/Floppy/following{/other_user}\",\"gists_url\":\"https://api.github.com/users/Floppy/gists{/gist_id}\",\"starred_url\":\"https://api.github.com/users/Floppy/starred{/owner}{/repo}\",\"subscriptions_url\":\"https://api.github.com/users/Floppy/subscriptions\",\"organizations_url\":\"https://api.github.com/users/Floppy/orgs\",\"repos_url\":\"https://api.github.com/users/Floppy/repos\",\"events_url\":\"https://api.github.com/users/Floppy/events{/privacy}\",\"received_events_url\":\"https://api.github.com/users/Floppy/received_events\",\"type\":\"User\",\"site_admin\":false},\"created_at\":\"2014-03-23T09:11:40Z\",\"updated_at\":\"2014-03-23T09:11:40Z\",\"body\":\"That
+        could be wrong though. I have no citation :)\"},{\"url\":\"https://api.github.com/repos/openpolitics/manifesto/issues/comments/38387394\",\"html_url\":\"https://github.com/openpolitics/manifesto/pull/135#issuecomment-38387394\",\"issue_url\":\"https://api.github.com/repos/openpolitics/manifesto/issues/135\",\"id\":38387394,\"user\":{\"login\":\"philipjohn\",\"id\":136342,\"avatar_url\":\"https://avatars.githubusercontent.com/u/136342?\",\"gravatar_id\":\"c69525bb0df6c234216b9e2aa32f7727\",\"url\":\"https://api.github.com/users/philipjohn\",\"html_url\":\"https://github.com/philipjohn\",\"followers_url\":\"https://api.github.com/users/philipjohn/followers\",\"following_url\":\"https://api.github.com/users/philipjohn/following{/other_user}\",\"gists_url\":\"https://api.github.com/users/philipjohn/gists{/gist_id}\",\"starred_url\":\"https://api.github.com/users/philipjohn/starred{/owner}{/repo}\",\"subscriptions_url\":\"https://api.github.com/users/philipjohn/subscriptions\",\"organizations_url\":\"https://api.github.com/users/philipjohn/orgs\",\"repos_url\":\"https://api.github.com/users/philipjohn/repos\",\"events_url\":\"https://api.github.com/users/philipjohn/events{/privacy}\",\"received_events_url\":\"https://api.github.com/users/philipjohn/received_events\",\"type\":\"User\",\"site_admin\":false},\"created_at\":\"2014-03-23T16:26:45Z\",\"updated_at\":\"2014-03-23T16:26:45Z\",\"body\":\"Hmm
+        you may be right, which actually puts the whole thing in a different context
+        I guess, because it isn't then a policy that says 'government will stop corps
+        suing' it's one that says \\\"we'll stop *international treaties* from having
+        a chilling effect on legitimate government policy that's in the national interest\\\"...
+        i.e. its the treaty that's the direct threat as opposed to the corps. Does
+        that sound right?\"},{\"url\":\"https://api.github.com/repos/openpolitics/manifesto/issues/comments/38391858\",\"html_url\":\"https://github.com/openpolitics/manifesto/pull/135#issuecomment-38391858\",\"issue_url\":\"https://api.github.com/repos/openpolitics/manifesto/issues/135\",\"id\":38391858,\"user\":{\"login\":\"Floppy\",\"id\":3565,\"avatar_url\":\"https://avatars.githubusercontent.com/u/3565?\",\"gravatar_id\":\"c150a49c7709fa40bffca545ecf8942d\",\"url\":\"https://api.github.com/users/Floppy\",\"html_url\":\"https://github.com/Floppy\",\"followers_url\":\"https://api.github.com/users/Floppy/followers\",\"following_url\":\"https://api.github.com/users/Floppy/following{/other_user}\",\"gists_url\":\"https://api.github.com/users/Floppy/gists{/gist_id}\",\"starred_url\":\"https://api.github.com/users/Floppy/starred{/owner}{/repo}\",\"subscriptions_url\":\"https://api.github.com/users/Floppy/subscriptions\",\"organizations_url\":\"https://api.github.com/users/Floppy/orgs\",\"repos_url\":\"https://api.github.com/users/Floppy/repos\",\"events_url\":\"https://api.github.com/users/Floppy/events{/privacy}\",\"received_events_url\":\"https://api.github.com/users/Floppy/received_events\",\"type\":\"User\",\"site_admin\":false},\"created_at\":\"2014-03-23T18:33:20Z\",\"updated_at\":\"2014-03-23T18:33:20Z\",\"body\":\"Yes,
+        that's what I was going for. Let me rephrase using some of those words and
+        we'll try this again.\"},{\"url\":\"https://api.github.com/repos/openpolitics/manifesto/issues/comments/39099793\",\"html_url\":\"https://github.com/openpolitics/manifesto/pull/135#issuecomment-39099793\",\"issue_url\":\"https://api.github.com/repos/openpolitics/manifesto/issues/135\",\"id\":39099793,\"user\":{\"login\":\"PaulJRobinson\",\"id\":4026234,\"avatar_url\":\"https://avatars.githubusercontent.com/u/4026234?\",\"gravatar_id\":\"c65ff1e22e2481b7410dfdc90649310d\",\"url\":\"https://api.github.com/users/PaulJRobinson\",\"html_url\":\"https://github.com/PaulJRobinson\",\"followers_url\":\"https://api.github.com/users/PaulJRobinson/followers\",\"following_url\":\"https://api.github.com/users/PaulJRobinson/following{/other_user}\",\"gists_url\":\"https://api.github.com/users/PaulJRobinson/gists{/gist_id}\",\"starred_url\":\"https://api.github.com/users/PaulJRobinson/starred{/owner}{/repo}\",\"subscriptions_url\":\"https://api.github.com/users/PaulJRobinson/subscriptions\",\"organizations_url\":\"https://api.github.com/users/PaulJRobinson/orgs\",\"repos_url\":\"https://api.github.com/users/PaulJRobinson/repos\",\"events_url\":\"https://api.github.com/users/PaulJRobinson/events{/privacy}\",\"received_events_url\":\"https://api.github.com/users/PaulJRobinson/received_events\",\"type\":\"User\",\"site_admin\":false},\"created_at\":\"2014-03-31T15:11:22Z\",\"updated_at\":\"2014-03-31T15:11:22Z\",\"body\":\":+1:\"},{\"url\":\"https://api.github.com/repos/openpolitics/manifesto/issues/comments/39380556\",\"html_url\":\"https://github.com/openpolitics/manifesto/pull/135#issuecomment-39380556\",\"issue_url\":\"https://api.github.com/repos/openpolitics/manifesto/issues/135\",\"id\":39380556,\"user\":{\"login\":\"Floppy\",\"id\":3565,\"avatar_url\":\"https://avatars.githubusercontent.com/u/3565?\",\"gravatar_id\":\"c150a49c7709fa40bffca545ecf8942d\",\"url\":\"https://api.github.com/users/Floppy\",\"html_url\":\"https://github.com/Floppy\",\"followers_url\":\"https://api.github.com/users/Floppy/followers\",\"following_url\":\"https://api.github.com/users/Floppy/following{/other_user}\",\"gists_url\":\"https://api.github.com/users/Floppy/gists{/gist_id}\",\"starred_url\":\"https://api.github.com/users/Floppy/starred{/owner}{/repo}\",\"subscriptions_url\":\"https://api.github.com/users/Floppy/subscriptions\",\"organizations_url\":\"https://api.github.com/users/Floppy/orgs\",\"repos_url\":\"https://api.github.com/users/Floppy/repos\",\"events_url\":\"https://api.github.com/users/Floppy/events{/privacy}\",\"received_events_url\":\"https://api.github.com/users/Floppy/received_events\",\"type\":\"User\",\"site_admin\":false},\"created_at\":\"2014-04-02T20:40:12Z\",\"updated_at\":\"2014-04-02T20:40:12Z\",\"body\":\"Updated
+        wording. See what you think.\"}]"
+    http_version: 
+  recorded_at: Wed, 02 Apr 2014 20:42:50 GMT
+- request:
+    method: post
+    uri: https://api.github.com/repos/openpolitics/manifesto/statuses/cf875cab11384f68c0034263ea10abe5d8c6cbfe?access_token=<GITHUB_OAUTH_TOKEN>
+    body:
+      encoding: UTF-8
+      string: "{\"state\":\"pending\",\"target_url\":\"http://votebot.openpolitics.org.uk/135\",\"description\":\"The
+        change is waiting for more votes\"}"
+    headers:
+      Accept:
+      - application/vnd.github.v3+json,application/vnd.github.beta+json;q=0.5,application/json;q=0.1
+      Accept-Charset:
+      - utf-8
+      User-Agent:
+      - Github Ruby Gem 0.11.3
+      Content-Type:
+      - application/json
+      Authorization:
+      - Token token="<GITHUB_OAUTH_TOKEN>"
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+  response:
+    status:
+      code: 201
+      message: Created
+    headers:
+      Server:
+      - GitHub.com
+      Date:
+      - Wed, 02 Apr 2014 20:42:51 GMT
+      Content-Type:
+      - application/json; charset=utf-8
+      Status:
+      - 201 Created
+      X-Ratelimit-Limit:
+      - '5000'
+      X-Ratelimit-Remaining:
+      - '4436'
+      X-Ratelimit-Reset:
+      - '1396471642'
+      Cache-Control:
+      - private, max-age=60, s-maxage=60
+      Etag:
+      - "\"3a9a9d075c58bb9bfe44b4d8f9053209\""
+      X-Oauth-Scopes:
+      - gist, repo, user
+      X-Accepted-Oauth-Scopes:
+      - ''
+      Location:
+      - https://api.github.com/repos/openpolitics/manifesto/statuses/cf875cab11384f68c0034263ea10abe5d8c6cbfe
+      Vary:
+      - Accept, Authorization, Cookie, X-GitHub-OTP
+      X-Github-Media-Type:
+      - github.v3; format=json
+      X-Content-Type-Options:
+      - nosniff
+      Content-Length:
+      - '1204'
+      Access-Control-Allow-Credentials:
+      - 'true'
+      Access-Control-Expose-Headers:
+      - ETag, Link, X-GitHub-OTP, X-RateLimit-Limit, X-RateLimit-Remaining, X-RateLimit-Reset,
+        X-OAuth-Scopes, X-Accepted-OAuth-Scopes, X-Poll-Interval
+      Access-Control-Allow-Origin:
+      - "*"
+      X-Github-Request-Id:
+      - 569C3641:5DAF:195021:533C764A
+    body:
+      encoding: UTF-8
+      string: "{\"url\":\"https://api.github.com/repos/openpolitics/manifesto/statuses/cf875cab11384f68c0034263ea10abe5d8c6cbfe\",\"id\":50818565,\"state\":\"pending\",\"description\":\"The
+        change is waiting for more votes\",\"target_url\":\"http://votebot.openpolitics.org.uk/135\",\"created_at\":\"2014-04-02T20:42:51Z\",\"updated_at\":\"2014-04-02T20:42:51Z\",\"creator\":{\"login\":\"Floppy\",\"id\":3565,\"avatar_url\":\"https://avatars.githubusercontent.com/u/3565?\",\"gravatar_id\":\"c150a49c7709fa40bffca545ecf8942d\",\"url\":\"https://api.github.com/users/Floppy\",\"html_url\":\"https://github.com/Floppy\",\"followers_url\":\"https://api.github.com/users/Floppy/followers\",\"following_url\":\"https://api.github.com/users/Floppy/following{/other_user}\",\"gists_url\":\"https://api.github.com/users/Floppy/gists{/gist_id}\",\"starred_url\":\"https://api.github.com/users/Floppy/starred{/owner}{/repo}\",\"subscriptions_url\":\"https://api.github.com/users/Floppy/subscriptions\",\"organizations_url\":\"https://api.github.com/users/Floppy/orgs\",\"repos_url\":\"https://api.github.com/users/Floppy/repos\",\"events_url\":\"https://api.github.com/users/Floppy/events{/privacy}\",\"received_events_url\":\"https://api.github.com/users/Floppy/received_events\",\"type\":\"User\",\"site_admin\":false}}"
+    http_version: 
+  recorded_at: Wed, 02 Apr 2014 20:42:51 GMT
+- request:
+    method: get
+    uri: https://api.github.com/repos/openpolitics/manifesto/commits/cf875cab11384f68c0034263ea10abe5d8c6cbfe?access_token=<GITHUB_OAUTH_TOKEN>
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept:
+      - application/vnd.github.v3+json,application/vnd.github.beta+json;q=0.5,application/json;q=0.1
+      Accept-Charset:
+      - utf-8
+      User-Agent:
+      - Github Ruby Gem 0.11.3
+      Authorization:
+      - Token token="<GITHUB_OAUTH_TOKEN>"
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - GitHub.com
+      Date:
+      - Wed, 02 Apr 2014 21:11:04 GMT
+      Content-Type:
+      - application/json; charset=utf-8
+      Transfer-Encoding:
+      - chunked
+      Status:
+      - 200 OK
+      X-Ratelimit-Limit:
+      - '5000'
+      X-Ratelimit-Remaining:
+      - '4843'
+      X-Ratelimit-Reset:
+      - '1396475243'
+      Cache-Control:
+      - private, max-age=60, s-maxage=60
+      Last-Modified:
+      - Wed, 02 Apr 2014 20:39:24 GMT
+      Etag:
+      - "\"cfd56051f5ba2b9304bcd1c67a8c4c98\""
+      X-Oauth-Scopes:
+      - gist, repo, user
+      X-Accepted-Oauth-Scopes:
+      - ''
+      Vary:
+      - Accept, Authorization, Cookie, X-GitHub-OTP
+      - Accept-Encoding
+      X-Github-Media-Type:
+      - github.v3; format=json
+      X-Content-Type-Options:
+      - nosniff
+      Access-Control-Allow-Credentials:
+      - 'true'
+      Access-Control-Expose-Headers:
+      - ETag, Link, X-GitHub-OTP, X-RateLimit-Limit, X-RateLimit-Remaining, X-RateLimit-Reset,
+        X-OAuth-Scopes, X-Accepted-OAuth-Scopes, X-Poll-Interval
+      Access-Control-Allow-Origin:
+      - "*"
+      X-Github-Request-Id:
+      - 569C3641:1BC9:1D33855:533C7CE7
+      X-Served-By:
+      - a8d8e492d6966f0c23dee2eed64c678a
+    body:
+      encoding: UTF-8
+      string: "{\"sha\":\"cf875cab11384f68c0034263ea10abe5d8c6cbfe\",\"commit\":{\"author\":{\"name\":\"James
+        Smith\",\"email\":\"james@floppy.org.uk\",\"date\":\"2014-04-02T20:39:24Z\"},\"committer\":{\"name\":\"James
+        Smith\",\"email\":\"james@floppy.org.uk\",\"date\":\"2014-04-02T20:39:24Z\"},\"message\":\"Redrafted
+        ISDS section\",\"tree\":{\"sha\":\"41bdb71f90aaa912f90152a8f3fc55747ede827f\",\"url\":\"https://api.github.com/repos/openpolitics/manifesto/git/trees/41bdb71f90aaa912f90152a8f3fc55747ede827f\"},\"url\":\"https://api.github.com/repos/openpolitics/manifesto/git/commits/cf875cab11384f68c0034263ea10abe5d8c6cbfe\",\"comment_count\":0},\"url\":\"https://api.github.com/repos/openpolitics/manifesto/commits/cf875cab11384f68c0034263ea10abe5d8c6cbfe\",\"html_url\":\"https://github.com/openpolitics/manifesto/commit/cf875cab11384f68c0034263ea10abe5d8c6cbfe\",\"comments_url\":\"https://api.github.com/repos/openpolitics/manifesto/commits/cf875cab11384f68c0034263ea10abe5d8c6cbfe/comments\",\"author\":{\"login\":\"Floppy\",\"id\":3565,\"avatar_url\":\"https://avatars.githubusercontent.com/u/3565?\",\"gravatar_id\":\"c150a49c7709fa40bffca545ecf8942d\",\"url\":\"https://api.github.com/users/Floppy\",\"html_url\":\"https://github.com/Floppy\",\"followers_url\":\"https://api.github.com/users/Floppy/followers\",\"following_url\":\"https://api.github.com/users/Floppy/following{/other_user}\",\"gists_url\":\"https://api.github.com/users/Floppy/gists{/gist_id}\",\"starred_url\":\"https://api.github.com/users/Floppy/starred{/owner}{/repo}\",\"subscriptions_url\":\"https://api.github.com/users/Floppy/subscriptions\",\"organizations_url\":\"https://api.github.com/users/Floppy/orgs\",\"repos_url\":\"https://api.github.com/users/Floppy/repos\",\"events_url\":\"https://api.github.com/users/Floppy/events{/privacy}\",\"received_events_url\":\"https://api.github.com/users/Floppy/received_events\",\"type\":\"User\",\"site_admin\":false},\"committer\":{\"login\":\"Floppy\",\"id\":3565,\"avatar_url\":\"https://avatars.githubusercontent.com/u/3565?\",\"gravatar_id\":\"c150a49c7709fa40bffca545ecf8942d\",\"url\":\"https://api.github.com/users/Floppy\",\"html_url\":\"https://github.com/Floppy\",\"followers_url\":\"https://api.github.com/users/Floppy/followers\",\"following_url\":\"https://api.github.com/users/Floppy/following{/other_user}\",\"gists_url\":\"https://api.github.com/users/Floppy/gists{/gist_id}\",\"starred_url\":\"https://api.github.com/users/Floppy/starred{/owner}{/repo}\",\"subscriptions_url\":\"https://api.github.com/users/Floppy/subscriptions\",\"organizations_url\":\"https://api.github.com/users/Floppy/orgs\",\"repos_url\":\"https://api.github.com/users/Floppy/repos\",\"events_url\":\"https://api.github.com/users/Floppy/events{/privacy}\",\"received_events_url\":\"https://api.github.com/users/Floppy/received_events\",\"type\":\"User\",\"site_admin\":false},\"parents\":[{\"sha\":\"65a9d4663a363a333f87a14afc77bd5932828f35\",\"url\":\"https://api.github.com/repos/openpolitics/manifesto/commits/65a9d4663a363a333f87a14afc77bd5932828f35\",\"html_url\":\"https://github.com/openpolitics/manifesto/commit/65a9d4663a363a333f87a14afc77bd5932828f35\"}],\"stats\":{\"total\":22,\"additions\":11,\"deletions\":11},\"files\":[{\"sha\":\"791418b69efe0a572420e8486e4f2ff8eff4ab27\",\"filename\":\"manifesto/economy.md\",\"status\":\"modified\",\"additions\":3,\"deletions\":9,\"changes\":12,\"blob_url\":\"https://github.com/openpolitics/manifesto/blob/cf875cab11384f68c0034263ea10abe5d8c6cbfe/manifesto/economy.md\",\"raw_url\":\"https://github.com/openpolitics/manifesto/raw/cf875cab11384f68c0034263ea10abe5d8c6cbfe/manifesto/economy.md\",\"contents_url\":\"https://api.github.com/repos/openpolitics/manifesto/contents/manifesto/economy.md?ref=cf875cab11384f68c0034263ea10abe5d8c6cbfe\",\"patch\":\"@@
+        -3,7 +3,7 @@ title: Economy\\n layout: policy\\n published: true\\n ---\\n-*
+        table of contents \\n+* table of contents\\n {:toc}\\n \\n What policies should
+        we propose to maintain a competitive economy that provides [full employment](http://www.princeton.edu/~achaney/tmve/wiki100k/docs/Full_employment.html)?\\n@@
+        -16,10 +16,10 @@ The personal income tax allowance will be set at the level
+        of a full time living\\n \\n The rate of capital gains tax for individuals
+        will be harmonized with the rate of tax on earned income, and all allowances
+        for each will be pooled, in order to ensure that work is rewarded and incentivised
+        to the same extent as investment.\\n \\n-Investigate viability of moving from
+        an income-assessed direct taxation to wealth assessed direct taxation. Those
+        who earn significant salaries but do not accumulate wealth or assets beyond
+        a single property (ie ensuring a genuine 'trickle-down' to the service industries)
+        should be taxed less. This means hard-work is still encouraged, high-earners
+        are not forced abroad, but those who sit on vast sums of accumulated wealth
+        would be penalised instead.   \\n+Investigate viability of moving from an
+        income-assessed direct taxation to wealth assessed direct taxation. Those
+        who earn significant salaries but do not accumulate wealth or assets beyond
+        a single property (ie ensuring a genuine 'trickle-down' to the service industries)
+        should be taxed less. This means hard-work is still encouraged, high-earners
+        are not forced abroad, but those who sit on vast sums of accumulated wealth
+        would be penalised instead.\\n \\n ### VAT\\n-Investigate possible reforms
+        to the way VAT is applied to goods and services with a view to making it less
+        regressive and, ultimately, to remove the poorest from having to pay entirely
+        - even if this requires renegotiating our obligations to the EU. \\n+Investigate
+        possible reforms to the way VAT is applied to goods and services with a view
+        to making it less regressive and, ultimately, to remove the poorest from having
+        to pay entirely - even if this requires renegotiating our obligations to the
+        EU.\\n \\n ## Social Security\\n \\n@@ -63,10 +63,4 @@ Close down all tax
+        havens under British jurisdiction. This means reforming tax r\\n \\n In parallel,
+        work at an international level to get rid of tax havens outside British jurisdiction,
+        and close international loopholes such as the \\\"Double Irish Dutch Sandwich\\\".\\n
+        \\n-## Investor-State Dispute Settlement\\n-\\n-Reject outright any and all
+        attempts to introduce systems whereby investors may sue the UK government
+        for loss of future profits. A current example is the Investor-State Dispute
+        Settlement (ISDS) process in the TTIP treaty currently under negotiation[^2],
+        which undermines democractic processes and could prevent the government taking
+        action which benefits the UK if it causes potential losses for foreign investors.\\n-\\n
+        [^1]: [Stop Secret Contracts](http://stopsecretcontracts.org/)\\n-\\n-[^2]:
+        [Investor-state dispute settlement (ISDS) and the Transatlantic Trade and
+        Investment Partnership (TTIP) - Commons Library Standard Note](http://www.parliament.uk/business/publications/research/briefing-papers/SN06777/investorstate-dispute-settlement-isds-and-the-transatlantic-trade-and-investment-partnership-ttip)\\n\\\\
+        No newline at end of file\"},{\"sha\":\"93efd82c612e2ef17f161ee4475a7e513033aa00\",\"filename\":\"manifesto/foreign_policy.md\",\"status\":\"modified\",\"additions\":8,\"deletions\":2,\"changes\":10,\"blob_url\":\"https://github.com/openpolitics/manifesto/blob/cf875cab11384f68c0034263ea10abe5d8c6cbfe/manifesto/foreign_policy.md\",\"raw_url\":\"https://github.com/openpolitics/manifesto/raw/cf875cab11384f68c0034263ea10abe5d8c6cbfe/manifesto/foreign_policy.md\",\"contents_url\":\"https://api.github.com/repos/openpolitics/manifesto/contents/manifesto/foreign_policy.md?ref=cf875cab11384f68c0034263ea10abe5d8c6cbfe\",\"patch\":\"@@
+        -3,7 +3,7 @@ title: Foreign Policy\\n layout: policy\\n published: true\\n
+        ---\\n-* table of contents \\n+* table of contents\\n {:toc}\\n \\n What policies
+        should we adopt in our relations with other countries?\\n@@ -22,4 +22,10 @@
+        We strongly oppose Capital Punishment in all forms, and would work with other
+        na\\n \\n ## United Nations Reform\\n \\n-Whilst it's right that those nations
+        that make the greatest contribution to UN troop deployments should retain
+        a permanent seat on the UN Security Council, no nation on the UN Security
+        Council should have the right of veto. All UN Security Resolutions should
+        be subject to majority vote.\\n\\\\ No newline at end of file\\n+Whilst it's
+        right that those nations that make the greatest contribution to UN troop deployments
+        should retain a permanent seat on the UN Security Council, no nation on the
+        UN Security Council should have the right of veto. All UN Security Resolutions
+        should be subject to majority vote.\\n+\\n+## Investor-State Dispute Settlement\\n+\\n+Resist
+        the adoption of international treaties that could allow unelected institutions
+        to have a chilling effect on government policy that is in the public interest
+        of UK voters. A current example is the Investor-State Dispute Settlement (ISDS)
+        process in the TTIP treaty currently under negotiation[^1], which undermines
+        democratic processes and could prevent the government taking action which
+        benefits the UK if it causes potential losses for foreign investors.\\n+\\n+[^1]:
+        [Investor-state dispute settlement (ISDS) and the Transatlantic Trade and
+        Investment Partnership (TTIP) - Commons Library Standard Note](http://www.parliament.uk/business/publications/research/briefing-papers/SN06777/investorstate-dispute-settlement-isds-and-the-transatlantic-trade-and-investment-partnership-ttip)\"}]}"
+    http_version: 
+  recorded_at: Wed, 02 Apr 2014 21:11:04 GMT
+recorded_with: VCR 2.8.0
