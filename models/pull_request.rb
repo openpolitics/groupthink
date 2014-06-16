@@ -74,7 +74,8 @@ class PullRequest
     self.class.github.repos.statuses.create 'openpolitics', 'manifesto', pr['head']['sha'],
       "state" =>  github_state,
       "target_url" => "http://votebot.openpolitics.org.uk/#{@number}",
-      "description" => github_description
+      "description" => github_description,
+      "context" => "votebot"
   end
 
   def process_comments(sha = nil)
