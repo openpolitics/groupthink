@@ -18,6 +18,19 @@
 </div>
 
 <div class='row'>
+  <div class='col-md-12'>
+    <div class='panel panel-default participants'>
+      <div class="panel-heading">
+        Participants: <%= @pull_request.participants.count %>
+      </div>
+      <div class='panel-body'>
+        <%= partial :person, collection: @pull_request.participants %>
+      <div>
+    </div>
+  </div>
+</div>
+
+<div class='row'>
 
   <div class='col-md-4'>
     <div class='panel panel-success agree'>
