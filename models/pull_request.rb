@@ -32,7 +32,7 @@ class PullRequest
     pr.state ? pr : nil
   end
 
-  attr_accessor :number, :state, :title, :agree, :disagree, :abstain, :proposer, :participants
+  attr_accessor :number, :state, :title, :agree, :disagree, :abstain, :proposer, :participants, :created_at
 
   def initialize(number)
     @number = number
@@ -46,12 +46,14 @@ class PullRequest
       @agree = data['agree']
       @disagree = data['disagree']
       @abstain = data['abstain']
+      @created_at = Date.parse data['created_at']
     end
   end
-
+  
   def update_from_github!
     pr = self.class.github.pull_requests.get('openpolitics', 'manifesto', @number)
     @proposer = pr.user
+    @created_at = Date.parse pr.created_at
     process_comments(pr.head.sha)
     github_state = nil
     github_description = nil
@@ -59,14 +61,18 @@ class PullRequest
       @state = "blocked"
       github_state = "failure"
       github_description = "The change is blocked"
-    elsif @agree.count >= 2
+    elsif @agree.count >= 2 && age >= 14
       @state = "passed"
       github_state = "success"
       github_description = "The change is approved and ready to merge"
-    else
+    elsif @agree.count < 2
       @state = "waiting"
       github_state = "pending"
       github_description = "The change is waiting for more votes"
+    else
+      @state = "waiting"
+      github_state = "pending"
+      github_description = "The change has not yet been open for 14 days"
     end
     @title = pr.title
     save!
@@ -129,6 +135,10 @@ class PullRequest
     [self.class.name, number.to_s].join(':')
   end
 
+  def age
+    (Date.today - created_at).to_i
+  end
+
   def save!
     redis.set(db_key, {
       'proposer' => @proposer,
@@ -138,6 +148,7 @@ class PullRequest
       'agree' => @agree,
       'disagree' => @disagree,
       'abstain' => @abstain,
+      'created_at' => @created_at.iso8601,
     }.to_json)
   end
 

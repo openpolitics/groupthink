@@ -3,6 +3,7 @@
     <th class="text-center">State</th>
     <th>Title</th>
     <th class="text-center">Participants</th>
+    <th class="text-center">Age</th>
     <th class="text-center"><%= state_image('agree')%></th>
     <th class="text-center"><%= state_image('abstain')%></th>
     <th class="text-center"><%= state_image('disagree')%></th>
@@ -13,6 +14,7 @@
       <td class="text-center"><span class='label label-<%= row_class(pr) %>'><%= pr.state.capitalize %></span></td>
       <td><a href='/<%= pr.number %>'><%= pr.title %></a></td> 
       <td class="text-center"><%= pr.participants.count %></td>
+      <td class="text-center"><%= pr.age %> days</td>
       <td class="text-center"><%= pr.agree.count %></td>
       <td class="text-center"><%= pr.abstain.count %></td>
       <td class="text-center"><%= pr.disagree.count %></td>
