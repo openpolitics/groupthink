@@ -11,14 +11,15 @@ describe PullRequest, :vcr do
   it "should include proposer information" do
     pr = PullRequest.update_from_github!(43)
     pr.proposer['login'].should == 'Floppy'
-    pr.proposer['avatar_url'].should == 'https://gravatar.com/avatar/c150a49c7709fa40bffca545ecf8942d?d=https%3A%2F%2Fidenticons.github.com%2Fe6e713296627dff6475085cc6a224464.png&r=x'
+    pr.proposer['avatar_url'].should == 'https://avatars.githubusercontent.com/u/3565?v=2'
   end
 
   it "should only count latest vote per person" do
     pr = PullRequest.update_from_github!(100)
     pr.abstain.count.should == 1
     pr.abstain[0]['login'].should == 'Floppy'
-    pr.agree.count.should == 0
+    pr.agree.count.should == 1
+    pr.agree[0]['login'].should == 'philipjohn'
   end
 
   it "should handle both thumbsup and +1 emoticons as upvotes" do
