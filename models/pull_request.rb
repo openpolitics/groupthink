@@ -104,20 +104,22 @@ class PullRequest
           @participants << user
           db_user.participating!(@number)
         end
-        case comment.body
-        when /:thumbsup:|:\+1:/
-          next if DateTime.parse(comment.created_at) < cutoff
-          remove_votes(user)
-          @agree << user
-          db_user.agree!(@number)
-        when /:hand:/
-          remove_votes(user)
-          @abstain << user
-          db_user.abstain!(@number)
-        when /:thumbsdown:|:\-1:/
-          remove_votes(user)
-          @disagree << user
-          db_user.disagree!(@number)
+        if db_user.contributor
+          case comment.body
+          when /:thumbsup:|:\+1:/
+            next if DateTime.parse(comment.created_at) < cutoff
+            remove_votes(user)
+            @agree << user
+            db_user.agree!(@number)
+          when /:hand:/
+            remove_votes(user)
+            @abstain << user
+            db_user.abstain!(@number)
+          when /:thumbsdown:|:\-1:/
+            remove_votes(user)
+            @disagree << user
+            db_user.disagree!(@number)
+          end
         end
       end
     end
