@@ -1,6 +1,6 @@
 class User
   
-  attr_accessor :login, :avatar_url, :agree, :disagree, :abstain, :participating, :voted
+  attr_accessor :login, :avatar_url, :agree, :disagree, :abstain, :participating, :voted, :contributor
 
   def initialize(login)
     @login = login
@@ -14,17 +14,27 @@ class User
       @abstain       = data['abstain'] || []
       @participating = data['participating'] || []
       @voted         = data['voted'] || []
+      @contributor   = data['contributor'].nil? ? update_github_contributor_status : data['contributor']
     else
       @agree         = []
       @disagree      = []
       @abstain       = []
       @participating = []
       @voted         = []
+      update_github_contributor_status
     end
   end
 
+  def update_github_contributor_status
+    conn = Faraday.new(:url => 'https://github.com')
+    response = conn.get '/openpolitics/manifesto/graphs/contributors-data'
+    json = JSON.parse(response.body)
+    @contributor = json.map{|x| x["author"]["login"]}.include? @login
+    @contributor
+  end
+
   def self.find_all
-    redis.keys.select{|x| x =~ /^User:/}.map{|key| User.new(key.split(':')[1])}.sort_by{|x| x.login}
+    redis.keys.select{|x| x =~ /^User:/}.map{|key| User.find(key.split(':')[1])}.sort_by{|x| x.login}
   end
   
   def self.find(login)
@@ -92,6 +102,7 @@ class User
       'abstain'       => @abstain,
       'participating' => @participating,
       'voted'         => @voted,
+      'contributor'   => @contributor.nil? ? update_github_contributor_status : @contributor
     }.to_json)
   end
   

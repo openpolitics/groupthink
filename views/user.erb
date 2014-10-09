@@ -6,6 +6,10 @@
 
 <h1><a href='http://github.com/<%= @user.login %>'><%= @user.login %></a></h1>
 
+<% if @user.contributor %>
+  <div class='label label-primary'>contributor</div>
+<% end %>
+
 <h2>Not voted on:</h2>
 
 <%= partial :pr_list, locals: {pull_requests: @not_voted} %>

@@ -1,6 +1,8 @@
-<a href='/users/<%= person['login']%>'>
+<% u = User.find(person['login']) %>
+
+<a href='/users/<%= u.login %>'>
   <img src='<%= person['avatar_url'] %>' 
-       alt='<%= person['login'] %>' 
-       title='<%= person['login'] %>' 
-       class="img-rounded" />
+       alt='<%= u.login %>' 
+       title='<%= u.login %>' 
+       class="img-rounded user <%= "contributor" if u.contributor %>" />
 </a>
