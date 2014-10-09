@@ -56,7 +56,7 @@ class Votebot < Sinatra::Base
   helpers do
     def row_class(pr)
       case pr.state
-      when 'passed'
+      when 'passed', 'agreed'
         'success'
       when 'waiting'
         'warning'

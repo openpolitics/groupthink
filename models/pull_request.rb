@@ -6,6 +6,7 @@ class PullRequest
   States = [
     "passed",
     "waiting",
+    "agreed",
     "blocked"
   ]
 
@@ -70,7 +71,7 @@ class PullRequest
       github_state = "pending"
       github_description = "The change is waiting for more votes"
     else
-      @state = "waiting"
+      @state = "agreed"
       github_state = "pending"
       github_description = "The change has not yet been open for 14 days"
     end
