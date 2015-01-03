@@ -93,6 +93,10 @@ class User
     [self.class.name, @login.to_s].join(':')
   end
 
+  def self.update_all_from_github!
+    User.all.each {|user| user.update_from_github! }
+  end
+
   def update_from_github!
     @contributor = update_github_contributor_status
     save!
