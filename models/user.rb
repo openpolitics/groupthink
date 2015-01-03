@@ -94,7 +94,7 @@ class User
   end
 
   def self.update_all_from_github!
-    User.all.each {|user| user.update_from_github! }
+    User.find_all.each {|user| user.update_from_github! }
   end
 
   def update_from_github!
