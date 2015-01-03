@@ -32,7 +32,11 @@ class Votebot < Sinatra::Base
   
   get '/:number' do
     @pull_request = PullRequest.find(params[:number])
-    erb :show
+    if @pull_request
+      erb :show
+    else
+      404
+    end
   end
   
   post '/:number/update' do
