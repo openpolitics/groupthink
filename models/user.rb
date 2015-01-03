@@ -92,6 +92,11 @@ class User
   def db_key
     [self.class.name, @login.to_s].join(':')
   end
+
+  def update_from_github!
+    @contributor = update_github_contributor_status
+    save!
+  end
   
   def save!
     redis.set(db_key, {
