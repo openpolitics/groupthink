@@ -1,7 +1,12 @@
 require 'sinatra/base'
 require 'sinatra/partial'
+require "bugsnag"
 require_relative 'environments'
 require_relative 'models'
+
+Bugsnag.configure do |config|
+  config.api_key = ENV["BUGSNAG_API_KEY"]
+end
 
 class Votebot < Sinatra::Base
   
@@ -10,6 +15,9 @@ class Votebot < Sinatra::Base
   enable :partial_underscores
   
   set :protection, :frame_options => 'ALLOW FROM http://openpolitics.org.uk'
+  
+  use Bugsnag::Rack
+  enable :raise_errors
   
   post '/update' do
     User.update_all_from_github!

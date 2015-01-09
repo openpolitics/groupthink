@@ -4,6 +4,8 @@ GEM
     addressable (2.3.6)
     backports (3.6.0)
     buftok (0.2.0)
+    bugsnag (2.7.1)
+      multi_json (~> 1.0)
     coderay (1.1.0)
     crack (0.4.2)
       safe_yaml (~> 1.0.0)
@@ -136,6 +138,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  bugsnag
   database_cleaner
   dotenv
   github_api

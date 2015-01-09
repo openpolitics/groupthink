@@ -7,6 +7,7 @@ gem "sinatra"
 gem "github_api"
 gem "twitter"
 gem "sinatra-partial"
+gem "bugsnag"
 
 group :development, :production do
   gem "redis"
