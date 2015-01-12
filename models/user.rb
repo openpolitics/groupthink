@@ -94,7 +94,14 @@ class User
   end
 
   def self.update_all_from_github!
-    User.find_all.each {|user| user.update_from_github! }
+    conn = Faraday.new(:url => 'https://github.com')
+    response = conn.get '/openpolitics/manifesto/graphs/contributors-data'
+    json = JSON.parse(response.body)
+    json.each do |contribution|
+      user = User.new(contribution["author"]["login"])
+      user.contributor = true
+      user.save!
+    end
   end
 
   def update_from_github!
