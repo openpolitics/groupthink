@@ -1,0 +1,18 @@
+<ol class="breadcrumb">
+  <li><a href="/">All Votes</a></li>
+  <li class="active">Users</li>
+</ol>
+
+<h1>All Users</h1>
+
+<h2>Contributors (<%= @contributors.count %>)</h2>
+
+<% @contributors.each do |user| %>
+  <%= partial :person, locals: {person: {'login' => user.login }} %>
+<% end %>
+
+<h2>Other users (<%= @others.count %>)</h2>
+
+<% @others.each do |user| %>
+  <%= partial :person, locals: {person: {'login' => user.login }} %>
+<% end %>

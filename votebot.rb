@@ -30,6 +30,13 @@ class Votebot < Sinatra::Base
     erb :index
   end
   
+  get '/users' do
+    @users = User.find_all
+    @contributors = @users.select{|x| x.contributor}
+    @others = @users.select{|x| !x.contributor}
+    erb :users
+  end
+
   get '/users/:login' do
     @user = User.find(params[:login])
     @pull_requests = PullRequest.find_all.sort_by{|x| x.number.to_i}.reverse
