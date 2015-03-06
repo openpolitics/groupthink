@@ -56,14 +56,14 @@ class PullRequest
     @proposer = pr.user
     @created_at = Date.parse pr.created_at
     process_comments(pr.head.sha)
-    required_agrees = (User.find_all.select{|x| x.contributor == true}.count * 0.2).to_i
+    required_agrees = 2
     github_state = nil
     github_description = nil
     if @disagree.count > 0
       @state = "blocked"
       github_state = "failure"
       github_description = "The change is blocked"
-    elsif @agree.count >= required_agrees && age >= 14
+    elsif @agree.count >= required_agrees && age >= 7
       @state = "passed"
       github_state = "success"
       github_description = "The change is approved and ready to merge"
