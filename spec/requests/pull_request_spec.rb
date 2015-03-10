@@ -3,23 +3,23 @@ require 'spec_helper'
 describe PullRequest, :vcr do
 
   it "should update pull requests on demand" do
+    Timecop.freeze(2014,1,20)
     pr = PullRequest.update_from_github!(43)
     pr.state.should == 'passed'
     redis.get("PullRequest:43").should include("passed")
+    Timecop.return
   end
 
   it "should include proposer information" do
     pr = PullRequest.update_from_github!(43)
     pr.proposer['login'].should == 'Floppy'
-    pr.proposer['avatar_url'].should == 'https://avatars.githubusercontent.com/u/3565?v=2'
+    pr.proposer['avatar_url'].should =~ /https:\/\/avatars.githubusercontent.com\/u\/3565/
   end
 
   it "should only count latest vote per person" do
     pr = PullRequest.update_from_github!(100)
-    pr.abstain.count.should == 1
-    pr.abstain[0]['login'].should == 'Floppy'
-    pr.agree.count.should == 1
-    pr.agree[0]['login'].should == 'philipjohn'
+    pr.agree.count.should == 2
+    pr.agree.map{|x| x['login']}.sort.should == ["Floppy", "philipjohn"]
   end
 
   it "should handle both thumbsup and +1 emoticons as upvotes" do
