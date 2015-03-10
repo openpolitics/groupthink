@@ -184,7 +184,7 @@ class PullRequest
   private
 
   def self.github
-    @@github = Github.new user: 'openpolitics', repo: 'manifesto', oauth_token: ENV['GITHUB_OAUTH_TOKEN']
+    Github.new user: 'openpolitics', repo: 'manifesto', oauth_token: ENV['GITHUB_OAUTH_TOKEN']
   end
 
 end
