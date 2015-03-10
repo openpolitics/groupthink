@@ -92,7 +92,7 @@ GEM
     rspec-mocks (3.0.1)
       rspec-support (~> 3.0.0)
     rspec-support (3.0.0)
-    safe_yaml (1.0.3)
+    safe_yaml (1.0.4)
     simple_oauth (0.2.0)
     sinatra (1.4.5)
       rack (~> 1.4)
