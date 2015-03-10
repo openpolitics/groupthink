@@ -14,7 +14,7 @@ class PullRequest
   def self.update_all_from_github!
     keys = redis.keys('PullRequest:*')
     redis.del(keys) unless keys.empty?
-    github.pull_requests.list.each do |pr|
+    github.pull_requests.list(auto_pagination: true).each do |pr|
       update_from_github!(pr["number"])
     end
   end
