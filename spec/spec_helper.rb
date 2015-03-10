@@ -1,7 +1,7 @@
 # spec/spec_helper.rb
 require 'rack/test'
-require 'database_cleaner'
 require 'vcr'
+require 'timecop'
 
 VCR.configure do |c|
   c.cassette_library_dir = 'spec/fixtures/cassettes'
@@ -20,8 +20,6 @@ module RSpecMixin
   def app() Votebot end
 end
 
-DatabaseCleaner.strategy = :truncation
-
 RSpec.configure do |config|
   config.include RSpecMixin
 
@@ -37,11 +35,7 @@ RSpec.configure do |config|
   config.order = 'random'
 
   config.before(:each) do
-    DatabaseCleaner.start
-  end
-
-  config.after(:each) do
-    DatabaseCleaner.clean
+    redis.flushdb
   end
 
 end

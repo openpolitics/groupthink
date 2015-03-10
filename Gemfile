@@ -17,6 +17,7 @@ group :test do
   gem "mock_redis"
   gem "vcr"
   gem "webmock"
+  gem "timecop"
 end  
 
 group :development do
@@ -26,6 +27,5 @@ end
 group :development, :test do
   gem "rspec"
   gem "rack-test"
-  gem "database_cleaner"
   gem "dotenv"
 end
