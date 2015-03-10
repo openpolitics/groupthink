@@ -7,7 +7,8 @@ class PullRequest
     "passed",
     "waiting",
     "agreed",
-    "blocked"
+    "blocked",
+    "dead"
   ]
 
   def self.update_all_from_github!
@@ -59,31 +60,47 @@ class PullRequest
     required_agrees = 2
     github_state = nil
     github_description = nil
+    votes = @agree.count - @abstain.count
     if @disagree.count > 0
       @state = "blocked"
       github_state = "failure"
-      github_description = "The change is blocked"
-    elsif @agree.count >= required_agrees && age >= 7
+      github_description = "The change is blocked."
+    elsif votes >= required_agrees
       @state = "passed"
       github_state = "success"
-      github_description = "The change is approved and ready to merge"
-    elsif @agree.count < required_agrees
+      github_description = "The change is agreed."
+    else
       @state = "waiting"
       github_state = "pending"
-      github_description = "The change is waiting for more votes"
-    else
-      @state = "agreed"
-      github_state = "pending"
-      github_description = "The change has not yet been open for 14 days"
+      github_description = "The change is waiting for more votes; #{required_agrees - votes} more needed."
     end
-    @title = pr.title
-    save!
     # Update github commit status
     self.class.github.repos.statuses.create 'openpolitics', 'manifesto', pr['head']['sha'],
       "state" =>  github_state,
       "target_url" => "http://votebot.openpolitics.org.uk/#{@number}",
       "description" => github_description,
-      "context" => "votebot"
+      "context" => "votebot/votes"
+    # Check age
+    if age >= 90
+      @state = "dead"
+      github_state = "failure"
+      github_description = "The change has been open for more than 90 days, and should be closed."
+    elsif age >= 7
+      github_state = "success"
+      github_description = "The change has been open long enough to be merged."
+    else
+      @state = "agreed" if @state == "passed"
+      github_state = "pending"
+      github_description = "The change has not yet been open for 7 days."
+    end
+    # Update github commit status
+    self.class.github.repos.statuses.create 'openpolitics', 'manifesto', pr['head']['sha'],
+      "state" =>  github_state,
+      "target_url" => "http://votebot.openpolitics.org.uk/#{@number}",
+      "description" => github_description,
+      "context" => "votebot/time"
+    @title = pr.title
+    save!
   end
 
   def process_comments(sha = nil)

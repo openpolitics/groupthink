@@ -80,7 +80,7 @@ class Votebot < Sinatra::Base
         'success'
       when 'waiting'
         'warning'
-      when 'blocked'
+      when 'blocked', 'dead'
         'danger'
       end
     end
