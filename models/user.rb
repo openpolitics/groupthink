@@ -28,8 +28,10 @@ class User
   def update_github_contributor_status
     conn = Faraday.new(:url => 'https://github.com')
     response = conn.get '/openpolitics/manifesto/graphs/contributors-data'
-    json = JSON.parse(response.body)
-    @contributor = json.map{|x| x["author"]["login"]}.include? @login
+    if response.body && response.body!=""
+      json = JSON.parse(response.body)
+      @contributor = json.map{|x| x["author"]["login"]}.include? @login
+    end
     @contributor
   end
 
