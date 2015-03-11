@@ -84,7 +84,7 @@ http_interactions:
   recorded_at: Tue, 10 Mar 2015 10:45:51 GMT
 - request:
     method: get
-    uri: https://api.github.com/repos/openpolitics/manifesto/issues/135/comments?access_token=<GITHUB_OAUTH_TOKEN>
+    uri: https://api.github.com/repos/openpolitics/manifesto/issues/135/comments?access_token=<GITHUB_OAUTH_TOKEN>&auto_paginate=true
     body:
       encoding: US-ASCII
       string: ''

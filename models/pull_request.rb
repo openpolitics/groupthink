@@ -104,7 +104,7 @@ class PullRequest
   end
 
   def process_comments(sha = nil)
-    comments = self.class.github.issues.comments.list 'openpolitics', 'manifesto', issue_id: @number
+    comments = self.class.github.issues.comments.list 'openpolitics', 'manifesto', issue_id: @number, auto_paginate: true
     if sha
       commit = self.class.github.repos.commits.get 'openpolitics', 'manifesto', sha
       cutoff = DateTime.parse(commit.commit.committer.date)
