@@ -140,6 +140,7 @@ PLATFORMS
 DEPENDENCIES
   bugsnag
   dotenv
+  faraday_middleware
   github_api
   mock_redis
   rack-test

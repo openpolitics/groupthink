@@ -8,6 +8,7 @@ gem "github_api"
 gem "twitter"
 gem "sinatra-partial"
 gem "bugsnag"
+gem "faraday_middleware"
 
 group :development, :production do
   gem "redis"

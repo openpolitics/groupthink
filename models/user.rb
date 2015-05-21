@@ -1,6 +1,16 @@
+require 'faraday_middleware'
+
 class User
   
   attr_accessor :login, :avatar_url, :agree, :disagree, :abstain, :participating, :voted, :contributor
+
+  def github
+    Faraday.new(:url => 'https://github.com') do |conn|
+      conn.request :json
+      conn.response :json
+      conn.adapter Faraday.default_adapter
+    end
+  end
 
   def initialize(login)
     @login = login
@@ -26,13 +36,8 @@ class User
   end
 
   def update_github_contributor_status
-    conn = Faraday.new(:url => 'https://github.com')
-    response = conn.get '/openpolitics/manifesto/graphs/contributors-data'
-    if response.body && response.body!=""
-      json = JSON.parse(response.body) rescue {}
-      @contributor = json.map{|x| x["author"]["login"]}.include? @login
-    end
-    @contributor
+    response = github.get '/openpolitics/manifesto/graphs/contributors-data', {}, {'Accept' => 'application/json'}
+    @contributor = response.body.map{|x| x["author"]["login"]}.include? @login
   end
 
   def self.find_all
@@ -96,10 +101,8 @@ class User
   end
 
   def self.update_all_from_github!
-    conn = Faraday.new(:url => 'https://github.com')
-    response = conn.get '/openpolitics/manifesto/graphs/contributors-data'
-    json = JSON.parse(response.body)
-    json.each do |contribution|
+    response = github.get '/openpolitics/manifesto/graphs/contributors-data', {}, {'Accept' => 'application/json'}
+    response.body.each do |contribution|
       user = User.new(contribution["author"]["login"])
       user.contributor = true
       user.save!
