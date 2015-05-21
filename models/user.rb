@@ -4,7 +4,7 @@ class User
   
   attr_accessor :login, :avatar_url, :agree, :disagree, :abstain, :participating, :voted, :contributor
 
-  def github
+  def self.github
     Faraday.new(:url => 'https://github.com') do |conn|
       conn.request :json
       conn.response :json
@@ -36,7 +36,7 @@ class User
   end
 
   def update_github_contributor_status
-    response = github.get '/openpolitics/manifesto/graphs/contributors-data', {}, {'Accept' => 'application/json'}
+    response = User.github.get '/openpolitics/manifesto/graphs/contributors-data', {}, {'Accept' => 'application/json'}
     @contributor = response.body.map{|x| x["author"]["login"]}.include? @login
   end
 
