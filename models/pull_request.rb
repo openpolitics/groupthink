@@ -1,4 +1,4 @@
-require 'github_api'
+require 'octokit'
 require 'json'
 
 class PullRequest
@@ -14,7 +14,7 @@ class PullRequest
   def self.update_all_from_github!
     keys = redis.keys('PullRequest:*')
     redis.del(keys) unless keys.empty?
-    github.pull_requests.list(auto_pagination: true).each do |pr|
+    Octokit.pull_requests(ENV['GITHUB_REPO']).each do |pr|
       update_from_github!(pr["number"])
     end
   end
@@ -53,9 +53,9 @@ class PullRequest
   end
   
   def update_from_github!
-    pr = self.class.github.pull_requests.get('openpolitics', 'manifesto', @number)
+    pr = Octokit.pull_request(ENV['GITHUB_REPO'], @number)
     @proposer = pr.user
-    @created_at = Date.parse pr.created_at
+    @created_at = pr.created_at
     process_comments(pr.head.sha)
     required_agrees = 2
     github_state = nil
@@ -75,11 +75,10 @@ class PullRequest
       github_description = "The change is waiting for more votes; #{required_agrees - votes} more needed."
     end
     # Update github commit status
-    self.class.github.repos.statuses.create 'openpolitics', 'manifesto', pr['head']['sha'],
-      "state" =>  github_state,
-      "target_url" => "http://votebot.openpolitics.org.uk/#{@number}",
-      "description" => github_description,
-      "context" => "votebot/votes"
+    Octokit.create_status(ENV['GITHUB_REPO'], pr.head.sha, github_state,
+      target_url: "http://votebot.openpolitics.org.uk/#{@number}",
+      description: github_description,
+      context: "votebot/votes")
     # Check age
     if age >= 90
       @state = "dead"
@@ -94,20 +93,19 @@ class PullRequest
       github_description = "The change has not yet been open for 7 days."
     end
     # Update github commit status
-    self.class.github.repos.statuses.create 'openpolitics', 'manifesto', pr['head']['sha'],
-      "state" =>  github_state,
-      "target_url" => "http://votebot.openpolitics.org.uk/#{@number}",
-      "description" => github_description,
-      "context" => "votebot/time"
+    Octokit.create_status(ENV['GITHUB_REPO'], pr.head.sha, github_state,
+      target_url: "http://votebot.openpolitics.org.uk/#{@number}",
+      description: github_description,
+      context: "votebot/time")
     @title = pr.title
     save!
   end
 
   def process_comments(sha = nil)
-    comments = self.class.github.issues.comments.list 'openpolitics', 'manifesto', issue_id: @number, auto_paginate: true
+    comments = Octokit.issue_comments(ENV['GITHUB_REPO'], @number)
     if sha
-      commit = self.class.github.repos.commits.get 'openpolitics', 'manifesto', sha
-      cutoff = DateTime.parse(commit.commit.committer.date)
+      commit = Octokit.pull_commits(ENV['GITHUB_REPO'], @number).find{|x| x.sha == sha}
+      cutoff = commit.commit.committer.date
     else
       cutoff = DateTime.new(1970)
     end
@@ -126,7 +124,7 @@ class PullRequest
         if db_user.contributor
           case comment.body
           when /:thumbsup:|:\+1:/
-            next if DateTime.parse(comment.created_at) < cutoff
+            next if comment.created_at < cutoff
             remove_votes(user)
             @agree << user
             db_user.agree!(@number)
@@ -157,7 +155,7 @@ class PullRequest
   end
 
   def age
-    (Date.today - created_at).to_i
+    (Date.today - @created_at.to_date).to_i
   end
 
   def save!
@@ -179,12 +177,6 @@ class PullRequest
       u.remove!(@number) if u
     end
     redis.del(db_key)
-  end
-
-  private
-
-  def self.github
-    Github.new user: 'openpolitics', repo: 'manifesto', oauth_token: ENV['GITHUB_OAUTH_TOKEN']
   end
 
 end
