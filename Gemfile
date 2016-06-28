@@ -1,10 +1,10 @@
 source "https://rubygems.org"
 
-ruby "2.2.0"
+ruby "2.3.1"
 
 gem "rake"
 gem "sinatra"
-gem "github_api"
+gem "octokit", "~> 4.0"
 gem "twitter"
 gem "sinatra-partial"
 gem "bugsnag"
@@ -19,6 +19,7 @@ group :test do
   gem "vcr"
   gem "webmock"
   gem "timecop"
+  gem "coveralls"
 end  
 
 group :development do
@@ -29,4 +30,5 @@ group :development, :test do
   gem "rspec"
   gem "rack-test"
   gem "dotenv"
+  gem "byebug"
 end

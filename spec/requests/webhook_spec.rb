@@ -1,26 +1,23 @@
-require 'spec_helper'
-require 'json'
-
 describe "webhook POST" do
 
   it "/ should reject unknown posts" do
     post '/webhook'
-    last_response.should be_bad_request
+    expect(last_response).to be_bad_request
   end
 
   it "/ should parse github issue comments correctly" do
     # Should result in PR 32 being updated
-    PullRequest.should_receive(:update_from_github!).with(32).once
+    expect(PullRequest).to receive(:update_from_github!).with(32).once
     # Set POST
     header 'X-Github-Event', "issue_comment"
     post '/webhook', payload: load_fixture('requests/issue_comment')
     # Check response
-    last_response.should be_ok
+    expect(last_response).to be_ok
   end
 
   it "/ should parse github pull requests correctly" do
     # Should result in PR 43 being updated
-    PullRequest.should_receive(:update_from_github!).with(43).once
+    expect(PullRequest).to receive(:update_from_github!).with(43).once
     # Should also send a tweet
     Twitter::REST::Client.any_instance.should_receive(:update).with("Reform Stamp Duty on house purchases: https://github.com/openpolitics/manifesto/pull/43 #openpolitics").once
 
@@ -28,7 +25,7 @@ describe "webhook POST" do
     header 'X-Github-Event', "pull_request"
     post '/webhook', payload: load_fixture('requests/pull_request')
     # Check response
-    last_response.should be_ok
+    expect(last_response).to be_ok
   end
 
   it "/ should handle pull request closes correctly" do
@@ -36,14 +33,13 @@ describe "webhook POST" do
     header 'X-Github-Event', "pull_request"
     post '/webhook', payload: load_fixture('requests/close_pull_request')
     # Check response
-    last_response.should be_ok
-
+    expect(last_response).to be_ok
   end
 
   it "/ should not accept other Github posts" do
     header 'X-Github-Event', "something_else"
     post '/webhook'
-    last_response.should be_bad_request
+    expect(last_response).to be_bad_request
   end
 
 end

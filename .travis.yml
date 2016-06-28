@@ -2,18 +2,8 @@ language: ruby
 sudo: false
 cache: bundler
 rvm:
-- 2.2.0
-deploy:
-  provider: heroku
-  api_key:
-    secure: YG+AVN/kERRVHzJOhXc7ou21GvjqrcssuWeKRWrc+DhEm42zYxHJ6hBPYN48rj9hu3JVUJFP7W21RskOrUO0EAEf69pOeC7is/PjrLTLLg+7itEy9ykUKBgVGJJ1MFR9wgrAIAa9BClOoB+zWQDRanbk03C8Vsvvg+ufGv3WXjw=
-  app: votebot
-  on:
-    repo: openpolitics/votebot
+- 2.3.1
 env:
   global:
-  - secure: Bqs3QFvw8z+8nBEkRoDXgFR4n3679sG0XSgmF0p1pwSAMglXTu0BruOiJJjo4/KlORjh6DlGkuc+emm0STXMe9O3Niox/4m/rVqSlwWhH1hpZhe/46zZxm4JzdmWFAyEsuBJxdWMjcn5HWLvjHHrV8BaLqHC00HBAUW784QKxh0=
-  - secure: XfXyAVywJX3tdyQ0bn3Qx6bHTzmiNGgeb6ElcJOhXufusmWJr+LBG9QXUIB7prkcInNI9lOAspcQ2ydC1XKxVOzdCHjwVhfU6b73mBjdZ6pRaLvHW31viTF1upz0vK4mSi0uAe6Z71iS5+n3aU/Q05yksesUrVW3F6lzWyIfYLs=
-  - secure: NpK11Jp1WYMjYCeHFCs8WaHEfAHTzQwNUN9SU9hDVbK/ElHVTAWL8BA/Me/+6WpEMPFFGDNg9qvUuS7yMU0Xl8gMogkoGCT7/uqMjTbDBqOgFZ60RClqOIQcDZRe5sgUzTvURKMTGrjt40ZnCo7PHynhYBVQstek2SFWcTIgPS8=
-  - secure: YRH9dnBDG/xfQ4r/uuBVEEmpMaIGybF3ZexYlEmWK3yFNxHH1CiRSpRLTimfYeb9YQbHF94QC/L8YPDrf54bGRXv19tW6b6U3q8BKUlleN2+FU5pxmbgazTORfvgKkFo/erwZOMQ/6yZqRtYikSK5OIhA9t9SwAEfd5F3+8cCdw=
-  - secure: F5opMM3vnJzoibpjMDRiRHidato0dtW2aVe/P1BYA0Z3I/3RvPNsFq7CKffNUOHIWX6vJNlrlCSjbMms7jXldGXiqZ3oB0d/accvVYj/VzKeO79Btibe19xo4nayoo6NgC/3MP44uvFAuge1Xs6pvbULEMtdpMRDaedu2D81ypI=
+  - GITHUB_REPO: openpolitics/manifesto
+  - GITHUB_OAUTH_TOKEN: abc123

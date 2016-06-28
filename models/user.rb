@@ -1,16 +1,6 @@
-require 'faraday_middleware'
-
 class User
   
   attr_accessor :login, :avatar_url, :agree, :disagree, :abstain, :participating, :voted, :contributor
-
-  def self.github
-    Faraday.new(:url => 'https://github.com') do |conn|
-      conn.request :json
-      conn.response :json
-      conn.adapter Faraday.default_adapter
-    end
-  end
 
   def initialize(login)
     @login = login
@@ -31,13 +21,12 @@ class User
       @abstain       = []
       @participating = []
       @voted         = []
-      update_github_contributor_status
+      update_from_github!
     end
   end
 
   def update_github_contributor_status
-    response = User.github.get '/openpolitics/manifesto/graphs/contributors-data', {}, {'Accept' => 'application/json'}
-    @contributor = response.body.map{|x| x["author"]["login"]}.include? @login
+    @contributor = !Octokit.contributors(ENV["GITHUB_REPO"]).find{|x| x.login == @login}.nil?
   end
 
   def self.find_all
@@ -101,9 +90,11 @@ class User
   end
 
   def self.update_all_from_github!
-    response = github.get '/openpolitics/manifesto/graphs/contributors-data', {}, {'Accept' => 'application/json'}
-    response.body.each do |contribution|
-      user = User.new(contribution["author"]["login"])
+    User.find_all.each do |user|
+      user.update_from_github!
+    end
+    Octokit.contributors(ENV["GITHUB_REPO"]).each do |contributor|
+      user = User.new(contributor["login"])
       user.contributor = true
       user.save!
     end
@@ -111,6 +102,7 @@ class User
 
   def update_from_github!
     @contributor = update_github_contributor_status
+    @avatar_url ||= Octokit.user(@login).avatar_url
     save!
   end
   
