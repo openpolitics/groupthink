@@ -1,12 +1,18 @@
 require 'sinatra/base'
 require 'sinatra/partial'
 require "bugsnag"
+require 'octokit'
 require_relative 'environments'
 require_relative 'models'
 
 Bugsnag.configure do |config|
   config.api_key = ENV["BUGSNAG_API_KEY"]
 end
+
+Octokit.configure do |c|
+  c.access_token = ENV['GITHUB_OAUTH_TOKEN']
+end
+Octokit.auto_paginate = true
 
 class Votebot < Sinatra::Base
   

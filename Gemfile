@@ -4,7 +4,7 @@ ruby "2.3.1"
 
 gem "rake"
 gem "sinatra"
-gem "github_api"
+gem "octokit", "~> 4.0"
 gem "twitter"
 gem "sinatra-partial"
 gem "bugsnag"
