@@ -90,9 +90,8 @@ class User
   end
 
   def self.update_all_from_github!
-    response = github.get '/openpolitics/manifesto/graphs/contributors-data', {}, {'Accept' => 'application/json'}
-    response.body.each do |contribution|
-      user = User.new(contribution["author"]["login"])
+    Octokit.contributors(ENV["GITHUB_REPO"]).each do |contributor|
+      user = User.new(contributor["login"])
       user.contributor = true
       user.save!
     end
