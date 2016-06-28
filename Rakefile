@@ -4,4 +4,10 @@ unless ENV['RACK_ENV'] == 'production'
   RSpec::Core::RakeTask.new(:spec)
 
   task :default => :spec
+  
+  task :update do
+    require_relative 'votebot'
+    User.update_all_from_github!
+    PullRequest.update_all_from_github!
+  end
 end
