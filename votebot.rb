@@ -1,7 +1,6 @@
 require 'sinatra/base'
 require 'sinatra/partial'
 require "bugsnag"
-require "byebug"
 require 'octokit'
 require_relative 'environments'
 require_relative 'models'
