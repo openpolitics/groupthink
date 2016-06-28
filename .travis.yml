@@ -3,13 +3,6 @@ sudo: false
 cache: bundler
 rvm:
 - 2.2.0
-deploy:
-  provider: heroku
-  api_key:
-    secure: YG+AVN/kERRVHzJOhXc7ou21GvjqrcssuWeKRWrc+DhEm42zYxHJ6hBPYN48rj9hu3JVUJFP7W21RskOrUO0EAEf69pOeC7is/PjrLTLLg+7itEy9ykUKBgVGJJ1MFR9wgrAIAa9BClOoB+zWQDRanbk03C8Vsvvg+ufGv3WXjw=
-  app: votebot
-  on:
-    repo: openpolitics/votebot
 env:
   global:
   - secure: Bqs3QFvw8z+8nBEkRoDXgFR4n3679sG0XSgmF0p1pwSAMglXTu0BruOiJJjo4/KlORjh6DlGkuc+emm0STXMe9O3Niox/4m/rVqSlwWhH1hpZhe/46zZxm4JzdmWFAyEsuBJxdWMjcn5HWLvjHHrV8BaLqHC00HBAUW784QKxh0=
