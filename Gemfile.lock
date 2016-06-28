@@ -5,6 +5,7 @@ GEM
     backports (3.6.8)
     buftok (0.2.0)
     bugsnag (4.2.1)
+    byebug (9.0.5)
     crack (0.4.3)
       safe_yaml (~> 1.0.0)
     diff-lcs (1.2.5)
@@ -124,6 +125,7 @@ PLATFORMS
 
 DEPENDENCIES
   bugsnag
+  byebug
   dotenv
   faraday_middleware
   mock_redis
