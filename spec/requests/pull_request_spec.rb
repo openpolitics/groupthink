@@ -10,8 +10,7 @@ describe PullRequest, :vcr do
 
   it "should include proposer information" do
     pr = PullRequest.update_from_github!(43)
-    expect(pr.proposer['login']).to eq 'Floppy'
-    expect(pr.proposer['avatar_url']).to match /https:\/\/avatars.githubusercontent.com\/u\/3565/
+    expect(pr.proposer).to eq 'Floppy'
   end
 
   it "should only count latest vote per person" do
