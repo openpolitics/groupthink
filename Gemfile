@@ -19,6 +19,7 @@ group :test do
   gem "vcr"
   gem "webmock"
   gem "timecop"
+  gem "coveralls"
 end  
 
 group :development do

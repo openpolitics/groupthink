@@ -2,6 +2,9 @@
 require 'rack/test'
 require 'vcr'
 require 'timecop'
+require 'coveralls'
+
+Coveralls.wear!
 
 VCR.configure do |c|
   c.cassette_library_dir = 'spec/fixtures/cassettes'
