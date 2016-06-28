@@ -54,7 +54,7 @@ class PullRequest
   
   def update_from_github!
     pr = Octokit.pull_request(ENV['GITHUB_REPO'], @number)
-    @proposer = pr.user
+    @proposer = pr.user.login
     @created_at = pr.created_at
     process_comments(pr.head.sha)
     required_agrees = 2
@@ -118,7 +118,7 @@ class PullRequest
       db_user = User.find(user.login)
       if user != @proposer
         unless @participants.include?(user)
-          @participants << user
+          @participants << user.login
           db_user.participating!(@number)
         end
         if db_user.contributor
@@ -126,15 +126,15 @@ class PullRequest
           when /:thumbsup:|:\+1:/
             next if comment.created_at < cutoff
             remove_votes(user)
-            @agree << user
+            @agree << user.login
             db_user.agree!(@number)
           when /:hand:/
             remove_votes(user)
-            @abstain << user
+            @abstain << user.login
             db_user.abstain!(@number)
           when /:thumbsdown:|:\-1:/
             remove_votes(user)
-            @disagree << user
+            @disagree << user.login
             db_user.disagree!(@number)
           end
         end
@@ -144,9 +144,9 @@ class PullRequest
   end
 
   def remove_votes(user)
-    @agree.delete(user)
-    @abstain.delete(user)
-    @disagree.delete(user)
+    @agree.delete(user.login)
+    @abstain.delete(user.login)
+    @disagree.delete(user.login)
     User.find(user.login).remove!(@number)
   end
 

@@ -16,12 +16,12 @@ describe PullRequest, :vcr do
   it "should only count latest vote per person" do
     pr = PullRequest.update_from_github!(100)
     expect(pr.agree.count).to eq 2
-    expect(pr.agree.map{|x| x['login']}.sort).to eq ["Floppy", "philipjohn"]
+    expect(pr.agree.sort).to eq ["Floppy", "philipjohn"]
   end
 
   it "should handle both thumbsup and +1 emoticons as upvotes" do
     pr = PullRequest.update_from_github!(356)
-    expect(pr.agree.map{|x| x['login']}.sort).to eq ["Floppy", "philipjohn"]
+    expect(pr.agree.sort).to eq ["Floppy", "philipjohn"]
   end
 
   it "should ignore votes from proposer" do

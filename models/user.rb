@@ -21,7 +21,7 @@ class User
       @abstain       = []
       @participating = []
       @voted         = []
-      update_github_contributor_status
+      update_from_github!
     end
   end
 
@@ -90,6 +90,9 @@ class User
   end
 
   def self.update_all_from_github!
+    User.find_all.each do |user|
+      user.update_from_github!
+    end
     Octokit.contributors(ENV["GITHUB_REPO"]).each do |contributor|
       user = User.new(contributor["login"])
       user.contributor = true
@@ -99,6 +102,7 @@ class User
 
   def update_from_github!
     @contributor = update_github_contributor_status
+    @avatar_url ||= Octokit.user(@login).avatar_url
     save!
   end
   
