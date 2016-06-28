@@ -11,7 +11,7 @@ describe PullRequest, :vcr do
   it "should include proposer information" do
     pr = PullRequest.update_from_github!(43)
     expect(pr.proposer['login']).to eq 'Floppy'
-    expect(pr.proposer['avatar_url']).to =~ /https:\/\/avatars.githubusercontent.com\/u\/3565/
+    expect(pr.proposer['avatar_url']).to match /https:\/\/avatars.githubusercontent.com\/u\/3565/
   end
 
   it "should only count latest vote per person" do
@@ -21,8 +21,8 @@ describe PullRequest, :vcr do
   end
 
   it "should handle both thumbsup and +1 emoticons as upvotes" do
-    pr = PullRequest.update_from_github!(43)
-    expect(pr.agree.map{|x| x['login']}.sort).to eq ["PaulJRobinson", "philipjohn"]
+    pr = PullRequest.update_from_github!(356)
+    expect(pr.agree.map{|x| x['login']}.sort).to eq ["Floppy", "philipjohn"]
   end
 
   it "should ignore votes from proposer" do
@@ -32,7 +32,7 @@ describe PullRequest, :vcr do
 
   it "should ignore votes before last commit" do
     pr = PullRequest.update_from_github!(135)
-    expect(pr.agree.count).to eq 0
+    expect(pr.agree.count).to eq 1
   end
 
 end
