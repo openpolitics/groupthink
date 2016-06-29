@@ -2,6 +2,7 @@
   <tr>
     <th class="text-center">State</th>
     <th>Title</th>
+    <th>View</th>
     <th class="text-center">Participants</th>
     <th class="text-center">Age</th>
     <th class="text-center"><%= state_image('agree')%></th>
@@ -13,6 +14,7 @@
     <tr class='<%= row_class(pr) %>'>
       <td class="text-center"><span class='label label-<%= row_class(pr) %>'><%= pr.state.capitalize %></span></td>
       <td><a href='/<%= pr.number %>'><%= pr.title %></a></td> 
+      <td class="text-center"><a href='http://github.com/openpolitics/manifesto/pull/<%= pr.number %>'>#<%= pr.number %></a></td>
       <td class="text-center"><%= pr.participants.count %></td>
       <td class="text-center"><%= pr.age %> days</td>
       <td class="text-center"><%= pr.agree.count %></td>

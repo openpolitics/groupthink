@@ -3,31 +3,27 @@
   <li class="active">#<%= @pull_request.number %></li>
 </ol>
 
-<h1><a href='http://github.com/openpolitics/manifesto/pull/<%= @pull_request.number %>'><%= @pull_request.title %></a></h1>
-
-<div class='well'>
-
-  <div class='proposer pull-right'>
-    Proposer: <%= partial :person, locals: {person: @pull_request.proposer } %>
-  </div>
-
-  <div class='status'>
-    <h1><span class='label label-<%= row_class(@pull_request) %>'><%= @pull_request.state.capitalize %></span></h1>
-  </div>
-  
-</div>
+<h1><%= @pull_request.title %> <a href='http://github.com/openpolitics/manifesto/pull/<%= @pull_request.number %>'><i class='fa fa-github'></i></a></h1>
 
 <div class='row'>
   <div class='col-md-12'>
-    <div class='panel panel-default participants'>
-      <div class="panel-heading">
-        Participants: <%= @pull_request.participants.count %>
-      </div>
-      <div class='panel-body'>
-        <%= partial :person, collection: @pull_request.participants %>
-      <div>
-    </div>
+    <p>
+      by <a href='/users/<%= @pull_request.proposer %>'><%= @pull_request.proposer %></a>
+    </p>
+    <h2><span class='label label-<%= row_class(@pull_request) %>'><%= @pull_request.state.capitalize %></span></h2>
   </div>
+</div>
+
+<hr/>
+
+<div class='alert alert-info'>
+  <p>
+    This page is currently just a utility page for showing a summary of voting 
+    activity. To read change details, comment, or vote, please 
+    <a href='http://github.com/openpolitics/manifesto/pull/<%= @pull_request.number %>'>
+      visit the GitHub pull request page.
+    </a>
+  </p>
 </div>
 
 <div class='row'>
@@ -68,6 +64,19 @@
     </div>
   </div>
 
+</div>
+
+<div class='row'>
+  <div class='col-md-12'>
+    <div class='panel panel-default participants'>
+      <div class="panel-heading">
+        Participants: <%= @pull_request.participants.count %>
+      </div>
+      <div class='panel-body'>
+        <%= partial :person, collection: @pull_request.participants %>
+      <div>
+    </div>
+  </div>
 </div>
 
 <div style='margin-top: 30px'>

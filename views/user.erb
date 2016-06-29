@@ -4,7 +4,7 @@
   <li class="active"><%= @user.login %></li>
 </ol>
 
-<h1><a href='http://github.com/<%= @user.login %>'><%= @user.login %></a></h1>
+<h1><%= @user.login %> <a href='http://github.com/<%= @user.login %>'><i class='fa fa-github'></i></a></h1>
 
 <% if @user.contributor %>
   <div class='label label-primary'>contributor</div>
