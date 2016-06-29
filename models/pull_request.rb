@@ -114,27 +114,27 @@ class PullRequest
     @abstain = []
     @disagree = []
     comments.each do |comment|
-      user = comment.user
-      db_user = User.find(user.login)
+      user = comment.user.login
+      db_user = User.find(user)
       if user != @proposer
         unless @participants.include?(user)
-          @participants << user.login
+          @participants << user
           db_user.participating!(@number)
         end
         if db_user.contributor
           case comment.body
-          when /:thumbsup:|:\+1:/
+          when /:thumbsup:|:\+1:|👍/
             next if comment.created_at < cutoff
             remove_votes(user)
-            @agree << user.login
+            @agree << user
             db_user.agree!(@number)
-          when /:hand:/
+          when /:hand:|✋/
             remove_votes(user)
-            @abstain << user.login
+            @abstain << user
             db_user.abstain!(@number)
-          when /:thumbsdown:|:\-1:/
+          when /:thumbsdown:|:\-1:|👎/
             remove_votes(user)
-            @disagree << user.login
+            @disagree << user
             db_user.disagree!(@number)
           end
         end
@@ -144,10 +144,10 @@ class PullRequest
   end
 
   def remove_votes(user)
-    @agree.delete(user.login)
-    @abstain.delete(user.login)
-    @disagree.delete(user.login)
-    User.find(user.login).remove!(@number)
+    @agree.delete(user)
+    @abstain.delete(user)
+    @disagree.delete(user)
+    User.find(user).remove!(@number)
   end
 
   def db_key
