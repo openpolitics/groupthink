@@ -173,7 +173,7 @@ class PullRequest
 
   def delete!
     (participants||[]).each do |user|
-      u = User.find(user.is_a?(Hash) ? user['login'] : user.login)
+      u = User.find(user)
       u.remove!(@number) if u
     end
     redis.del(db_key)
