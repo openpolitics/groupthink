@@ -143,7 +143,6 @@ class Votebot < Sinatra::Base
 
   def on_pull_request_opened(json)
     PullRequest.update_from_github!(json['number'])
-    twitter.update("#{json['pull_request']['title']}: #{json['pull_request']['html_url']} #openpolitics")
   end
   
   def on_pull_request_closed(json)

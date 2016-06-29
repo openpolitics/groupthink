@@ -18,9 +18,6 @@ describe "webhook POST" do
   it "/ should parse github pull requests correctly" do
     # Should result in PR 43 being updated
     expect(PullRequest).to receive(:update_from_github!).with(43).once
-    # Should also send a tweet
-    Twitter::REST::Client.any_instance.should_receive(:update).with("Reform Stamp Duty on house purchases: https://github.com/openpolitics/manifesto/pull/43 #openpolitics").once
-
     # Set POST
     header 'X-Github-Event', "pull_request"
     post '/webhook', payload: load_fixture('requests/pull_request')
