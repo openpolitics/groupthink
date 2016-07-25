@@ -17,16 +17,17 @@ ActiveRecord::Schema.define(version: 20160725063104) do
     t.string   "state",       null: false
     t.string   "title",       null: false
     t.integer  "proposer_id", null: false
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+    t.index ["proposer_id"], name: "index_pull_requests_on_proposer_id"
   end
 
   create_table "users", force: :cascade do |t|
     t.string   "login",                       null: false
     t.string   "avatar_url"
     t.boolean  "contributor", default: false, null: false
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",                  null: false
+    t.datetime "updated_at",                  null: false
   end
 
 end
