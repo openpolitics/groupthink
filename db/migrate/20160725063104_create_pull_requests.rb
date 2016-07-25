@@ -5,6 +5,7 @@ class CreatePullRequests < ActiveRecord::Migration[5.0]
       t.string :state, null: false
       t.string :title, null: false
       t.references :proposer, null: false
+      t.datetime :opened_at, null: false
       t.timestamps
     end
   end
