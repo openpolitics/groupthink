@@ -1,5 +1,6 @@
 require 'sinatra/base'
 require 'sinatra/partial'
+require "sinatra/activerecord"
 require "bugsnag"
 require 'octokit'
 require_relative 'environments'
@@ -16,6 +17,8 @@ Octokit.auto_paginate = true
 
 class Votebot < Sinatra::Base
   
+  register Sinatra::ActiveRecordExtension
+    
   register Sinatra::Partial
   set :partial_template_engine, :erb
   enable :partial_underscores
