@@ -12,11 +12,11 @@
 
 ActiveRecord::Schema.define(version: 20160725063104) do
 
-  create_table "proposals", force: :cascade do |t|
-    t.integer  "pull_request_number", null: false
-    t.string   "state",               null: false
-    t.string   "title",               null: false
-    t.integer  "proposer_id",         null: false
+  create_table "pull_requests", force: :cascade do |t|
+    t.integer  "number",      null: false
+    t.string   "state",       null: false
+    t.string   "title",       null: false
+    t.integer  "proposer_id", null: false
     t.datetime "created_at"
     t.datetime "updated_at"
   end

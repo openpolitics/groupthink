@@ -1,7 +1,7 @@
-class CreateProposals < ActiveRecord::Migration
+class CreatePullRequests < ActiveRecord::Migration
   def change
-    create_table :proposals do |t|
-      t.integer :pull_request_number, null: false
+    create_table :pull_requests do |t|
+      t.integer :number, null: false
       t.string :state, null: false
       t.string :title, null: false
       t.references :proposer, null: false
