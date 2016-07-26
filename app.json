@@ -1,0 +1,44 @@
+{
+  "name": "votebot",
+  "description": "",
+  "scripts": {
+  },
+  "env": {
+    "BUGSNAG_API_KEY": {
+      "required": true
+    },
+    "GITHUB_OAUTH_TOKEN": {
+      "required": true
+    },
+    "GITHUB_REPO": {
+      "required": true
+    },
+    "TWITTER_ACCESS_SECRET": {
+      "required": true
+    },
+    "TWITTER_ACCESS_TOKEN": {
+      "required": true
+    },
+    "TWITTER_CONSUMER_KEY": {
+      "required": true
+    },
+    "TWITTER_CONSUMER_SECRET": {
+      "required": true
+    }
+  },
+  "formation": {
+    "web": {
+      "quantity": 1
+    }
+  },
+  "addons": [
+    "heroku-postgresql",
+    "scheduler",
+    "redistogo"
+  ],
+  "buildpacks": [
+    {
+      "url": "heroku/ruby"
+    }
+  ]
+}
