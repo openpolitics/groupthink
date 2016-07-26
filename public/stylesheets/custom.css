@@ -6,6 +6,10 @@ div.proposer img {
   height: 48px;
 }
 
+img.user-large {
+  height: 96px;
+}
+
 div.userlist img {
   height: 48px;
   margin: 5px;
