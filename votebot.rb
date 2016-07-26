@@ -4,7 +4,7 @@ require "sinatra/activerecord"
 require "bugsnag"
 require 'octokit'
 require_relative 'environments'
-require_relative 'models'
+require_relative 'app/models'
 
 Bugsnag.configure do |config|
   config.api_key = ENV["BUGSNAG_API_KEY"]
@@ -16,6 +16,8 @@ end
 Octokit.auto_paginate = true
 
 class Votebot < Sinatra::Base
+  
+  set :views, Proc.new { File.join(root, "app", "views") }
   
   register Sinatra::ActiveRecordExtension
     
