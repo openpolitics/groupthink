@@ -28,13 +28,20 @@ class User < ActiveRecord::Base
   end
 
   def self.update_all_from_github!
+    Rails.logger.info "Updating existing users"
     User.all.each do |user|
+      Rails.logger.info " - #{user.login}"
       user.load_from_github and user.save!
     end
+    Rails.logger.info "Updating new contributors from GitHub"
     Octokit.contributors(ENV["GITHUB_REPO"]).each do |contributor|
-      user = User.find_or_create_by!(login: contributor["login"])
-      user.contributor = true
-      user.save!
+      params = login: contributor["login"]
+      unless User.find_by(params)
+        Rails.logger.info " - #{contributor["login"]}"
+        user = User.create(params)
+        user.contributor = true
+        user.save!
+      end
     end
   end
   

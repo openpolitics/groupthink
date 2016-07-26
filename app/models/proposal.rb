@@ -19,8 +19,11 @@ class Proposal < ActiveRecord::Base
   end
 
   def self.recreate_all_from_github!
+    Rails.logger.info "Removing all proposals"
     Proposal.delete_all
+    Rails.logger.info "Loading proposals"
     Octokit.pull_requests(ENV['GITHUB_REPO'], state: "all").each do |pr|
+      Rails.logger.info " - #{pr["number"]}: #{pr["title"]}"
       create_from_github!(pr["number"])
     end
   end
