@@ -1,7 +1,4 @@
-require 'octokit'
-require 'json'
-
-class Proposal < ActiveRecord::Base
+class Proposal < ApplicationRecord
 
   include VoteCounter
 

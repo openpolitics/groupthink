@@ -1,4 +1,4 @@
-class User < ActiveRecord::Base
+class User < ApplicationRecord
   
   has_many :interactions, dependent: :destroy
   has_many :participating, through: :interactions, source: :proposal
