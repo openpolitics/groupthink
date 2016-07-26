@@ -35,7 +35,7 @@ class User < ActiveRecord::Base
     end
     Rails.logger.info "Updating new contributors from GitHub"
     Octokit.contributors(ENV["GITHUB_REPO"]).each do |contributor|
-      params = login: contributor["login"]
+      params = {login: contributor["login"]}
       unless User.find_by(params)
         Rails.logger.info " - #{contributor["login"]}"
         user = User.create(params)
