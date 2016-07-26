@@ -10,7 +10,17 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160725063104) do
+ActiveRecord::Schema.define(version: 20160725064329) do
+
+  create_table "interactions", force: :cascade do |t|
+    t.integer  "user_id",         null: false
+    t.integer  "pull_request_id", null: false
+    t.string   "last_vote"
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
+    t.index ["pull_request_id"], name: "index_interactions_on_pull_request_id"
+    t.index ["user_id"], name: "index_interactions_on_user_id"
+  end
 
   create_table "pull_requests", force: :cascade do |t|
     t.integer  "number",      null: false
