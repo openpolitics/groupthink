@@ -14,7 +14,7 @@
 
 <%= partial :pr_list, locals: {pull_requests: @not_voted} %>
 
-<h2>Voted on:</h2>
+<h2>Voted on (<%= @voted.count %>):</h2>
 
 <table class='table vote-list'>
   <tr>
@@ -33,6 +33,6 @@
   <% end %>
 </table>
 
-<h2>Proposed:</h2>
+<h2>Proposed (<%= @proposed.count %>):</h2>
 
 <%= partial :pr_list, locals: {pull_requests: @proposed} %>

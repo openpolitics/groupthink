@@ -1,3 +1,7 @@
 <h1>Open Votes</h1>
 
 <%= partial :pr_list, locals: {pull_requests: @pull_requests} %>
+
+<h1>Closed Votes</h1>
+
+<%= partial :pr_list, locals: {pull_requests: @closed} %>
