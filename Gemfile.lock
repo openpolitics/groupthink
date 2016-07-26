@@ -26,6 +26,7 @@ GEM
       tins (~> 1.6.0)
     crack (0.4.3)
       safe_yaml (~> 1.0.0)
+    database_cleaner (1.5.3)
     diff-lcs (1.2.5)
     docile (1.1.5)
     dotenv (2.1.1)
@@ -134,6 +135,7 @@ DEPENDENCIES
   bugsnag
   byebug
   coveralls
+  database_cleaner
   dotenv
   faraday_middleware
   mock_redis

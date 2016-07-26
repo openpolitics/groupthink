@@ -36,4 +36,5 @@ group :development, :test do
   gem "rack-test"
   gem "dotenv"
   gem "byebug"
+  gem "database_cleaner"
 end

@@ -3,6 +3,7 @@ require 'rack/test'
 require 'vcr'
 require 'timecop'
 require 'coveralls'
+require 'database_cleaner'
 
 Coveralls.wear!
 
@@ -35,12 +36,23 @@ RSpec.configure do |config|
   #     --seed 1234
   config.order = 'random'
 
-  config.before(:each) do
-    redis.flushdb
-  end
-
 end
 
 def load_fixture(filename)
   File.read(File.join(File.dirname(__FILE__), 'fixtures', filename))
+end
+
+RSpec.configure do |config|
+
+  config.before(:suite) do
+    DatabaseCleaner.strategy = :transaction
+    DatabaseCleaner.clean_with(:truncation)
+  end
+
+  config.around(:each) do |example|
+    DatabaseCleaner.cleaning do
+      example.run
+    end
+  end
+
 end
