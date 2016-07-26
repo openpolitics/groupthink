@@ -1,1 +1,0 @@
-require_relative "environments/#{ENV["RACK_ENV"] || 'development'}"

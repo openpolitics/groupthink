@@ -1,4 +1,4 @@
-describe User, :vcr do
+RSpec.describe User, :vcr do
 
   it "should load user data from github" do
     u = User.create(login: 'Floppy')

@@ -1,0 +1,86 @@
+<ol class="breadcrumb">
+  <li><a href="/">All Proposals</a></li>
+  <li class="active">#<%= @proposal.number %></li>
+</ol>
+
+<h1><%= @proposal.title %> <a href='http://github.com/openpolitics/manifesto/pull/<%= @proposal.number %>'><i class='fa fa-github'></i></a></h1>
+
+<div class='row'>
+  <div class='col-md-12'>
+    <p>
+      by <a href='/users/<%= @proposal.proposer %>'><%= @proposal.proposer.login %></a>
+    </p>
+    <h2><span class='label label-<%= row_class(@proposal) %>'><%= @proposal.state.capitalize %></span></h2>
+  </div>
+</div>
+
+<hr/>
+
+<div class='alert alert-info'>
+  <p>
+    This page is currently just a utility page for showing a summary of voting 
+    activity. To read change details, comment, or vote, please 
+    <a href='http://github.com/openpolitics/manifesto/pull/<%= @proposal.number %>'>
+      visit the GitHub page for this proposal.
+    </a>
+  </p>
+</div>
+
+<div class='row'>
+
+  <div class='col-md-4'>
+    <div class='panel panel-success agree'>
+      <div class="panel-heading">
+        <%= state_image('agree')%>
+        Agree: <%= @proposal.agree.count %>
+      </div>
+      <div class='panel-body'>
+        <%= render partial: 'shared/person', collection: @proposal.agree.map{|v| v.user} %>
+      </div>
+    </div>
+  </div>
+
+  <div class='col-md-4'>
+    <div class='panel panel-info abstain'>
+      <div class="panel-heading">
+        <%= state_image('abstain')%>
+        Abstaining: <%= @proposal.abstain.count %>
+      </div>
+      <div class='panel-body'>
+        <%= render partial: 'shared/person', collection: @proposal.abstain.map{|v| v.user} %>
+      </div>
+    </div>
+  </div>
+
+  <div class='col-md-4'>
+    <div class='panel panel-danger disagree'>
+      <div class="panel-heading">
+        <%= state_image('disagree')%>
+        Disagree: <%= @proposal.disagree.count %>
+      </div>
+      <div class='panel-body'>
+        <%= render partial: 'shared/person', collection: @proposal.disagree.map{|v| v.user} %>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<div class='row'>
+  <div class='col-md-12'>
+    <div class='panel panel-default participants'>
+      <div class="panel-heading">
+        Participants: <%= @proposal.participants.count %>
+      </div>
+      <div class='panel-body'>
+        <%= render partial: 'shared/person', collection: @proposal.participants %>
+      <div>
+    </div>
+  </div>
+</div>
+
+<div style='margin-top: 30px'>
+  <form action='/proposals/<%= @proposal.number %>' method='PUT'>
+    <button type='submit' class='btn btn-warning'>Update</button>
+  </form>
+</div>

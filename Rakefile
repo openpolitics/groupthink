@@ -1,21 +1,6 @@
-require "sinatra/activerecord/rake"
+# Add your own tasks in files placed in lib/tasks ending in .rake,
+# for example lib/tasks/capistrano.rake, and they will automatically be available to Rake.
 
-namespace :db do
-  task :load_config do
-    require "./votebot"
-  end
-end
+require_relative 'config/application'
 
-task :update do
-  require_relative 'votebot'
-  User.update_all_from_github!
-  Proposal.recreate_all_from_github!
-end
-
-unless ENV['RACK_ENV'] == 'production'
-  require 'rspec/core/rake_task'
-
-  RSpec::Core::RakeTask.new(:spec)
-
-  task :default => :spec
-end
+Rails.application.load_tasks

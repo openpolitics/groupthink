@@ -1,4 +1,4 @@
-class Interaction < ActiveRecord::Base
+class Interaction < ApplicationRecord
   
   belongs_to :user
   belongs_to :proposal  

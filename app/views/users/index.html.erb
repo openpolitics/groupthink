@@ -1,0 +1,34 @@
+<ol class="breadcrumb">
+  <li><a href="/">All Votes</a></li>
+  <li class="active">Users</li>
+</ol>
+
+<h1>All Users</h1>
+
+Click on a user image to see their activity history.
+
+<h2>Contributors (<%= @contributors.count %>)</h2>
+
+<p>
+  Contributors have had a proposal accepted, and thus under the rules, get voting
+  rights on future proposals.
+</p>
+
+<div class='userlist'>
+  <% @contributors.each do |user| %>
+    <%= render partial: 'shared/person', locals: {person: user } %>
+  <% end %>
+</div>
+
+<h2>Other participants (<%= @others.count %>)</h2>
+
+<p>
+  Other participants have either submitted a (so far) unsuccessful proposal, or just taken
+  part in the discussion, and do not yet have voting rights.
+</p>
+
+<div class='userlist'>
+  <% @others.each do |user| %>
+    <%= render partial: 'shared/person', locals: {person: user } %>
+  <% end %>
+</div>

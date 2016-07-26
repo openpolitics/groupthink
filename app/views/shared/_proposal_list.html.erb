@@ -1,0 +1,26 @@
+<table class='table vote-list'>
+  <tr>
+    <th class="text-center">State</th>
+    <th>Title</th>
+    <th>View</th>
+    <th class="text-center">Participants</th>
+    <th class="text-center">Age</th>
+    <th class="text-center"><%= state_image('agree')%></th>
+    <th class="text-center"><%= state_image('abstain')%></th>
+    <th class="text-center"><%= state_image('disagree')%></th>
+    <th class="text-center">Proposer</th>
+  </tr>
+  <% proposals.each do |proposal| %>
+    <tr class='<%= row_class(proposal) %>'>
+      <td class="text-center"><span class='label label-<%= row_class(proposal) %>'><%= proposal.state.capitalize %></span></td>
+      <td><a href='/proposals/<%= proposal.number %>'><%= proposal.title %></a></td> 
+      <td class="text-center"><a href='http://github.com/openpolitics/manifesto/pull/<%= proposal.number %>'>#<%= proposal.number %></a></td>
+      <td class="text-center"><%= proposal.participants.count %></td>
+      <td class="text-center"><%= proposal.age %> days</td>
+      <td class="text-center"><%= proposal.agree.count %></td>
+      <td class="text-center"><%= proposal.abstain.count %></td>
+      <td class="text-center"><%= proposal.disagree.count %></td>
+      <td class="proposer text-center"><%= render partial: 'shared/person', locals: {person: proposal.proposer } %></td> 
+    </tr>
+  <% end %>
+</table>

@@ -1,4 +1,4 @@
-describe Proposal, :vcr do
+RSpec.describe Proposal, :vcr do
 
   it "should update proposals on demand" do
     Timecop.freeze(2015,5,30)
