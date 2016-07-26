@@ -35,7 +35,8 @@ class Votebot < Sinatra::Base
   end
 
   get '/' do
-    @pull_requests = PullRequest.all.sort_by{|x| x.number.to_i}.reverse
+    @pull_requests = PullRequest.open.sort_by{|x| x.number.to_i}.reverse
+    @closed = PullRequest.closed.sort_by{|x| x.number.to_i}.reverse
     erb :index
   end
   
@@ -51,6 +52,7 @@ class Votebot < Sinatra::Base
     @pull_requests = PullRequest.all.sort_by{|x| x.number.to_i}.reverse
     @proposed, @pull_requests = @pull_requests.partition{|x| x.proposer == @user}
     @voted, @not_voted = @pull_requests.partition{|pr| @user.participating.where("last_vote IS NOT NULL").include? pr}
+    @not_voted.reject!{|x| x.closed? }
     erb :user
   end
   
@@ -85,11 +87,11 @@ class Votebot < Sinatra::Base
   helpers do
     def row_class(pr)
       case pr.state
-      when 'passed', 'agreed'
+      when 'passed', 'agreed', 'accepted'
         'success'
       when 'waiting'
         'warning'
-      when 'blocked', 'dead'
+      when 'blocked', 'dead', 'rejected'
         'danger'
       end
     end

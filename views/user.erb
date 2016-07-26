@@ -4,17 +4,22 @@
   <li class="active"><%= @user.login %></li>
 </ol>
 
-<h1><%= @user.login %> <a href='http://github.com/<%= @user.login %>'><i class='fa fa-github'></i></a></h1>
+<img class="img-rounded pull-right user-large" src='<%= @user.avatar_url %>' 
+alt='<%= @user.login %>' 
+title='<%= @user.login %>' />
+<h1 class='user'>
+  <%= @user.login %> <a href='http://github.com/<%= @user.login %>'><i class='fa fa-github'></i></a>
+</h1>
 
 <% if @user.contributor %>
   <div class='label label-primary'>contributor</div>
 <% end %>
 
-<h2>Not voted on:</h2>
+<h2 style='clear: right'>Not voted on yet:</h2>
 
 <%= partial :pr_list, locals: {pull_requests: @not_voted} %>
 
-<h2>Voted on:</h2>
+<h2>Voted on (<%= @voted.count %>):</h2>
 
 <table class='table vote-list'>
   <tr>
@@ -33,6 +38,6 @@
   <% end %>
 </table>
 
-<h2>Proposed:</h2>
+<h2>Proposed (<%= @proposed.count %>):</h2>
 
 <%= partial :pr_list, locals: {pull_requests: @proposed} %>
