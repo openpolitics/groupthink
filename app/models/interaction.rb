@@ -1,10 +1,10 @@
 class Interaction < ActiveRecord::Base
   
   belongs_to :user
-  belongs_to :pull_request  
+  belongs_to :proposal  
 
   validates :user, presence: true
-  validates :pull_request, presence: true
+  validates :proposal, presence: true
   
   validates :last_vote, inclusion: {in: %w(agree disagree abstain), allow_nil: true}
   

@@ -10,19 +10,19 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160726133704) do
+ActiveRecord::Schema.define(version: 20160726142431) do
 
   create_table "interactions", force: :cascade do |t|
-    t.integer  "user_id",         null: false
-    t.integer  "pull_request_id", null: false
+    t.integer  "user_id",     null: false
+    t.integer  "proposal_id", null: false
     t.string   "last_vote"
-    t.datetime "created_at",      null: false
-    t.datetime "updated_at",      null: false
-    t.index ["pull_request_id"], name: "index_interactions_on_pull_request_id"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+    t.index ["proposal_id"], name: "index_interactions_on_proposal_id"
     t.index ["user_id"], name: "index_interactions_on_user_id"
   end
 
-  create_table "pull_requests", force: :cascade do |t|
+  create_table "proposals", force: :cascade do |t|
     t.integer  "number",      null: false
     t.string   "state",       null: false
     t.string   "title",       null: false
@@ -30,7 +30,7 @@ ActiveRecord::Schema.define(version: 20160726133704) do
     t.datetime "opened_at",   null: false
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
-    t.index ["proposer_id"], name: "index_pull_requests_on_proposer_id"
+    t.index ["proposer_id"], name: "index_proposals_on_proposer_id"
   end
 
   create_table "users", force: :cascade do |t|

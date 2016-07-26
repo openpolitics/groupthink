@@ -17,7 +17,7 @@ title='<%= @user.login %>' />
 
 <h2 style='clear: right'>Not voted on yet:</h2>
 
-<%= partial :pr_list, locals: {pull_requests: @not_voted} %>
+<%= partial :proposal_list, locals: {proposals: @not_voted} %>
 
 <h2>Voted on (<%= @voted.count %>):</h2>
 
@@ -40,4 +40,4 @@ title='<%= @user.login %>' />
 
 <h2>Proposed (<%= @proposed.count %>):</h2>
 
-<%= partial :pr_list, locals: {pull_requests: @proposed} %>
+<%= partial :proposal_list, locals: {proposals: @proposed} %>

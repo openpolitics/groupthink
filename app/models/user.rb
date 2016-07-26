@@ -1,7 +1,7 @@
 class User < ActiveRecord::Base
   
   has_many :interactions, dependent: :destroy
-  has_many :participating, through: :interactions, source: :pull_request
+  has_many :participating, through: :interactions, source: :proposal
 
   validates :login, presence: true, uniqueness: true
   validates :avatar_url, presence: true
@@ -23,8 +23,8 @@ class User < ActiveRecord::Base
     self.contributor = !@contributors.find{|x| x.login == login}.nil?
   end
   
-  def state(pr)
-    interactions.find_by(pull_request: pr).try(:state)
+  def state(proposal)
+    interactions.find_by(proposal: proposal).try(:state)
   end
 
   def self.update_all_from_github!

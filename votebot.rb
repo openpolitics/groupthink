@@ -33,13 +33,13 @@ class Votebot < Sinatra::Base
   
   post '/update' do
     User.update_all_from_github!
-    PullRequest.recreate_all_from_github!
+    Proposal.recreate_all_from_github!
     200
   end
 
   get '/' do
-    @pull_requests = PullRequest.open.sort_by{|x| x.number.to_i}.reverse
-    @closed = PullRequest.closed.sort_by{|x| x.number.to_i}.reverse
+    @open_proposals = Proposal.open.sort_by{|x| x.number.to_i}.reverse
+    @closed_proposals = Proposal.closed.sort_by{|x| x.number.to_i}.reverse
     erb :index
   end
   
@@ -52,16 +52,16 @@ class Votebot < Sinatra::Base
 
   get '/users/:login' do
     @user = User.find_by_login(params[:login])
-    @pull_requests = PullRequest.all.sort_by{|x| x.number.to_i}.reverse
-    @proposed, @pull_requests = @pull_requests.partition{|x| x.proposer == @user}
-    @voted, @not_voted = @pull_requests.partition{|pr| @user.participating.where("last_vote IS NOT NULL").include? pr}
+    @proposals = Proposal.all.sort_by{|x| x.number.to_i}.reverse
+    @proposed, @proposals = @proposals.partition{|x| x.proposer == @user}
+    @voted, @not_voted = @proposals.partition{|pr| @user.participating.where("last_vote IS NOT NULL").include? pr}
     @not_voted.reject!{|x| x.closed? }
     erb :user
   end
   
   get '/:number' do
-    @pull_request = PullRequest.find_by(number: params[:number])
-    if @pull_request
+    @proposal = Proposal.find_by(number: params[:number])
+    if @proposal
       erb :show
     else
       404
@@ -69,8 +69,8 @@ class Votebot < Sinatra::Base
   end
   
   post '/:number/update' do
-    @pull_request = PullRequest.find_by(number: params[:number])
-    @pull_request.update_from_github!
+    @proposal = Proposal.find_by(number: params[:number])
+    @proposal.update_from_github!
     redirect "/#{params[:number]}"
   end
 
@@ -145,16 +145,16 @@ class Votebot < Sinatra::Base
   def on_issue_comment_created(json)
     issue = json['issue']
     if issue['state'] == 'open' && issue['pull_request']
-      PullRequest.create_from_github!(issue['number'])
+      Proposal.create_from_github!(issue['number'])
     end
   end
 
   def on_pull_request_opened(json)
-    PullRequest.create_from_github!(json['number'])
+    Proposal.create_from_github!(json['number'])
   end
   
   def on_pull_request_closed(json)
-    PullRequest.find_or_create_by(number: json['number']).try(:close!)
+    Proposal.find_or_create_by(number: json['number']).try(:close!)
   end
   
 end

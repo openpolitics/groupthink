@@ -1,7 +1,7 @@
-<h1>Open Votes</h1>
+<h1>Open Proposals</h1>
 
-<%= partial :pr_list, locals: {pull_requests: @pull_requests} %>
+<%= partial :proposal_list, locals: {proposals: @open_proposals} %>
 
-<h1>Closed Votes</h1>
+<h1>Closed Proposals</h1>
 
-<%= partial :pr_list, locals: {pull_requests: @closed} %>
+<%= partial :proposal_list, locals: {proposals: @closed_proposals} %>

@@ -1,7 +1,7 @@
 require 'octokit'
 require 'json'
 
-class PullRequest < ActiveRecord::Base
+class Proposal < ActiveRecord::Base
 
   include VoteCounter
 
@@ -19,14 +19,14 @@ class PullRequest < ActiveRecord::Base
   end
 
   def self.recreate_all_from_github!
-    PullRequest.delete_all
+    Proposal.delete_all
     Octokit.pull_requests(ENV['GITHUB_REPO'], state: "all").each do |pr|
       create_from_github!(pr["number"])
     end
   end
 
   def self.create_from_github!(number)
-    pr = PullRequest.find_or_create_by!(number: number)
+    pr = Proposal.find_or_create_by!(number: number)
     pr.count_votes!
     pr
   end

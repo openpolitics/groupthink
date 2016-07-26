@@ -1,16 +1,16 @@
 <ol class="breadcrumb">
-  <li><a href="/">All Votes</a></li>
-  <li class="active">#<%= @pull_request.number %></li>
+  <li><a href="/">All Proposals</a></li>
+  <li class="active">#<%= @proposal.number %></li>
 </ol>
 
-<h1><%= @pull_request.title %> <a href='http://github.com/openpolitics/manifesto/pull/<%= @pull_request.number %>'><i class='fa fa-github'></i></a></h1>
+<h1><%= @proposal.title %> <a href='http://github.com/openpolitics/manifesto/pull/<%= @proposal.number %>'><i class='fa fa-github'></i></a></h1>
 
 <div class='row'>
   <div class='col-md-12'>
     <p>
-      by <a href='/users/<%= @pull_request.proposer %>'><%= @pull_request.proposer.login %></a>
+      by <a href='/users/<%= @proposal.proposer %>'><%= @proposal.proposer.login %></a>
     </p>
-    <h2><span class='label label-<%= row_class(@pull_request) %>'><%= @pull_request.state.capitalize %></span></h2>
+    <h2><span class='label label-<%= row_class(@proposal) %>'><%= @proposal.state.capitalize %></span></h2>
   </div>
 </div>
 
@@ -20,8 +20,8 @@
   <p>
     This page is currently just a utility page for showing a summary of voting 
     activity. To read change details, comment, or vote, please 
-    <a href='http://github.com/openpolitics/manifesto/pull/<%= @pull_request.number %>'>
-      visit the GitHub pull request page.
+    <a href='http://github.com/openpolitics/manifesto/pull/<%= @proposal.number %>'>
+      visit the GitHub page for this proposal.
     </a>
   </p>
 </div>
@@ -32,10 +32,10 @@
     <div class='panel panel-success agree'>
       <div class="panel-heading">
         <%= state_image('agree')%>
-        Agree: <%= @pull_request.agree.count %>
+        Agree: <%= @proposal.agree.count %>
       </div>
       <div class='panel-body'>
-        <%= partial :person, collection: @pull_request.agree.map{|v| v.user} %>
+        <%= partial :person, collection: @proposal.agree.map{|v| v.user} %>
       </div>
     </div>
   </div>
@@ -44,10 +44,10 @@
     <div class='panel panel-info abstain'>
       <div class="panel-heading">
         <%= state_image('abstain')%>
-        Abstaining: <%= @pull_request.abstain.count %>
+        Abstaining: <%= @proposal.abstain.count %>
       </div>
       <div class='panel-body'>
-        <%= partial :person, collection: @pull_request.abstain.map{|v| v.user} %>
+        <%= partial :person, collection: @proposal.abstain.map{|v| v.user} %>
       </div>
     </div>
   </div>
@@ -56,10 +56,10 @@
     <div class='panel panel-danger disagree'>
       <div class="panel-heading">
         <%= state_image('disagree')%>
-        Disagree: <%= @pull_request.disagree.count %>
+        Disagree: <%= @proposal.disagree.count %>
       </div>
       <div class='panel-body'>
-        <%= partial :person, collection: @pull_request.disagree.map{|v| v.user} %>
+        <%= partial :person, collection: @proposal.disagree.map{|v| v.user} %>
       </div>
     </div>
   </div>
@@ -70,17 +70,17 @@
   <div class='col-md-12'>
     <div class='panel panel-default participants'>
       <div class="panel-heading">
-        Participants: <%= @pull_request.participants.count %>
+        Participants: <%= @proposal.participants.count %>
       </div>
       <div class='panel-body'>
-        <%= partial :person, collection: @pull_request.participants %>
+        <%= partial :person, collection: @proposal.participants %>
       <div>
     </div>
   </div>
 </div>
 
 <div style='margin-top: 30px'>
-  <form action='/<%= @pull_request.number %>/update' method='POST'>
+  <form action='/<%= @proposal.number %>/update' method='POST'>
     <button type='submit' class='btn btn-warning'>Update</button>
   </form>
 </div>
