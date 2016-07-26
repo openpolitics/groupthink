@@ -16,6 +16,6 @@ unless ENV['RACK_ENV'] == 'production'
   task :update do
     require_relative 'votebot'
     User.update_all_from_github!
-    PullRequest.update_all_from_github!
+    PullRequest.recreate_all_from_github!
   end
 end

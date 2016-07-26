@@ -30,17 +30,17 @@ class Votebot < Sinatra::Base
   
   post '/update' do
     User.update_all_from_github!
-    PullRequest.update_all_from_github!
+    PullRequest.recreate_all_from_github!
     200
   end
 
   get '/' do
-    @pull_requests = PullRequest.find_all.sort_by{|x| x.number.to_i}.reverse
+    @pull_requests = PullRequest.all.sort_by{|x| x.number.to_i}.reverse
     erb :index
   end
   
   get '/users' do
-    @users = User.find_all
+    @users = User.all
     @contributors = @users.select{|x| x.contributor}
     @others = @users.select{|x| !x.contributor}
     erb :users
@@ -48,14 +48,14 @@ class Votebot < Sinatra::Base
 
   get '/users/:login' do
     @user = User.find(params[:login])
-    @pull_requests = PullRequest.find_all.sort_by{|x| x.number.to_i}.reverse
+    @pull_requests = PullRequest.all.sort_by{|x| x.number.to_i}.reverse
     @proposed, @pull_requests = @pull_requests.partition{|x| x.proposer['login'] == @user.login}
     @voted, @not_voted = @pull_requests.partition{|x| @user.voted.include?(x.number.to_i)}
     erb :user
   end
   
   get '/:number' do
-    @pull_request = PullRequest.find(params[:number])
+    @pull_request = PullRequest.find_by(number: params[:number])
     if @pull_request
       erb :show
     else
@@ -64,7 +64,7 @@ class Votebot < Sinatra::Base
   end
   
   post '/:number/update' do
-    @pull_request = PullRequest.find(params[:number])
+    @pull_request = PullRequest.find_by(number: params[:number])
     @pull_request.update_from_github!
     redirect "/#{params[:number]}"
   end
@@ -140,16 +140,16 @@ class Votebot < Sinatra::Base
   def on_issue_comment_created(json)
     issue = json['issue']
     if issue['state'] == 'open' && issue['pull_request']
-      PullRequest.update_from_github!(issue['number'])
+      PullRequest.create_from_github!(issue['number'])
     end
   end
 
   def on_pull_request_opened(json)
-    PullRequest.update_from_github!(json['number'])
+    PullRequest.create_from_github!(json['number'])
   end
   
   def on_pull_request_closed(json)
-    PullRequest.new(json['number']).delete!
+    PullRequest.find_or_create_by(number: json['number']).try(:close!)
   end
   
 end
