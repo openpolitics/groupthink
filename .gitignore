@@ -7,3 +7,4 @@
 /dump.rdb
 .byebug_history
 coverage
+db/*.sqlite3

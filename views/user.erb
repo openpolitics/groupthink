@@ -24,10 +24,10 @@
     <th class="text-center">Proposer</th>
   </tr>
   <% @voted.each do |pr| %>
-    <tr class='<%= user_row_class(@user.state(pr.number)) %>'>
+    <tr class='<%= user_row_class(@user.state(pr)) %>'>
       <td class="text-center"><span class='label label-<%= row_class(pr) %>'><%= pr.state.capitalize %></span></td>
       <td><a href='/<%= pr.number %>'><%= pr.title %></a></td> 
-      <td class="text-center"><%= state_image(@user.state(pr.number)) %></td> 
+      <td class="text-center"><%= state_image(@user.state(pr)) %></td> 
       <td class="proposer text-center"><%= partial :person, locals: {person: pr.proposer } %></td> 
     </tr>
   <% end %>

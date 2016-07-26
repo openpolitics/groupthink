@@ -35,7 +35,7 @@
         Agree: <%= @pull_request.agree.count %>
       </div>
       <div class='panel-body'>
-        <%= partial :person, collection: @pull_request.agree %>
+        <%= partial :person, collection: @pull_request.agree.map{|v| v.user} %>
       </div>
     </div>
   </div>
@@ -47,7 +47,7 @@
         Abstaining: <%= @pull_request.abstain.count %>
       </div>
       <div class='panel-body'>
-        <%= partial :person, collection: @pull_request.abstain %>
+        <%= partial :person, collection: @pull_request.abstain.map{|v| v.user} %>
       </div>
     </div>
   </div>
@@ -59,7 +59,7 @@
         Disagree: <%= @pull_request.disagree.count %>
       </div>
       <div class='panel-body'>
-        <%= partial :person, collection: @pull_request.disagree %>
+        <%= partial :person, collection: @pull_request.disagree.map{|v| v.user} %>
       </div>
     </div>
   </div>

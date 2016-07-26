@@ -1,4 +1,4 @@
-describe "webhook POST" do
+describe "webhook POST", :vcr do
 
   it "/ should reject unknown posts" do
     post '/webhook'
@@ -7,7 +7,7 @@ describe "webhook POST" do
 
   it "/ should parse github issue comments correctly" do
     # Should result in PR 32 being updated
-    expect(PullRequest).to receive(:update_from_github!).with(32).once
+    expect(PullRequest).to receive(:create_from_github!).with(32).once
     # Set POST
     header 'X-Github-Event', "issue_comment"
     post '/webhook', payload: load_fixture('requests/issue_comment')
@@ -17,7 +17,7 @@ describe "webhook POST" do
 
   it "/ should parse github pull requests correctly" do
     # Should result in PR 43 being updated
-    expect(PullRequest).to receive(:update_from_github!).with(43).once
+    expect(PullRequest).to receive(:create_from_github!).with(43).once
     # Set POST
     header 'X-Github-Event', "pull_request"
     post '/webhook', payload: load_fixture('requests/pull_request')
