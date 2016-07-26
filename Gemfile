@@ -50,7 +50,6 @@ group :development, :test do
   gem "timecop"
   gem "coveralls"
   gem "rspec-rails"
-  gem "rack-test"
   gem "dotenv-rails"
   gem "database_cleaner"
 end

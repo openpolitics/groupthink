@@ -227,7 +227,6 @@ DEPENDENCIES
   octokit (~> 4.0)
   pg
   puma (~> 3.0)
-  rack-test
   rails (~> 5.0.0)
   rspec-rails
   sass-rails (~> 5.0)
