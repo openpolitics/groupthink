@@ -1,4 +1,4 @@
-class CreateProposals < ActiveRecord::Migration[5.0]
+class CreatePullRequests < ActiveRecord::Migration[5.0]
   def change
     create_table :pull_requests do |t|
       t.integer :number, null: false
