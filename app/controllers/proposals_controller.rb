@@ -18,18 +18,19 @@ class ProposalsController < ApplicationController
   def update_all
     User.update_all_from_github!
     Proposal.recreate_all_from_github!
+    head 200
   end
 
   def webhook
-    case env['HTTP_X_GITHUB_EVENT']
+    case request.env['HTTP_X_GITHUB_EVENT']
     when "issue_comment"
       on_issue_comment(JSON.parse(params[:payload]))
-      200
+      head 200
     when "pull_request"
       on_pull_request(JSON.parse(params[:payload]))
-      200
+      head 200
     else
-      400
+      head 400
     end
   end
   
