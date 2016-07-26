@@ -51,7 +51,7 @@ group :development, :test do
   gem "coveralls"
   gem "rspec-rails"
   gem "rack-test"
-  gem "dotenv"
+  gem "dotenv-rails"
   gem "database_cleaner"
 end
 

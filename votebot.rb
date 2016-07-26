@@ -3,7 +3,6 @@ require 'sinatra/partial'
 require "sinatra/activerecord"
 require "bugsnag"
 require 'octokit'
-require_relative 'environments'
 require_relative 'app/models'
 
 Bugsnag.configure do |config|
