@@ -18,6 +18,7 @@ Octokit.auto_paginate = true
 class Votebot < Sinatra::Base
   
   set :views, Proc.new { File.join(root, "app", "views") }
+  set :public_folder, Proc.new { File.join(root, "app", "assets") }
   
   register Sinatra::ActiveRecordExtension
     
