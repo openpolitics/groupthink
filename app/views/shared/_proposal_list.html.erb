@@ -13,7 +13,7 @@
   <% proposals.each do |proposal| %>
     <tr class='<%= row_class(proposal) %>'>
       <td class="text-center"><span class='label label-<%= row_class(proposal) %>'><%= proposal.state.capitalize %></span></td>
-      <td><a href='/<%= proposal.number %>'><%= proposal.title %></a></td> 
+      <td><a href='/proposals/<%= proposal.number %>'><%= proposal.title %></a></td> 
       <td class="text-center"><a href='http://github.com/openpolitics/manifesto/pull/<%= proposal.number %>'>#<%= proposal.number %></a></td>
       <td class="text-center"><%= proposal.participants.count %></td>
       <td class="text-center"><%= proposal.age %> days</td>

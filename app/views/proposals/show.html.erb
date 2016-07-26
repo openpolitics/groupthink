@@ -35,7 +35,7 @@
         Agree: <%= @proposal.agree.count %>
       </div>
       <div class='panel-body'>
-        <%= partial :person, collection: @proposal.agree.map{|v| v.user} %>
+        <%= render partial: 'shared/person', collection: @proposal.agree.map{|v| v.user} %>
       </div>
     </div>
   </div>
@@ -47,7 +47,7 @@
         Abstaining: <%= @proposal.abstain.count %>
       </div>
       <div class='panel-body'>
-        <%= partial :person, collection: @proposal.abstain.map{|v| v.user} %>
+        <%= render partial: 'shared/person', collection: @proposal.abstain.map{|v| v.user} %>
       </div>
     </div>
   </div>
@@ -59,7 +59,7 @@
         Disagree: <%= @proposal.disagree.count %>
       </div>
       <div class='panel-body'>
-        <%= partial :person, collection: @proposal.disagree.map{|v| v.user} %>
+        <%= render partial: 'shared/person', collection: @proposal.disagree.map{|v| v.user} %>
       </div>
     </div>
   </div>
@@ -73,7 +73,7 @@
         Participants: <%= @proposal.participants.count %>
       </div>
       <div class='panel-body'>
-        <%= partial :person, collection: @proposal.participants %>
+        <%= render partial: 'shared/person', collection: @proposal.participants %>
       <div>
     </div>
   </div>

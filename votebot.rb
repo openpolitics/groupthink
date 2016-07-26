@@ -36,27 +36,6 @@ class Votebot < Sinatra::Base
     200
   end
 
-  get '/' do
-    @open_proposals = Proposal.open.sort_by{|x| x.number.to_i}.reverse
-    @closed_proposals = Proposal.closed.sort_by{|x| x.number.to_i}.reverse
-    erb :index
-  end
-  
-  get '/:number' do
-    @proposal = Proposal.find_by(number: params[:number])
-    if @proposal
-      erb :show
-    else
-      404
-    end
-  end
-  
-  post '/:number/update' do
-    @proposal = Proposal.find_by(number: params[:number])
-    @proposal.update_from_github!
-    redirect "/#{params[:number]}"
-  end
-
   post '/webhook' do
     case env['HTTP_X_GITHUB_EVENT']
     when "issue_comment"

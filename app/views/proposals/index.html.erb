@@ -1,0 +1,7 @@
+<h1>Open Proposals</h1>
+
+<%= render partial: 'shared/proposal_list', locals: {proposals: @open_proposals} %>
+
+<h1>Closed Proposals</h1>
+
+<%= render partial: 'shared/proposal_list', locals: {proposals: @closed_proposals} %>
