@@ -10,7 +10,7 @@ class PullRequest < ActiveRecord::Base
   belongs_to :proposer, class_name: "User"
 
   validates :number, presence: true, uniqueness: true
-  validates :state, inclusion: { in: %w(waiting agreed passed blocked dead)}
+  validates :state, inclusion: { in: %w(waiting agreed passed blocked dead accepted rejected)}
   validates :title, presence: true
   validates :proposer, presence: true
 
@@ -20,7 +20,7 @@ class PullRequest < ActiveRecord::Base
 
   def self.recreate_all_from_github!
     PullRequest.delete_all
-    Octokit.pull_requests(ENV['GITHUB_REPO']).each do |pr|
+    Octokit.pull_requests(ENV['GITHUB_REPO'], state: "all").each do |pr|
       create_from_github!(pr["number"])
     end
   end
@@ -33,10 +33,6 @@ class PullRequest < ActiveRecord::Base
   
   def github_pr
     @github_pr ||= Octokit.pull_request(ENV['GITHUB_REPO'], number)
-  end
-  
-  def sha
-    @sha ||= github_pr.head.sha
   end
   
   def load_from_github
@@ -64,7 +60,19 @@ class PullRequest < ActiveRecord::Base
 
   def close!
     proposer.update_github_contributor_status and proposer.save!
-    destroy
+    update_state!
+  end
+  
+  def closed?
+    %w(accepted rejected).include? state
   end
 
+  def self.closed
+    self.where(state: %w(accepted rejected))
+  end
+
+  def self.open
+    self.where(state: %w(waiting agreed passed blocked dead))
+  end
+  
 end

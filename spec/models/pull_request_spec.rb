@@ -3,7 +3,7 @@ describe PullRequest, :vcr do
   it "should update pull requests on demand" do
     Timecop.freeze(2015,5,30)
     pr = PullRequest.create_from_github!(356)
-    expect(pr.state).to eq 'passed'
+    expect(pr.state).to eq 'accepted'
     Timecop.return
   end
 
@@ -31,6 +31,16 @@ describe PullRequest, :vcr do
   it "should ignore votes before last commit" do
     pr = PullRequest.create_from_github!(135)
     expect(pr.agree.count).to eq 1
+  end
+
+  it "should store merged pull requests as accepted" do
+    pr = PullRequest.create_from_github!(43)
+    expect(pr.state).to eq 'accepted'
+  end
+
+  it "should store closed and unmerged pull requests as rejected" do
+    pr = PullRequest.create_from_github!(9)
+    expect(pr.state).to eq 'rejected'
   end
 
 end
