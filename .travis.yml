@@ -3,6 +3,9 @@ sudo: false
 cache: bundler
 rvm:
 - 2.3.1
+before_script:
+- bundle exec rake db:schema:load
+- bundle exec rake db:test:prepare
 env:
   global:
   - GITHUB_REPO: openpolitics/manifesto
