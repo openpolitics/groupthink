@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160725064329) do
+ActiveRecord::Schema.define(version: 20160726133704) do
 
   create_table "interactions", force: :cascade do |t|
     t.integer  "user_id",         null: false
@@ -39,6 +39,7 @@ ActiveRecord::Schema.define(version: 20160725064329) do
     t.boolean  "contributor", default: false, null: false
     t.datetime "created_at",                  null: false
     t.datetime "updated_at",                  null: false
+    t.string   "email"
   end
 
 end

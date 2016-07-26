@@ -11,7 +11,9 @@ class User < ActiveRecord::Base
   end
 
   def load_from_github
-    self.avatar_url ||= Octokit.user(login).avatar_url
+    github_user = Octokit.user(login)
+    self.avatar_url ||= github_user.avatar_url
+    self.email ||= github_user.email
     self.contributor = update_github_contributor_status
     nil # to avoid halting validation chain until 5.1
   end
