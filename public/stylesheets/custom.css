@@ -6,6 +6,11 @@ div.proposer img {
   height: 48px;
 }
 
+div.userlist img {
+  height: 48px;
+  margin: 5px;
+}
+
 .panel-heading img, th img {
   height: 24px;
 }

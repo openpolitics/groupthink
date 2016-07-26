@@ -1,7 +1,7 @@
 class User < ActiveRecord::Base
   
   has_many :interactions, dependent: :destroy
-  has_many :participating, through: :interactions, class_name: "PullRequests"
+  has_many :participating, through: :interactions, source: :pull_request
 
   validates :login, presence: true, uniqueness: true
   validates :avatar_url, presence: true
@@ -30,7 +30,8 @@ class User < ActiveRecord::Base
       user.load_from_github and user.save!
     end
     Octokit.contributors(ENV["GITHUB_REPO"]).each do |contributor|
-      user = User.new(login: contributor["login"])
+      user = User.find_or_create_by!(login: contributor["login"])
+      user.contributor = true
       user.save!
     end
   end

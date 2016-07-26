@@ -40,17 +40,17 @@ class Votebot < Sinatra::Base
   end
   
   get '/users' do
-    @users = User.all
+    @users = User.all.order(:login)
     @contributors = @users.select{|x| x.contributor}
     @others = @users.select{|x| !x.contributor}
     erb :users
   end
 
   get '/users/:login' do
-    @user = User.find(params[:login])
+    @user = User.find_by_login(params[:login])
     @pull_requests = PullRequest.all.sort_by{|x| x.number.to_i}.reverse
-    @proposed, @pull_requests = @pull_requests.partition{|x| x.proposer['login'] == @user.login}
-    @voted, @not_voted = @pull_requests.partition{|x| @user.voted.include?(x.number.to_i)}
+    @proposed, @pull_requests = @pull_requests.partition{|x| x.proposer == @user}
+    @voted, @not_voted = @pull_requests.partition{|pr| @user.participating.where("last_vote IS NOT NULL").include? pr}
     erb :user
   end
   
