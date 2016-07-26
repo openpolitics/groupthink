@@ -1,5 +1,6 @@
 module VoteCounter
-
+  extend ActiveSupport::Concern
+  
   def sha
     @sha ||= github_pr.head.sha
   end
