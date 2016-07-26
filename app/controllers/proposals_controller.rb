@@ -12,7 +12,7 @@ class ProposalsController < ApplicationController
   def update
     @proposal = Proposal.find_by(number: params[:id])
     @proposal.update_from_github!
-    redirect "/#{params[:id]}"
+    redirect @proposal
   end
   
   def webhook
