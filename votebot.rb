@@ -42,22 +42,6 @@ class Votebot < Sinatra::Base
     erb :index
   end
   
-  get '/users' do
-    @users = User.all.order(:login)
-    @contributors = @users.select{|x| x.contributor}
-    @others = @users.select{|x| !x.contributor}
-    erb :users
-  end
-
-  get '/users/:login' do
-    @user = User.find_by_login(params[:login])
-    @proposals = Proposal.all.sort_by{|x| x.number.to_i}.reverse
-    @proposed, @proposals = @proposals.partition{|x| x.proposer == @user}
-    @voted, @not_voted = @proposals.partition{|pr| @user.participating.where("last_vote IS NOT NULL").include? pr}
-    @not_voted.reject!{|x| x.closed? }
-    erb :user
-  end
-  
   get '/:number' do
     @proposal = Proposal.find_by(number: params[:number])
     if @proposal
@@ -83,43 +67,6 @@ class Votebot < Sinatra::Base
       200
     else
       400
-    end
-  end
-  
-  helpers do
-    def row_class(pr)
-      case pr.state
-      when 'passed', 'agreed', 'accepted'
-        'success'
-      when 'waiting'
-        'warning'
-      when 'blocked', 'dead', 'rejected'
-        'danger'
-      end
-    end
-    def user_row_class(state)
-      case state
-      when 'agree'
-        'success'
-      when 'abstain', 'participating'
-        'warning'
-      when 'disagree'
-        'danger'
-      else
-        ''
-      end
-    end
-    def state_image(state)
-      case state
-      when 'agree'
-        "<img src='https://github.global.ssl.fastly.net/images/icons/emoji/+1.png?v5' title='Agree'/>"
-      when 'abstain'
-        "<img src='https://github.global.ssl.fastly.net/images/icons/emoji/hand.png?v5' title='Abstain'/>"
-      when 'disagree'
-        "<img src='https://github.global.ssl.fastly.net/images/icons/emoji/-1.png?v5' title='Disagree'/>"
-      else
-        ""
-      end
     end
   end
   

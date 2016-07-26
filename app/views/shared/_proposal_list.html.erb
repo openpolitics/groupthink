@@ -20,7 +20,7 @@
       <td class="text-center"><%= proposal.agree.count %></td>
       <td class="text-center"><%= proposal.abstain.count %></td>
       <td class="text-center"><%= proposal.disagree.count %></td>
-      <td class="proposer text-center"><%= partial :person, locals: {person: proposal.proposer } %></td> 
+      <td class="proposer text-center"><%= render partial: 'shared/person', locals: {person: proposal.proposer } %></td> 
     </tr>
   <% end %>
 </table>

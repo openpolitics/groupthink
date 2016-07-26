@@ -17,7 +17,7 @@ title='<%= @user.login %>' />
 
 <h2 style='clear: right'>Not voted on yet:</h2>
 
-<%= partial :proposal_list, locals: {proposals: @not_voted} %>
+<%= render partial: 'shared/proposal_list', locals: {proposals: @not_voted} %>
 
 <h2>Voted on (<%= @voted.count %>):</h2>
 
@@ -33,11 +33,11 @@ title='<%= @user.login %>' />
       <td class="text-center"><span class='label label-<%= row_class(pr) %>'><%= pr.state.capitalize %></span></td>
       <td><a href='/<%= pr.number %>'><%= pr.title %></a></td> 
       <td class="text-center"><%= state_image(@user.state(pr)) %></td> 
-      <td class="proposer text-center"><%= partial :person, locals: {person: pr.proposer } %></td> 
+      <td class="proposer text-center"><%= render partial: 'shared/person', locals: {person: pr.proposer } %></td> 
     </tr>
   <% end %>
 </table>
 
 <h2>Proposed (<%= @proposed.count %>):</h2>
 
-<%= partial :proposal_list, locals: {proposals: @proposed} %>
+<%= render partial: 'shared/proposal_list', locals: {proposals: @proposed} %>

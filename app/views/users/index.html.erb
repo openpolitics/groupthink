@@ -16,7 +16,7 @@ Click on a user image to see their activity history.
 
 <div class='userlist'>
   <% @contributors.each do |user| %>
-    <%= partial :person, locals: {person: user } %>
+    <%= render partial: 'shared/person', locals: {person: user } %>
   <% end %>
 </div>
 
@@ -29,6 +29,6 @@ Click on a user image to see their activity history.
 
 <div class='userlist'>
   <% @others.each do |user| %>
-    <%= partial :person, locals: {person: user } %>
+    <%= render partial: 'shared/person', locals: {person: user } %>
   <% end %>
 </div>
