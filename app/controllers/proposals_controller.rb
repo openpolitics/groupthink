@@ -15,12 +15,6 @@ class ProposalsController < ApplicationController
     redirect "/#{params[:id]}"
   end
   
-  def update_all
-    User.update_all_from_github!
-    Proposal.recreate_all_from_github!
-    head 200
-  end
-
   def webhook
     case request.env['HTTP_X_GITHUB_EVENT']
     when "issue_comment"
