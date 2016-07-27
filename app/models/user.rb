@@ -56,5 +56,8 @@ class User < ApplicationRecord
     end
   end
   
+  def to_param
+    login
+  end
   
 end
