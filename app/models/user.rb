@@ -1,5 +1,7 @@
 class User < ApplicationRecord
   
+  devise :omniauthable, :omniauth_providers => [:github]
+
   has_many :interactions, dependent: :destroy
   has_many :participating, through: :interactions, source: :proposal
 
@@ -8,6 +10,15 @@ class User < ApplicationRecord
   
   before_validation(on: :create) do 
     load_from_github
+  end
+
+  def self.from_omniauth(auth)
+    # Find by oauth details, or if not available, by login only as some may have been created before.
+    u = find_by(provider: auth.provider, uid: auth.uid) || find_by(login: auth.extra.raw_info.login)
+    if u.nil?
+      u.create(provider: auth.provider, uid: auth.uid, login: auth.extra.raw_info.login)
+    end
+    u
   end
 
   def load_from_github

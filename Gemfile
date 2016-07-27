@@ -35,6 +35,10 @@ gem "octokit", "~> 4.0"
 # Bug tracking with bugsnag
 gem "bugsnag"
 
+# Devise and github for login
+gem "devise"
+gem "omniauth-github"
+
 # Postgres in production for Heroku
 group :production do
   gem "pg"
