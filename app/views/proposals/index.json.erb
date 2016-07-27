@@ -1,0 +1,16 @@
+{
+  "count": <%= Proposal.count %>,
+  "open": {
+    "count": <%= @open_proposals.count %>,
+    "waiting": <%= Proposal.where(state: "waiting").count %>,
+    "agreed": <%= Proposal.where(state: "agreed").count %>,
+    "passed": <%= Proposal.where(state: "passed").count %>,
+    "blocked": <%= Proposal.where(state: "blocked").count %>,
+    "dead": <%= Proposal.where(state: "dead").count %>
+  },
+  "closed": {
+    "count": <%= @open_proposals.count %>,
+    "accepted": <%= Proposal.where(state: "accepted").count %>,
+    "rejected": <%= Proposal.where(state: "rejected").count %>
+  }
+}
