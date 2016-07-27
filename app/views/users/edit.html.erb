@@ -1,0 +1,37 @@
+<ol class="breadcrumb">
+  <li><a href="/">All Votes</a></li>
+  <li><a href='/users'>Users</a></li>
+  <li><%= link_to @user.login, @user %></li>
+  <li class="active">Settings</li>
+</ol>
+
+<img class="img-rounded pull-right user-large" src='<%= @user.avatar_url %>' 
+alt='<%= @user.login %>' 
+title='<%= @user.login %>' />
+
+<h1>Settings</h1>
+
+
+<%= form_for @user, html: {class: "form-horizontal", style: 'clear: right'} do |f| %>
+  <div class="form-group">
+    <label for="user[email]" class="col-sm-2 control-label">Email</label>
+    <div class="col-sm-6">
+      <%= f.email_field :email, placeholder: "Email", type: "email", class: "form-control" %>
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="inputEmail3" class="col-sm-2 control-label">Notifications</label>
+    <div class="col-sm-6">
+      <div class="checkbox">
+        <label>
+          <%= f.check_box :notify_new %> New proposals I can vote on
+        </label>
+      </div>
+    </div>
+  </div>
+  <div class="form-group">
+    <div class="col-sm-offset-2 col-sm-10">
+      <%= f.submit class: "btn btn-primary", value: "Save Settings" %>
+    </div>
+  </div>
+<% end %>
