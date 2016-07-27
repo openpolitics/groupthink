@@ -9,7 +9,7 @@
     "dead": <%= Proposal.where(state: "dead").count %>
   },
   "closed": {
-    "count": <%= @open_proposals.count %>,
+    "count": <%= @closed_proposals.count %>,
     "accepted": <%= Proposal.where(state: "accepted").count %>,
     "rejected": <%= Proposal.where(state: "rejected").count %>
   }
