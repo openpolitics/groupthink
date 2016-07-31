@@ -31,9 +31,9 @@ title='<%= @user.login %>' />
   <% @voted.each do |pr| %>
     <tr class='<%= user_row_class(@user.vote(pr)) %>'>
       <td class="text-center">
-        <span class='label label-<%= row_class(proposal) %>'>
-          <%= state_icon(proposal.state) %>
-          <span class='hidden-xs'><%= proposal.state.capitalize %></span>
+        <span class='label label-<%= row_class(pr) %>'>
+          <%= state_icon(pr.state) %>
+          <span class='hidden-xs'><%= pr.state.capitalize %></span>
         </span>
       </td>
       <td><a href='/proposals/<%= pr.number %>'><%= pr.title %></a></td> 
