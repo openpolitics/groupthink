@@ -28,14 +28,18 @@ module ApplicationHelper
     end
   end
   
-  def state_image(state)
-    case state
+  def vote_icon(vote)
+    case vote
     when 'agree'
-      "<img src='https://github.global.ssl.fastly.net/images/icons/emoji/+1.png?v5' title='Agree'/>".html_safe
+      "<i class='fa fa-thumbs-o-up'></i>".html_safe
     when 'abstain'
-      "<img src='https://github.global.ssl.fastly.net/images/icons/emoji/hand.png?v5' title='Abstain'/>".html_safe
+      "<i class='fa fa-hand-stop-o'></i>".html_safe
     when 'disagree'
-      "<img src='https://github.global.ssl.fastly.net/images/icons/emoji/-1.png?v5' title='Disagree'/>".html_safe
+      "<i class='fa fa-thumbs-o-down'></i>".html_safe
+    else
+      ""
+    end
+  end
     else
       ""
     end

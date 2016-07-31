@@ -34,7 +34,7 @@ class User < ApplicationRecord
     self.contributor = !@contributors.find{|x| x.login == login}.nil?
   end
   
-  def state(proposal)
+  def vote(proposal)
     interactions.find_by(proposal: proposal).try(:state)
   end
 

@@ -31,7 +31,7 @@
   <div class='col-md-4'>
     <div class='panel panel-success agree'>
       <div class="panel-heading">
-        <%= state_image('agree')%>
+        <%= vote_icon('agree')%>
         Agree: <%= @proposal.agree.count %>
       </div>
       <div class='panel-body'>
@@ -43,7 +43,7 @@
   <div class='col-md-4'>
     <div class='panel panel-info abstain'>
       <div class="panel-heading">
-        <%= state_image('abstain')%>
+        <%= vote_icon('abstain')%>
         Abstaining: <%= @proposal.abstain.count %>
       </div>
       <div class='panel-body'>
@@ -55,7 +55,7 @@
   <div class='col-md-4'>
     <div class='panel panel-danger disagree'>
       <div class="panel-heading">
-        <%= state_image('disagree')%>
+        <%= vote_icon('disagree')%>
         Disagree: <%= @proposal.disagree.count %>
       </div>
       <div class='panel-body'>
