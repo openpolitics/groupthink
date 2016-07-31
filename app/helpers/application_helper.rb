@@ -40,6 +40,15 @@ module ApplicationHelper
       ""
     end
   end
+
+  def state_icon(state)
+    case state
+    when 'waiting'
+      "<i class='fa fa-clock-o'></i>".html_safe
+    when 'blocked', 'rejected'
+      "<i class='fa fa-ban'></i>".html_safe
+    when 'accepted', 'passed', 'agreed'
+      "<i class='fa fa-check'></i>".html_safe
     else
       ""
     end
