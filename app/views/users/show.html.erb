@@ -30,8 +30,13 @@ title='<%= @user.login %>' />
   </tr>
   <% @voted.each do |pr| %>
     <tr class='<%= user_row_class(@user.vote(pr)) %>'>
-      <td class="text-center"><span class='label label-<%= row_class(pr) %>'><%= pr.state.capitalize %></span></td>
-      <td><a href='/<%= pr.number %>'><%= pr.title %></a></td> 
+      <td class="text-center">
+        <span class='label label-<%= row_class(proposal) %>'>
+          <%= state_icon(proposal.state) %>
+          <span class='hidden-xs'><%= proposal.state.capitalize %></span>
+        </span>
+      </td>
+      <td><a href='/proposals/<%= pr.number %>'><%= pr.title %></a></td> 
       <td class="text-center"><%= vote_icon(@user.vote(pr)) %></td> 
       <td class="proposer text-center"><%= render partial: 'shared/person', locals: {person: pr.proposer } %></td> 
     </tr>
