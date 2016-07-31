@@ -2,8 +2,8 @@
   <tr>
     <th class="text-center">State</th>
     <th>Title</th>
-    <th>View</th>
-    <th class="text-center"><i class='fa fa-comments'></th>
+    <th class='hidden-xs'>View</th>
+    <th class="text-center hidden-xs"><i class='fa fa-comments'></th>
     <th class="text-center"><i class='fa fa-clock-o'></th>
     <th class="text-center"><%= vote_icon('agree')%></th>
     <th class="text-center"><%= vote_icon('abstain')%></th>
@@ -19,8 +19,8 @@
         </span>
       </td>
       <td><a href='/proposals/<%= proposal.number %>'><%= proposal.title %></a></td> 
-      <td class="text-center"><a href='http://github.com/openpolitics/manifesto/pull/<%= proposal.number %>'><i class='fa fa-github'></i></a></td>
-      <td class="text-center"><%= proposal.participants.count %></td>
+      <td class="text-center hidden-xs"><a href='http://github.com/openpolitics/manifesto/pull/<%= proposal.number %>'><i class='fa fa-github'></i></a></td>
+      <td class="text-center hidden-xs"><%= proposal.participants.count %></td>
       <td class="text-center"><%= proposal.age %>d</td>
       <td class="text-center"><%= proposal.agree.count %></td>
       <td class="text-center"><%= proposal.abstain.count %></td>
