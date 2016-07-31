@@ -39,6 +39,8 @@ gem "bugsnag"
 gem "devise"
 gem "omniauth-github"
 
+gem "font-awesome-rails"
+
 # Postgres in production for Heroku
 group :production do
   gem "pg"

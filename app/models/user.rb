@@ -24,7 +24,7 @@ class User < ApplicationRecord
   def load_from_github
     github_user = Octokit.user(login)
     self.avatar_url = github_user.avatar_url
-    self.email = github_user.email
+    self.email ||= github_user.email
     self.contributor = update_github_contributor_status
     nil # to avoid halting validation chain until 5.1
   end
@@ -56,5 +56,8 @@ class User < ApplicationRecord
     end
   end
   
+  def to_param
+    login
+  end
   
 end
