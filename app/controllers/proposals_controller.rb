@@ -9,12 +9,6 @@ class ProposalsController < ApplicationController
     @proposal = Proposal.find_by(number: params[:id])
   end
   
-  def update
-    @proposal = Proposal.find_by(number: params[:id])
-    @proposal.update_from_github!
-    redirect @proposal
-  end
-  
   def webhook
     case request.env['HTTP_X_GITHUB_EVENT']
     when "issue_comment"
