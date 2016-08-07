@@ -1,5 +1,6 @@
 class ProposalsController < ApplicationController
-
+  protect_from_forgery except: :webhook
+  
   def index
     @open_proposals = Proposal.open.sort_by{|x| x.number.to_i}.reverse
     @closed_proposals = Proposal.closed.sort_by{|x| x.number.to_i}.reverse
