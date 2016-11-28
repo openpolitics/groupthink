@@ -1534,7 +1534,7 @@ http_interactions:
     uri: https://api.github.com/repos/openpolitics/manifesto/statuses/8a85d0d2d2583543423ebe29ca1c0fc1e07e56c9
     body:
       encoding: UTF-8
-      string: '{"target_url":"http://votebot.openpolitics.org.uk/43","description":"The
+      string: '{"target_url":"https://votebot.openpolitics.org.uk/43","description":"The
         change is agreed.","context":"votebot/votes","state":"success"}'
     headers:
       Accept:
@@ -1605,7 +1605,7 @@ http_interactions:
     body:
       encoding: UTF-8
       string: '{"url":"https://api.github.com/repos/openpolitics/manifesto/statuses/8a85d0d2d2583543423ebe29ca1c0fc1e07e56c9","id":668681462,"state":"success","description":"The
-        change is agreed.","target_url":"http://votebot.openpolitics.org.uk/43","context":"votebot/votes","created_at":"2016-07-26T12:53:06Z","updated_at":"2016-07-26T12:53:06Z","creator":{"login":"Floppy","id":3565,"avatar_url":"https://avatars.githubusercontent.com/u/3565?v=3","gravatar_id":"","url":"https://api.github.com/users/Floppy","html_url":"https://github.com/Floppy","followers_url":"https://api.github.com/users/Floppy/followers","following_url":"https://api.github.com/users/Floppy/following{/other_user}","gists_url":"https://api.github.com/users/Floppy/gists{/gist_id}","starred_url":"https://api.github.com/users/Floppy/starred{/owner}{/repo}","subscriptions_url":"https://api.github.com/users/Floppy/subscriptions","organizations_url":"https://api.github.com/users/Floppy/orgs","repos_url":"https://api.github.com/users/Floppy/repos","events_url":"https://api.github.com/users/Floppy/events{/privacy}","received_events_url":"https://api.github.com/users/Floppy/received_events","type":"User","site_admin":false}}'
+        change is agreed.","target_url":"https://votebot.openpolitics.org.uk/43","context":"votebot/votes","created_at":"2016-07-26T12:53:06Z","updated_at":"2016-07-26T12:53:06Z","creator":{"login":"Floppy","id":3565,"avatar_url":"https://avatars.githubusercontent.com/u/3565?v=3","gravatar_id":"","url":"https://api.github.com/users/Floppy","html_url":"https://github.com/Floppy","followers_url":"https://api.github.com/users/Floppy/followers","following_url":"https://api.github.com/users/Floppy/following{/other_user}","gists_url":"https://api.github.com/users/Floppy/gists{/gist_id}","starred_url":"https://api.github.com/users/Floppy/starred{/owner}{/repo}","subscriptions_url":"https://api.github.com/users/Floppy/subscriptions","organizations_url":"https://api.github.com/users/Floppy/orgs","repos_url":"https://api.github.com/users/Floppy/repos","events_url":"https://api.github.com/users/Floppy/events{/privacy}","received_events_url":"https://api.github.com/users/Floppy/received_events","type":"User","site_admin":false}}'
     http_version: 
   recorded_at: Tue, 26 Jul 2016 12:53:06 GMT
 - request:
@@ -1613,7 +1613,7 @@ http_interactions:
     uri: https://api.github.com/repos/openpolitics/manifesto/statuses/8a85d0d2d2583543423ebe29ca1c0fc1e07e56c9
     body:
       encoding: UTF-8
-      string: '{"target_url":"http://votebot.openpolitics.org.uk/43","description":"The
+      string: '{"target_url":"https://votebot.openpolitics.org.uk/43","description":"The
         change has been open for more than 90 days, and should be closed.","context":"votebot/time","state":"failure"}'
     headers:
       Accept:
@@ -1684,7 +1684,7 @@ http_interactions:
     body:
       encoding: UTF-8
       string: '{"url":"https://api.github.com/repos/openpolitics/manifesto/statuses/8a85d0d2d2583543423ebe29ca1c0fc1e07e56c9","id":668681480,"state":"failure","description":"The
-        change has been open for more than 90 days, and should be closed.","target_url":"http://votebot.openpolitics.org.uk/43","context":"votebot/time","created_at":"2016-07-26T12:53:06Z","updated_at":"2016-07-26T12:53:06Z","creator":{"login":"Floppy","id":3565,"avatar_url":"https://avatars.githubusercontent.com/u/3565?v=3","gravatar_id":"","url":"https://api.github.com/users/Floppy","html_url":"https://github.com/Floppy","followers_url":"https://api.github.com/users/Floppy/followers","following_url":"https://api.github.com/users/Floppy/following{/other_user}","gists_url":"https://api.github.com/users/Floppy/gists{/gist_id}","starred_url":"https://api.github.com/users/Floppy/starred{/owner}{/repo}","subscriptions_url":"https://api.github.com/users/Floppy/subscriptions","organizations_url":"https://api.github.com/users/Floppy/orgs","repos_url":"https://api.github.com/users/Floppy/repos","events_url":"https://api.github.com/users/Floppy/events{/privacy}","received_events_url":"https://api.github.com/users/Floppy/received_events","type":"User","site_admin":false}}'
+        change has been open for more than 90 days, and should be closed.","target_url":"https://votebot.openpolitics.org.uk/43","context":"votebot/time","created_at":"2016-07-26T12:53:06Z","updated_at":"2016-07-26T12:53:06Z","creator":{"login":"Floppy","id":3565,"avatar_url":"https://avatars.githubusercontent.com/u/3565?v=3","gravatar_id":"","url":"https://api.github.com/users/Floppy","html_url":"https://github.com/Floppy","followers_url":"https://api.github.com/users/Floppy/followers","following_url":"https://api.github.com/users/Floppy/following{/other_user}","gists_url":"https://api.github.com/users/Floppy/gists{/gist_id}","starred_url":"https://api.github.com/users/Floppy/starred{/owner}{/repo}","subscriptions_url":"https://api.github.com/users/Floppy/subscriptions","organizations_url":"https://api.github.com/users/Floppy/orgs","repos_url":"https://api.github.com/users/Floppy/repos","events_url":"https://api.github.com/users/Floppy/events{/privacy}","received_events_url":"https://api.github.com/users/Floppy/received_events","type":"User","site_admin":false}}'
     http_version: 
   recorded_at: Tue, 26 Jul 2016 12:53:06 GMT
 recorded_with: VCR 3.0.3

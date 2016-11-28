@@ -37,7 +37,7 @@ module VoteCounter
       end
       # Update github commit status
       Octokit.create_status(ENV['GITHUB_REPO'], sha, github_state,
-        target_url: "http://votebot.openpolitics.org.uk/proposals/#{number}",
+        target_url: "https://votebot.openpolitics.org.uk/proposals/#{number}",
         description: github_description,
         context: "votebot/votes")
       # Check age
@@ -55,7 +55,7 @@ module VoteCounter
       end
       # Update github commit status
       Octokit.create_status(ENV['GITHUB_REPO'], sha, github_state,
-        target_url: "http://votebot.openpolitics.org.uk/proposals/#{number}",
+        target_url: "https://votebot.openpolitics.org.uk/proposals/#{number}",
         description: github_description,
         context: "votebot/time")
     end

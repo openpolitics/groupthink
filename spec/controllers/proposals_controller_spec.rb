@@ -6,7 +6,7 @@ RSpec.describe ProposalsController, type: :controller do
   it "should show index page" do
     get :index
     expect(response).to be_ok
-    expect(response.body).to include "http://openpolitics.org.uk"
+    expect(response.body).to include "https://openpolitics.org.uk"
   end
 
   it "should show individual proposal page", :vcr do
