@@ -1,6 +1,10 @@
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/simplemde/latest/simplemde.min.css">
+<script src="https://cdn.jsdelivr.net/simplemde/latest/simplemde.min.js"></script>
+
+
 <div class='row'>
   <div class='col-md-8'>
-    <%= text_area_tag 'content', @content, style: 'width: 100%; height: 700px; font-family: monospace' %>
+    <%= text_area_tag 'content', @content, style: 'width: 100%; min-height: 700px; font-family: monospace' %>
   </div>
   <div class='col-md-4'>
     <small>
@@ -40,3 +44,12 @@
   </small>
   </div>
 </div>
+
+<script>
+var simplemde = new SimpleMDE({
+  hideIcons: ["heading", "image", "fullscreen", "side-by-side"],
+  showIcons: ["heading-2", "heading-3"],
+  status: false,
+  autofocus: true
+});
+</script>
