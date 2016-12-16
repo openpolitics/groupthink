@@ -1,22 +1,24 @@
-<div class='panel panel-success'>
-  <div class="panel-heading">
-    <%= fa_icon 'check-circle' %>
-    <%= t 'help.success_title' %>
-  </div>
-  <div class="panel-body">
-    <p>
-      <%= t 'help.success' %>
-    </p>
-    <% if @has_cla %>
-      <p>
-        <%= t :cla %>
-      </p>
-      <p>
-        <%= link_to "#{fa_icon('check')} #{t(:sign_cla)}".html_safe, @cla_url, class: 'btn btn-primary' %>
-      </p>
-    <% end %>
-  </div>
+<div class="alert alert-success">
+  <%= fa_icon 'check-circle' %>
+  <%= t 'help.success_title' %>
 </div>
 
-<%= link_to "#{fa_icon('globe')} #{t(:return)}".html_safe, @return_to, class: 'btn btn-primary' if @return_to %>
-<%= link_to "#{fa_icon('code-fork')} #{t(:open_pr)}".html_safe, @pr, class: 'btn btn-default' %>
+<div>
+  <p>
+    <%= t 'help.success' %>
+  </p>
+  <% if @has_cla %>
+    <p>
+      <%= t :cla %>
+    </p>
+    <p>
+      <%= link_to "#{fa_icon('check')} #{t(:sign_cla)}".html_safe, @cla_url, class: 'btn btn-primary' %>
+    </p>
+  <% end %>
+</div>
+
+<div>
+  <%= link_to "#{fa_icon('globe')} #{t(:return)}".html_safe, @return_to, class: 'btn btn-primary' if @return_to %>
+  <%= link_to "#{fa_icon('code-fork')} #{t(:view)}".html_safe, "/proposals/#{@pr}", class: 'btn btn-default' %>
+  <%= link_to "#{fa_icon('list')} #{t(:view_all)}".html_safe, "/proposals", class: 'btn btn-default' %>
+</div>
