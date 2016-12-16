@@ -21,7 +21,7 @@ module VoteCounter
       required_agrees = ENV["PASS_THRESHOLD"].to_i
       github_state = nil
       github_description = nil
-      votes = (agree.count * ENV["UPVOTE_WEIGHT"].to_i) + (abstain.count * ENV["ABSTAIN_WEIGHT"].to_i) + (disagree.count * NV["DOWNVOTE_WEIGHT"].to_i)
+      votes = (agree.count * ENV["UPVOTE_WEIGHT"].to_i) + (abstain.count * ENV["ABSTAIN_WEIGHT"].to_i) + (disagree.count * ENV["DOWNVOTE_WEIGHT"].to_i)
       if votes < ENV["BLOCK_THRESHOLD"].to_i
         state = "blocked"
         github_state = "failure"
