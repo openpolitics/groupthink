@@ -1,0 +1,15 @@
+<div class='jumbotron'>
+  <h1><%= t :site_title %></h1>
+  <% unless user_signed_in? %>
+    <p>
+      <%= t :signed_out_site_intro %>
+    </p>
+    <p>
+      <%= link_to "#{fa_icon 'github'} #{t(:sign_in)}".html_safe, user_github_omniauth_authorize_path, class: 'btn btn-primary btn-lg' %>
+    </p>
+  <% else %>
+    <p>
+      <%= t :signed_in_site_intro %>
+    </p>
+  <% end %>
+</div>

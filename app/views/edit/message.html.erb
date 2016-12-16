@@ -1,0 +1,31 @@
+<%= form_tag action: 'commit' do %>
+
+<div class='panel panel-primary'>
+  <div class="panel-heading">
+    <%= fa_icon 'question-circle' %>
+    <%= t 'help.summary' %>
+  </div>
+  <div class="panel-body">
+    <%= text_field_tag 'summary', '', style: 'width: 100%', maxlength: "100", placeholder: "write a short summary of your change here", required: true %>
+  </div>
+</div>
+
+<div class='panel panel-default'>
+  <div class="panel-heading">
+    <%= fa_icon 'question-circle' %>
+    <%= t 'help.description' %>
+  </div>
+  <div class="panel-body">
+    <%= text_area_tag 'description', '', style: 'width: 100%; height: 100px', placeholder: "write a more detailed explanation here if you want to" %>
+  </div>
+</div>
+
+<%= hidden_field_tag "filename", @filename %>
+<%= hidden_field_tag "owner", @owner %>
+<%= hidden_field_tag "repo", @repo %>
+<%= hidden_field_tag "branch", @branch %>
+<%= hidden_field_tag "content", @content %>
+<%= hidden_field_tag "lineendings", @lineendings %>
+<%= submit_tag t(:submit_changes), class: 'btn btn-primary'%>
+
+<% end %>

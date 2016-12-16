@@ -1,0 +1,25 @@
+<%= form_tag action: 'message' do %>
+
+<div class='panel panel-primary'>
+  <div class="panel-heading">
+    <%= fa_icon 'question-circle' %>
+    <%= t 'help.edit' %>
+  </div>
+  <div class="panel-body">
+    <%= case @format
+    when "csv"
+      render 'csv_editor' 
+    else
+      render 'text_editor'
+    end %>
+  </div>
+</div>
+
+<%= hidden_field_tag "filename", @filename %>
+<%= hidden_field_tag "owner", @owner %>
+<%= hidden_field_tag "repo", @repo %>
+<%= hidden_field_tag "branch", @branch %>
+<%= hidden_field_tag "lineendings", @lineendings %>
+<%= submit_tag t(:submit_changes), class: 'btn btn-primary'%>
+
+<% end %>

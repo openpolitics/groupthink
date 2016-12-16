@@ -1,0 +1,20 @@
+<div id='example' class="handsontable">
+</div>
+<script>
+  var data = Papa.parse("<%= escape_javascript(@content).html_safe %>").data;
+  var container = document.getElementById('example');
+
+  hot = new Handsontable(container, {
+    data: data,
+    minSpareRows: 1,
+    contextMenu: true,
+    afterChange: function (change, source) {
+      if (source == "edit") {
+        $('#content').val(Papa.unparse(data));
+      }
+    }
+  });
+  
+</script>
+
+<%= hidden_field_tag 'content', @content %>
