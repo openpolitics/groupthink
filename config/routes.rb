@@ -13,6 +13,14 @@ Rails.application.routes.draw do
   
   post 'webhook', to: 'proposals#webhook', as: :webhook
   
+  constraints(path: /[^\?]+/) do
+    get "/edit/:branch/*path" => "edit#edit", :format => false
+  end
+  post "/edit/message" => "edit#message"
+  post "/edit/commit" => "edit#commit"
+  get "/edit" => "edit#index"
+  
+  
   root "proposals#index"
   
 end

@@ -41,6 +41,8 @@ gem "omniauth-github"
 
 gem "font-awesome-rails"
 
+gem "memoist"
+
 # Postgres in production for Heroku
 group :production do
   gem "pg"
