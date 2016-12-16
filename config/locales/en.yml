@@ -36,4 +36,4 @@ en:
     summary: Write a short summary that describes what you changed. For instance, "Fixed spelling mistakes", or "Added a new section about ducks".
     description: If you want to, you can add a more detailed description that describes the background to your change, or explains to reviewers why it should be accepted.
     success_title: Thanks! Your change has been submitted.
-    success: Your change will now go into a queue to be reviewed before it's merged in. If you'd like to look at the queue on GitHub and see the comments on your submission, press the "View pull request" button.
+    success: Your change will now go into a queue to be reviewed before it's merged in. If you'd like to look at the queue, and see the votes and comments on your submission, press the "View all proposals" button.
