@@ -9,6 +9,8 @@
     <%= case @format
     when "csv"
       render 'csv_editor' 
+    when "md"
+      render 'markdown_editor' 
     else
       render 'text_editor'
     end %>
