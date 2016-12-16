@@ -1,20 +1,21 @@
 <%= form_tag action: 'message' do %>
 
-<div class='panel panel-primary'>
-  <div class="panel-heading">
-    <%= fa_icon 'question-circle' %>
-    <%= t 'help.edit' %>
-  </div>
-  <div class="panel-body">
-    <%= case @format
-    when "csv"
-      render 'csv_editor' 
-    when "md"
-      render 'markdown_editor' 
-    else
-      render 'text_editor'
-    end %>
-  </div>
+<h1>Suggest a change to <em><%= @filename %></em></h1>
+
+<div class="form-group alert alert-success">
+  <%= fa_icon 'question-circle' %>
+  <%= t 'help.edit' %>
+</div>
+
+<div class="form-group">
+  <%= case @format
+  when "csv"
+    render 'csv_editor' 
+  when "md"
+    render 'markdown_editor' 
+  else
+    render 'text_editor'
+  end %>
 </div>
 
 <%= hidden_field_tag "filename", @filename %>
@@ -22,6 +23,9 @@
 <%= hidden_field_tag "repo", @repo %>
 <%= hidden_field_tag "branch", @branch %>
 <%= hidden_field_tag "lineendings", @lineendings %>
-<%= submit_tag t(:submit_changes), class: 'btn btn-primary'%>
+
+<div class="form-group">
+  <%= submit_tag t(:submit_changes), class: 'btn btn-primary'%>
+</div>
 
 <% end %>
