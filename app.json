@@ -30,6 +30,24 @@
     },
     "TWITTER_CONSUMER_SECRET": {
       "required": true
+    },
+    "DOWNVOTE_WEIGHT": {
+      "required": true
+    },
+    "UPVOTE_WEIGHT": {
+      "required": true
+    },
+    "ABSTAIN_WEIGHT": {
+      "required": true
+    },
+    "MIN_AGE": {
+      "required": true
+    },
+    "MAX_AGE": {
+      "required": true
+    },
+    "PASS_THRESHOLD": {
+      "required": true
     }
   },
   "formation": {

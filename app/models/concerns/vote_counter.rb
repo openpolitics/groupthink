@@ -18,11 +18,11 @@ module VoteCounter
         state = "rejected"
       end
     else
-      required_agrees = 2
+      required_agrees = ENV["PASS_THRESHOLD"].to_i
       github_state = nil
       github_description = nil
-      votes = agree.count - abstain.count
-      if disagree.count > 0
+      votes = (agree.count * ENV["UPVOTE_WEIGHT"].to_i) + (abstain.count * ENV["ABSTAIN_WEIGHT"].to_i) + (disagree.count * NV["DOWNVOTE_WEIGHT"].to_i)
+      if votes < ENV["BLOCK_THRESHOLD"].to_i
         state = "blocked"
         github_state = "failure"
         github_description = "The change is blocked."
@@ -41,17 +41,17 @@ module VoteCounter
         description: github_description,
         context: "votebot/votes")
       # Check age
-      if age >= 90
+      if age >= ENV["MAX_AGE"].to_i
         state = "dead"
         github_state = "failure"
-        github_description = "The change has been open for more than 90 days, and should be closed."
-      elsif age >= 7
+        github_description = "The change has been open for more than #{ENV["MAX_AGE"]} days, and should be closed."
+      elsif age >= ENV["MIN_AGE"].to_i
         github_state = "success"
         github_description = "The change has been open long enough to be merged."
       else
         state = "agreed" if state == "passed"
         github_state = "pending"
-        github_description = "The change has not yet been open for 7 days."
+        github_description = "The change has not yet been open for #{ENV["MIN_AGE"]} days."
       end
       # Update github commit status
       Octokit.create_status(ENV['GITHUB_REPO'], sha, github_state,
