@@ -58,6 +58,7 @@ group :development, :test do
   gem "rspec-rails"
   gem "dotenv-rails"
   gem "database_cleaner"
+  gem "email_spec"
 end
 
 group :development do
