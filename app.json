@@ -5,49 +5,60 @@
   },
   "env": {
     "BUGSNAG_API_KEY": {
-      "required": true
+      "required": false,
+      "description": "API key for Bugsnag error reporting. Error reporting will not be enabled if API key is not present."
     },
     "GITHUB_OAUTH_TOKEN": {
-      "required": true
+      "required": true,
+      "description": "OAuth token for GitHub API access. Generate a token at https://github.com/settings/tokens."
     },
     "GITHUB_APP_ID": {
-      "required": true
+      "required": true,
+      "description": "App ID for GitHub OAuth login. Generate an app at https://github.com/settings/developers."
     },
     "GITHUB_APP_SECRET": {
-      "required": true
+      "required": true,
+      "description": "App secret for GitHub OAuth login. Generate an app at https://github.com/settings/developers."
     },
     "GITHUB_REPO": {
-      "required": true
-    },
-    "TWITTER_ACCESS_SECRET": {
-      "required": true
-    },
-    "TWITTER_ACCESS_TOKEN": {
-      "required": true
-    },
-    "TWITTER_CONSUMER_KEY": {
-      "required": true
-    },
-    "TWITTER_CONSUMER_SECRET": {
-      "required": true
+      "required": true,
+      "value": "username/repository",
+      "description": "The GitHub repository that this app is monitoring. In the format '{username}/{repository}'"
     },
     "DOWNVOTE_WEIGHT": {
-      "required": true
+      "required": true,
+      "value": "-10",
+      "description": "The weighting for downvotes. Normally a large negative value to make rejection of changes easier than adoption."
     },
     "UPVOTE_WEIGHT": {
-      "required": true
+      "required": true,
+      "value": "1",
+      "description": "The weighting for upvotes. Unlikely to be anything other than 1."
     },
     "ABSTAIN_WEIGHT": {
-      "required": true
+      "required": true,
+      "value": "-1",
+      "description": "The weighting for abstentions. Set to -1 to make abstentions require a balancing upvote, or set to 0 to remove their influence completely."
     },
     "MIN_AGE": {
-      "required": true
+      "required": true,
+      "value": "7",
+      "description": "How many days a proposal must be open for in order to be accepted."
     },
     "MAX_AGE": {
-      "required": true
+      "required": true,
+      "value": "90",
+      "description": "The longest (in days) a proposal can be open for in order to be accepted."
     },
     "PASS_THRESHOLD": {
-      "required": true
+      "required": true,
+      "value": "2",
+      "description": "How many weighted votes are required to pass?"
+    },
+    "BLOCK_THRESHOLD": {
+      "required": true,
+      "value": "-1",
+      "description": "Proposals with votes below this threshold will be considered 'blocked' when calculating status."
     }
   },
   "formation": {
@@ -57,8 +68,7 @@
   },
   "addons": [
     "heroku-postgresql",
-    "scheduler",
-    "redistogo"
+    "scheduler"
   ],
   "buildpacks": [
     {
