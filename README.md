@@ -15,11 +15,9 @@ This isn't a simple process, unfortunately, but we'll help you through as best w
 
 ### Set up a GitHub repository for your content
 
-You can use Votebot to edit any GitHub repository you like, but we've set up a template site using GitHub Pages and Jekyll to get you started. Hit "Fork" below to get a copy for yourself, ready to go:
+You can use Votebot to edit any GitHub repository you like, but we've set up a template site using GitHub Pages and Jekyll to get you started. 
 
-<!-- Place this tag where you want the button to render. -->
-<a class="github-button" href="https://github.com/openpolitics/template/fork" data-icon="octicon-repo-forked" data-style="mega" data-count-href="/openpolitics/template/network" data-count-api="/repos/openpolitics/template#forks_count" data-count-aria-label="# forks on GitHub" aria-label="Fork openpolitics/template on GitHub">Fork</a>
-<script async defer src="https://buttons.github.io/buttons.js"></script>
+[Click here to create your very own copy, ready to go.](https://github.com/openpolitics/template/fork)
 
 Then visit the cloned repository's settings page, and:
 
@@ -39,7 +37,7 @@ Keep hold of the generated token - you'll need it in a minute.
 
 ### Create a GitHub OAuth application
 
-Visit the [Developer applications page](https://github.com/settings/developers) on your GitHub account to set up user login via GitHub. Register a new application; in the homepage and callback URLs enter the URL of the application you are about to deploy. Yes, that's slightly tricky. It will be something like `https://your-unique-votebot-app-name.herokuapp.com`.
+Visit the [Developer applications page](https://github.com/settings/developers) on your GitHub account to set up user login via GitHub. Register a new application; in the homepage and callback URLs enter the URL of the application you are about to deploy. Yes, that's slightly tricky. It will be something like `https://your-unique-votebot-app-name.herokuapp.com`. Make up the `your-unique-votebot-app-name` part. The name of your project will probably do.
 
 Again, keep hold of the client ID and secret. You'll need them in the next step.
 
