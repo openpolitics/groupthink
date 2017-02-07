@@ -5,3 +5,8 @@ votebot
 =======
 
 An app which monitors manifesto PRs, and decides if consensus has been reached
+
+
+## Get your own!
+
+[![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy)
