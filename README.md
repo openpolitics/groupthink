@@ -3,17 +3,29 @@
 
 # Votebot
 
-An app which monitors manifesto PRs, and decides if consensus has been reached.
+A collaborative writing platform built on top of GitHub, originally designed for open policymaking and manifesto writing.
+
+It has two main functions:
+
+1. Provide a friendly interface to make changes (using pull requests) to GitHub-hosted Jekyll websites, using Markdown.
+
+2. Monitor discussion in those pull requests, and layer on a voting system to determine what should be merged in. Voting is done using special symbols in pull requests, which are counted by the app. Status is set using the GitHub commit status API.
+
+The system was originally implemented for the collaborative manifesto project at https://openpolitics.org.uk/manifesto. The canonical instance of this app for that project is https://votebot.openpolitics.org.uk
 
 ## Usage
 
+... to be written ...
+
 ### Voting rules
+
+... to be written ...
 
 ## Get your own!
 
-This isn't a simple process, unfortunately, but we'll help you through as best we can...
+If you want to run your own open democratic platform, you can! This isn't a simple process yet, unfortunately, but we'll help you through as best we can...
 
-Note that currently the style and headers of the deployed app will still match the [OpenPolitics Manifesto version](https://votebot.openpolitics.org.uk). A change for that will be coming soon.
+Note that currently the style and headers of the deployed app will still match the [OpenPolitics Manifesto version](https://votebot.openpolitics.org.uk). A [change for that](https://github.com/openpolitics/votebot/issues/42) will be coming soon.
 
 ### Set up a GitHub repository for your content
 
@@ -66,7 +78,7 @@ Leave the rest of the settings on default except for "which events would you lik
 * Issue comment
 * Pull request
 
-Save the webhook. It will probably complain with the test payload, but should work for the real thing. We'll fix this soon.
+Save the webhook. It will probably complain with the test payload, but should work for the real thing. [We'll fix this soon](https://github.com/openpolitics/votebot/issues/44). [We might even be able to automate it](https://github.com/openpolitics/votebot/issues/43).
 
 ### Configure the editor link on your site
 
