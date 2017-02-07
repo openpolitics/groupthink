@@ -2,7 +2,7 @@
   "name": "votebot",
   "description": "",
   "scripts": {
-    "postdeploy": "bundle exec rake db:setup"
+    "postdeploy": "bundle exec rake db:schema:load"
   },
   "env": {
     "BUGSNAG_API_KEY": {
