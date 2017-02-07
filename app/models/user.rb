@@ -16,7 +16,7 @@ class User < ApplicationRecord
     # Find by oauth details, or if not available, by login only as some may have been created before.
     u = find_by(provider: auth.provider, uid: auth.uid) || find_by(login: auth.extra.raw_info.login)
     if u.nil?
-      u.create(provider: auth.provider, uid: auth.uid, login: auth.extra.raw_info.login)
+      u = User.create(provider: auth.provider, uid: auth.uid, login: auth.extra.raw_info.login)
     end
     u
   end
