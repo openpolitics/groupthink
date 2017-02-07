@@ -13,6 +13,8 @@ An app which monitors manifesto PRs, and decides if consensus has been reached.
 
 This isn't a simple process, unfortunately, but we'll help you through as best we can...
 
+Note that currently the style and headers of the deployed app will still match the [OpenPolitics Manifesto version](https://votebot.openpolitics.org.uk). A change for that will be coming soon.
+
 ### Set up a GitHub repository for your content
 
 You can use Votebot to edit any GitHub repository you like, but we've set up a template site using GitHub Pages and Jekyll to get you started. 
