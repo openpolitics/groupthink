@@ -27,7 +27,7 @@ class Proposal < ApplicationRecord
 
   def self.create_from_github!(number)
     pr = Proposal.find_or_create_by!(number: number)
-    pr.count_votes!
+    pr.count_votes! unless pr.closed?
     pr
   end
   
