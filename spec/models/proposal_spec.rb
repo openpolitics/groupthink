@@ -4,7 +4,7 @@ RSpec.describe Proposal, :vcr do
 
   before :each do
     # Stub out posting of instructions for now
-    allow_any_instance_of(Proposal).to receive(:post_instructions)
+    expect_any_instance_of(Proposal).to receive(:post_instructions).once.and_return(nil)
   end
 
   it "should update proposals on demand" do
