@@ -10,6 +10,8 @@ RSpec.describe UsersController, type: :controller do
   end
 
   it "should show individual user page", :vcr do
+    # Stub out posting of instructions for now
+    allow_any_instance_of(Proposal).to receive(:post_instructions)
     # Load a user
     User.create(login: 'Floppy')
     # Load a few proposals

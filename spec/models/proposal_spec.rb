@@ -2,6 +2,11 @@ require 'rails_helper'
 
 RSpec.describe Proposal, :vcr do
 
+  before :each do
+    # Stub out posting of instructions for now
+    allow_any_instance_of(Proposal).to receive(:post_instructions)
+  end
+
   it "should update proposals on demand" do
     Timecop.freeze(2015,5,30)
     pr = Proposal.create_from_github!(356)
