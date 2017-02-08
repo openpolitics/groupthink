@@ -2,11 +2,6 @@ require 'rails_helper'
 
 RSpec.describe Proposal, :vcr do
 
-  before :each do
-    # Stub out posting of instructions for now
-    expect_any_instance_of(Proposal).to receive(:post_instructions).once.and_return(nil)
-  end
-
   it "should update proposals on demand" do
     Timecop.freeze(2015,5,30)
     pr = Proposal.create_from_github!(356)
@@ -28,6 +23,11 @@ RSpec.describe Proposal, :vcr do
   it "should handle both thumbsup and +1 emoticons as upvotes" do
     pr = Proposal.create_from_github!(356)
     expect(pr.agree.map{|x| x.user.login}.sort).to eq ["Floppy", "philipjohn"]
+  end
+
+  it "should handle emoji upvotes" do
+    pr = Proposal.create_from_github!(433)
+    expect(pr.agree.map{|x| x.user.login}.sort).to eq ["Floppy"]
   end
 
   it "should ignore votes from proposer" do
