@@ -100,7 +100,7 @@ module VoteCounter
   def post_instructions
     Octokit.add_comment(ENV['GITHUB_REPO'], number, <<-EOF)
 <!-- votebot instructions -->
-This proposal is open for discussion and voting. If you are a [contributor](https://votebot.openpolitics.org.uk/proposals/) to this repository (and not the proposer), you may vote on whether or not it is accepted. 
+This proposal is open for discussion and voting. If you are a [contributor](https://votebot.openpolitics.org.uk/users/) to this repository (and not the proposer), you may vote on whether or not it is accepted. 
 
 ## How to vote
 Vote by entering one of the following symbols in a comment on this pull request. Only your last vote will be counted, and you may change your vote at any time until the change is accepted or closed.
