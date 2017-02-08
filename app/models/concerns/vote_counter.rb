@@ -6,7 +6,8 @@ module VoteCounter
   end
   
   def count_votes!
-    process_comments
+    instructions_found = process_comments
+    post_instructions unless instructions_found
     update_state!
   end
     
@@ -64,6 +65,7 @@ module VoteCounter
   end
 
   def process_comments
+    instructions_found = false
     comments = Octokit.issue_comments(ENV['GITHUB_REPO'], number)
     if sha
       commit = Octokit.pull_commits(ENV['GITHUB_REPO'], number).find{|x| x.sha == sha}
@@ -77,6 +79,8 @@ module VoteCounter
         interaction = interactions.find_or_create_by!(user: user)
         if user.contributor
           case comment.body
+          when /<!-- votebot instructions -->/
+            instructions_found = true
           when /:thumbsup:|:\+1:|👍/
             next if comment.created_at < cutoff
             interaction.agree!
@@ -88,6 +92,31 @@ module VoteCounter
         end
       end
     end
+    instructions_found
+  end
+
+  def post_instructions
+    Octokit.add_comment(ENV['GITHUB_REPO'], number, <<-EOF)
+<!-- votebot instructions -->
+This proposal is open for discussion and voting. If you are a [contributor](https://votebot.openpolitics.org.uk/proposals/) to this repository (and not the proposer), you may vote on whether or not it is accepted. 
+
+## How to vote
+Vote by entering one of the following symbols in a comment on this pull request. Only your last vote will be counted, and you may change your vote at any time until the change is accepted or closed.
+
+|vote|symbol|type this|points|
+|--|--|--|--|
+|Agree|:thumbsup:|`:thumbsup:`|#{ENV["UPVOTE_WEIGHT"]}|
+|Abstain|:hand:|`:hand:`|#{ENV["ABSTAIN_WEIGHT"]}|
+|Block|:thumbsdown:|`:thumbsdown:`|#{ENV["DOWNVOTE_WEIGHT"]}|
+
+Proposals will be accepted and merged once they have a total of #{ENV["PASS_THRESHOLD"]} points when all votes are counted. Votes will be open for a minimum of #{ENV["MIN_AGE"]} days, but will be closed if the proposal is not accepted after #{ENV["MAX_AGE"]}.
+
+Votes are counted [automatically here](https://votebot.openpolitics.org.uk/proposals/#{number}), and results are set in the merge status checks below.
+
+## Changes
+
+If the proposer makes a change to the proposal, no votes cast before that change will be counted.
+EOF
   end
 
 end
