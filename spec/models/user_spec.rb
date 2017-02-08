@@ -1,3 +1,5 @@
+require 'rails_helper'
+
 RSpec.describe User, :vcr do
 
   it "should load user data from github" do

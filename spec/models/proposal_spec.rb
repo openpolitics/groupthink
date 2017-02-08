@@ -1,3 +1,5 @@
+require 'rails_helper'
+
 RSpec.describe Proposal, :vcr do
 
   it "should update proposals on demand" do
