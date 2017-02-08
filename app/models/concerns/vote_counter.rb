@@ -74,7 +74,7 @@ module VoteCounter
       cutoff = DateTime.new(1970)
     end
     comments.each do |comment|
-      if comment.body =~ "<!-- votebot instructions -->"
+      if comment.body =~ /<!-- votebot instructions -->/
         instructions_found = true
         next
       end
