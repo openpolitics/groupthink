@@ -7,7 +7,7 @@ module VoteCounter
   
   def count_votes!
     instructions_found = process_comments
-    post_instructions unless instructions_found
+    post_instructions if !instructions_found && github_pr.state != "closed"
     update_state!
   end
     
