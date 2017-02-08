@@ -74,13 +74,15 @@ module VoteCounter
       cutoff = DateTime.new(1970)
     end
     comments.each do |comment|
+      if comment.body =~ "<!-- votebot instructions -->"
+        instructions_found = true
+        next
+      end
       user = User.find_or_create_by(login: comment.user.login)
       if user != proposer
         interaction = interactions.find_or_create_by!(user: user)
         if user.contributor
           case comment.body
-          when /<!-- votebot instructions -->/
-            instructions_found = true
           when /:thumbsup:|:\+1:|👍/
             next if comment.created_at < cutoff
             interaction.agree!
