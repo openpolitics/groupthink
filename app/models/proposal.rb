@@ -75,4 +75,7 @@ class Proposal < ApplicationRecord
     self.where(state: %w(waiting agreed passed blocked dead))
   end
   
+  def url
+    "https://github.com/#{ENV['GITHUB_REPO']}/pull/#{@proposal.number}"
+  
 end

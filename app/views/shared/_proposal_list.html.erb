@@ -19,7 +19,7 @@
         </span>
       </td>
       <td><a href='/proposals/<%= proposal.number %>'><%= proposal.title %></a></td> 
-      <td class="text-center hidden-xs"><a href='https://github.com/openpolitics/manifesto/pull/<%= proposal.number %>'><i class='fa fa-github'></i></a></td>
+      <td class="text-center hidden-xs"><a href='<%= proposal.url %>'><i class='fa fa-github'></i></a></td>
       <td class="text-center hidden-xs"><%= proposal.participants.count %></td>
       <td class="text-center"><%= proposal.age %>d</td>
       <td class="text-center"><%= proposal.agree.count %></td>

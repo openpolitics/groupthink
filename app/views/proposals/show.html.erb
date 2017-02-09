@@ -3,7 +3,7 @@
   <li class="active">#<%= @proposal.number %></li>
 </ol>
 
-<h1><%= @proposal.title %> <a href='https://github.com/openpolitics/manifesto/pull/<%= @proposal.number %>'><i class='fa fa-github'></i></a></h1>
+<h1><%= @proposal.title %> <a href='<%= @proposal.url %>'><i class='fa fa-github'></i></a></h1>
 
 <div class='row'>
   <div class='col-md-12'>
@@ -20,7 +20,7 @@
   <p>
     This page is currently just a utility page for showing a summary of voting 
     activity. To read change details, comment, or vote, please 
-    <a href='https://github.com/openpolitics/manifesto/pull/<%= @proposal.number %>'>
+    <a href='<%= @proposal.url %>'>
       visit the GitHub page for this proposal.
     </a>
   </p>
