@@ -77,5 +77,6 @@ class Proposal < ApplicationRecord
   
   def url
     "https://github.com/#{ENV['GITHUB_REPO']}/pull/#{@proposal.number}"
+  end
   
 end
