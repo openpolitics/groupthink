@@ -26,6 +26,16 @@
       "value": "username/repository",
       "description": "The GitHub repository that this app is monitoring. In the format '{username}/{repository}'"
     },
+    "SITE_URL": {
+      "required": true,
+      "value": "https://your-unique-votebot-app-name.herokuapp.com",
+      "description": "The URL for this app. Unless you're setting up a CNAME, it'll be based on the app name you entered above."
+    },
+    "EMAIL_DOMAIN": {
+      "required": true,
+      "value": "example.com",
+      "description": "Which domain should emails look like they come from?"
+    },
     "DOWNVOTE_WEIGHT": {
       "required": true,
       "value": "-10",

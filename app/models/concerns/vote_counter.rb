@@ -38,7 +38,7 @@ module VoteCounter
       end
       # Update github commit status
       Octokit.create_status(ENV['GITHUB_REPO'], sha, github_state,
-        target_url: "https://votebot.openpolitics.org.uk/proposals/#{number}",
+        target_url: "#{ENV['SITE_URL']}/proposals/#{number}",
         description: github_description,
         context: "votebot/votes")
       # Check age
@@ -56,7 +56,7 @@ module VoteCounter
       end
       # Update github commit status
       Octokit.create_status(ENV['GITHUB_REPO'], sha, github_state,
-        target_url: "https://votebot.openpolitics.org.uk/proposals/#{number}",
+        target_url: "#{ENV['SITE_URL']}/proposals/#{number}",
         description: github_description,
         context: "votebot/time")
     end
@@ -100,7 +100,7 @@ module VoteCounter
   def post_instructions
     Octokit.add_comment(ENV['GITHUB_REPO'], number, <<-EOF)
 <!-- votebot instructions -->
-This proposal is open for discussion and voting. If you are a [contributor](https://votebot.openpolitics.org.uk/users/) to this repository (and not the proposer), you may vote on whether or not it is accepted. 
+This proposal is open for discussion and voting. If you are a [contributor](#{ENV['SITE_URL']}/users/) to this repository (and not the proposer), you may vote on whether or not it is accepted. 
 
 ## How to vote
 Vote by entering one of the following symbols in a comment on this pull request. Only your last vote will be counted, and you may change your vote at any time until the change is accepted or closed.
@@ -113,7 +113,7 @@ Vote by entering one of the following symbols in a comment on this pull request.
 
 Proposals will be accepted and merged once they have a total of #{ENV["PASS_THRESHOLD"]} points when all votes are counted. Votes will be open for a minimum of #{ENV["MIN_AGE"]} days, but will be closed if the proposal is not accepted after #{ENV["MAX_AGE"]}.
 
-Votes are counted [automatically here](https://votebot.openpolitics.org.uk/proposals/#{number}), and results are set in the merge status checks below.
+Votes are counted [automatically here](#{ENV['SITE_URL']}/proposals/#{number}), and results are set in the merge status checks below.
 
 ## Changes
 
