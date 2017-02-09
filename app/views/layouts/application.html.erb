@@ -7,8 +7,8 @@
     <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
-    <link type="image/png" sizes="64x64" href="/assets/logo64.png" rel="icon"></link>
-    <link sizes="180x180" href="/assets/apple-touch-icon.png" rel="apple-touch-icon"></link>
+    <%= favicon_link_tag 'logo64.png', type: 'image/png' %>
+    <%= favicon_link_tag 'apple-touch-icon.png', rel: 'apple-touch-icon', type: 'image/png' %>
     <style>
        body {
          padding-top: 50px;
@@ -26,7 +26,7 @@
               <span class="icon-bar"></span>
             </button>
             <a class="navbar-brand" href="https://openpolitics.org.uk/index.html">
-              <img src="/assets/logo64_inverted.png" alt="logo" height="20" style="vertical-align: text-bottom; display: inline-block">&nbsp;OpenPolitics
+              <%= image_tag "logo64_inverted.png", alt: "logo", height: "20", style: "vertical-align: text-bottom; display: inline-block" %>&nbsp;OpenPolitics
             </a>
           </div>
           <div class="collapse navbar-collapse">
