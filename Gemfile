@@ -59,6 +59,7 @@ group :development, :test do
   gem "dotenv-rails"
   gem "database_cleaner"
   gem "email_spec"
+  gem "factory_girl_rails"
 end
 
 group :development do
