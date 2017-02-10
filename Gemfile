@@ -60,6 +60,7 @@ group :development, :test do
   gem "database_cleaner"
   gem "email_spec"
   gem "factory_girl_rails"
+  gem "faker"
 end
 
 group :development do
