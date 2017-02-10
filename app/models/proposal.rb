@@ -11,9 +11,7 @@ class Proposal < ApplicationRecord
   validates :title, presence: true
   validates :proposer, presence: true
 
-  before_validation(on: :create) do 
-    load_from_github
-  end
+  before_validation :load_from_github, on: :create
 
   def self.recreate_all_from_github!
     Rails.logger.info "Removing all proposals"

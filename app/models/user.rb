@@ -8,9 +8,7 @@ class User < ApplicationRecord
   validates :login, presence: true, uniqueness: true
   validates :avatar_url, presence: true
   
-  before_validation(on: :create) do 
-    load_from_github
-  end
+  before_validation :load_from_github, on: :create
 
   def self.from_omniauth(auth)
     # Find by oauth details, or if not available, by login only as some may have been created before.
