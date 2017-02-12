@@ -8,8 +8,14 @@ FactoryGirl.define do
     opened_at { Time.now }
 
     # Don't run load_from_github callback when creating from factory, but put it back after
-    after(:build) { |x| x.class.skip_callback(:validation, :before, :load_from_github) }
-    after(:create) { |x| x.class.set_callback(:validation, :before, :load_from_github, on: :create)}
+    after(:build) do |x| 
+      x.class.skip_callback(:validation, :before, :load_from_github) 
+      x.class.skip_callback(:create, :after, :count_votes!) 
+    end
+    after(:create) do |x| 
+      x.class.set_callback(:create, :after, :count_votes!)
+      x.class.set_callback(:validation, :before, :load_from_github, on: :create)
+    end
   end
 
 end

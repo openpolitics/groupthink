@@ -12,23 +12,23 @@ class Proposal < ApplicationRecord
   validates :proposer, presence: true
 
   before_validation :load_from_github, on: :create
+  after_create :count_votes!
 
-  def self.recreate_all_from_github!
-    Rails.logger.info "Removing all proposals"
-    Proposal.delete_all
-    Rails.logger.info "Loading proposals"
+  def self.update_all_from_github!
+    Rails.logger.info "Updating proposals"
     Octokit.pull_requests(ENV['GITHUB_REPO'], state: "all").each do |pr|
       Rails.logger.info " - #{pr["number"]}: #{pr["title"]}"
-      create_from_github!(pr["number"])
+      pr = Proposal.find(number: pr["number"])
+      pr.update_from_github!
     end
   end
 
-  def self.create_from_github!(number)
-    pr = Proposal.find_or_create_by!(number: number)
-    pr.count_votes! unless pr.closed?
-    pr
+  def update_from_github!
+    load_from_github
+    count_votes! unless closed?
+    save!
   end
-  
+
   def github_pr
     @github_pr ||= Octokit.pull_request(ENV['GITHUB_REPO'], number)
   end
