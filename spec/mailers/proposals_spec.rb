@@ -10,7 +10,7 @@ RSpec.describe ProposalsMailer, type: :mailer do
   
     it "renders the headers" do
       expect(mail.to).to eq(["contributor@example.com"])
-      expect(mail.from).to eq(["no-reply@openpolitics.org.uk"])
+      expect(mail.from).to eq(["no-reply@#{ENV["EMAIL_DOMAIN"]}"])
       expect(mail.subject).to eq("OpenPolitics Manifesto: new proposal ready for your vote")
     end
   
