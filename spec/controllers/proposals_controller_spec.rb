@@ -15,7 +15,7 @@ RSpec.describe ProposalsController, type: :controller do
     # Load a user
     User.create(login: 'Floppy')
     # Load a proposal
-    Proposal.create_from_github!(405) # proposed by this user
+    Proposal.create(number: 405) # proposed by this user
     # Test show page
     get :show, params: {id: 405}
     expect(response).to be_ok

@@ -75,8 +75,19 @@ GEM
     dotenv-rails (2.2.0)
       dotenv (= 2.2.0)
       railties (>= 3.2, < 5.1)
+    email_spec (2.1.0)
+      htmlentities (~> 4.3.3)
+      launchy (~> 2.1)
+      mail (~> 2.6.3)
     erubis (2.7.0)
     execjs (2.7.0)
+    factory_girl (4.8.0)
+      activesupport (>= 3.0.0)
+    factory_girl_rails (4.8.0)
+      factory_girl (~> 4.8.0)
+      railties (>= 3.0.0)
+    faker (1.7.2)
+      i18n (~> 0.5)
     faraday (0.10.1)
       multipart-post (>= 1.2, < 3)
     ffi (1.9.17)
@@ -86,6 +97,7 @@ GEM
       activesupport (>= 4.1.0)
     hashdiff (0.3.2)
     hashie (3.5.1)
+    htmlentities (4.3.4)
     i18n (0.8.0)
     jbuilder (2.6.1)
       activesupport (>= 3.0.0, < 5.1)
@@ -96,6 +108,10 @@ GEM
       thor (>= 0.14, < 2.0)
     json (2.0.3)
     jwt (1.5.6)
+    launchy (2.4.3)
+      addressable (~> 2.3)
+    letter_opener (1.4.1)
+      launchy (~> 2.2)
     listen (3.1.5)
       rb-fsevent (~> 0.9, >= 0.9.4)
       rb-inotify (~> 0.9, >= 0.9.7)
@@ -259,9 +275,13 @@ DEPENDENCIES
   database_cleaner
   devise
   dotenv-rails
+  email_spec
+  factory_girl_rails
+  faker
   font-awesome-rails
   jbuilder (~> 2.5)
   jquery-rails
+  letter_opener
   listen (~> 3.0)
   memoist
   octokit (~> 4.0)

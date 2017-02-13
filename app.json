@@ -70,6 +70,21 @@
       "required": true,
       "value": "-1",
       "description": "Proposals with votes below this threshold will be considered 'blocked' when calculating status."
+    },
+    "SMTP_SERVER": {
+      "required": true,
+      "value": "smtp.sendgrid.net",
+      "description": "The name of your SMTP server, for sending mail"
+    },
+    "SMTP_USERNAME": {
+      "required": true,
+      "value": "username",
+      "description": "The login username for your SMTP server, for sending mail"
+    },
+    "SMTP_PASSWORD": {
+      "required": true,
+      "value": "password",
+      "description": "The password for your SMTP server, for sending mail"
     }
   },
   "formation": {

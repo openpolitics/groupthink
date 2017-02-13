@@ -44,16 +44,16 @@ class ProposalsController < ApplicationController
   def on_issue_comment_created(json)
     issue = json['issue']
     if issue['state'] == 'open' && issue['pull_request']
-      Proposal.create_from_github!(issue['number'])
+      Proposal.find_by(number: issue['number']).try(:update_from_github!)
     end
   end
 
   def on_pull_request_opened(json)
-    Proposal.create_from_github!(json['number'])
+    proposal = Proposal.create(number: json['number'])
   end
   
   def on_pull_request_closed(json)
-    Proposal.find_or_create_by(number: json['number']).try(:close!)
+    Proposal.find_by(number: json['number']).try(:close!)
   end
   
 end
