@@ -57,7 +57,7 @@ class EditController < ApplicationController
   end
 
   def github
-    @github = Octokit::Client.new(:access_token => session[:github_token])
+    @github ||= Octokit::Client.new(:access_token => session[:github_token])
   end
 
   def original_repo_path
