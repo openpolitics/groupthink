@@ -27,7 +27,7 @@ class EditController < ApplicationController
       @pr = open_pr(new_branch, @branch, @summary, @description)
     else
       new_branch = commit_file(user_repo_path, @filename, @content, @summary)
-      @pr = open_pr("#{@current_user.username}:#{new_branch}", @branch, @summary, @description)
+      @pr = open_pr("#{@current_user.login}:#{new_branch}", @branch, @summary, @description)
     end
     # Check for CLA
     @cla_url = "https://www.clahub.com/agreements/#{original_repo_path}"
@@ -66,7 +66,7 @@ class EditController < ApplicationController
   
   def user_repo_path
     repo_name = ENV['GITHUB_REPO'].split("/").last
-    "#{current_user.username}/#{repo_name}"
+    "#{current_user.login}/#{repo_name}"
   end
   
   def branch
