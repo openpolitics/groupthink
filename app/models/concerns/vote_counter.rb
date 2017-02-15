@@ -117,7 +117,7 @@ Votes are counted [automatically here](#{ENV['SITE_URL']}/proposals/#{number}), 
 
 ## Changes
 
-If the proposer makes a change to the proposal, no votes cast before that change will be counted.
+@#{proposer.login}, if you want to make further changes to this proposal, you can do so by [clicking on the pencil icons here](https://github.com/#{ENV['GITHUB_REPO']}/pull/#{number}/files). If a change is made to the proposal, no votes cast before that change will be counted, and votes must be recast.
 EOF
   end
 
