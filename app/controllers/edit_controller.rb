@@ -22,13 +22,21 @@ class EditController < ApplicationController
   def commit
     # Fix line endings
     @content = convert_line_endings(@content, @lineendings)
-    if github.repository(original_repo_path).permissions.push
-      new_branch = commit_file(original_repo_path, @filename, @content, @summary)
-      @pr = open_pr(new_branch, @branch, @summary, @description)
-    else
-      new_branch = commit_file(user_repo_path, @filename, @content, @summary)
-      @pr = open_pr("#{@current_user.login}:#{new_branch}", @branch, @summary, @description)
-    end
+    # Do we need to work in a fork?
+    forked = !github.repository(original_repo_path).permissions.push
+    repo_path = forked ? user_repo_path : original_repo_path
+    # Get the SHA of the edited branch - this is the head we want to add to
+    base_sha = github.tree(original_repo_path, @branch, :recursive => true).sha
+    # What shall we call our new branch?
+    branch_name = DateTime.now.to_s(:number)
+    # Update fork if appropriate by making a new branch from the upstream base SHA
+    # We do this even if not forking, as there's no harm in doing so
+    create_branch(repo_path, branch_name, base_sha)
+    # Commit the file on our new branch
+    new_branch = commit_file(repo_path, @filename, @content, @summary, base_sha, branch_name)
+    # open PR
+    pull_from = forked ? "#{@current_user.login}:#{new_branch}" : branch_name
+    @pr = open_pr(pull_from, @branch, @summary, @description)
     # Check for CLA
     @cla_url = "https://www.clahub.com/agreements/#{original_repo_path}"
     r = Faraday.get @cla_url
@@ -107,14 +115,13 @@ class EditController < ApplicationController
     github.create_blob repo, content, "utf-8"
   end
 
-  def add_blob_to_tree(repo, sha, filename)
-    tree = tree repo, @branch
+  def add_blob_to_tree(repo, blob_sha, filename, base_sha)
     new_tree = github.create_tree repo, [{
       path: filename,
       mode: "100644",
       type: "blob",
-      sha: sha
-    }], base_tree: tree.sha
+      sha: blob_sha
+    }], base_tree: base_sha
     new_tree.sha
   end
 
@@ -123,9 +130,8 @@ class EditController < ApplicationController
     Hash[blobs.map{|x| [x[0], blob_content(repo, x[1])]}]
   end
 
-  def commit_sha(repo, sha, message)
-    parent = latest_commit(repo, @branch)
-    commit = github.create_commit repo, message, sha, [parent]
+  def commit_sha(repo, sha, message, parent_sha)
+    commit = github.create_commit repo, message, sha, parent_sha
     commit.sha
   end
   
@@ -134,16 +140,21 @@ class EditController < ApplicationController
     branch.ref
   end
 
+  def update_branch(repo, name, sha)
+    branch = github.update_reference repo, "heads/#{name}", sha
+    branch.ref
+  end
+
   def open_pr(head, base, title, description)
     pr = github.create_pull_request original_repo_path, base, head, title, description
     pr.number
   end
   
-  def commit_file(repo, name, content, message)    
+  def commit_file(repo, name, content, message, base_sha, branch_name)    
     blob_sha = create_blob(repo, content)
-    tree_sha = add_blob_to_tree(repo, blob_sha, name)
-    commit_sha = commit_sha(repo, tree_sha, message)
-    create_branch(repo, DateTime.now.to_s(:number), commit_sha)
+    tree_sha = add_blob_to_tree(repo, blob_sha, name, base_sha)
+    commit_sha = commit_sha(repo, tree_sha, message, base_sha)
+    update_branch(repo, branch_name, commit_sha)
   end
 
   def detect_line_endings(str)
