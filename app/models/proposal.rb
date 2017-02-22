@@ -81,7 +81,7 @@ class Proposal < ApplicationRecord
   def notify_voters
     # Notify users that there is a new proposal to vote on
     User.where.not(email: nil).where(notify_new: true, contributor: true).all.each do |user|
-      ProposalsMailer.new_proposal(user, self) unless user == proposer
+      ProposalsMailer.new_proposal(user, self).deliver_now unless user == proposer
     end
   end
   
