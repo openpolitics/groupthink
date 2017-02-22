@@ -58,11 +58,17 @@ RSpec.describe Proposal, :vcr do
       @no_notifications = create :user, contributor: true, notify_new: false
       @participant = create :user, contributor: false, notify_new: true
     end
+
+    before :each do
+      @mail = double("mail")
+      allow(@mail).to receive(:deliver_now)
+    end
   
     it "should go to voters" do
       expect(ProposalsMailer).to receive(:new_proposal).once do |user, proposal|
         expect(user).to eql @voter
         expect(proposal).to be_valid
+        @mail
       end
       proposal = create :proposal, proposer: @proposer
     end
@@ -71,6 +77,7 @@ RSpec.describe Proposal, :vcr do
       expect(ProposalsMailer).to receive(:new_proposal).at_least(:once) do |user, proposal|
         expect(user).not_to eql @proposer
         expect(proposal).to be_valid
+        @mail
       end
       proposal = create :proposal, proposer: @proposer
     end
@@ -79,6 +86,7 @@ RSpec.describe Proposal, :vcr do
       expect(ProposalsMailer).to receive(:new_proposal).at_least(:once) do |user, proposal|
         expect(user).not_to eql @no_notifications
         expect(proposal).to be_valid
+        @mail
       end
       proposal = create :proposal, proposer: @proposer
     end
@@ -87,6 +95,7 @@ RSpec.describe Proposal, :vcr do
       expect(ProposalsMailer).to receive(:new_proposal).at_least(:once) do |user, proposal|
         expect(user).not_to eql @participant
         expect(proposal).to be_valid
+        @mail
       end
       proposal = create :proposal, proposer: @proposer
     end
