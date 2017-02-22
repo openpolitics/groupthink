@@ -93,6 +93,7 @@ GEM
     ffi (1.9.17)
     font-awesome-rails (4.7.0.1)
       railties (>= 3.2, < 5.1)
+    github-markup (1.4.1)
     globalid (0.3.7)
       activesupport (>= 4.1.0)
     hashdiff (0.3.2)
@@ -184,8 +185,10 @@ GEM
     rb-fsevent (0.9.8)
     rb-inotify (0.9.8)
       ffi (>= 0.5.0)
+    redcarpet (3.4.0)
     responders (2.3.0)
       railties (>= 4.2.0, < 5.1)
+    rinku (2.0.2)
     rspec-core (3.5.4)
       rspec-support (~> 3.5.0)
     rspec-expectations (3.5.0)
@@ -278,6 +281,7 @@ DEPENDENCIES
   factory_girl_rails
   faker
   font-awesome-rails
+  github-markup
   jbuilder (~> 2.5)
   jquery-rails
   letter_opener
@@ -288,6 +292,8 @@ DEPENDENCIES
   pg
   puma (~> 3.0)
   rails (~> 5.0)
+  redcarpet
+  rinku
   rspec-rails
   sass-rails (~> 5.0)
   spring
