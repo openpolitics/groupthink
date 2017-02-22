@@ -45,14 +45,14 @@ module VoteCounter
       if age >= ENV["MAX_AGE"].to_i
         state = "dead"
         github_state = "failure"
-        github_description = "The change has been open for more than #{ENV["MAX_AGE"]} days, and should be closed."
+        github_description = "The change has been open for more than #{ENV["MAX_AGE"]} days, and should be closed (age: #{age}d)."
       elsif age >= ENV["MIN_AGE"].to_i
         github_state = "success"
-        github_description = "The change has been open long enough to be merged."
+        github_description = "The change has been open long enough to be merged (age: #{age}d)."
       else
         state = "agreed" if state == "passed"
         github_state = "pending"
-        github_description = "The change has not yet been open for #{ENV["MIN_AGE"]} days."
+        github_description = "The change has not yet been open for #{ENV["MIN_AGE"]} days (age: #{age}d)."
       end
       # Update github commit status
       Octokit.create_status(ENV['GITHUB_REPO'], sha, github_state,
