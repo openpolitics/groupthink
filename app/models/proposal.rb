@@ -19,7 +19,7 @@ class Proposal < ApplicationRecord
     Rails.logger.info "Updating proposals"
     Octokit.pull_requests(ENV['GITHUB_REPO'], state: "all").each do |pr|
       Rails.logger.info " - #{pr["number"]}: #{pr["title"]}"
-      pr = Proposal.find(number: pr["number"])
+      pr = Proposal.find_by_number(pr["number"].to_i)
       pr.update_from_github!
     end
   end
