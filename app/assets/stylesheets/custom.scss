@@ -38,6 +38,7 @@ div.participants .panel-body {
 img.user {
   opacity: 0.5;
   margin: 5px;
+  height: 48px;
 }
 
 img.contributor {
@@ -49,8 +50,4 @@ img.contributor {
     height: 20px;
     margin: 0px;
   }
-}
-
-div.comment img.user {
-  height: 48px;
 }
