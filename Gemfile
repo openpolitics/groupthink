@@ -41,6 +41,10 @@ gem "font-awesome-rails"
 
 gem "memoist"
 
+gem 'github-markup', require: 'github/markup'
+gem 'redcarpet'
+gem 'rinku', require: 'rails_rinku'
+
 # Postgres in production for Heroku
 group :production do
   gem "pg"

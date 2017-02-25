@@ -3,32 +3,99 @@
   <li class="active">#<%= @proposal.number %></li>
 </ol>
 
-<h1><%= @proposal.title %> <a href='<%= @proposal.url %>'><i class='fa fa-github'></i></a></h1>
+<h1>
+  
+  <%= @proposal.title %>
+  <a href='<%= @proposal.url %>'>
+    <%= fa_icon 'github' %>
+  </a>
+</h1>
 
-<div class='row'>
-  <div class='col-md-12'>
-    <p>
-      by <a href='/users/<%= @proposal.proposer %>'><%= @proposal.proposer.login %></a>
-    </p>
-    <h2><span class='label label-<%= row_class(@proposal) %>'><%= @proposal.state.capitalize %></span></h2>
+<div class='row' style='text-align: center'>
+  <div class='col-md-3 user'>
+    Proposer
+    <br/>
+    <%= render partial: 'shared/person', locals: { person: @proposal.proposer } %>
+  </div>
+  <div class='col-md-3'>
+    State
+    <br/>
+    <h2>
+      <span class='label label-<%= row_class(@proposal) %>'>
+        <%= state_icon(@proposal.state) %>
+        <%= @proposal.state.capitalize %>
+      </span>
+    </h2>
+  </div>
+  <div class='col-md-3'>
+    Vote Score
+    <br/>
+    <% rowclass = @proposal.blocked? ? "danger" : "warning" %>
+    <% rowclass = 'success' if @proposal.agreed? %>
+    <h2><span class='label label-<%= rowclass %>'><%= @proposal.score %></span></h2>
+  </div>
+  <div class='col-md-3'>
+    Age
+    <br/>
+    <h2>
+      <% rowclass = @proposal.too_old? || @proposal.too_new? ? "danger" : "success" %>
+      <span class='label label-<%= rowclass %>'><%= @proposal.age %> days</span>
+    </h2>
   </div>
 </div>
 
 <hr/>
 
-<div class='alert alert-info'>
-  <p>
-    This page is currently just a utility page for showing a summary of voting 
-    activity. To read change details, comment, or vote, please 
-    <a href='<%= @proposal.url %>'>
-      visit the GitHub page for this proposal.
-    </a>
-  </p>
-</div>
-
 <div class='row'>
 
-  <div class='col-md-4'>
+  <div class='col-md-9'>
+    
+    <div>
+      <p>
+        <a class='btn btn-primary btn-block' href='<%= @proposal.url %>/files'>
+          <%= fa_icon 'search' %>
+          View changes
+        </a>
+      </p>
+    </div>
+    
+    <div class='comment alert alert-info pull-left' style='width: 75%'>
+      <p class='pull-left'>
+        <%= render partial: 'shared/person', locals: { person: @proposal.proposer } %>
+      </p>
+      <p>
+        <small><%= link_to time_ago_in_words(@proposal.github_pr.created_at)+" ago", @proposal.url %></small>
+      </p>
+      <p>
+        <%= render_github_markdown(@proposal.github_pr.body) %>
+      </p>
+    </div>
+    <% @comments.each do |comment| %>
+      <% user = User.find_by_login(comment.user.login) %>
+      <% by_proposer = (user == @proposal.proposer) %>
+      <% unless comment.body =~ /votebot instructions/ %>
+        <div class='comment alert <%= by_proposer ? 'alert-info pull-left' : 'alert-warning pull-right' %>'  style='width: 75%'>
+          <p class='<%= by_proposer ? 'pull-left' : 'pull-right' %>'>
+            <%= render partial: 'shared/person', locals: { person: user } %>
+          </p>
+          <p>
+            <small><%= link_to time_ago_in_words(comment.created_at)+" ago", comment.html_url %></small>
+          </p>
+          <p>
+            <%= render_github_markdown(comment.body) %>
+          </p>
+        </div>
+      <% end %>
+    <% end %>
+    <div style="clear: both">
+      <a class='btn btn-primary btn-block' href='<%= @proposal.url %>'>
+        <%= fa_icon 'comment' %>
+        To comment or vote, please click here to visit the GitHub pull request
+      </a>
+    </div>
+  </div>
+
+  <div class='col-md-3'>
     <div class='panel panel-success agree'>
       <div class="panel-heading">
         <%= vote_icon('agree')%>
@@ -38,21 +105,7 @@
         <%= render partial: 'shared/person', collection: @proposal.agree.map{|v| v.user} %>
       </div>
     </div>
-  </div>
 
-  <div class='col-md-4'>
-    <div class='panel panel-info abstain'>
-      <div class="panel-heading">
-        <%= vote_icon('abstain')%>
-        Abstaining: <%= @proposal.abstain.count %>
-      </div>
-      <div class='panel-body'>
-        <%= render partial: 'shared/person', collection: @proposal.abstain.map{|v| v.user} %>
-      </div>
-    </div>
-  </div>
-
-  <div class='col-md-4'>
     <div class='panel panel-danger disagree'>
       <div class="panel-heading">
         <%= vote_icon('disagree')%>
@@ -62,19 +115,26 @@
         <%= render partial: 'shared/person', collection: @proposal.disagree.map{|v| v.user} %>
       </div>
     </div>
-  </div>
+    
+    <div class='panel panel-info abstain'>
+      <div class="panel-heading">
+        <%= vote_icon('abstain')%>
+        Abstaining: <%= @proposal.abstain.count %>
+      </div>
+      <div class='panel-body'>
+        <%= render partial: 'shared/person', collection: @proposal.abstain.map{|v| v.user} %>
+      </div>
+    </div>
 
-</div>
-
-<div class='row'>
-  <div class='col-md-12'>
     <div class='panel panel-default participants'>
       <div class="panel-heading">
         Participants: <%= @proposal.participants.count %>
       </div>
       <div class='panel-body'>
         <%= render partial: 'shared/person', collection: @proposal.participants %>
-      <div>
+      </div>
     </div>
+
   </div>
+
 </div>

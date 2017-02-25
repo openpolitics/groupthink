@@ -44,6 +44,26 @@ class Proposal < ApplicationRecord
   def age
     (Date.today - opened_at.to_date).to_i
   end
+  
+  def too_old?
+    age >= ENV["MAX_AGE"].to_i
+  end
+  
+  def too_new? 
+    age < ENV["MIN_AGE"].to_i
+  end
+
+  def score
+    (agree.count * ENV["UPVOTE_WEIGHT"].to_i) + (abstain.count * ENV["ABSTAIN_WEIGHT"].to_i) + (disagree.count * ENV["DOWNVOTE_WEIGHT"].to_i)
+  end
+
+  def agreed?
+    score >= ENV["PASS_THRESHOLD"].to_i
+  end
+  
+  def blocked?
+    score < ENV["BLOCK_THRESHOLD"].to_i
+  end
 
   def agree
     interactions.where(last_vote: "agree")

@@ -19,22 +19,20 @@ module VoteCounter
         state = "rejected"
       end
     else
-      required_agrees = ENV["PASS_THRESHOLD"].to_i
       github_state = nil
       github_description = nil
-      votes = (agree.count * ENV["UPVOTE_WEIGHT"].to_i) + (abstain.count * ENV["ABSTAIN_WEIGHT"].to_i) + (disagree.count * ENV["DOWNVOTE_WEIGHT"].to_i)
-      if votes < ENV["BLOCK_THRESHOLD"].to_i
+      if blocked?
         state = "blocked"
         github_state = "failure"
         github_description = "The change is blocked."
-      elsif votes >= required_agrees
+      elsif agreed?
         state = "passed"
         github_state = "success"
         github_description = "The change is agreed."
       else
         state = "waiting"
         github_state = "pending"
-        github_description = "The change is waiting for more votes; #{required_agrees - votes} more needed."
+        github_description = "The change is waiting for more votes; #{ENV["PASS_THRESHOLD"].to_i - score} more needed."
       end
       # Update github commit status
       Octokit.create_status(ENV['GITHUB_REPO'], sha, github_state,
@@ -42,17 +40,17 @@ module VoteCounter
         description: github_description,
         context: "votebot/votes")
       # Check age
-      if age >= ENV["MAX_AGE"].to_i
+      if too_old?
         state = "dead"
         github_state = "failure"
         github_description = "The change has been open for more than #{ENV["MAX_AGE"]} days, and should be closed (age: #{age}d)."
-      elsif age >= ENV["MIN_AGE"].to_i
-        github_state = "success"
-        github_description = "The change has been open long enough to be merged (age: #{age}d)."
-      else
+      elsif too_new?
         state = "agreed" if state == "passed"
         github_state = "pending"
         github_description = "The change has not yet been open for #{ENV["MIN_AGE"]} days (age: #{age}d)."
+      else
+        github_state = "success"
+        github_description = "The change has been open long enough to be merged (age: #{age}d)."
       end
       # Update github commit status
       Octokit.create_status(ENV['GITHUB_REPO'], sha, github_state,

@@ -8,6 +8,7 @@ class ProposalsController < ApplicationController
   
   def show
     @proposal = Proposal.find_by(number: params[:id])
+    @comments = comments = Octokit.issue_comments(ENV['GITHUB_REPO'], @proposal.number)
   end
   
   def webhook
