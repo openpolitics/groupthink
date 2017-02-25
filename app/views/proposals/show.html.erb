@@ -3,14 +3,44 @@
   <li class="active">#<%= @proposal.number %></li>
 </ol>
 
-<h1><%= @proposal.title %> <a href='<%= @proposal.url %>'><i class='fa fa-github'></i></a></h1>
+<h1>
+  
+  <%= @proposal.title %>
+  <a href='<%= @proposal.url %>'>
+    <%= fa_icon 'github' %>
+  </a>
+</h1>
 
-<div class='row'>
-  <div class='col-md-12'>
-    <p>
-      by <a href='/users/<%= @proposal.proposer %>'><%= @proposal.proposer.login %></a>
-    </p>
-    <h2><span class='label label-<%= row_class(@proposal) %>'><%= @proposal.state.capitalize %></span></h2>
+<div class='row' style='text-align: center'>
+  <div class='col-md-3 user'>
+    Proposer
+    <br/>
+    <%= render partial: 'shared/person', locals: { person: @proposal.proposer } %>
+  </div>
+  <div class='col-md-3'>
+    State
+    <br/>
+    <h2>
+      <span class='label label-<%= row_class(@proposal) %>'>
+        <%= state_icon(@proposal.state) %>
+        <%= @proposal.state.capitalize %>
+      </span>
+    </h2>
+  </div>
+  <div class='col-md-3'>
+    Vote Score
+    <br/>
+    <% rowclass = @proposal.blocked? ? "danger" : "warning" %>
+    <% rowclass = 'success' if @proposal.agreed? %>
+    <h2><span class='label label-<%= rowclass %>'><%= @proposal.score %></span></h2>
+  </div>
+  <div class='col-md-3'>
+    Age
+    <br/>
+    <h2>
+      <% rowclass = @proposal.too_old? || @proposal.too_new? ? "danger" : "success" %>
+      <span class='label label-<%= rowclass %>'><%= @proposal.age %> days</span>
+    </h2>
   </div>
 </div>
 
@@ -19,6 +49,16 @@
 <div class='row'>
 
   <div class='col-md-9'>
+    
+    <div>
+      <p>
+        <a class='btn btn-primary btn-block' href='<%= @proposal.url %>/files'>
+          <%= fa_icon 'search' %>
+          View changes
+        </a>
+      </p>
+    </div>
+    
     <div class='comment alert alert-info pull-left' style='width: 75%'>
       <p class='pull-left'>
         <%= render partial: 'shared/person', locals: { person: @proposal.proposer } %>
@@ -48,7 +88,10 @@
       <% end %>
     <% end %>
     <div style="clear: both">
-      <a class='btn btn-primary btn-block' href='<%= @proposal.url %>'>To comment or vote, please click here to visit the GitHub pull request</a>
+      <a class='btn btn-primary btn-block' href='<%= @proposal.url %>'>
+        <%= fa_icon 'comment' %>
+        To comment or vote, please click here to visit the GitHub pull request
+      </a>
     </div>
   </div>
 
