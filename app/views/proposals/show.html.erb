@@ -59,7 +59,7 @@
       </p>
     </div>
     
-    <div class='comment alert alert-info pull-left' style='width: 75%'>
+    <div class='comment well pull-left' style='width: 75%'>
       <p class='pull-left'>
         <%= render partial: 'shared/person', locals: { person: @proposal.proposer } %>
       </p>
@@ -74,7 +74,11 @@
       <% user = User.find_by_login(comment.user.login) %>
       <% by_proposer = (user == @proposal.proposer) %>
       <% unless comment.body =~ /votebot instructions/ %>
-        <div class='comment alert <%= by_proposer ? 'alert-info pull-left' : 'alert-warning pull-right' %>'  style='width: 75%'>
+        <% boxclass = 'well' %>
+        <% boxclass = 'alert alert-danger' if comment.body.contains_block? %>
+        <% boxclass = 'alert alert-warning' if comment.body.contains_downvote? %>
+        <% boxclass = 'alert alert-success' if comment.body.contains_upvote? %>
+        <div class='comment <%= boxclass %> <%= by_proposer ? 'pull-left' : 'pull-right' %>'  style='width: 75%'>
           <p class='<%= by_proposer ? 'pull-left' : 'pull-right' %>'>
             <%= render partial: 'shared/person', locals: { person: user } %>
           </p>
@@ -106,26 +110,26 @@
       </div>
     </div>
 
-    <div class='panel panel-danger disagree'>
-      <div class="panel-heading">
-        <%= vote_icon('disagree')%>
-        Disagree: <%= @proposal.disagree.count %>
-      </div>
-      <div class='panel-body'>
-        <%= render partial: 'shared/person', collection: @proposal.disagree.map{|v| v.user} %>
-      </div>
-    </div>
-    
-    <div class='panel panel-info abstain'>
+    <div class='panel panel-warning abstain'>
       <div class="panel-heading">
         <%= vote_icon('abstain')%>
-        Abstaining: <%= @proposal.abstain.count %>
+        Disagree: <%= @proposal.abstain.count %>
       </div>
       <div class='panel-body'>
         <%= render partial: 'shared/person', collection: @proposal.abstain.map{|v| v.user} %>
       </div>
     </div>
 
+    <div class='panel panel-danger disagree'>
+      <div class="panel-heading">
+        <%= vote_icon('disagree')%>
+        Block: <%= @proposal.disagree.count %>
+      </div>
+      <div class='panel-body'>
+        <%= render partial: 'shared/person', collection: @proposal.disagree.map{|v| v.user} %>
+      </div>
+    </div>
+    
     <div class='panel panel-default participants'>
       <div class="panel-heading">
         Participants: <%= @proposal.participants.count %>
