@@ -8,7 +8,7 @@ class String
     ].any? {|x| self.include?(x)}
   end
 
-  def contains_downvote?
+  def contains_no?
     [
       ":hand:",
       "✋",

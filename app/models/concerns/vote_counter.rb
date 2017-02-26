@@ -84,8 +84,8 @@ module VoteCounter
             next if comment.created_at < cutoff
             interaction.agree!
           end
-          if comment.body.contains_downvote?
-            interaction.abstain!
+          if comment.body.contains_no?
+            interaction.no!
           end
           if comment.body.contains_block?
             interaction.block!
@@ -107,7 +107,7 @@ Vote by entering one of the following symbols in a comment on this pull request.
 |vote|symbol|type this|points|
 |--|--|--|--|
 |Agree|:thumbsup:|`:thumbsup:`|#{ENV["UPVOTE_WEIGHT"]}|
-|Abstain|:hand:|`:hand:`|#{ENV["ABSTAIN_WEIGHT"]}|
+|No|:hand:|`:hand:`|#{ENV["NO_WEIGHT"]}|
 |Block|:thumbsdown:|`:thumbsdown:`|#{ENV["BLOCK_WEIGHT"]}|
 
 Proposals will be accepted and merged once they have a total of #{ENV["PASS_THRESHOLD"]} points when all votes are counted. Votes will be open for a minimum of #{ENV["MIN_AGE"]} days, but will be closed if the proposal is not accepted after #{ENV["MAX_AGE"]}.

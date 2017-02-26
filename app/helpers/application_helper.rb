@@ -19,7 +19,7 @@ module ApplicationHelper
     case state
     when 'agree'
       'success'
-    when 'abstain', 'participating'
+    when 'no', 'participating'
       'warning'
     when 'block'
       'danger'
@@ -32,7 +32,7 @@ module ApplicationHelper
     case vote
     when 'agree'
       "<i class='fa fa-thumbs-o-up'></i>".html_safe
-    when 'abstain'
+    when 'no'
       "<i class='fa fa-hand-stop-o'></i>".html_safe
     when 'block'
       "<i class='fa fa-thumbs-o-down'></i>".html_safe

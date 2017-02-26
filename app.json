@@ -46,10 +46,10 @@
       "value": "1",
       "description": "The weighting for upvotes. Unlikely to be anything other than 1."
     },
-    "ABSTAIN_WEIGHT": {
+    "NO_WEIGHT": {
       "required": true,
       "value": "-1",
-      "description": "The weighting for abstentions. Set to -1 to make abstentions require a balancing upvote, or set to 0 to remove their influence completely."
+      "description": "The weighting for no votes. Unlikely to be anything other than -1."
     },
     "MIN_AGE": {
       "required": true,

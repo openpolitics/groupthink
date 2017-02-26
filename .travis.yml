@@ -15,7 +15,7 @@ env:
   - EMAIL_DOMAIN: example.com
   - BLOCK_WEIGHT: -1000
   - UPVOTE_WEIGHT: 1
-  - ABSTAIN_WEIGHT: -1
+  - NO_WEIGHT: -1
   - MIN_AGE: 7
   - MAX_AGE: 90
   - PASS_THRESHOLD: 2
