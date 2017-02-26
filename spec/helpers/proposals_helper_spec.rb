@@ -87,6 +87,12 @@ RSpec.describe ProposalsHelper, type: :helper do
       expect(helper.link_proposals(input)).to eql output
     end
 
+    it "not in an HTML entity" do
+      input = "&#434;"
+      output = "&#434;"
+      expect(helper.link_proposals(input)).to eql output
+    end
+
 
   end
 

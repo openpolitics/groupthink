@@ -30,24 +30,10 @@ module ProposalsHelper
   end
   
   def link_proposals(str)
-    str.scan(/\s?#(\d+)([^0-9;]|$)/).each do |match|
-      str = str.gsub "##{match[0]}", "<a href='/proposals/#{match[0]}'>##{match[0]}</a>"
+    str.scan(/(\s|^|\>)#(\d+)/).each do |match|
+      str = str.gsub "##{match[1]}", "<a href='/proposals/#{match[1]}'>##{match[1]}</a>"
     end
     str.html_safe
-  end
-
-  def link_usernames(markdown)
-    markdown.scan(/(\s|^)@(\w+)/).each do |match|      
-      markdown = markdown.gsub "@#{match[1]}", "<a href='/users/#{match[1]}'>@#{match[1]}</a>"
-    end
-    markdown.html_safe
-  end
-  
-  def link_proposals(markdown)
-    markdown.scan(/\s?#(\d+)[^0-9;]/).each do |match|
-      markdown = markdown.gsub "##{match[0]}", "<a href='/proposals/#{match[0]}'>##{match[0]}</a>"
-    end
-    markdown.html_safe
   end
 
 end
