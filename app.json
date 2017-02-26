@@ -36,10 +36,10 @@
       "value": "example.com",
       "description": "Which domain should emails look like they come from?"
     },
-    "DOWNVOTE_WEIGHT": {
+    "BLOCK_WEIGHT": {
       "required": true,
       "value": "-10",
-      "description": "The weighting for downvotes. Normally a large negative value to make rejection of changes easier than adoption."
+      "description": "The weighting for blocks. Normally a large negative value to make rejection of changes easier than adoption."
     },
     "UPVOTE_WEIGHT": {
       "required": true,

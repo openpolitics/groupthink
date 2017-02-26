@@ -13,7 +13,7 @@ env:
   - GITHUB_REPO: openpolitics/manifesto
   - SITE_URL: https://votebot.example.com
   - EMAIL_DOMAIN: example.com
-  - DOWNVOTE_WEIGHT: -1000
+  - BLOCK_WEIGHT: -1000
   - UPVOTE_WEIGHT: 1
   - ABSTAIN_WEIGHT: -1
   - MIN_AGE: 7

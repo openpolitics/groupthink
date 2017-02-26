@@ -120,13 +120,13 @@
       </div>
     </div>
 
-    <div class='panel panel-danger disagree'>
+    <div class='panel panel-danger block'>
       <div class="panel-heading">
-        <%= vote_icon('disagree')%>
-        Block: <%= @proposal.disagree.count %>
+        <%= vote_icon('block')%>
+        Block: <%= @proposal.block.count %>
       </div>
       <div class='panel-body'>
-        <%= render partial: 'shared/person', collection: @proposal.disagree.map{|v| v.user} %>
+        <%= render partial: 'shared/person', collection: @proposal.block.map{|v| v.user} %>
       </div>
     </div>
     

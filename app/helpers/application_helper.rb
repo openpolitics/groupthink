@@ -21,7 +21,7 @@ module ApplicationHelper
       'success'
     when 'abstain', 'participating'
       'warning'
-    when 'disagree'
+    when 'block'
       'danger'
     else
       ''
@@ -34,7 +34,7 @@ module ApplicationHelper
       "<i class='fa fa-thumbs-o-up'></i>".html_safe
     when 'abstain'
       "<i class='fa fa-hand-stop-o'></i>".html_safe
-    when 'disagree'
+    when 'block'
       "<i class='fa fa-thumbs-o-down'></i>".html_safe
     else
       ""
