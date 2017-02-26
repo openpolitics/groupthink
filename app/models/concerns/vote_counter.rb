@@ -80,13 +80,14 @@ module VoteCounter
       if user != proposer
         interaction = interactions.find_or_create_by!(user: user)
         if user.contributor
-          case comment.body
-          when /:thumbsup:|:\+1:|👍/
+          if comment.body.contains_upvote?
             next if comment.created_at < cutoff
             interaction.agree!
-          when /:hand:|✋/
+          end
+          if comment.body.contains_downvote?
             interaction.abstain!
-          when /:thumbsdown:|:\-1:|👎/
+          end
+          if comment.body.contains_block?
             interaction.disagree!
           end
         end
