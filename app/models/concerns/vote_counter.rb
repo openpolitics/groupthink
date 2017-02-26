@@ -106,9 +106,9 @@ Vote by entering one of the following symbols in a comment on this pull request.
 
 |vote|symbol|type this|points|
 |--|--|--|--|
-|Yes|:thumbsup:|`:thumbsup:`|#{ENV["YES_WEIGHT"]}|
-|No|:hand:|`:hand:`|#{ENV["NO_WEIGHT"]}|
-|Block|:thumbsdown:|`:thumbsdown:`|#{ENV["BLOCK_WEIGHT"]}|
+|Yes|:white_check_mark:|`:white_check_mark:`|#{ENV["YES_WEIGHT"]}|
+|No|:negative_squared_cross_mark:|`:negative_squared_cross_mark:`|#{ENV["NO_WEIGHT"]}|
+|Block|:no_entry_sign:|`:no_entry_sign:`|#{ENV["BLOCK_WEIGHT"]}|
 
 Proposals will be accepted and merged once they have a total of #{ENV["PASS_THRESHOLD"]} points when all votes are counted. Votes will be open for a minimum of #{ENV["MIN_AGE"]} days, but will be closed if the proposal is not accepted after #{ENV["MAX_AGE"]}.
 

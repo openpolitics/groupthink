@@ -10,6 +10,9 @@ module ProposalsHelper
 
   def replace_emoji(str)
     {
+      ":white_check_mark:" => "✅",
+      ":negative_squared_cross_mark:" => "❎",
+      ":no_entry_sign:" => "🚫",
       ":thumbsup:" => "👍",
       ":thumbsdown:" => "👎",
       ":+1:" => "👍",

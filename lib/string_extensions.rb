@@ -2,6 +2,8 @@ class String
 
   def contains_yes?
     [
+      ":white_check_mark:",
+      "✅",
       ":thumbsup:",
       ":+1:",
       "👍",
@@ -10,6 +12,8 @@ class String
 
   def contains_no?
     [
+      ":negative_squared_cross_mark:",
+      "❎",
       ":hand:",
       "✋",
     ].any? {|x| self.include?(x)}
@@ -17,6 +21,8 @@ class String
 
   def contains_block?
     [
+      ":no_entry_sign:",
+      "🚫"
       ":thumbsdown:",
       ":-1:",
       "👎",
