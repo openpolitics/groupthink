@@ -80,9 +80,9 @@ module VoteCounter
       if user != proposer
         interaction = interactions.find_or_create_by!(user: user)
         if user.contributor
-          if comment.body.contains_upvote?
+          if comment.body.contains_yes?
             next if comment.created_at < cutoff
-            interaction.agree!
+            interaction.yes!
           end
           if comment.body.contains_no?
             interaction.no!
@@ -106,7 +106,7 @@ Vote by entering one of the following symbols in a comment on this pull request.
 
 |vote|symbol|type this|points|
 |--|--|--|--|
-|Agree|:thumbsup:|`:thumbsup:`|#{ENV["UPVOTE_WEIGHT"]}|
+|Yes|:thumbsup:|`:thumbsup:`|#{ENV["YES_WEIGHT"]}|
 |No|:hand:|`:hand:`|#{ENV["NO_WEIGHT"]}|
 |Block|:thumbsdown:|`:thumbsdown:`|#{ENV["BLOCK_WEIGHT"]}|
 

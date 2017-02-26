@@ -1,6 +1,6 @@
 class String
 
-  def contains_upvote?
+  def contains_yes?
     [
       ":thumbsup:",
       ":+1:",

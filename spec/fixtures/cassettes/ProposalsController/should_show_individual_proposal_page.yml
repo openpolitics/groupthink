@@ -326,7 +326,7 @@ http_interactions:
         it is accepted. \n\n## How to vote\nVote by entering one of the following
         symbols in a comment on this pull request. Only your last vote will be counted,
         and you may change your vote at any time until the change is accepted or closed.\n\n|vote|symbol|type
-        this|points|\n|--|--|--|--|\n|Agree|:thumbsup:|`:thumbsup:`|1|\n|No|:hand:|`:hand:`|-1|\n|Block|:thumbsdown:|`:thumbsdown:`|-1000|\n\nProposals
+        this|points|\n|--|--|--|--|\n|Yes|:thumbsup:|`:thumbsup:`|1|\n|No|:hand:|`:hand:`|-1|\n|Block|:thumbsdown:|`:thumbsdown:`|-1000|\n\nProposals
         will be accepted and merged once they have a total of 2 points when all votes
         are counted. Votes will be open for a minimum of 7 days, but will be closed
         if the proposal is not accepted after 90.\n\nVotes are counted [automatically
@@ -809,7 +809,7 @@ http_interactions:
         it is accepted. \n\n## How to vote\nVote by entering one of the following
         symbols in a comment on this pull request. Only your last vote will be counted,
         and you may change your vote at any time until the change is accepted or closed.\n\n|vote|symbol|type
-        this|points|\n|--|--|--|--|\n|Agree|:thumbsup:|`:thumbsup:`|1|\n|No|:hand:|`:hand:`|-1|\n|Block|:thumbsdown:|`:thumbsdown:`|-1000|\n\nProposals
+        this|points|\n|--|--|--|--|\n|Yes|:thumbsup:|`:thumbsup:`|1|\n|No|:hand:|`:hand:`|-1|\n|Block|:thumbsdown:|`:thumbsdown:`|-1000|\n\nProposals
         will be accepted and merged once they have a total of 2 points when all votes
         are counted. Votes will be open for a minimum of 7 days, but will be closed
         if the proposal is not accepted after 90.\n\nVotes are counted [automatically

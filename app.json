@@ -41,10 +41,10 @@
       "value": "-10",
       "description": "The weighting for blocks. Normally a large negative value to make rejection of changes easier than adoption."
     },
-    "UPVOTE_WEIGHT": {
+    "YES_WEIGHT": {
       "required": true,
       "value": "1",
-      "description": "The weighting for upvotes. Unlikely to be anything other than 1."
+      "description": "The weighting for yes votes. Unlikely to be anything other than 1."
     },
     "NO_WEIGHT": {
       "required": true,

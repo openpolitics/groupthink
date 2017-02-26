@@ -17,7 +17,7 @@ module ApplicationHelper
   
   def user_row_class(state)
     case state
-    when 'agree'
+    when 'yes'
       'success'
     when 'no', 'participating'
       'warning'
@@ -30,7 +30,7 @@ module ApplicationHelper
   
   def vote_icon(vote)
     case vote
-    when 'agree'
+    when 'yes'
       "<i class='fa fa-thumbs-o-up'></i>".html_safe
     when 'no'
       "<i class='fa fa-hand-stop-o'></i>".html_safe

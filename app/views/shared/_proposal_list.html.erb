@@ -5,7 +5,7 @@
     <th class='hidden-xs'>View</th>
     <th class="text-center hidden-xs"><i class='fa fa-comments'></th>
     <th class="text-center"><i class='fa fa-clock-o'></th>
-    <th class="text-center"><%= vote_icon('agree')%></th>
+    <th class="text-center"><%= vote_icon('yes')%></th>
     <th class="text-center"><%= vote_icon('no')%></th>
     <th class="text-center"><%= vote_icon('block')%></th>
     <th class="text-center"><i class='fa fa-user'></i></th>
@@ -22,7 +22,7 @@
       <td class="text-center hidden-xs"><a href='<%= proposal.url %>'><i class='fa fa-github'></i></a></td>
       <td class="text-center hidden-xs"><%= proposal.participants.count %></td>
       <td class="text-center"><%= proposal.age %>d</td>
-      <td class="text-center"><%= proposal.agree.count %></td>
+      <td class="text-center"><%= proposal.yes.count %></td>
       <td class="text-center"><%= proposal.no.count %></td>
       <td class="text-center"><%= proposal.block.count %></td>
       <td class="proposer text-center"><%= render partial: 'shared/person', locals: {person: proposal.proposer } %></td> 

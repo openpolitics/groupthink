@@ -76,8 +76,8 @@
       <% unless comment.body =~ /votebot instructions/ %>
         <% boxclass = 'well' %>
         <% boxclass = 'alert alert-danger' if comment.body.contains_block? %>
-        <% boxclass = 'alert alert-success' if comment.body.contains_upvote? %>
         <% boxclass = 'alert alert-warning' if comment.body.contains_no? %>
+        <% boxclass = 'alert alert-success' if comment.body.contains_yes? %>
         <div class='comment <%= boxclass %> <%= by_proposer ? 'pull-left' : 'pull-right' %>'  style='width: 75%'>
           <p class='<%= by_proposer ? 'pull-left' : 'pull-right' %>'>
             <%= render partial: 'shared/person', locals: { person: user } %>
@@ -100,13 +100,13 @@
   </div>
 
   <div class='col-md-3'>
-    <div class='panel panel-success agree'>
+    <div class='panel panel-success yes'>
       <div class="panel-heading">
-        <%= vote_icon('agree')%>
-        Agree: <%= @proposal.agree.count %>
+        <%= vote_icon('yes')%>
+        Yes: <%= @proposal.yes.count %>
       </div>
       <div class='panel-body'>
-        <%= render partial: 'shared/person', collection: @proposal.agree.map{|v| v.user} %>
+        <%= render partial: 'shared/person', collection: @proposal.yes.map{|v| v.user} %>
       </div>
     </div>
 
