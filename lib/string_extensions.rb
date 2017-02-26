@@ -22,7 +22,7 @@ class String
   def contains_block?
     [
       ":no_entry_sign:",
-      "🚫"
+      "🚫",
       ":thumbsdown:",
       ":-1:",
       "👎",
