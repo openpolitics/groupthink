@@ -31,11 +31,11 @@ module ApplicationHelper
   def vote_icon(vote)
     case vote
     when 'yes'
-      "<i class='fa fa-thumbs-o-up'></i>".html_safe
+      "<i class='fa fa-check'></i>".html_safe
     when 'no'
-      "<i class='fa fa-hand-stop-o'></i>".html_safe
+      "<i class='fa fa-times'></i>".html_safe
     when 'block'
-      "<i class='fa fa-thumbs-o-down'></i>".html_safe
+      "<i class='fa fa-ban'></i>".html_safe
     else
       ""
     end
