@@ -52,12 +52,11 @@
     <% @proposal.diff.each do |file| %>
       <div class='panel panel-default'>
         <div class="panel-heading">
-          <%= file[:filename] %>
+          <%= link_to "@#{@proposal.proposer.login}", @proposal.proposer %> edited <code><%= file[:filename] %></code>
+          - <%= link_to time_ago_in_words(@proposal.github_pr.created_at)+" ago", @proposal.url %>
         </div>
         <div class='panel-body'>
-          <pre>
-            <%= file[:patch] %>
-          </pre>
+          <%= render_diff(file[:patch]).html_safe %>
         </div>
       </div>
     <% end %>
@@ -67,7 +66,7 @@
         <%= render partial: 'shared/person', locals: { person: @proposal.proposer } %>
       </p>
       <p>
-        <small><%= link_to time_ago_in_words(@proposal.github_pr.created_at)+" ago", @proposal.url %></small>
+        <%= link_to "@#{@proposal.proposer.login}", @proposal.proposer %> - <%= link_to time_ago_in_words(@proposal.github_pr.created_at)+" ago", @proposal.url %>
       </p>
       <p>
         <%= render_github_markdown(@proposal.github_pr.body) %>
@@ -86,7 +85,7 @@
             <%= render partial: 'shared/person', locals: { person: user } %>
           </p>
           <p>
-            <small><%= link_to time_ago_in_words(comment.created_at)+" ago", comment.html_url %></small>
+            <%= link_to "@#{user.login}", user %> - <%= link_to time_ago_in_words(comment.created_at)+" ago", comment.html_url %></small>
           </p>
           <p>
             <%= render_github_markdown(comment.body) %>
