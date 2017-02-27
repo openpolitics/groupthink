@@ -49,16 +49,18 @@
 
   <div class='col-md-9'>
 
-    <% @proposal.diff.each do |file| %>
-      <div class='panel panel-default'>
-        <div class="panel-heading">
-          <%= link_to "@#{@proposal.proposer.login}", @proposal.proposer %> edited <code><%= file[:filename] %></code>
-          - <%= link_to time_ago_in_words(@proposal.github_pr.created_at)+" ago", @proposal.url %>
+    <% @proposal.commit_shas.each do |commit| %>
+      <% @proposal.diff(commit).each do |file| %>
+        <div class='panel panel-default'>
+          <div class="panel-heading">
+            <%= link_to "@#{@proposal.proposer.login}", @proposal.proposer %> edited <code><%= file[:filename] %></code>
+            - <%= link_to time_ago_in_words(@proposal.github_pr.created_at)+" ago", @proposal.url %>
+          </div>
+          <div class='panel-body'>
+            <%= render_diff(file[:patch]).html_safe %>
+          </div>
         </div>
-        <div class='panel-body'>
-          <%= render_diff(file[:patch]).html_safe %>
-        </div>
-      </div>
+      <% end %>
     <% end %>
     
     <%= render partial: 'comment', locals: {

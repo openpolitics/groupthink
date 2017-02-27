@@ -34,6 +34,10 @@ class Proposal < ApplicationRecord
     @github_pr ||= Octokit.pull_request(ENV['GITHUB_REPO'], number)
   end
 
+  def commit_shas
+    Octokit.pull_request_commits(ENV['GITHUB_REPO'], number).map{|x| x[:sha]}
+  end
+
   def head_sha
     github_pr["head"]["sha"]
   end
@@ -42,8 +46,9 @@ class Proposal < ApplicationRecord
     github_pr["base"]["sha"]
   end
   
-  def diff
-    Octokit.compare(ENV['GITHUB_REPO'], base_sha, head_sha).files
+  def diff(sha = nil)
+    sha ||= head_sha
+    Octokit.compare(ENV['GITHUB_REPO'], base_sha, sha).files
   end
   
   def load_from_github
