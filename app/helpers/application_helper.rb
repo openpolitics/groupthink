@@ -32,11 +32,11 @@ module ApplicationHelper
     icon = ""
     case vote
     when 'yes'
-      icon = "thumbs-o-up"
+      icon = "check"
     when 'no'
-      icon = "hand-stop-o"
+      icon = "times"
     when 'block'
-      icon = "thumbs-o-down"
+      icon = "ban"
     when 'participating'
       icon = "comments-o"
     end
