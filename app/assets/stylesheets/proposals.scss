@@ -1,3 +1,23 @@
 // Place all the styles related to the proposals controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+.diff {
+  padding: 0px 5px;
+}
+
+.diff-unchanged {
+  margin: 0px 5px;
+}
+
+.diff-removed {
+  background-color: #fee;
+  border-left: 5px solid red;  
+  border-right: 5px solid red;  
+}
+
+.diff-added {
+  background-color: #efe;
+  border-left: 5px solid green;  
+  border-right: 5px solid green;  
+}
