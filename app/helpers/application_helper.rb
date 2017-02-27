@@ -31,11 +31,11 @@ module ApplicationHelper
   def vote_icon(vote)
     case vote
     when 'agree'
-      "<i class='fa fa-thumbs-o-up'></i>".html_safe
+      fa_icon "thumbs-o-up"
     when 'abstain'
-      "<i class='fa fa-hand-stop-o'></i>".html_safe
+      fa_icon "hand-stop-o"
     when 'disagree'
-      "<i class='fa fa-thumbs-o-down'></i>".html_safe
+      fa_icon "thumbs-o-down"
     else
       ""
     end
@@ -44,11 +44,11 @@ module ApplicationHelper
   def state_icon(state)
     case state
     when 'waiting'
-      "<i class='fa fa-clock-o'></i>".html_safe
+      fa_icon "clock-o"
     when 'blocked', 'rejected'
-      "<i class='fa fa-ban'></i>".html_safe
+      fa_icon "ban"
     when 'accepted', 'passed', 'agreed'
-      "<i class='fa fa-check'></i>".html_safe
+      fa_icon "check"
     else
       ""
     end
