@@ -3,12 +3,12 @@
     <th class="text-center">State</th>
     <th>Title</th>
     <th class='hidden-xs'>View</th>
-    <th class="text-center hidden-xs"><%= fa_icon 'comments' %></th>
+    <th class="text-center hidden-xs"><%= fa_icon 'comments-o' %></th>
     <th class="text-center"><%= fa_icon 'clock-o' %></th>
     <th class="text-center"><%= vote_icon('agree')%></th>
     <th class="text-center"><%= vote_icon('abstain')%></th>
     <th class="text-center"><%= vote_icon('disagree')%></th>
-    <th class="text-center"><%= fa_icon 'user' %></th>
+    <th class="text-center"><%= fa_icon 'user-o' %></th>
   </tr>
   <% proposals.each do |proposal| %>
     <tr class='<%= row_class(proposal) %>'>

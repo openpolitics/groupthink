@@ -26,7 +26,7 @@ title='<%= @user.login %>' />
     <th class="text-center">State</th>
     <th>Title</th>
     <th class="text-center"><%= @user.login %>'s vote</th>
-    <th class="text-center"><%= fa_icon 'user' %></i></th>
+    <th class="text-center"><%= fa_icon 'user-o' %></i></th>
   </tr>
   <% @voted.each do |pr| %>
     <tr class='<%= user_row_class(@user.vote(pr)) %>'>
