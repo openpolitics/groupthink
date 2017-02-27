@@ -23,8 +23,8 @@ module ApplicationHelper
       'warning'
     when 'disagree'
       'danger'
-    else
-      ''
+    when 'participating'
+      'default'
     end
   end
   
