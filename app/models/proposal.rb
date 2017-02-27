@@ -33,6 +33,23 @@ class Proposal < ApplicationRecord
   def github_pr
     @github_pr ||= Octokit.pull_request(ENV['GITHUB_REPO'], number)
   end
+
+  def commits
+    Octokit.pull_request_commits(ENV['GITHUB_REPO'], number)
+  end
+
+  def head_sha
+    github_pr["head"]["sha"]
+  end
+  
+  def base_sha
+    github_pr["base"]["sha"]
+  end
+  
+  def diff(sha = nil)
+    sha ||= head_sha
+    Octokit.compare(ENV['GITHUB_REPO'], base_sha, sha).files
+  end
   
   def load_from_github
     self.opened_at = github_pr.created_at
