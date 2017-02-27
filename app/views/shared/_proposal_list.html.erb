@@ -2,7 +2,6 @@
   <tr>
     <th class="text-center">State</th>
     <th>Title</th>
-    <th class='hidden-xs'>View</th>
     <th class="text-center hidden-xs"><%= fa_icon 'comments-o' %></th>
     <th class="text-center"><%= fa_icon 'clock-o' %></th>
     <th class="text-center"><%= vote_icon('yes')%></th>
@@ -19,7 +18,6 @@
         </span>
       </td>
       <td><a href='/proposals/<%= proposal.number %>'><%= proposal.title %></a></td> 
-      <td class="text-center hidden-xs"><a href='<%= proposal.url %>'><%= fa_icon 'github' %></a></td>
       <td class="text-center hidden-xs"><%= proposal.participants.count %></td>
       <td class="text-center"><%= proposal.age %>d</td>
       <td class="text-center"><%= proposal.yes.count %></td>

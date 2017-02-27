@@ -19,7 +19,7 @@ module ApplicationHelper
     case state
     when 'yes'
       'success'
-    when 'no', 'participating'
+    when 'no'
       'warning'
     when 'block'
       'danger'
