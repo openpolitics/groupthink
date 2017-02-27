@@ -17,11 +17,11 @@ module ApplicationHelper
   
   def user_row_class(state)
     case state
-    when 'agree'
+    when 'yes'
       'success'
-    when 'abstain'
+    when 'no'
       'warning'
-    when 'disagree'
+    when 'block'
       'danger'
     when 'participating'
       'default'
@@ -31,12 +31,12 @@ module ApplicationHelper
   def vote_icon(vote, options = {})
     icon = ""
     case vote
-    when 'agree'
-      icon = "thumbs-o-up"
-    when 'abstain'
-      icon = "hand-stop-o"
-    when 'disagree'
-      icon = "thumbs-o-down"
+    when 'yes'
+      icon = "check"
+    when 'no'
+      icon = "times"
+    when 'block'
+      icon = "ban"
     when 'participating'
       icon = "comments-o"
     end

@@ -1,15 +1,19 @@
 class String
 
-  def contains_upvote?
+  def contains_yes?
     [
+      ":white_check_mark:",
+      "✅",
       ":thumbsup:",
       ":+1:",
       "👍",
     ].any? {|x| self.include?(x)}
   end
 
-  def contains_downvote?
+  def contains_no?
     [
+      ":negative_squared_cross_mark:",
+      "❎",
       ":hand:",
       "✋",
     ].any? {|x| self.include?(x)}
@@ -17,6 +21,8 @@ class String
 
   def contains_block?
     [
+      ":no_entry_sign:",
+      "🚫",
       ":thumbsdown:",
       ":-1:",
       "👎",

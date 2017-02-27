@@ -16,28 +16,28 @@ RSpec.describe Proposal, :vcr do
 
   it "should only count latest vote per person" do
     pr = Proposal.create(number: 100)
-    expect(pr.agree.count).to eq 2
-    expect(pr.agree.map{|x| x.user.login}.sort).to eq ["Floppy", "philipjohn"]
+    expect(pr.yes.count).to eq 2
+    expect(pr.yes.map{|x| x.user.login}.sort).to eq ["Floppy", "philipjohn"]
   end
 
-  it "should handle both thumbsup and +1 emoticons as upvotes" do
+  it "should handle both thumbsup and +1 emoticons as yes votes" do
     pr = Proposal.create(number: 356)
-    expect(pr.agree.map{|x| x.user.login}.sort).to eq ["Floppy", "philipjohn"]
+    expect(pr.yes.map{|x| x.user.login}.sort).to eq ["Floppy", "philipjohn"]
   end
 
-  it "should handle emoji upvotes" do
+  it "should handle emoji yes votes" do
     pr = Proposal.create(number: 433)
-    expect(pr.agree.map{|x| x.user.login}.sort).to eq ["Floppy"]
+    expect(pr.yes.map{|x| x.user.login}.sort).to eq ["Floppy"]
   end
 
   it "should ignore votes from proposer" do
     pr = Proposal.create(number: 74)
-    expect(pr.agree.count).to eq 0
+    expect(pr.yes.count).to eq 0
   end
 
   it "should ignore votes before last commit" do
     pr = Proposal.create(number: 135)
-    expect(pr.agree.count).to eq 1
+    expect(pr.yes.count).to eq 1
   end
 
   it "should store merged pull requests as accepted" do

@@ -71,7 +71,7 @@ class Proposal < ApplicationRecord
   end
 
   def score
-    (agree.count * ENV["UPVOTE_WEIGHT"].to_i) + (abstain.count * ENV["ABSTAIN_WEIGHT"].to_i) + (disagree.count * ENV["DOWNVOTE_WEIGHT"].to_i)
+    (yes.count * ENV["YES_WEIGHT"].to_i) + (no.count * ENV["NO_WEIGHT"].to_i) + (block.count * ENV["BLOCK_WEIGHT"].to_i)
   end
 
   def agreed?
@@ -82,16 +82,16 @@ class Proposal < ApplicationRecord
     score < ENV["BLOCK_THRESHOLD"].to_i
   end
 
-  def agree
-    interactions.where(last_vote: "agree")
+  def yes
+    interactions.where(last_vote: "yes")
   end
   
-  def disagree
-    interactions.where(last_vote: "disagree")
+  def block
+    interactions.where(last_vote: "block")
   end
   
-  def abstain
-    interactions.where(last_vote: "abstain")
+  def no
+    interactions.where(last_vote: "no")
   end
 
   def close!
