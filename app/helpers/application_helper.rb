@@ -28,30 +28,34 @@ module ApplicationHelper
     end
   end
   
-  def vote_icon(vote)
+  def vote_icon(vote, options = {})
+    icon = ""
     case vote
     when 'agree'
-      fa_icon "thumbs-o-up"
+      icon = "thumbs-o-up"
     when 'abstain'
-      fa_icon "hand-stop-o"
+      icon = "hand-stop-o"
     when 'disagree'
-      fa_icon "thumbs-o-down"
-    else
-      ""
+      icon = "thumbs-o-down"
+    when 'participating'
+      icon = "comments-o"
     end
+    icon += " #{options[:size]}" if options[:size]
+    icon.blank? ? nil : fa_icon(icon)
   end
 
-  def state_icon(state)
+  def state_icon(state, options = {})
+    icon = ""
     case state
     when 'waiting'
-      fa_icon "clock-o"
+      icon = "clock-o"
     when 'blocked', 'rejected'
-      fa_icon "ban"
+      icon = "ban"
     when 'accepted', 'passed', 'agreed'
-      fa_icon "check"
-    else
-      ""
+      icon = "check"
     end
+    icon += " #{options[:size]}" if options[:size]
+    icon.blank? ? nil : fa_icon(icon)
   end
 
 end
