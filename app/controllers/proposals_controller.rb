@@ -1,5 +1,6 @@
 class ProposalsController < ApplicationController
   protect_from_forgery except: :webhook
+  before_filter :get_proposal, except: [:index, :webhook]
   
   def index
     @open_proposals = Proposal.open.sort_by{|x| x.number.to_i}.reverse
@@ -7,7 +8,6 @@ class ProposalsController < ApplicationController
   end
   
   def show
-    @proposal = Proposal.find_by(number: params[:id])
     # Generate unified activity list
     @activity = []
     # Add commits
@@ -60,6 +60,10 @@ class ProposalsController < ApplicationController
   end
   
   private
+  
+  def get_proposal
+    @proposal = Proposal.find_by_number(params[:id])
+  end
   
   def on_issue_comment(json)
     case json['action']
