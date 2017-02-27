@@ -49,10 +49,35 @@
     <% end %>
     
     <div style="clear: both">
-      <a class='btn btn-primary btn-block' href='<%= @proposal.url %>'>
-        <%= fa_icon 'comment' %>
-        To comment or vote, please click here to visit the GitHub pull request
-      </a>
+      <div class='panel panel-default'>
+        <div class="panel-heading">
+          Comment<% if current_user.try(:contributor) %> and vote<% end %>:
+        </div>
+        <div class='panel-body'>
+          <form>
+            <div class="form-group">
+              <textarea id="comment" class="form-control" rows="5"></textarea>
+            </div>
+            <% if current_user.try(:contributor) %>
+              <div class="form-group">
+                <label class="radio-inline">
+                  <input type="radio" name="vote" id="vote-none" value="none" checked="true"> Not voting
+                </label>
+                <label class="radio-inline">
+                  <input type="radio" name="vote" id="vote-yes" value="yes"> <%= vote_icon('agree') %> Yes
+                </label>
+                <label class="radio-inline">
+                  <input type="radio" name="vote" id="vote-no" value="no"> <%= vote_icon('abstain') %> No
+                </label>
+                <label class="radio-inline">
+                  <input type="radio" name="vote" id="vote-block" value="block"> <%= vote_icon('disagree') %> Block
+                </label>
+              </div>
+            <% end %>
+            <button type="submit" class="btn btn-primary">Submit</button>
+          </form>
+        </div>
+      </div>
     </div>
   </div>
 
