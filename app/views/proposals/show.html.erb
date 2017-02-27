@@ -4,7 +4,6 @@
 </ol>
 
 <h1>
-  
   <%= @proposal.title %>
   <a href='<%= @proposal.url %>'>
     <%= fa_icon 'github' %>
@@ -49,15 +48,19 @@
 <div class='row'>
 
   <div class='col-md-9'>
-    
-    <div>
-      <p>
-        <a class='btn btn-primary btn-block' href='<%= @proposal.url %>/files'>
-          <%= fa_icon 'search' %>
-          View changes
-        </a>
-      </p>
-    </div>
+
+    <% @proposal.diff.each do |file| %>
+      <div class='panel panel-default'>
+        <div class="panel-heading">
+          <%= file[:filename] %>
+        </div>
+        <div class='panel-body'>
+          <pre>
+            <%= file[:patch] %>
+          </pre>
+        </div>
+      </div>
+    <% end %>
     
     <div class='comment well pull-left' style='width: 75%'>
       <p class='pull-left'>
