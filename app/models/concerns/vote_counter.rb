@@ -80,15 +80,15 @@ module VoteCounter
       if user != proposer
         interaction = interactions.find_or_create_by!(user: user)
         if user.contributor
-          if comment.body.contains_upvote?
+          if comment.body.contains_yes?
             next if comment.created_at < cutoff
-            interaction.agree!
+            interaction.yes!
           end
-          if comment.body.contains_downvote?
-            interaction.abstain!
+          if comment.body.contains_no?
+            interaction.no!
           end
           if comment.body.contains_block?
-            interaction.disagree!
+            interaction.block!
           end
         end
       end
@@ -106,9 +106,9 @@ Vote by entering one of the following symbols in a comment on this pull request.
 
 |vote|symbol|type this|points|
 |--|--|--|--|
-|Agree|:thumbsup:|`:thumbsup:`|#{ENV["UPVOTE_WEIGHT"]}|
-|Abstain|:hand:|`:hand:`|#{ENV["ABSTAIN_WEIGHT"]}|
-|Block|:thumbsdown:|`:thumbsdown:`|#{ENV["DOWNVOTE_WEIGHT"]}|
+|Yes|:white_check_mark:|`:white_check_mark:`|#{ENV["YES_WEIGHT"]}|
+|No|:negative_squared_cross_mark:|`:negative_squared_cross_mark:`|#{ENV["NO_WEIGHT"]}|
+|Block|:no_entry_sign:|`:no_entry_sign:`|#{ENV["BLOCK_WEIGHT"]}|
 
 Proposals will be accepted and merged once they have a total of #{ENV["PASS_THRESHOLD"]} points when all votes are counted. Votes will be open for a minimum of #{ENV["MIN_AGE"]} days, but will be closed if the proposal is not accepted after #{ENV["MAX_AGE"]}.
 

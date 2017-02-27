@@ -4,9 +4,9 @@
     <th>Title</th>
     <th class="text-center hidden-xs"><%= fa_icon 'comments-o' %></th>
     <th class="text-center"><%= fa_icon 'clock-o' %></th>
-    <th class="text-center"><%= vote_icon('agree')%></th>
-    <th class="text-center"><%= vote_icon('abstain')%></th>
-    <th class="text-center"><%= vote_icon('disagree')%></th>
+    <th class="text-center"><%= vote_icon('yes')%></th>
+    <th class="text-center"><%= vote_icon('no')%></th>
+    <th class="text-center"><%= vote_icon('block')%></th>
     <th class="text-center"><%= fa_icon 'user-o' %></th>
   </tr>
   <% proposals.each do |proposal| %>
@@ -20,9 +20,9 @@
       <td><a href='/proposals/<%= proposal.number %>'><%= proposal.title %></a></td> 
       <td class="text-center hidden-xs"><%= proposal.participants.count %></td>
       <td class="text-center"><%= proposal.age %>d</td>
-      <td class="text-center"><%= proposal.agree.count %></td>
-      <td class="text-center"><%= proposal.abstain.count %></td>
-      <td class="text-center"><%= proposal.disagree.count %></td>
+      <td class="text-center"><%= proposal.yes.count %></td>
+      <td class="text-center"><%= proposal.no.count %></td>
+      <td class="text-center"><%= proposal.block.count %></td>
       <td class="proposer text-center"><%= render partial: 'shared/person', locals: {person: proposal.proposer } %></td> 
     </tr>
   <% end %>

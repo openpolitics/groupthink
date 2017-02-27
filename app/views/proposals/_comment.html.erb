@@ -1,8 +1,8 @@
 <% by_proposer = (user == proposal.proposer) %>
 <% boxclass = 'well' %>
 <% boxclass = 'alert alert-danger' if body.contains_block? %>
-<% boxclass = 'alert alert-warning' if body.contains_downvote? %>
-<% boxclass = 'alert alert-success' if body.contains_upvote? %>
+<% boxclass = 'alert alert-warning' if body.contains_no? %>
+<% boxclass = 'alert alert-success' if body.contains_yes? %>
 <div class='comment <%= boxclass %> <%= by_proposer ? 'pull-left' : 'pull-right' %>'  style='width: 75%'>
   <p class='<%= by_proposer ? 'pull-left' : 'pull-right' %>'>
     <%= render partial: 'shared/person', locals: { person: user } %>
