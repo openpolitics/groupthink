@@ -61,38 +61,26 @@
       </div>
     <% end %>
     
-    <div class='comment well pull-left' style='width: 75%'>
-      <p class='pull-left'>
-        <%= render partial: 'shared/person', locals: { person: @proposal.proposer } %>
-      </p>
-      <p>
-        <%= link_to "@#{@proposal.proposer.login}", @proposal.proposer %> - <%= link_to time_ago_in_words(@proposal.github_pr.created_at)+" ago", @proposal.url %>
-      </p>
-      <p>
-        <%= render_github_markdown(@proposal.github_pr.body) %>
-      </p>
-    </div>
+    <%= render partial: 'comment', locals: {
+      body: @proposal.github_pr.body,
+      user: @proposal.proposer, 
+      proposal: @proposal, 
+      original_url: @proposal.url,
+      time: @proposal.github_pr.created_at
+    } %>
+
     <% @comments.each do |comment| %>
-      <% user = User.find_by_login(comment.user.login) %>
-      <% by_proposer = (user == @proposal.proposer) %>
       <% unless comment.body =~ /votebot instructions/ %>
-        <% boxclass = 'well' %>
-        <% boxclass = 'alert alert-danger' if comment.body.contains_block? %>
-        <% boxclass = 'alert alert-warning' if comment.body.contains_downvote? %>
-        <% boxclass = 'alert alert-success' if comment.body.contains_upvote? %>
-        <div class='comment <%= boxclass %> <%= by_proposer ? 'pull-left' : 'pull-right' %>'  style='width: 75%'>
-          <p class='<%= by_proposer ? 'pull-left' : 'pull-right' %>'>
-            <%= render partial: 'shared/person', locals: { person: user } %>
-          </p>
-          <p>
-            <%= link_to "@#{user.login}", user %> - <%= link_to time_ago_in_words(comment.created_at)+" ago", comment.html_url %></small>
-          </p>
-          <p>
-            <%= render_github_markdown(comment.body) %>
-          </p>
-        </div>
+        <%= render partial: 'comment', locals: {
+          body: comment.body, 
+          user: User.find_by_login(comment.user.login), 
+          proposal: @proposal, 
+          original_url: comment.html_url,
+          time: comment.created_at
+        } %>
       <% end %>
     <% end %>
+    
     <div style="clear: both">
       <a class='btn btn-primary btn-block' href='<%= @proposal.url %>'>
         <%= fa_icon 'comment' %>
