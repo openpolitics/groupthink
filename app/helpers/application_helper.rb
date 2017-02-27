@@ -23,35 +23,39 @@ module ApplicationHelper
       'warning'
     when 'block'
       'danger'
-    else
-      ''
+    when 'participating'
+      'default'
     end
   end
   
-  def vote_icon(vote)
+  def vote_icon(vote, options = {})
+    icon = ""
     case vote
     when 'yes'
-      "<i class='fa fa-check'></i>".html_safe
+      icon = "thumbs-o-up"
     when 'no'
-      "<i class='fa fa-times'></i>".html_safe
+      icon = "hand-stop-o"
     when 'block'
-      "<i class='fa fa-ban'></i>".html_safe
-    else
-      ""
+      icon = "thumbs-o-down"
+    when 'participating'
+      icon = "comments-o"
     end
+    icon += " #{options[:size]}" if options[:size]
+    icon.blank? ? nil : fa_icon(icon)
   end
 
-  def state_icon(state)
+  def state_icon(state, options = {})
+    icon = ""
     case state
     when 'waiting'
-      "<i class='fa fa-clock-o'></i>".html_safe
+      icon = "clock-o"
     when 'blocked', 'rejected'
-      "<i class='fa fa-ban'></i>".html_safe
+      icon = "ban"
     when 'accepted', 'passed', 'agreed'
-      "<i class='fa fa-check'></i>".html_safe
-    else
-      ""
+      icon = "check"
     end
+    icon += " #{options[:size]}" if options[:size]
+    icon.blank? ? nil : fa_icon(icon)
   end
 
 end

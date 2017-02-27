@@ -100,42 +100,18 @@
   </div>
 
   <div class='col-md-3'>
-    <div class='panel panel-success yes'>
-      <div class="panel-heading">
-        <%= vote_icon('yes')%>
-        Yes: <%= @proposal.yes.count %>
-      </div>
-      <div class='panel-body'>
-        <%= render partial: 'shared/person', collection: @proposal.yes.map{|v| v.user} %>
-      </div>
-    </div>
-
-    <div class='panel panel-warning no'>
-      <div class="panel-heading">
-        <%= vote_icon('no')%>
-        No: <%= @proposal.no.count %>
-      </div>
-      <div class='panel-body'>
-        <%= render partial: 'shared/person', collection: @proposal.no.map{|v| v.user} %>
-      </div>
-    </div>
-
-    <div class='panel panel-danger block'>
-      <div class="panel-heading">
-        <%= vote_icon('block')%>
-        Block: <%= @proposal.block.count %>
-      </div>
-      <div class='panel-body'>
-        <%= render partial: 'shared/person', collection: @proposal.block.map{|v| v.user} %>
-      </div>
-    </div>
     
-    <div class='panel panel-default participants'>
+    <div class='panel panel-default'>
       <div class="panel-heading">
-        Participants: <%= @proposal.participants.count %>
+        Activity
       </div>
       <div class='panel-body'>
-        <%= render partial: 'shared/person', collection: @proposal.participants %>
+        <% @proposal.participants.each do |user| %>
+          <div class='alert alert-<%= user_row_class(user.vote(@proposal)) %>'>
+            <%= render partial: 'shared/person', locals: { person: user } %>
+            <%= vote_icon(user.vote(@proposal), size: "lg") %>
+          </div>
+        <% end %>
       </div>
     </div>
 
