@@ -34,8 +34,8 @@ class Proposal < ApplicationRecord
     @github_pr ||= Octokit.pull_request(ENV['GITHUB_REPO'], number)
   end
 
-  def commit_shas
-    Octokit.pull_request_commits(ENV['GITHUB_REPO'], number).map{|x| x[:sha]}
+  def commits
+    Octokit.pull_request_commits(ENV['GITHUB_REPO'], number)
   end
 
   def head_sha

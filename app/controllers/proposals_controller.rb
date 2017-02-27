@@ -8,7 +8,42 @@ class ProposalsController < ApplicationController
   
   def show
     @proposal = Proposal.find_by(number: params[:id])
-    @comments = comments = Octokit.issue_comments(ENV['GITHUB_REPO'], @proposal.number)
+    # Generate unified activity list
+    @activity = []
+    # Add commits
+    @activity.concat(@proposal.commits.map{|commit|
+      ['diff', {
+        sha: commit[:sha],
+        user: User.find_by_login(commit[:commit][:author][:name]),
+        proposal: @proposal, 
+        original_url: @proposal.url,
+        time: commit[:commit][:author][:date]
+      }]
+    })
+    # Add original description
+    @activity << ['comment', {
+      body: @proposal.github_pr.body,
+      user: @proposal.proposer, 
+      proposal: @proposal, 
+      original_url: @proposal.url,
+      time: @proposal.github_pr.created_at
+    }] if @proposal.github_pr.body
+    # Add comments
+    comments = Octokit.issue_comments(ENV['GITHUB_REPO'], @proposal.number)
+    @activity.concat(comments.map{|comment|
+      next if comment.body =~ /votebot instructions/
+      ['comment', {
+        body: comment.body, 
+        user: User.find_by_login(comment.user.login), 
+        proposal: @proposal, 
+        original_url: comment.html_url,
+        time: comment.created_at
+      }]
+    })
+    # Remove any empty elements
+    @activity.compact!
+    # Sort by time
+    @activity.sort_by! { |a| a[1][:time] }
   end
   
   def webhook

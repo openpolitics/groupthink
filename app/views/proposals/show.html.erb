@@ -49,38 +49,8 @@
 
   <div class='col-md-9'>
 
-    <% @proposal.commit_shas.each do |commit| %>
-      <% @proposal.diff(commit).each do |file| %>
-        <div class='panel panel-default'>
-          <div class="panel-heading">
-            <%= link_to "@#{@proposal.proposer.login}", @proposal.proposer %> edited <code><%= file[:filename] %></code>
-            - <%= link_to time_ago_in_words(@proposal.github_pr.created_at)+" ago", @proposal.url %>
-          </div>
-          <div class='panel-body'>
-            <%= render_diff(file[:patch]).html_safe %>
-          </div>
-        </div>
-      <% end %>
-    <% end %>
-    
-    <%= render partial: 'comment', locals: {
-      body: @proposal.github_pr.body,
-      user: @proposal.proposer, 
-      proposal: @proposal, 
-      original_url: @proposal.url,
-      time: @proposal.github_pr.created_at
-    } %>
-
-    <% @comments.each do |comment| %>
-      <% unless comment.body =~ /votebot instructions/ %>
-        <%= render partial: 'comment', locals: {
-          body: comment.body, 
-          user: User.find_by_login(comment.user.login), 
-          proposal: @proposal, 
-          original_url: comment.html_url,
-          time: comment.created_at
-        } %>
-      <% end %>
+    <% @activity.each do |x| %>
+      <%= render partial: x[0], locals: x[1] %>
     <% end %>
     
     <div style="clear: both">
