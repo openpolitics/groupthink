@@ -13,7 +13,7 @@ title='<%= @user.login %>' />
 
 <%= render partial: 'shared/proposal_list', locals: {proposals: @not_voted} %>
 
-<h2>Voted on (<%= @voted.count %>):</h2>
+<h2>Voted on (<%= @voted_count %>):</h2>
 
 <table class='table vote-list'>
   <tr>
@@ -41,7 +41,7 @@ title='<%= @user.login %>' />
   <%= paginate @voted, param_name: :voted_page%>
 </div>
 
-<h2>Proposed (<%= @proposed.count %>):</h2>
+<h2>Proposed (<%= @proposed_count %>):</h2>
 
 <%= render partial: 'shared/proposal_list', locals: {proposals: @proposed} %>
 

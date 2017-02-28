@@ -9,8 +9,15 @@ class UsersController < ApplicationController
   end
 
   def show
-    @proposed = @user.proposed.page params[:proposed_page]
-    @voted = @user.voted_on.page params[:voted_page]
+    # Get proposed list
+    @proposed = @user.proposed
+    @proposed_count = @proposed.count
+    @proposed = @proposed.page params[:proposed_page]
+    # Get voted list
+    @voted = @user.voted_on
+    @voted_count = @voted.count
+    @voted = @voted.page params[:voted_page]
+    # Get list not yet voted on
     @not_voted = @user.not_voted_on
   end
 
