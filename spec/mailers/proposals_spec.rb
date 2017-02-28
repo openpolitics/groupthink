@@ -19,7 +19,7 @@ RSpec.describe ProposalsMailer, type: :mailer do
     end
 
     it "should include link to vote" do
-      expect(mail.body.encoded).to match("https://github.com/#{ENV["GITHUB_REPO"]}/pull/#{proposal.number}")
+      expect(mail.body.encoded).to match("#{ENV["SITE_URL"]}/proposals/#{proposal.number}")
     end
 
     it "should include link to edit settings for user" do
