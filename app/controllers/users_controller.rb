@@ -10,7 +10,7 @@ class UsersController < ApplicationController
   end
 
   def show
-    @proposals = Proposal.all.sort_by{|x| x.number.to_i}.reverse
+    @proposals = Proposal.all.order(number: :desc)
     @proposed, @proposals = @proposals.partition{|x| x.proposer == @user}
     @voted, @not_voted = @proposals.partition{|pr| @user.participating.where("last_vote IS NOT NULL").include? pr}
     @not_voted.reject!{|x| x.closed? }
