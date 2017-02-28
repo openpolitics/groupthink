@@ -8,6 +8,8 @@ class ProposalsController < ApplicationController
   end
   
   def show
+    # Can the current user vote?
+    @can_vote = current_user.try(:contributor) && current_user != @proposal.proposer
     # Generate unified activity list
     @activity = []
     # Add commits
@@ -57,6 +59,21 @@ class ProposalsController < ApplicationController
     else
       head 400
     end
+  end
+  
+  def comment
+    github = Octokit::Client.new(:access_token => session[:github_token])
+    comment = params[:comment]
+    case params[:vote]
+      when "yes"
+        comment += "\n\nVote: ✅"
+      when "no"
+        comment += "\n\nVote: ❎"
+      when "block"
+        comment += "\n\nVote: 🚫"
+    end
+    github.add_comment(ENV['GITHUB_REPO'], @proposal.number, comment)
+    redirect_to @proposal
   end
   
   private
