@@ -9,10 +9,9 @@ class UsersController < ApplicationController
   end
 
   def show
-    @proposals = Proposal.all
-    @proposed, @proposals = @proposals.partition{|x| x.proposer == @user}
-    @voted, @not_voted = @proposals.partition{|pr| @user.participating.where("last_vote IS NOT NULL").include? pr}
-    @not_voted.reject!{|x| x.closed? }
+    @proposed = @user.proposed.page params[:proposed_page]
+    @voted = @user.voted_on.page params[:voted_page]
+    @not_voted = @user.not_voted_on
   end
 
   def edit

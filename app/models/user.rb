@@ -12,6 +12,19 @@ class User < ApplicationRecord
   
   before_validation :load_from_github, on: :create
 
+  def proposed
+    Proposal.where(proposer: self)
+  end
+
+  def voted_on
+    Proposal.joins(:interactions).where('interactions.user': self).where.not('interactions.last_vote': nil, proposer: self)
+  end
+
+  def not_voted_on
+    # There might be a better way to do this
+    Proposal.open.where.not(proposer: self, id: voted_on)
+  end
+
   def self.from_omniauth(auth)
     # Find by oauth details, or if not available, by login only as some may have been created before.
     u = find_by(provider: auth.provider, uid: auth.uid) || find_by(login: auth.extra.raw_info.login)
