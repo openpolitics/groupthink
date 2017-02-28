@@ -3,8 +3,8 @@ class ProposalsController < ApplicationController
   before_filter :get_proposal, except: [:index, :webhook]
   
   def index
-    @open_proposals = Proposal.open.sort_by{|x| x.number.to_i}.reverse
-    @closed_proposals = Proposal.closed.sort_by{|x| x.number.to_i}.reverse
+    @open_proposals = Proposal.open.order(number: :desc)
+    @closed_proposals = Proposal.closed.order(number: :desc).page params[:page]
   end
   
   def show

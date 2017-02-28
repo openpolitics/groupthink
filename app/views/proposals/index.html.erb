@@ -5,3 +5,7 @@
 <h1>Closed Proposals</h1>
 
 <%= render partial: 'shared/proposal_list', locals: {proposals: @closed_proposals} %>
+
+<div style="text-align: center">
+  <%= paginate @closed_proposals %>
+</div>
