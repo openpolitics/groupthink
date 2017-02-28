@@ -2,7 +2,7 @@ class Proposal < ApplicationRecord
   include VoteCounter
 
   default_scope { order(number: :desc) }
-  paginates_per 25
+  paginates_per 10
 
   has_many :interactions, dependent: :destroy
   has_many :participants, through: :interactions, source: :user
