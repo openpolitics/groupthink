@@ -48,37 +48,40 @@
       <%= render partial: x[0], locals: x[1] %>
     <% end %>
     
-    <div style="clear: both">
-      <div class='panel panel-primary' id="vote">
-        <div class="panel-heading">
-          Comment<% if @can_vote %> and vote<% end %>:
-        </div>
-        <div class='panel-body'>
-          <%= form_tag comment_proposal_path(@proposal) do %>
-            <div class="form-group">
-              <%= text_area_tag :comment, "", {rows: 5, class: "form-control"} %>
-            </div>
-            <% if @can_vote %>
+    <% if signed_in? %>
+      <div style="clear: both">
+        <div class='panel panel-primary' id="vote">
+          <div class="panel-heading">
+            Comment<% if @can_vote %> and vote<% end %>:
+          </div>
+          <div class='panel-body'>
+            <%= form_tag comment_proposal_path(@proposal) do %>
               <div class="form-group">
-                <label class="radio-inline">
-                  <input type="radio" name="vote" id="vote-none" value="none" checked="true"> Not voting
-                </label>
-                <label class="radio-inline">
-                  <input type="radio" name="vote" id="vote-yes" value="yes"> <%= vote_icon('yes') %> Yes
-                </label>
-                <label class="radio-inline">
-                  <input type="radio" name="vote" id="vote-no" value="no"> <%= vote_icon('no') %> No
-                </label>
-                <label class="radio-inline">
-                  <input type="radio" name="vote" id="vote-block" value="block"> <%= vote_icon('block') %> Block
-                </label>
+                <%= text_area_tag :comment, "", {rows: 5, class: "form-control"} %>
               </div>
+              <% if @can_vote %>
+                <div class="form-group">
+                  <label class="radio-inline">
+                    <input type="radio" name="vote" id="vote-none" value="none" checked="true"> Not voting
+                  </label>
+                  <label class="radio-inline">
+                    <input type="radio" name="vote" id="vote-yes" value="yes"> <%= vote_icon('yes') %> Yes
+                  </label>
+                  <label class="radio-inline">
+                    <input type="radio" name="vote" id="vote-no" value="no"> <%= vote_icon('no') %> No
+                  </label>
+                  <label class="radio-inline">
+                    <input type="radio" name="vote" id="vote-block" value="block"> <%= vote_icon('block') %> Block
+                  </label>
+                </div>
+              <% end %>
+              <button type="submit" class="btn btn-primary">Submit</button>
             <% end %>
-            <button type="submit" class="btn btn-primary">Submit</button>
-          <% end %>
+          </div>
         </div>
       </div>
-    </div>
+    <% end %>
+      
   </div>
 
   <div class='col-md-3'>
