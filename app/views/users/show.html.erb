@@ -37,6 +37,14 @@ title='<%= @user.login %>' />
   <% end %>
 </table>
 
+<div style="text-align: center">
+  <%= paginate @voted, param_name: :voted_page%>
+</div>
+
 <h2>Proposed (<%= @proposed.count %>):</h2>
 
 <%= render partial: 'shared/proposal_list', locals: {proposals: @proposed} %>
+
+<div style="text-align: center">
+  <%= paginate @proposed, param_name: :proposed_page%>
+</div>
