@@ -4,12 +4,12 @@ class UsersController < ApplicationController
   before_action :authorise, only: [:edit, :update]
   
   def index
-    @contributors = User.where(contributor: true).order(:login)
-    @others = User.where(contributor: false).order(:login)
+    @contributors = User.where(contributor: true)
+    @others = User.where(contributor: false)
   end
 
   def show
-    @proposals = Proposal.all.order(number: :desc)
+    @proposals = Proposal.all
     @proposed, @proposals = @proposals.partition{|x| x.proposer == @user}
     @voted, @not_voted = @proposals.partition{|pr| @user.participating.where("last_vote IS NOT NULL").include? pr}
     @not_voted.reject!{|x| x.closed? }

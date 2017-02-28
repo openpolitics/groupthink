@@ -1,6 +1,9 @@
 class Proposal < ApplicationRecord
   include VoteCounter
 
+  default_scope { order(number: :desc) }
+  paginates_per 25
+
   has_many :interactions, dependent: :destroy
   has_many :participants, through: :interactions, source: :user
   belongs_to :proposer, class_name: "User"
@@ -13,8 +16,6 @@ class Proposal < ApplicationRecord
   before_validation :load_from_github, on: :create
   after_create :count_votes!
   after_create :notify_voters
-
-  paginates_per 25
 
   def self.update_all_from_github!
     Rails.logger.info "Updating proposals"

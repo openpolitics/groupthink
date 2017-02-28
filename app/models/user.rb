@@ -1,5 +1,7 @@
 class User < ApplicationRecord
   
+  default_scope { order(:login) }
+
   devise :omniauthable, :omniauth_providers => [:github]
 
   has_many :interactions, dependent: :destroy
