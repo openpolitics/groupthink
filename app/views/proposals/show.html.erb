@@ -49,16 +49,16 @@
     <% end %>
     
     <div style="clear: both">
-      <div class='panel panel-default'>
+      <div class='panel panel-primary' id="vote">
         <div class="panel-heading">
-          Comment<% if current_user.try(:contributor) %> and vote<% end %>:
+          Comment<% if @can_vote %> and vote<% end %>:
         </div>
         <div class='panel-body'>
-          <form>
+          <%= form_tag comment_proposal_path(@proposal) do %>
             <div class="form-group">
-              <textarea id="comment" class="form-control" rows="5"></textarea>
+              <%= text_area_tag :comment, "", {rows: 5, class: "form-control"} %>
             </div>
-            <% if current_user.try(:contributor) %>
+            <% if @can_vote %>
               <div class="form-group">
                 <label class="radio-inline">
                   <input type="radio" name="vote" id="vote-none" value="none" checked="true"> Not voting
@@ -75,13 +75,23 @@
               </div>
             <% end %>
             <button type="submit" class="btn btn-primary">Submit</button>
-          </form>
+          <% end %>
         </div>
       </div>
     </div>
   </div>
 
   <div class='col-md-3'>
+    
+    <% if @can_vote %>
+      <div>
+        <p>
+          <a href='#vote' class='btn btn-primary btn-block'>
+            <%= fa_icon 'check' %> Vote now!
+          </a>
+        </p>
+      </div>
+    <% end %>
     
     <div class='panel panel-default'>
       <div class="panel-heading">

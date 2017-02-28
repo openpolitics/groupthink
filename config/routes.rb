@@ -9,7 +9,11 @@ Rails.application.routes.draw do
     delete 'sign_out', :to => 'devise/sessions#destroy', :as => :destroy_user_session
   end
   
-  resources :proposals
+  resources :proposals do
+    member do
+      post :comment
+    end
+  end
   
   post 'webhook', to: 'proposals#webhook', as: :webhook
   
