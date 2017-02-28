@@ -4,9 +4,8 @@ class UsersController < ApplicationController
   before_action :authorise, only: [:edit, :update]
   
   def index
-    @users = User.all.order(:login)
-    @contributors = @users.select{|x| x.contributor}
-    @others = @users.select{|x| !x.contributor}
+    @contributors = User.where(contributor: true).order(:login)
+    @others = User.where(contributor: false).order(:login)
   end
 
   def show
