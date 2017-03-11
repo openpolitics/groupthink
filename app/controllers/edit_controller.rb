@@ -66,7 +66,7 @@ class EditController < ApplicationController
     @branch = params[:branch]
     @title = params[:title]
     @filename = params[:filename] || params[:path]
-    @format = params[:format] || @filename ? @filename.split('.').last : "md"
+    @format = params[:format] || (@filename ? @filename.split('.').last : "md")
     if @title.present? && @filename.nil?
       @filename = @title.parameterize + ".#{@format}"
     end
