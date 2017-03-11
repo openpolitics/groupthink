@@ -57,11 +57,11 @@ class EditController < ApplicationController
     @repo = params[:repo]
     @branch = params[:branch]
     @filename = params[:filename] || params[:path]
-    @format = @filename.split('.').last
+    @format = params[:format] || @filename ? @filename.split('.').last : "md"
     @content = params[:content]
     @summary = params[:summary]
     @description = params[:description]
-    @lineendings = params[:lineendings]
+    @lineendings = params[:lineendings] || :crlf
   end
 
   def github
