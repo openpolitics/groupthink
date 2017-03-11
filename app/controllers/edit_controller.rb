@@ -28,7 +28,6 @@ class EditController < ApplicationController
   end
   
   def commit
-    raise "parp"
     # Fix line endings
     @content = convert_line_endings(@content, @lineendings)
     # Do we need to work in a fork?
