@@ -1,5 +1,12 @@
 <%= form_tag action: 'message' do %>
 
+<div class='pull-right'>
+  <a class='btn btn-success' href='/new/<%= @branch%>'>
+    <%= fa_icon 'plus' %>
+    Create new file instead
+  </a>
+</div>
+
 <h1>Suggest a change to <em><%= @filename %></em></h1>
 
 <div class="form-group alert alert-success">
