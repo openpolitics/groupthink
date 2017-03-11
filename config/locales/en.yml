@@ -33,6 +33,7 @@ en:
   sign_cla: Accept CLA
   help:
     edit: Make your changes in the editor below, then hit "Submit changes" at the bottom.
+    new: Enter the title of your new document (e.g. "All About Rabbits"), and then write the content in the editor below. Once you're done hit "Submit changes" at the bottom.
     summary: Write a short summary that describes what you changed. For instance, "Fixed spelling mistakes", or "Added a new section about ducks".
     description: If you want to, you can add a more detailed description that describes the background to your change, or explains to reviewers why it should be accepted.
     success_title: Thanks! Your change has been submitted.

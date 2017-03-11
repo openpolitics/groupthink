@@ -1,0 +1,16 @@
+<%= form_tag action: 'message' do %>
+
+<h1>Create a new file</h1>
+
+<div class="form-group alert alert-success">
+  <%= fa_icon 'question-circle' %>
+  <%= t 'help.new' %>
+</div>
+
+<div class="form-group">
+  <%= text_field_tag 'title', '', style: 'width: 100%', maxlength: "100", placeholder: "Enter the title for your new file", required: true %>
+</div>
+
+<%= render 'edit_form' %>
+
+<% end %>

@@ -19,6 +19,7 @@ Rails.application.routes.draw do
   
   constraints(path: /[^\?]+/) do
     get "/edit/:branch/*path" => "edit#edit", :format => false
+    get "/new/:branch" => "edit#new", :format => false
   end
   post "/edit/message" => "edit#message"
   post "/edit/commit" => "edit#commit"

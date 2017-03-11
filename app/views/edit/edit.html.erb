@@ -1,5 +1,12 @@
 <%= form_tag action: 'message' do %>
 
+<div class='pull-right'>
+  <a class='btn btn-success' href='/new/<%= @branch%>'>
+    <%= fa_icon 'plus' %>
+    Create new file instead
+  </a>
+</div>
+
 <h1>Suggest a change to <em><%= @filename %></em></h1>
 
 <div class="form-group alert alert-success">
@@ -7,25 +14,8 @@
   <%= t 'help.edit' %>
 </div>
 
-<div class="form-group">
-  <%= case @format
-  when "csv"
-    render 'csv_editor' 
-  when "md"
-    render 'markdown_editor' 
-  else
-    render 'text_editor'
-  end %>
-</div>
-
 <%= hidden_field_tag "filename", @filename %>
-<%= hidden_field_tag "owner", @owner %>
-<%= hidden_field_tag "repo", @repo %>
-<%= hidden_field_tag "branch", @branch %>
-<%= hidden_field_tag "lineendings", @lineendings %>
 
-<div class="form-group">
-  <%= submit_tag t(:submit_changes), class: 'btn btn-primary'%>
-</div>
+<%= render 'edit_form' %>
 
 <% end %>

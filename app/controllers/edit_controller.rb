@@ -7,12 +7,20 @@ class EditController < ApplicationController
   def index
   end
   
+  def new
+    @content = ""
+  end
+  
   def edit    
     @content = get_files(original_repo_path, @filename)[@filename]
     @lineendings = detect_line_endings(@content)
   end
 
   def message
+    # Prepend title if we have been given one, for a new filename
+    if @title.present?
+      @content = "---\ntitle: #{@title}\n---\n#{@content}"
+    end
     # Prepare a fork if we don't have permission to push
     unless github.repository(original_repo_path).permissions.push
       github.fork original_repo_path
@@ -56,12 +64,16 @@ class EditController < ApplicationController
     @owner = params[:owner]
     @repo = params[:repo]
     @branch = params[:branch]
+    @title = params[:title]
     @filename = params[:filename] || params[:path]
-    @format = @filename.split('.').last
+    @format = params[:format] || (@filename ? @filename.split('.').last : "md")
+    if @title.present? && @filename.nil?
+      @filename = @title.parameterize + ".#{@format}"
+    end
     @content = params[:content]
     @summary = params[:summary]
     @description = params[:description]
-    @lineendings = params[:lineendings]
+    @lineendings = params[:lineendings] || :crlf
   end
 
   def github
