@@ -46,6 +46,11 @@
       "value": "",
       "description": "The logo for the project that this app manages. This will be shown in the top left of the site at a height of 20px."
     },
+    "FAVICON_URL": {
+      "required": true,
+      "value": "",
+      "description": "The URL for a shortcut icon to show in tab titles and bookmark lists."
+    },
     "EMAIL_DOMAIN": {
       "required": true,
       "value": "example.com",
