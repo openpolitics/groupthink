@@ -31,8 +31,9 @@
           </div>
           <div class="collapse navbar-collapse">
             <ul class="nav navbar-nav">
-              <li><a href="/proposals">Proposals</a></li>
-              <li><a href="/users">Contributors</a></li>
+              <li><%= link_to "Proposals", proposals_path %></li>
+              <li><%= link_to "Ideas", ideas_path %></li>
+              <li><%= link_to "Contributors", users_path %></li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
               <% if signed_in? %>

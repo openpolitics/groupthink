@@ -15,6 +15,9 @@ Rails.application.routes.draw do
     end
   end
   
+  resources :ideas do
+  end
+
   post 'webhook', to: 'proposals#webhook', as: :webhook
   
   constraints(path: /[^\?]+/) do

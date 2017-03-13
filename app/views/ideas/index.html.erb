@@ -1,0 +1,36 @@
+<h1>Ideas</h1>
+
+<div class='alert alert-info'>
+  <p>
+    This page lists outline ideas that have been suggested, but not turned into detailed 
+    proposals yet. 
+  </p>
+  <p>
+    If you're looking for something to contribute:
+  </p>
+  <ol>
+    <li>pick something interesting from the list,</li>
+    <li>click through to take a look at the details,</li>
+    <li>then go and suggest a change!</li>
+</div>
+
+<table class='table table-striped'>
+  <tr>
+    <th>
+      Idea
+    </th>
+    <th>
+      When suggested
+    </th>
+  </tr>
+  <% @ideas.each do |idea| %>
+    <tr>
+      <td>
+        <%= link_to idea[:title], idea_path(idea[:number]) %>
+      </td>
+      <td>
+        <%= time_ago_in_words(idea[:created_at]) %> ago
+      </td>
+    </tr>
+  <% end %>
+</table>

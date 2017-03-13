@@ -1,0 +1,38 @@
+<h1>
+  <%= @idea.title %>
+  <a href='<%= @idea.html_url %>'>
+    <%= fa_icon 'github' %>
+  </a>
+</h1>
+
+<hr/>
+
+<div class='row'>
+
+  <div class='col-md-9'>
+
+    <% @activity.each do |x| %>
+      <%= render partial: "shared/#{x[0]}", locals: x[1] %>
+    <% end %>
+    
+  </div>
+
+  <div class='col-md-3'>
+    
+    <div>
+      <div class='alert alert-info'>
+        This is just a suggestion for a proposal, not a completed proposal. It
+        should be turned into a proper proposal by editing the original document.
+        Debate and voting can then happen there.
+      </div>
+      
+      <p>
+        <a href='#vote' class='btn btn-primary btn-block'>
+          <%= fa_icon 'edit' %> Make a proposal on this idea!
+        </a>
+      </p>
+    </div>
+    
+  </div>
+
+</div>
