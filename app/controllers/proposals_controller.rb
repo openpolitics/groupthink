@@ -26,7 +26,7 @@ class ProposalsController < ApplicationController
     @activity << ['comment', {
       body: @proposal.github_pr.body,
       user: @proposal.proposer, 
-      proposal: @proposal, 
+      by_author: true,
       original_url: @proposal.url,
       time: @proposal.github_pr.created_at
     }] if @proposal.github_pr.body
@@ -37,7 +37,7 @@ class ProposalsController < ApplicationController
       ['comment', {
         body: comment.body, 
         user: User.find_by_login(comment.user.login), 
-        proposal: @proposal, 
+        by_author: (comment.user.login == @proposal.proposer.login),
         original_url: comment.html_url,
         time: comment.created_at
       }]
