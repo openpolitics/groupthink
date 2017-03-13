@@ -31,6 +31,21 @@
       "value": "https://your-unique-votebot-app-name.herokuapp.com",
       "description": "The URL for this app. Unless you're setting up a CNAME, it'll be based on the app name you entered above."
     },
+    "PROJECT_URL": {
+      "required": true,
+      "value": "",
+      "description": "The URL for the project website that this app manages."
+    },
+    "PROJECT_NAME": {
+      "required": true,
+      "value": "",
+      "description": "The name of the project that this app manages. This will be shown in the top left of the site and link to the PROJECT_URL."
+    },
+    "PROJECT_LOGO": {
+      "required": true,
+      "value": "",
+      "description": "The logo for the project that this app manages. This will be shown in the top left of the site at a height of 20px."
+    },
     "EMAIL_DOMAIN": {
       "required": true,
       "value": "example.com",
