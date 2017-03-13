@@ -1,6 +1,13 @@
+<div class='pull-right'>
+  <a href='https://github.com/<%= ENV['GITHUB_REPO'] %>/issues/new?labels=idea' class='btn btn-primary' style='margin: 25px 0px'>
+    <%= fa_icon 'plus' %>
+    Suggest a new idea
+  </a>
+</div>
+
 <h1>Ideas</h1>
 
-<div class='alert alert-info'>
+<div class='alert alert-info' style='clear: both'>
   <p>
     This page lists outline ideas that have been suggested, but not turned into detailed 
     proposals yet. 
@@ -12,6 +19,7 @@
     <li>pick something interesting from the list,</li>
     <li>click through to take a look at the details,</li>
     <li>then go and suggest a change!</li>
+  </ol>
 </div>
 
 <table class='table table-striped'>
