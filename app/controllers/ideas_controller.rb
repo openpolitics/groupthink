@@ -6,7 +6,7 @@ class IdeasController < ApplicationController
   def show
     @idea = Octokit.issue(ENV['GITHUB_REPO'], params[:id])
     @activity = []
-    @author = User.find_by_login(@idea.user.login)
+    @author = User.find_or_create_by(login: @idea.user.login)
     # Add original description
     @activity << ['comment', {
       body: @idea[:body].blank? ? "*The author didn't add any more detail*" : @idea[:body],
@@ -20,7 +20,7 @@ class IdeasController < ApplicationController
     @activity.concat(comments.map{|comment|
       ['comment', {
         body: comment.body,
-        user: User.find_by_login(comment.user.login),
+        user: User.find_or_create_by(login: comment.user.login),
         by_author: (@author.login == comment.user.login),
         original_url: comment.html_url,
         time: comment.created_at
