@@ -23,7 +23,6 @@
     },
     "GITHUB_REPO": {
       "required": true,
-      "value": "username/repository",
       "description": "The GitHub repository that this app is monitoring. In the format '{username}/{repository}'"
     },
     "SITE_URL": {
