@@ -1,13 +1,13 @@
 <html>
   <head>
-    <title>OpenPolitics Votebot</title>
+    <title><%= ENV['PROJECT_NAME'] %></title>
     <%= csrf_meta_tags %>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
-    <%= favicon_link_tag 'logo64.png', type: 'image/png' %>
+    <%= favicon_link_tag ENV['FAVICON_URL'], type: 'image/png' if ENV['FAVICON_URL'] %>
     <%= favicon_link_tag 'apple-touch-icon.png', rel: 'apple-touch-icon', type: 'image/png' %>
     <style>
        body {
@@ -25,14 +25,15 @@
               <span class="icon-bar"></span>
               <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="https://openpolitics.org.uk/index.html">
-              <%= image_tag "logo64_inverted.png", alt: "logo", height: "20", style: "vertical-align: text-bottom; display: inline-block" %>&nbsp;OpenPolitics
+            <a class="navbar-brand" href="<%= ENV['PROJECT_URL'] %>">
+              <%= image_tag ENV['PROJECT_LOGO'], alt: "logo", height: "20", style: "vertical-align: text-bottom; display: inline-block" if ENV['PROJECT_LOGO']%>&nbsp;<%= ENV['PROJECT_NAME'] %>
             </a>
           </div>
           <div class="collapse navbar-collapse">
             <ul class="nav navbar-nav">
-              <li><a href="/proposals">Proposals</a></li>
-              <li><a href="/users">Contributors</a></li>
+              <li><%= link_to "Proposals", proposals_path %></li>
+              <li><%= link_to "Ideas", ideas_path %></li>
+              <li><%= link_to "Contributors", users_path %></li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
               <% if signed_in? %>

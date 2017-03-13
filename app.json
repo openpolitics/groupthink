@@ -23,13 +23,32 @@
     },
     "GITHUB_REPO": {
       "required": true,
-      "value": "username/repository",
       "description": "The GitHub repository that this app is monitoring. In the format '{username}/{repository}'"
     },
     "SITE_URL": {
       "required": true,
       "value": "https://your-unique-votebot-app-name.herokuapp.com",
       "description": "The URL for this app. Unless you're setting up a CNAME, it'll be based on the app name you entered above."
+    },
+    "PROJECT_URL": {
+      "required": true,
+      "value": "",
+      "description": "The URL for the project website that this app manages."
+    },
+    "PROJECT_NAME": {
+      "required": true,
+      "value": "",
+      "description": "The name of the project that this app manages. This will be shown in the top left of the site and link to the PROJECT_URL."
+    },
+    "PROJECT_LOGO": {
+      "required": false,
+      "value": "",
+      "description": "The logo for the project that this app manages. This will be shown in the top left of the site at a height of 20px."
+    },
+    "FAVICON_URL": {
+      "required": false,
+      "value": "",
+      "description": "The URL for a shortcut icon to show in tab titles and bookmark lists."
     },
     "EMAIL_DOMAIN": {
       "required": true,
