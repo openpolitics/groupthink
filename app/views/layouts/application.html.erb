@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
-    <%= favicon_link_tag ENV['FAVICON_URL'], type: 'image/png' %>
+    <%= favicon_link_tag ENV['FAVICON_URL'], type: 'image/png' if ENV['FAVICON_URL'] %>
     <%= favicon_link_tag 'apple-touch-icon.png', rel: 'apple-touch-icon', type: 'image/png' %>
     <style>
        body {
@@ -26,7 +26,7 @@
               <span class="icon-bar"></span>
             </button>
             <a class="navbar-brand" href="<%= ENV['PROJECT_URL'] %>">
-              <%= image_tag ENV['PROJECT_LOGO'], alt: "logo", height: "20", style: "vertical-align: text-bottom; display: inline-block" %>&nbsp;<%= ENV['PROJECT_NAME'] %>
+              <%= image_tag ENV['PROJECT_LOGO'], alt: "logo", height: "20", style: "vertical-align: text-bottom; display: inline-block" if ENV['PROJECT_LOGO']%>&nbsp;<%= ENV['PROJECT_NAME'] %>
             </a>
           </div>
           <div class="collapse navbar-collapse">
