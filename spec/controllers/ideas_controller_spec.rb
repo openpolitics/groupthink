@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe IdeasController, type: :controller do
+RSpec.describe IdeasController, type: :controller, vcr: true do
 
   describe "GET #index" do
     it "returns http success" do
@@ -11,7 +11,7 @@ RSpec.describe IdeasController, type: :controller do
 
   describe "GET #show" do
     it "returns http success" do
-      get :show
+      get :show, id: 430
       expect(response).to have_http_status(:success)
     end
   end
