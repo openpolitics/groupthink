@@ -30,6 +30,7 @@ RSpec.describe ProposalsController, type: :controller do
     end
     
     it "should redirect to login if not logged in" do
+      expect_any_instance_of(Octokit::Client).to receive(:add_comment).never
       put :comment, params: {id: @proposal.number}
       expect(response).to be_redirect
       expect(response.redirect_url).to eq "http://test.host/sign_in"
