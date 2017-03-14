@@ -11,7 +11,7 @@ RSpec.describe IdeasController, type: :controller, vcr: true do
 
   describe "GET #show" do
     it "returns http success" do
-      get :show, id: 430
+      get :show, params: {id: 430}
       expect(response).to have_http_status(:success)
     end
   end
