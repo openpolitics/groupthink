@@ -32,7 +32,7 @@ RSpec.describe ProposalsController, type: :controller do
     it "should redirect to login if not logged in" do
       put :comment, params: {id: @proposal.number}
       expect(response).to be_redirect
-      expect(response.redirect_to).to include "/login"
+      expect(response.redirect_url).to eq "http://test.host/sign_in"
     end
   
   end
