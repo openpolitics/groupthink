@@ -22,4 +22,19 @@ RSpec.describe ProposalsController, type: :controller do
     expect(response.body).to include "Floppy"
   end
 
+  context "adding comments" do
+    
+    before :each do
+      @proposer = create :user, contributor: true, notify_new: true
+      @proposal = create :proposal, proposer: @proposer
+    end
+    
+    it "should redirect to login if not logged in" do
+      put :comment, params: {id: @proposal.number}
+      expect(response).to be_redirect
+      expect(response.redirect_to).to include "/login"
+    end
+  
+  end
+
 end
