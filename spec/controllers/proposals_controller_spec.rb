@@ -35,6 +35,14 @@ RSpec.describe ProposalsController, type: :controller do
       expect(response.redirect_url).to eq "http://test.host/sign_in"
     end
   
+    it "should post comment if logged in" do
+      expect_any_instance_of(Octokit::Client).to receive(:add_comment).once
+      sign_in @proposer
+      put :comment, params: {id: @proposal.number, comment: "hello"}
+      expect(response).to be_redirect
+      expect(response.redirect_url).to eq "http://test.host/proposals/#{@proposal.number}"
+    end
+
   end
 
 end
