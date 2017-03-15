@@ -107,7 +107,7 @@ class ProposalsController < ApplicationController
   end
 
   def on_pull_request_opened(json)
-    proposal = Proposal.create(number: json['number'])
+    Proposal.create(number: json['number'])
   end
   
   def on_pull_request_closed(json)

@@ -4,7 +4,7 @@ module ApplicationHelper
     ENV['BOOTSTRAP_CSS_URL'] || "//maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css"
   end
   
-  def new_session_path(scope)
+  def new_session_path(_scope)
       new_user_session_path
   end
     

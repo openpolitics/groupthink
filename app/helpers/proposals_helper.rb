@@ -5,7 +5,7 @@ module ProposalsHelper
     markdown = GitHub::Markup.render('comment.markdown', markdown).html_safe
     markdown = link_usernames(markdown)
     markdown = link_proposals(markdown)
-    markdown = auto_link(markdown)
+    auto_link(markdown)
   end
 
   def replace_emoji(str)

@@ -102,7 +102,7 @@ class EditController < ApplicationController
   memoize :latest_commit
 
   def tree(repo, branch)
-    t = github.tree(repo, branch, :recursive => true)
+    github.tree(repo, branch, :recursive => true)
   end
   memoize :tree
 
