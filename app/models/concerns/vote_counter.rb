@@ -24,25 +24,18 @@ module VoteCounter
   end
     
   def update_state!
+    # default
+    state = "waiting"
+    # If closed, was it accepted or rejected?
     if github_pr.state == "closed"
-      if github_pr.merged == true
-        state = "accepted"
-      else
-        state = "rejected"
-      end
+      state = github_pr.merged ? "accepted" : "rejected"
     else
       if too_old?
         state = "dead"
       elsif blocked?
         state = "blocked"
       elsif passed?
-        if too_new? 
-          state = "agreed"
-        else
-          state = "passed"
-        end
-      else
-        state = "waiting"
+        state = too_new? ? "agreed" : "passed"
       end
     end
     # Store final state in DB
@@ -102,19 +95,16 @@ module VoteCounter
     return if comment.body =~ /<!-- votebot instructions -->/
     # Find the user
     user = User.find_or_create_by(login: comment.user.login)
-    # If it's not the proposer, count the vote
-    if user != proposer && user.contributor
-      interaction = interactions.find_or_create_by!(user: user)
-      if comment.body.contains_yes?
-        interaction.yes! if comment.created_at >= time_of_last_commit
-      end
-      if comment.body.contains_no?
-        interaction.no!
-      end
-      if comment.body.contains_block?
-        interaction.block!
-      end
+    # Ignore proposer and non-contributors
+    return if user == proposer || !user.contributor
+    # Votes are stores in an interaction record 
+    interaction = interactions.find_or_create_by!(user: user)
+    # It's a yes if there is a yes vote AND the comment is since the last commit
+    if comment.body.contains_yes? && (comment.created_at >= time_of_last_commit)
+      interaction.yes!
     end
+    interaction.no! if comment.body.contains_no?
+    interaction.block! if comment.body.contains_block?
   end
 
   def count_votes_in_comments(comments)
