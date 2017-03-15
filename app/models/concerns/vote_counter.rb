@@ -6,9 +6,19 @@ module VoteCounter
   end
   
   def count_votes!
-    instructions_found = process_comments
-    post_instructions if !instructions_found && github_pr.state != "closed"
+    # Get the comments
+    comments = Octokit.issue_comments(ENV['GITHUB_REPO'], number)
+    # Post instructions if they're not already there
+    if !instructions_posted?(comments) && github_pr.state != "closed"
+      post_instructions
+    end
+    # Count up all the votes
+    count_votes_in_comments(comments)
+    # Update the state flag
     update_state!
+    # Set build statuses on github
+    set_vote_build_status
+    set_time_build_status
   end
     
   def update_state!
@@ -19,41 +29,53 @@ module VoteCounter
         state = "rejected"
       end
     else
-      github_state = nil
-      github_description = nil
-      if blocked?
-        state = "blocked"
-        github_state = "failure"
-        github_description = "The change is blocked."
-      elsif passed?
-        state = "passed"
-        github_state = "success"
-        github_description = "The change is agreed."
-      else
-        state = "waiting"
-        github_state = "pending"
-        github_description = "The change is waiting for more votes; #{ENV["PASS_THRESHOLD"].to_i - score} more needed."
-      end
-      # Update github commit status
-      set_build_status(github_state, github_description, "votebot/votes")
-      # Check age
       if too_old?
         state = "dead"
-        github_state = "failure"
-        github_description = "The change has been open for more than #{ENV["MAX_AGE"]} days, and should be closed (age: #{age}d)."
-      elsif too_new?
-        state = "agreed" if state == "passed"
-        github_state = "pending"
-        github_description = "The change has not yet been open for #{ENV["MIN_AGE"]} days (age: #{age}d)."
+      elsif blocked?
+        state = "blocked"
+      elsif passed?
+        if too_new? 
+          state = "agreed"
+        else
+          state = "passed"
+        end
       else
-        github_state = "success"
-        github_description = "The change has been open long enough to be merged (age: #{age}d)."
+        state = "waiting"
       end
-      # Update github commit status
-      set_build_status(github_state, github_description, "votebot/time")
     end
     # Store final state in DB
     update_attributes!(state: state)
+  end
+
+  def set_vote_build_status
+    if blocked?
+      status = "failure"
+      text = "The proposal is blocked."
+    elsif passed?
+      status = "success"
+      text = "The proposal has been agreed."
+    else
+      status = "pending"
+      text = "The proposal is waiting for more votes; #{ENV["PASS_THRESHOLD"].to_i - score} more needed."
+    end
+    # Update github commit status
+    set_build_status(status, text, "votebot/votes")
+  end
+
+  def set_time_build_status
+    # Check age
+    if too_old?
+      status = "failure"
+      text = "The change has been open for more than #{ENV["MAX_AGE"]} days, and should be closed (age: #{age}d)."
+    elsif too_new?
+      status = "pending"
+      text = "The change has not yet been open for #{ENV["MIN_AGE"]} days (age: #{age}d)."
+    else
+      status = "success"
+      text = "The change has been open long enough to be merged (age: #{age}d)."
+    end
+    # Update github commit status
+    set_build_status(status, text, "votebot/time")    
   end
 
   def set_build_status(state, text, context)
@@ -63,38 +85,45 @@ module VoteCounter
       context: context)
   end
 
-  def process_comments
+  def instructions_posted?(comments)
     instructions_found = false
-    comments = Octokit.issue_comments(ENV['GITHUB_REPO'], number)
-    if sha
-      commit = Octokit.pull_commits(ENV['GITHUB_REPO'], number).find{|x| x.sha == sha}
-      cutoff = commit.commit.committer.date
-    else
-      cutoff = DateTime.new(1970)
-    end
-    comments.each do |comment|
-      if comment.body =~ /<!-- votebot instructions -->/
+    comments.each do |c|
+      if c.body =~ /<!-- votebot instructions -->/
         instructions_found = true
-        next
-      end
-      user = User.find_or_create_by(login: comment.user.login)
-      if user != proposer
-        interaction = interactions.find_or_create_by!(user: user)
-        if user.contributor
-          if comment.body.contains_yes?
-            next if comment.created_at < cutoff
-            interaction.yes!
-          end
-          if comment.body.contains_no?
-            interaction.no!
-          end
-          if comment.body.contains_block?
-            interaction.block!
-          end
-        end
       end
     end
     instructions_found
+  end
+
+  def count_vote_in_comment(comment, time_of_last_commit)
+    # Skip instructions
+    return if comment.body =~ /<!-- votebot instructions -->/
+    # Find the user
+    user = User.find_or_create_by(login: comment.user.login)
+    # If it's not the proposer, count the vote
+    if user != proposer && user.contributor
+      interaction = interactions.find_or_create_by!(user: user)
+      if comment.body.contains_yes?
+        interaction.yes! if comment.created_at >= time_of_last_commit
+      end
+      if comment.body.contains_no?
+        interaction.no!
+      end
+      if comment.body.contains_block?
+        interaction.block!
+      end
+    end
+  end
+
+  def count_votes_in_comments(comments)
+    # Find the time of the last commit
+    time_of_last_commit = DateTime.new(1970)
+    if sha
+      commit = Octokit.pull_commits(ENV['GITHUB_REPO'], number).find{|x| x.sha == sha}
+      time_of_last_commit = commit.commit.committer.date
+    end
+    # Count votes in comments
+    comments.each { |c| count_vote_in_comment(c, time_of_last_commit) }
   end
 
   def post_instructions
