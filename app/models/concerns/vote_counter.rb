@@ -17,8 +17,10 @@ module VoteCounter
     # Update the state flag
     update_state!
     # Set build statuses on github
-    set_vote_build_status
-    set_time_build_status
+    unless closed?
+      set_vote_build_status
+      set_time_build_status
+    end
   end
     
   def update_state!
