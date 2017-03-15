@@ -5,61 +5,56 @@ module ApplicationHelper
   end
   
   def new_session_path(_scope)
-      new_user_session_path
+    new_user_session_path
   end
-    
+
   def row_class(pr)
-    case pr.state
-    when 'passed', 'agreed', 'accepted'
-      'success'
-    when 'waiting'
-      'warning'
-    when 'blocked', 'dead', 'rejected'
-      'danger'
-    end
+    {
+      'waiting'  => 'warning',
+      'blocked'  => 'danger',
+      'rejected' => 'danger',
+      'dead'     => 'danger',
+      'accepted' => 'success',
+      'passed'   => 'success',
+      'agreed'   => 'success',
+    }[pr.state]
   end
   
   def user_row_class(state)
-    case state
-    when 'yes'
-      'success'
-    when 'no'
-      'warning'
-    when 'block'
-      'danger'
-    when 'participating'
-      'default'
-    end
+    {
+      'yes'           => 'success',
+      'no'            => 'warning',
+      'block'         => 'danger',
+      'participating' => 'default'
+    }[state]
+  end
+  
+  def fa_sized_icon(icon, size = nil)
+    icon += " #{size}" if size
+    fa_icon(icon)
   end
   
   def vote_icon(vote, options = {})
-    icon = ""
-    case vote
-    when 'yes'
-      icon = "check"
-    when 'no'
-      icon = "times"
-    when 'block'
-      icon = "ban"
-    when 'participating'
-      icon = "comments-o"
-    end
-    icon += " #{options[:size]}" if options[:size]
-    icon.blank? ? nil : fa_icon(icon)
+    icon = {
+      "yes"           => "check",
+      "no"            => "times",
+      "block"         => "ban",
+      "participating" => "comments-o"
+    }[vote]
+    fa_sized_icon(icon, options[:size])
   end
 
   def state_icon(state, options = {})
-    icon = ""
-    case state
-    when 'waiting'
-      icon = "clock-o"
-    when 'blocked', 'rejected'
-      icon = "ban"
-    when 'accepted', 'passed', 'agreed'
-      icon = "check"
-    end
-    icon += " #{options[:size]}" if options[:size]
-    icon.blank? ? nil : fa_icon(icon)
+    icon = {
+      'waiting'  => 'clock-o',
+      'blocked'  => 'ban',
+      'rejected' => 'ban',
+      'dead'     => 'ban',
+      'accepted' => 'check',
+      'passed'   => 'check',
+      'agreed'   => 'check',
+    }[state]
+    fa_sized_icon(icon, options[:size])
   end
 
 end
