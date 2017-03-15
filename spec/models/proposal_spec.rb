@@ -2,13 +2,6 @@ require 'rails_helper'
 
 RSpec.describe Proposal, :vcr do
 
-  it "should update proposals on demand" do
-    Timecop.freeze(2015,5,30)
-    pr = Proposal.create(number: 356)
-    expect(pr.state).to eq 'accepted'
-    Timecop.return
-  end
-
   it "should include proposer information" do
     pr = Proposal.create(number: 43)
     expect(pr.proposer.login).to eq 'Floppy'
