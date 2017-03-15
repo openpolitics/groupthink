@@ -104,6 +104,10 @@
       "required": true,
       "value": "password",
       "description": "The password for your SMTP server, for sending mail"
+    },
+    "BOOTSTRAP_CSS_URL": {
+      "required": false,
+      "description": "A URL for a Bootstrap 3 CSS file. If not specified, the default theme will be used"
     }
   },
   "formation": {
