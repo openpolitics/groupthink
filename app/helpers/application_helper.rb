@@ -8,53 +8,75 @@ module ApplicationHelper
     new_user_session_path
   end
 
-  def row_class(pr)
-    {
-      'waiting'  => 'warning',
-      'blocked'  => 'danger',
-      'rejected' => 'danger',
-      'dead'     => 'danger',
-      'accepted' => 'success',
-      'passed'   => 'success',
-      'agreed'   => 'success',
-    }[pr.state]
-  end
-  
-  def user_row_class(state)
-    {
-      'yes'           => 'success',
-      'no'            => 'warning',
-      'block'         => 'danger',
-      'participating' => 'default'
-    }[state]
-  end
-  
   def fa_sized_icon(icon, size = nil)
     icon += " #{size}" if size
     fa_icon(icon)
   end
   
+  @@state_style = {
+    'waiting' => {
+      class: 'warning',
+      icon:  'clock-o',
+    },
+    'blocked' => {
+      class: 'danger',
+      icon:  'ban',
+    },
+    'rejected' => {
+      class: 'danger',
+      icon:  'ban',
+    },
+    'dead' => {
+      class: 'danger',
+      icon:  'ban',
+    },
+    'accepted' => {
+      class: 'success',
+      icon:  'check',
+    },
+    'passed' => {
+      class: 'success',
+      icon:  'check',
+    },
+    'agreed' => {
+      class: 'success',
+      icon:  'check',
+    },
+  }
+
+  @@vote_style = {
+    'yes' => {
+      class: 'success',
+      icon: 'check',
+    },
+    'no' => {
+      class: 'warning',
+      icon: 'times',
+    },
+    'block' => {
+      class: 'danger',
+      icon: 'ban',
+    },
+    'participating' => {
+      class: 'default',
+      icon: 'comments-o',
+    },
+  }
+
+  def row_class(pr)
+    @@state_style[pr.state][:class]
+  end
+  
+  def user_row_class(state)
+    @@vote_style[state][:class]
+  end
+  
   def vote_icon(vote, options = {})
-    icon = {
-      "yes"           => "check",
-      "no"            => "times",
-      "block"         => "ban",
-      "participating" => "comments-o"
-    }[vote]
-    fa_sized_icon(icon, options[:size])
+    fa_sized_icon(@@vote_style[vote][:icon], options[:size])
   end
 
   def state_icon(state, options = {})
-    icon = {
-      'waiting'  => 'clock-o',
-      'blocked'  => 'ban',
-      'rejected' => 'ban',
-      'dead'     => 'ban',
-      'accepted' => 'check',
-      'passed'   => 'check',
-      'agreed'   => 'check',
-    }[state]
-    fa_sized_icon(icon, options[:size])
+    fa_sized_icon(@@state_style[state][:icon], options[:size])
   end
 
 end
