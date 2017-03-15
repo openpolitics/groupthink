@@ -25,7 +25,7 @@ module VoteCounter
         state = "blocked"
         github_state = "failure"
         github_description = "The change is blocked."
-      elsif agreed?
+      elsif passed?
         state = "passed"
         github_state = "success"
         github_description = "The change is agreed."

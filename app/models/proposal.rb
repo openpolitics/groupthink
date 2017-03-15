@@ -76,7 +76,7 @@ class Proposal < ApplicationRecord
     (yes.count * ENV["YES_WEIGHT"].to_i) + (no.count * ENV["NO_WEIGHT"].to_i) + (block.count * ENV["BLOCK_WEIGHT"].to_i)
   end
 
-  def agreed?
+  def passed?
     score >= ENV["PASS_THRESHOLD"].to_i
   end
   
