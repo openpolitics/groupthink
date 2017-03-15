@@ -35,10 +35,7 @@ module VoteCounter
         github_description = "The change is waiting for more votes; #{ENV["PASS_THRESHOLD"].to_i - score} more needed."
       end
       # Update github commit status
-      Octokit.create_status(ENV['GITHUB_REPO'], sha, github_state,
-        target_url: "#{ENV['SITE_URL']}/proposals/#{number}",
-        description: github_description,
-        context: "votebot/votes")
+      set_build_status(github_state, github_description, "votebot/votes")
       # Check age
       if too_old?
         state = "dead"
@@ -53,13 +50,17 @@ module VoteCounter
         github_description = "The change has been open long enough to be merged (age: #{age}d)."
       end
       # Update github commit status
-      Octokit.create_status(ENV['GITHUB_REPO'], sha, github_state,
-        target_url: "#{ENV['SITE_URL']}/proposals/#{number}",
-        description: github_description,
-        context: "votebot/time")
+      set_build_status(github_state, github_description, "votebot/time")
     end
     # Store final state in DB
     update_attributes!(state: state)
+  end
+
+  def set_build_status(state, text, context)
+    Octokit.create_status(ENV['GITHUB_REPO'], sha, state,
+      target_url: "#{ENV['SITE_URL']}/proposals/#{number}",
+      description: text,
+      context: context)
   end
 
   def process_comments
