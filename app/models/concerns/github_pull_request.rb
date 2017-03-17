@@ -40,5 +40,13 @@ module GithubPullRequest
   def github_commits
     Octokit.pull_request_commits(ENV['GITHUB_REPO'], number)
   end
+  
+  def pr_closed?
+    github_pr.state == "closed"
+  end
+
+  def pr_merged?
+    github_pr.merged
+  end
 
 end

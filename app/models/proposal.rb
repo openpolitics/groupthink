@@ -76,8 +76,8 @@ class Proposal < ApplicationRecord
     # default
     state = "waiting"
     # If closed, was it accepted or rejected?
-    if github_pr.state == "closed"
-      state = github_pr.merged ? "accepted" : "rejected"
+    if pr_closed?
+      state = pr_merged? ? "accepted" : "rejected"
     else
       if too_old?
         state = "dead"
