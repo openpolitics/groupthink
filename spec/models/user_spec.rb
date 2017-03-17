@@ -1,8 +1,8 @@
 require 'rails_helper'
 
-RSpec.describe User, :vcr do
+RSpec.describe User do
 
-  it "should load user data from github" do
+  it "should load user data from github", :vcr do
     u = User.create(login: 'Floppy')
     expect(u.avatar_url).to be_present
     expect(u.email).to eq 'james@floppy.org.uk'

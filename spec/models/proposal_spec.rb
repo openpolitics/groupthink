@@ -1,8 +1,8 @@
 require 'rails_helper'
 
-RSpec.describe Proposal, :vcr do
+RSpec.describe Proposal do
 
-  it "should include proposer information" do
+  it "should include proposer information", :vcr  do
     pr = Proposal.create(number: 43)
     expect(pr.proposer.login).to eq 'Floppy'
   end
