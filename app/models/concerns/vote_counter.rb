@@ -22,25 +22,6 @@ module VoteCounter
       set_time_build_status
     end
   end
-    
-  def update_state!
-    # default
-    state = "waiting"
-    # If closed, was it accepted or rejected?
-    if github_pr.state == "closed"
-      state = github_pr.merged ? "accepted" : "rejected"
-    else
-      if too_old?
-        state = "dead"
-      elsif blocked?
-        state = "blocked"
-      elsif passed?
-        state = too_new? ? "agreed" : "passed"
-      end
-    end
-    # Store final state in DB
-    update_attributes!(state: state)
-  end
 
   def set_vote_build_status
     if blocked?

@@ -7,6 +7,20 @@ RSpec.describe Proposal do
     expect(pr.proposer.login).to eq 'Floppy'
   end
   
+  context "checking overall state" do
+    
+    it "should store merged pull requests as accepted", :vcr do
+      pr = Proposal.create(number: 43)
+      expect(pr.state).to eq 'accepted'
+    end
+
+    it "should store closed and unmerged pull requests as rejected", :vcr do
+      pr = Proposal.create(number: 9)
+      expect(pr.state).to eq 'rejected'
+    end
+
+  end
+  
   context "notification of new proposals" do
   
     before :all do

@@ -28,14 +28,4 @@ RSpec.describe VoteCounter do
     expect(pr.yes.count).to eq 1
   end
 
-  it "should store merged pull requests as accepted", :vcr do
-    pr = Proposal.create(number: 43)
-    expect(pr.state).to eq 'accepted'
-  end
-
-  it "should store closed and unmerged pull requests as rejected", :vcr do
-    pr = Proposal.create(number: 9)
-    expect(pr.state).to eq 'rejected'
-  end
-
 end
