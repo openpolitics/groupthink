@@ -35,7 +35,7 @@ module GithubPullRequest
     "https://github.com/#{ENV['GITHUB_REPO']}/pull/#{number}"
   end
     
-  def commits
+  def github_commits
     Octokit.pull_request_commits(ENV['GITHUB_REPO'], number)
   end
 

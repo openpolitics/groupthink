@@ -83,7 +83,7 @@ module VoteCounter
     # Find the time of the last commit
     time_of_last_commit = DateTime.new(1970)
     if sha
-      commit = Octokit.pull_commits(ENV['GITHUB_REPO'], number).find{|x| x.sha == sha}
+      commit = github_commits.find{|x| x.sha == sha}
       time_of_last_commit = commit.commit.committer.date
     end
     # Count votes in comments

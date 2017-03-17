@@ -14,7 +14,7 @@ class ProposalsController < ApplicationController
     # Generate unified activity list
     @activity = []
     # Add commits
-    @activity.concat(@proposal.commits.map{|commit|
+    @activity.concat(@proposal.github_commits.map{|commit|
       ['diff', {
         sha: commit[:sha],
         user: User.find_by_login(commit[:commit][:author][:name]),
