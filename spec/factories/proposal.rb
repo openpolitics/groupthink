@@ -4,7 +4,7 @@ FactoryGirl.define do
     number { Faker::Number.number(3) }
     state "waiting"
     title { Faker::Book.title }
-    #proposer - send this in
+    proposer { create :user }
     opened_at { Time.now }
 
     # Don't run load_from_github callback when creating from factory, but put it back after
