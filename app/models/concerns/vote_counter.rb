@@ -90,7 +90,7 @@ module VoteCounter
   end
 
   def post_instructions
-    Octokit.add_comment(ENV['GITHUB_REPO'], number, <<-EOF)
+    github_add_comment <<-EOF
 <!-- votebot instructions -->
 This proposal is open for discussion and voting. If you are a [contributor](#{ENV['SITE_URL']}/users/) to this repository (and not the proposer), you may vote on whether or not it is accepted. 
 
