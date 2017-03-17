@@ -2,7 +2,7 @@
   <div class='panel panel-default' style='clear: both'>
     <div class="panel-heading">
       <%= link_to "@#{proposal.proposer.login}", proposal.proposer %> edited <code><%= file[:filename] %></code>
-      - <%= link_to time_ago_in_words(proposal.github_pr.created_at)+" ago", proposal.url %>
+      - <%= link_to time_ago_in_words(proposal.submitted_at)+" ago", proposal.url %>
     </div>
     <div class='panel-body'>
       <%= render_diff(file[:patch]).html_safe %>

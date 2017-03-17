@@ -1,10 +1,8 @@
 module VoteCounter
   extend ActiveSupport::Concern
   
-  def sha
-    @sha ||= github_pr.head.sha
-  end
-  
+  private
+
   def count_votes!
     # Get the comments
     comments = Octokit.issue_comments(ENV['GITHUB_REPO'], number)
@@ -52,13 +50,6 @@ module VoteCounter
     end
     # Update github commit status
     set_build_status(status, text, "votebot/time")    
-  end
-
-  def set_build_status(state, text, context)
-    Octokit.create_status(ENV['GITHUB_REPO'], sha, state,
-      target_url: "#{ENV['SITE_URL']}/proposals/#{number}",
-      description: text,
-      context: context)
   end
 
   def instructions_posted?(comments)

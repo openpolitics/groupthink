@@ -1,5 +1,6 @@
 class Proposal < ApplicationRecord
   include VoteCounter
+  include GithubPullRequest
 
   default_scope { order(number: :desc) }
   paginates_per 10
@@ -32,14 +33,6 @@ class Proposal < ApplicationRecord
     save!
   end
 
-  def github_pr
-    @github_pr ||= Octokit.pull_request(ENV['GITHUB_REPO'], number)
-  end
-
-  def commits
-    Octokit.pull_request_commits(ENV['GITHUB_REPO'], number)
-  end
-
   def description
     github_pr.body
   end
@@ -48,19 +41,6 @@ class Proposal < ApplicationRecord
     github_pr.created_at
   end
 
-  def head_sha
-    github_pr["head"]["sha"]
-  end
-  
-  def base_sha
-    github_pr["base"]["sha"]
-  end
-  
-  def diff(sha = nil)
-    sha ||= head_sha
-    Octokit.compare(ENV['GITHUB_REPO'], base_sha, sha).files
-  end
-  
   def load_from_github
     self.opened_at = github_pr.created_at
     self.title     = github_pr.title
@@ -141,7 +121,7 @@ class Proposal < ApplicationRecord
   end
   
   def url
-    "https://github.com/#{ENV['GITHUB_REPO']}/pull/#{number}"
+    github_url
   end
   
   def notify_voters
