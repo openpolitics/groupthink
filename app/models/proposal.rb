@@ -42,10 +42,10 @@ class Proposal < ApplicationRecord
   end
 
   def load_from_github
-    self.opened_at = github_pr.created_at
-    self.title     = github_pr.title
-    self.state   ||= "waiting"
-    self.proposer  = User.find_or_create_by(login: github_pr.user.login)
+    self.opened_at ||= github_pr.created_at
+    self.title     ||= github_pr.title
+    self.state     ||= "waiting"
+    self.proposer  ||= User.find_or_create_by(login: github_pr.user.login)
   end
 
   def age
