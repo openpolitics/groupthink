@@ -25,12 +25,12 @@ class ProposalsController < ApplicationController
     })
     # Add original description
     @activity << ['comment', {
-      body: @proposal.github_pr.body,
+      body: @proposal.description,
       user: @proposal.proposer, 
       by_author: true,
       original_url: @proposal.url,
-      time: @proposal.github_pr.created_at
-    }] if @proposal.github_pr.body
+      time: @proposal.submitted_at
+    }] if @proposal.description
     # Add comments
     comments = Octokit.issue_comments(ENV['GITHUB_REPO'], @proposal.number)
     @activity.concat(comments.map{|comment|

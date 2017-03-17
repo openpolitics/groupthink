@@ -40,6 +40,14 @@ class Proposal < ApplicationRecord
     Octokit.pull_request_commits(ENV['GITHUB_REPO'], number)
   end
 
+  def description
+    github_pr.body
+  end
+
+  def submitted_at
+    github_pr.created_at
+  end
+
   def head_sha
     github_pr["head"]["sha"]
   end
