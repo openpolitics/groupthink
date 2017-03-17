@@ -4,8 +4,7 @@ module VoteCounter
   private
 
   def count_votes!
-    # Get the comments
-    comments = Octokit.issue_comments(ENV['GITHUB_REPO'], number)
+    comments = github_comments
     # Post instructions if they're not already there
     if !instructions_posted?(comments) && github_pr.state != "closed"
       post_instructions

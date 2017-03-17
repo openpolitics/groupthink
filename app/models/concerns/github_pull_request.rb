@@ -39,4 +39,8 @@ module GithubPullRequest
     Octokit.pull_request_commits(ENV['GITHUB_REPO'], number)
   end
 
+  def github_comments
+    Octokit.issue_comments(ENV['GITHUB_REPO'], number)
+  end
+
 end
