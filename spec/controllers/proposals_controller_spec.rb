@@ -16,7 +16,7 @@ RSpec.describe ProposalsController, type: :controller do
 
   it "should show individual proposal page" do
     # Stub out the calls to github data
-    allow_any_instance_of(Proposal).to receive(:commits).and_return([])
+    allow_any_instance_of(Proposal).to receive(:github_commits).and_return([])
     allow_any_instance_of(Proposal).to receive(:description).and_return("test")
     allow_any_instance_of(Proposal).to receive(:submitted_at).and_return(1.hour.ago)
     allow_any_instance_of(Octokit::Client).to receive(:issue_comments).and_return([])
