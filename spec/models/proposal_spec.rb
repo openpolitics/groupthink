@@ -1,11 +1,6 @@
 require 'rails_helper'
 
 RSpec.describe Proposal do
-
-  it "should load proposer from github", :vcr  do
-    pr = Proposal.create(number: 43)
-    expect(pr.proposer.login).to eq 'Floppy'
-  end
   
   context "checking overall state" do
     
