@@ -11,14 +11,14 @@ RSpec.describe VoteCounter do
     pr = create :proposal
     comments = [
       OpenStruct.new(
-        body: ":-1:",
+        body: "✅",
         created_at: 2.hours.ago,
         user: OpenStruct.new(
           login: @voter1.login
         )
       ),
       OpenStruct.new(
-        body: ":+1:",
+        body: "✅",
         created_at: 1.hour.ago,
         user: OpenStruct.new(
           login: @voter1.login
@@ -31,28 +31,49 @@ RSpec.describe VoteCounter do
     expect(pr.yes.first.user).to eq @voter1
   end
 
-  [":+1:", ":thumbsup:", "👍", ":white_check_mark:", "✅"].each do |symbol|
-    it "should treat #{symbol}  as a yes vote" do
-      pr = create :proposal
-      comments = [
-        OpenStruct.new(
-          body: "here is a vote! #{symbol}",
-          created_at: 2.hours.ago,
-          user: OpenStruct.new(
-            login: @voter1.login
-          )
-        )      ]
-      expect(pr).to receive(:time_of_last_commit).and_return(1.day.ago)
-      pr.send(:count_votes_in_comments, comments)
-      expect(pr.score).to eq 1
+  context "casting votes in comments" do
+    [
+      {
+        vote: "yes",
+        symbols: [":+1:", ":thumbsup:", "👍", ":white_check_mark:", "✅"],
+        score: 1
+      },
+      {
+        vote: "no",
+        symbols: [":hand:", "✋", ":negative_squared_cross_mark:", "❎"],
+        score: -1
+      },
+      {
+        vote: "block",
+        symbols: [":-1:", ":thumbsdown:", "👎", ":no_entry_sign:", "🚫"],
+        score: -1000
+      },
+    ].each do |set|
+      set[:symbols].each do |symbol|
+        it "should treat #{symbol}  as a #{set[:vote]} vote" do
+          pr = create :proposal
+          comments = [
+            OpenStruct.new(
+              body: "here is a vote! #{symbol}",
+              created_at: 2.hours.ago,
+              user: OpenStruct.new(
+                login: @voter1.login
+              )
+            )      
+          ]
+          expect(pr).to receive(:time_of_last_commit).and_return(1.day.ago)
+          pr.send(:count_votes_in_comments, comments)
+          expect(pr.score).to eq set[:score]
+        end
+      end
     end
   end
-
+  
   it "should ignore votes from proposer" do
     pr = create :proposal
     comments = [
       OpenStruct.new(
-        body: ":+1:",
+        body: "✅",
         created_at: 2.hours.ago,
         user: OpenStruct.new(
           login: pr.proposer.login
@@ -68,7 +89,7 @@ RSpec.describe VoteCounter do
     pr = create :proposal
     comments = [
       OpenStruct.new(
-        body: ":+1:",
+        body: "✅",
         created_at: 2.hours.ago,
         user: OpenStruct.new(
           login: pr.proposer.login
