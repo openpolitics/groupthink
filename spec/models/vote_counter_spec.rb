@@ -2,30 +2,82 @@ require 'rails_helper'
 
 RSpec.describe VoteCounter do
 
-  it "should only count latest vote per person", :vcr do
-    pr = Proposal.create(number: 100)
-    expect(pr.yes.count).to eq 2
-    expect(pr.yes.map{|x| x.user.login}.sort).to eq ["Floppy", "philipjohn"]
+  before :each do
+    @voter1 = create :user, contributor: true
+    @voter2 = create :user, contributor: true
   end
 
-  it "should handle both thumbsup and +1 emoticons as yes votes", :vcr do
-    pr = Proposal.create(number: 356)
-    expect(pr.yes.map{|x| x.user.login}.sort).to eq ["Floppy", "philipjohn"]
+  it "should only count latest vote per person" do
+    pr = create :proposal
+    comments = [
+      OpenStruct.new(
+        body: ":-1:",
+        created_at: 2.hours.ago,
+        user: OpenStruct.new(
+          login: @voter1.login
+        )
+      ),
+      OpenStruct.new(
+        body: ":+1:",
+        created_at: 1.hour.ago,
+        user: OpenStruct.new(
+          login: @voter1.login
+        )
+      )
+    ]
+    expect(pr).to receive(:time_of_last_commit).and_return(1.day.ago).at_least(:once)
+    pr.send(:count_votes_in_comments, comments)
+    expect(pr.score).to eq 1
+    expect(pr.yes.first.user).to eq @voter1
   end
 
-  it "should handle emoji yes votes", :vcr do
-    pr = Proposal.create(number: 433)
-    expect(pr.yes.map{|x| x.user.login}.sort).to eq ["Floppy"]
+  [":+1:", ":thumbsup:", "👍", ":white_check_mark:", "✅"].each do |symbol|
+    it "should treat #{symbol}  as a yes vote" do
+      pr = create :proposal
+      comments = [
+        OpenStruct.new(
+          body: "here is a vote! #{symbol}",
+          created_at: 2.hours.ago,
+          user: OpenStruct.new(
+            login: @voter1.login
+          )
+        )      ]
+      expect(pr).to receive(:time_of_last_commit).and_return(1.day.ago)
+      pr.send(:count_votes_in_comments, comments)
+      expect(pr.score).to eq 1
+    end
   end
 
-  it "should ignore votes from proposer", :vcr do
-    pr = Proposal.create(number: 74)
-    expect(pr.yes.count).to eq 0
+  it "should ignore votes from proposer" do
+    pr = create :proposal
+    comments = [
+      OpenStruct.new(
+        body: ":+1:",
+        created_at: 2.hours.ago,
+        user: OpenStruct.new(
+          login: pr.proposer.login
+        )
+      )
+    ]
+    expect(pr).to receive(:time_of_last_commit).and_return(1.day.ago)
+    pr.send(:count_votes_in_comments, comments)
+    expect(pr.score).to eq 0
   end
 
-  it "should ignore votes before last commit", :vcr do
-    pr = Proposal.create(number: 135)
-    expect(pr.yes.count).to eq 1
+  it "should ignore votes before last commit" do
+    pr = create :proposal
+    comments = [
+      OpenStruct.new(
+        body: ":+1:",
+        created_at: 2.hours.ago,
+        user: OpenStruct.new(
+          login: pr.proposer.login
+        )
+      )
+    ]
+    expect(pr).to receive(:time_of_last_commit).and_return(1.hour.ago)
+    pr.send(:count_votes_in_comments, comments)
+    expect(pr.score).to eq 0
   end
 
 end

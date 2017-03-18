@@ -48,5 +48,14 @@ module GithubPullRequest
   def pr_merged?
     github_pr.merged
   end
+  
+  def time_of_last_commit
+    time = DateTime.new(1970)
+    if sha
+      commit = github_commits.find{|x| x.sha == sha}
+      time = commit.commit.committer.date
+    end
+    time
+  end
 
 end

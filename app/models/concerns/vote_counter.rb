@@ -6,7 +6,7 @@ module VoteCounter
   def count_votes!
     comments = github_comments
     # Post instructions if they're not already there
-    if !instructions_posted?(comments) && github_pr.state != "closed"
+    if !instructions_posted?(comments) && !pr_closed?
       post_instructions
     end
     # Count up all the votes
@@ -79,13 +79,6 @@ module VoteCounter
   end
 
   def count_votes_in_comments(comments)
-    # Find the time of the last commit
-    time_of_last_commit = DateTime.new(1970)
-    if sha
-      commit = github_commits.find{|x| x.sha == sha}
-      time_of_last_commit = commit.commit.committer.date
-    end
-    # Count votes in comments
     comments.each { |c| count_vote_in_comment(c, time_of_last_commit) }
   end
 
