@@ -43,7 +43,9 @@ module ProposalsHelper
     sections = [[:unchanged, ""]]
     last_type = " "
     str.split("\n").map do |line|
-      next if line.starts_with?("@")
+      if line.starts_with?("@")
+        next
+      end
       if line.starts_with?(last_type)
         sections.last[1] += "\n#{line[1..-1]}"
       else

@@ -63,19 +63,27 @@ module VoteCounter
 
   def count_vote_in_comment(comment, time_of_last_commit)
     # Skip instructions
-    return if comment.body =~ /<!-- votebot instructions -->/
+    if comment.body =~ /<!-- votebot instructions -->/
+      return
+    end
     # Find the user
     user = User.find_or_create_by(login: comment.user.login)
     # Ignore proposer and non-contributors
-    return if user == proposer || !user.contributor
+    if user == proposer || !user.contributor
+      return 
+    end
     # Votes are stores in an interaction record 
     interaction = interactions.find_or_create_by!(user: user)
     # It's a yes if there is a yes vote AND the comment is since the last commit
     if comment.body.contains_yes? && (comment.created_at >= time_of_last_commit)
       interaction.yes!
     end
-    interaction.no! if comment.body.contains_no?
-    interaction.block! if comment.body.contains_block?
+    if comment.body.contains_no?
+      interaction.no! 
+    end
+    if comment.body.contains_block?
+      interaction.block! 
+    end
   end
 
   def count_votes_in_comments(comments)
