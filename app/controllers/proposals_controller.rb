@@ -11,42 +11,8 @@ class ProposalsController < ApplicationController
   def show
     # Can the current user vote?
     @can_vote = current_user.try(:contributor) && current_user != @proposal.proposer
-    # Generate unified activity list
-    @activity = []
-    # Add commits
-    @activity.concat(@proposal.github_commits.map{|commit|
-      ['diff', {
-        sha: commit[:sha],
-        user: User.find_by_login(commit[:commit][:author][:name]),
-        proposal: @proposal, 
-        original_url: @proposal.url,
-        time: commit[:commit][:author][:date]
-      }]
-    })
-    # Add original description
-    @activity << ['comment', {
-      body: @proposal.description,
-      user: @proposal.proposer, 
-      by_author: true,
-      original_url: @proposal.url,
-      time: @proposal.submitted_at
-    }] if @proposal.description
-    # Add comments
-    comments = Octokit.issue_comments(ENV['GITHUB_REPO'], @proposal.number)
-    @activity.concat(comments.map{|comment|
-      next if comment.body =~ /votebot instructions/
-      ['comment', {
-        body: comment.body, 
-        user: User.find_by_login(comment.user.login), 
-        by_author: (comment.user.login == @proposal.proposer.login),
-        original_url: comment.html_url,
-        time: comment.created_at
-      }]
-    })
-    # Remove any empty elements
-    @activity.compact!
-    # Sort by time
-    @activity.sort_by! { |a| a[1][:time] }
+    # Get activity list
+    @activity = @proposal.activity_log
   end
   
   def webhook
