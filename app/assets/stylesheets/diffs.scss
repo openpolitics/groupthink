@@ -1,0 +1,24 @@
+.diff {
+  
+  $diff-border-width: 5px;
+  
+  padding: 0px $diff-border-width;
+  
+  &.unchanged {
+    margin: 0px $diff-border-width;
+  }
+
+  &.removed {
+    background-color: #fee;
+    border-left: $diff-border-width solid red;
+    border-right: $diff-border-width solid red;
+  }
+
+  &.added {
+    background-color: #efe;
+    border-left: $diff-border-width solid green;  
+    border-right: $diff-border-width solid green;  
+  }
+
+}
+
