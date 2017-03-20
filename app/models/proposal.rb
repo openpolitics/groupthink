@@ -172,4 +172,8 @@ class Proposal < ApplicationRecord
     activity.sort_by { |a| a[1][:time] }
   end
   
+  def diff(sha)
+    github_diff(sha)
+  end
+
 end
