@@ -1,0 +1,29 @@
+img.avatar {
+  
+  $avatar-default-size: 48px;
+  
+  width: $avatar-default-size;
+  height: $avatar-default-size;
+  margin: 5px;
+  opacity: 0.5;
+  
+  &.toolbar {
+    width: 20px;
+    height: 20px;
+  }
+  
+  &.small {
+    width: ($avatar-default-size / 2);
+    height: ($avatar-default-size / 2);
+  }
+  
+  &.large {
+    width: ($avatar-default-size * 2);
+    height: ($avatar-default-size * 2);
+  }
+  
+  &.contributor {
+    opacity: 1.0;
+  }
+
+}
