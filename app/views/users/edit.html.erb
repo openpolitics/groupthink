@@ -1,6 +1,6 @@
-<img class="img-rounded pull-right user-large" src='<%= @user.avatar_url %>' 
-alt='<%= @user.login %>' 
-title='<%= @user.login %>' />
+<div class='pull-right'>
+  <%= render partial: 'shared/person', locals: {person: @user, size: "large" } %>
+</div>
 
 <h1>Settings</h1>
 
