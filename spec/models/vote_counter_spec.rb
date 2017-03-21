@@ -101,4 +101,30 @@ RSpec.describe VoteCounter do
     expect(pr.score).to eq 0
   end
 
+  it "should actively remove yes votes cast before the last commit" do
+    pr = create :proposal
+    comments = [
+      OpenStruct.new(
+        body: "✅",
+        created_at: 2.hours.ago,
+        user: OpenStruct.new(
+          login: @voter1.login
+        )
+      )
+    ]
+    # First, calculate the vote count without a recent commit
+    expect(pr).to receive(:time_of_last_commit).and_return(3.hours.ago)
+    pr.send(:count_votes_in_comments, comments)
+    expect(pr.yes.count).to eq 1
+    expect(pr.participants.count).to eq 1
+    expect(pr.score).to eq 1
+    # Now, with the same DB data, let's have a newer commit and check that
+    # the score has changed when we recount.
+    expect(pr).to receive(:time_of_last_commit).and_return(1.hour.ago)
+    pr.send(:count_votes_in_comments, comments)
+    expect(pr.yes.count).to eq 0
+    expect(pr.participants.count).to eq 1
+    expect(pr.score).to eq 0
+  end
+
 end

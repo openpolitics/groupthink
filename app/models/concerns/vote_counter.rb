@@ -75,8 +75,12 @@ module VoteCounter
     # Votes are stores in an interaction record 
     interaction = interactions.find_or_create_by!(user: user)
     # It's a yes if there is a yes vote AND the comment is since the last commit
-    if comment.body.contains_yes? && (comment.created_at >= time_of_last_commit)
-      interaction.yes!
+    if comment.body.contains_yes?
+      if (comment.created_at >= time_of_last_commit)
+        interaction.yes!
+      else
+        interaction.update_attributes!(last_vote: nil)
+      end
     end
     if comment.body.contains_no?
       interaction.no! 
