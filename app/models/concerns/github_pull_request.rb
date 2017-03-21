@@ -28,7 +28,7 @@ module GithubPullRequest
       context: context)
   end
 
-  def diff(sha = nil)
+  def github_diff(sha = nil)
     sha ||= head_sha
     Octokit.compare(ENV['GITHUB_REPO'], base_sha, sha).files
   end
