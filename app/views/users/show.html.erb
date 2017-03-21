@@ -32,7 +32,7 @@
       </td>
       <td><a href='/proposals/<%= pr.number %>'><%= pr.title %></a></td> 
       <td class="text-center"><%= vote_icon(@user.vote(pr)) %></td> 
-      <td class="proposer text-center"><%= render partial: 'shared/person', locals: {person: pr.proposer } %></td> 
+      <td class="proposer text-center"><%= render partial: 'shared/person', locals: {person: pr.proposer, size: "small" } %></td> 
     </tr>
   <% end %>
 </table>
