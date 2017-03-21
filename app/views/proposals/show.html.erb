@@ -103,7 +103,7 @@
       <div class='panel-body'>
         <% @proposal.participants.each do |user| %>
           <div class='alert alert-<%= user_row_class(user.vote(@proposal)) %>'>
-            <%= render partial: 'shared/person', locals: { person: user } %>
+            <%= render partial: 'shared/person', locals: { person: user, size: "small" } %>
             <%= vote_icon(user.vote(@proposal), size: "lg") %>
           </div>
         <% end %>

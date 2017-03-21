@@ -23,7 +23,7 @@
       <td class="text-center"><%= proposal.yes.count %></td>
       <td class="text-center"><%= proposal.no.count %></td>
       <td class="text-center"><%= proposal.block.count %></td>
-      <td class="proposer text-center"><%= render partial: 'shared/person', locals: {person: proposal.proposer } %></td> 
+      <td class="proposer text-center"><%= render partial: 'shared/person', locals: {person: proposal.proposer, size: "small"} %></td> 
     </tr>
   <% end %>
 </table>

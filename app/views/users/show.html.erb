@@ -1,6 +1,6 @@
-<img class="img-rounded pull-right user-large" src='<%= @user.avatar_url %>' 
-alt='<%= @user.login %>' 
-title='<%= @user.login %>' />
+<div class='pull-right'>
+  <%= render partial: 'shared/person', locals: {person: @user, size: "large" } %>
+</div>
 <h1 class='user'>
   <%= @user.login %> <a href='https://github.com/<%= @user.login %>'><%= fa_icon 'github' %></a>
 </h1>
@@ -32,7 +32,7 @@ title='<%= @user.login %>' />
       </td>
       <td><a href='/proposals/<%= pr.number %>'><%= pr.title %></a></td> 
       <td class="text-center"><%= vote_icon(@user.vote(pr)) %></td> 
-      <td class="proposer text-center"><%= render partial: 'shared/person', locals: {person: pr.proposer } %></td> 
+      <td class="proposer text-center"><%= render partial: 'shared/person', locals: {person: pr.proposer, size: "small" } %></td> 
     </tr>
   <% end %>
 </table>

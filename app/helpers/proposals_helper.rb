@@ -59,7 +59,7 @@ module ProposalsHelper
       end
     end
     sections.map do |section|
-      "<div class='diff diff-#{section[0]}'>#{render_github_markdown(section[1])}</div>"
+      "<div class='diff #{section[0]}'>#{render_github_markdown(section[1])}</div>"
     end.join
   end
   
