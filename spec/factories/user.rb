@@ -12,4 +12,9 @@ FactoryGirl.define do
     after(:create) { |x| x.class.set_callback(:validation, :before, :load_from_github, on: :create)}
   end
 
+  factory :user_with_github_data, class: User do
+    login { Faker::Internet.user_name }
+    provider "github"
+  end
+
 end

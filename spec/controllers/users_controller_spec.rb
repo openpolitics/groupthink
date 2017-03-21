@@ -3,24 +3,22 @@ require 'rails_helper'
 RSpec.describe UsersController, type: :controller do
   render_views
   
+  before :each do
+    @user = create :user, contributor: true, notify_new: true
+  end
+
   it "should show index page" do
     get :index
     expect(response).to be_ok
     expect(response.body).to include "Contributors"
+    expect(response.body).to include @user.login
   end
 
-  it "should show individual user page", :vcr do
-    # Stub out posting of instructions for now
-    allow_any_instance_of(Proposal).to receive(:post_instructions)
-    # Load a user
-    User.create(login: 'Floppy')
-    # Load a few proposals
-    Proposal.create(number: 405) # proposed by this user
-    Proposal.create(number: 100) # voted on by this user
+  it "should show individual user page" do
     # Test show page
-    get :show, params: {id: 'Floppy'}
+    get :show, params: {id: @user.login}
     expect(response).to be_ok
-    expect(response.body).to include "Floppy"
+    expect(response.body).to include @user.login
   end
 
 end

@@ -1,5 +1,6 @@
 class Proposal < ApplicationRecord
   include VoteCounter
+  include GithubPullRequest
 
   default_scope { order(number: :desc) }
   paginates_per 10
@@ -21,7 +22,7 @@ class Proposal < ApplicationRecord
     Rails.logger.info "Updating proposals"
     Octokit.pull_requests(ENV['GITHUB_REPO'], state: "all").each do |pr|
       Rails.logger.info " - #{pr["number"]}: #{pr["title"]}"
-      pr = Proposal.find_by_number(pr["number"].to_i)
+      pr = Proposal.find_or_create_by(number: pr["number"].to_i)
       pr.update_from_github!
     end
   end
@@ -32,32 +33,19 @@ class Proposal < ApplicationRecord
     save!
   end
 
-  def github_pr
-    @github_pr ||= Octokit.pull_request(ENV['GITHUB_REPO'], number)
+  def description
+    github_pr.body
   end
 
-  def commits
-    Octokit.pull_request_commits(ENV['GITHUB_REPO'], number)
+  def submitted_at
+    github_pr.created_at
   end
 
-  def head_sha
-    github_pr["head"]["sha"]
-  end
-  
-  def base_sha
-    github_pr["base"]["sha"]
-  end
-  
-  def diff(sha = nil)
-    sha ||= head_sha
-    Octokit.compare(ENV['GITHUB_REPO'], base_sha, sha).files
-  end
-  
   def load_from_github
-    self.opened_at = github_pr.created_at
-    self.title     = github_pr.title
-    self.state   ||= "waiting"
-    self.proposer  = User.find_or_create_by(login: github_pr.user.login)
+    self.opened_at ||= github_pr.created_at
+    self.title     ||= github_pr.title
+    self.state     ||= "waiting"
+    self.proposer  ||= User.find_or_create_by(login: github_pr.user.login)
   end
 
   def age
@@ -82,6 +70,25 @@ class Proposal < ApplicationRecord
   
   def blocked?
     score < ENV["BLOCK_THRESHOLD"].to_i
+  end
+  
+  def update_state!
+    # default
+    state = "waiting"
+    # If closed, was it accepted or rejected?
+    if pr_closed?
+      state = pr_merged? ? "accepted" : "rejected"
+    else
+      if too_old?
+        state = "dead"
+      elsif blocked?
+        state = "blocked"
+      elsif passed?
+        state = too_new? ? "agreed" : "passed"
+      end
+    end
+    # Store final state in DB
+    update_attributes!(state: state)
   end
 
   def yes
@@ -114,7 +121,7 @@ class Proposal < ApplicationRecord
   end
   
   def url
-    "https://github.com/#{ENV['GITHUB_REPO']}/pull/#{number}"
+    github_url
   end
   
   def notify_voters
@@ -127,5 +134,46 @@ class Proposal < ApplicationRecord
   def to_param
     number.to_s
   end
+
+  def activity_log
+    activity = []
+    # Add commits
+    activity.concat(github_commits.map{|commit|
+      ['diff', {
+        sha: commit[:sha],
+        user: User.find_by_login(commit[:commit][:author][:name]),
+        proposal: self, 
+        original_url: url,
+        time: commit[:commit][:author][:date]
+      }]
+    })
+    # Add original description
+    activity << ['comment', {
+      body: description,
+      user: proposer, 
+      by_author: true,
+      original_url: url,
+      time: submitted_at
+    }] if description
+    # Add comments    
+    activity.concat(github_comments.map{|comment|
+      next if comment.body =~ /votebot instructions/
+      ['comment', {
+        body: comment.body, 
+        user: User.find_by_login(comment.user.login), 
+        by_author: (comment.user.login == proposer.login),
+        original_url: comment.html_url,
+        time: comment.created_at
+      }]
+    })
+    # Remove any empty elements
+    activity.compact!
+    # Sort by time
+    activity.sort_by { |a| a[1][:time] }
+  end
   
+  def diff(sha)
+    github_diff(sha)
+  end
+
 end

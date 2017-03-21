@@ -3,31 +3,30 @@ require 'rails_helper'
 RSpec.describe ProposalsController, type: :controller do
   render_views
   
+  before :each do
+    @proposer = create :user, contributor: true, notify_new: true
+    @proposal = create :proposal, proposer: @proposer
+  end
+  
   it "should show index page" do
     get :index
     expect(response).to be_ok
     expect(response.body).to include "https://openpolitics.org.uk"
   end
 
-  it "should show individual proposal page", :vcr do
-    # Stub out posting of instructions for now
-    allow_any_instance_of(Proposal).to receive(:post_instructions)
-    # Load a user
-    User.create(login: 'Floppy')
-    # Load a proposal
-    Proposal.create(number: 405) # proposed by this user
+  it "should show individual proposal page" do
+    # Stub out the calls to github data
+    allow_any_instance_of(GithubPullRequest).to receive(:github_commits).and_return([])
+    allow_any_instance_of(Proposal).to receive(:description).and_return("test")
+    allow_any_instance_of(Proposal).to receive(:submitted_at).and_return(1.hour.ago)
+    allow_any_instance_of(Octokit::Client).to receive(:issue_comments).and_return([])
     # Test show page
-    get :show, params: {id: 405}
+    get :show, params: {id: @proposal.number}
     expect(response).to be_ok
-    expect(response.body).to include "Floppy"
+    expect(response.body).to include @proposer.login
   end
 
   context "adding comments" do
-    
-    before :each do
-      @proposer = create :user, contributor: true, notify_new: true
-      @proposal = create :proposal, proposer: @proposer
-    end
     
     it "should redirect to login if not logged in" do
       expect_any_instance_of(Octokit::Client).to receive(:add_comment).never

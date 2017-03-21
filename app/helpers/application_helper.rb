@@ -9,7 +9,9 @@ module ApplicationHelper
   end
 
   def fa_sized_icon(icon, size = nil)
-    icon += " #{size}" if size
+    if size
+      icon += " #{size}"
+    end
     fa_icon(icon)
   end
   

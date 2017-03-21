@@ -1,15 +1,12 @@
 module VoteCounter
   extend ActiveSupport::Concern
   
-  def sha
-    @sha ||= github_pr.head.sha
-  end
-  
+  private
+
   def count_votes!
-    # Get the comments
-    comments = Octokit.issue_comments(ENV['GITHUB_REPO'], number)
+    comments = github_comments
     # Post instructions if they're not already there
-    if !instructions_posted?(comments) && github_pr.state != "closed"
+    if !instructions_posted?(comments) && !pr_closed?
       post_instructions
     end
     # Count up all the votes
@@ -21,25 +18,6 @@ module VoteCounter
       set_vote_build_status
       set_time_build_status
     end
-  end
-    
-  def update_state!
-    # default
-    state = "waiting"
-    # If closed, was it accepted or rejected?
-    if github_pr.state == "closed"
-      state = github_pr.merged ? "accepted" : "rejected"
-    else
-      if too_old?
-        state = "dead"
-      elsif blocked?
-        state = "blocked"
-      elsif passed?
-        state = too_new? ? "agreed" : "passed"
-      end
-    end
-    # Store final state in DB
-    update_attributes!(state: state)
   end
 
   def set_vote_build_status
@@ -73,13 +51,6 @@ module VoteCounter
     set_build_status(status, text, "votebot/time")    
   end
 
-  def set_build_status(state, text, context)
-    Octokit.create_status(ENV['GITHUB_REPO'], sha, state,
-      target_url: "#{ENV['SITE_URL']}/proposals/#{number}",
-      description: text,
-      context: context)
-  end
-
   def instructions_posted?(comments)
     instructions_found = false
     comments.each do |c|
@@ -92,34 +63,35 @@ module VoteCounter
 
   def count_vote_in_comment(comment, time_of_last_commit)
     # Skip instructions
-    return if comment.body =~ /<!-- votebot instructions -->/
+    if comment.body =~ /<!-- votebot instructions -->/
+      return
+    end
     # Find the user
     user = User.find_or_create_by(login: comment.user.login)
     # Ignore proposer and non-contributors
-    return if user == proposer || !user.contributor
+    if user == proposer || !user.contributor
+      return 
+    end
     # Votes are stores in an interaction record 
     interaction = interactions.find_or_create_by!(user: user)
     # It's a yes if there is a yes vote AND the comment is since the last commit
     if comment.body.contains_yes? && (comment.created_at >= time_of_last_commit)
       interaction.yes!
     end
-    interaction.no! if comment.body.contains_no?
-    interaction.block! if comment.body.contains_block?
+    if comment.body.contains_no?
+      interaction.no! 
+    end
+    if comment.body.contains_block?
+      interaction.block! 
+    end
   end
 
   def count_votes_in_comments(comments)
-    # Find the time of the last commit
-    time_of_last_commit = DateTime.new(1970)
-    if sha
-      commit = Octokit.pull_commits(ENV['GITHUB_REPO'], number).find{|x| x.sha == sha}
-      time_of_last_commit = commit.commit.committer.date
-    end
-    # Count votes in comments
     comments.each { |c| count_vote_in_comment(c, time_of_last_commit) }
   end
 
   def post_instructions
-    Octokit.add_comment(ENV['GITHUB_REPO'], number, <<-EOF)
+    github_add_comment <<-EOF
 <!-- votebot instructions -->
 This proposal is open for discussion and voting. If you are a [contributor](#{ENV['SITE_URL']}/users/) to this repository (and not the proposer), you may vote on whether or not it is accepted. 
 
