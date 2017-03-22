@@ -103,6 +103,10 @@ class Proposal < ApplicationRecord
     interactions.where(last_vote: "no")
   end
 
+  def abstain
+    interactions.where(last_vote: "abstain")
+  end
+
   def close!
     proposer.update_github_contributor_status and proposer.save!
     update_state!
