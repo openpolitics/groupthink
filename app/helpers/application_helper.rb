@@ -59,6 +59,10 @@ module ApplicationHelper
       class: 'danger',
       icon: 'ban',
     },
+    'abstention' => {
+      class: 'warning',
+      icon: 'meh-o',
+    },
     'participating' => {
       class: 'default',
       icon: 'comments-o',

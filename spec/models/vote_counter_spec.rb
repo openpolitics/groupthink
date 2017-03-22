@@ -44,6 +44,11 @@ RSpec.describe VoteCounter do
         score: -1
       },
       {
+        vote: "abstention",
+        symbols: [":zipper_mouth_face:", "🤐"],
+        score: 0
+      },
+      {
         vote: "block",
         symbols: [":-1:", ":thumbsdown:", "👎", ":no_entry_sign:", "🚫"],
         score: -1000
@@ -64,6 +69,7 @@ RSpec.describe VoteCounter do
           expect(pr).to receive(:time_of_last_commit).and_return(1.day.ago)
           pr.send(:count_votes_in_comments, comments)
           expect(pr.score).to eq set[:score]
+          expect(pr.send(set[:vote]).count).to eq 1
         end
       end
     end

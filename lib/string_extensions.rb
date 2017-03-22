@@ -19,6 +19,13 @@ class String
     ].any? {|x| self.include?(x)}
   end
 
+  def contains_abstention?
+    [
+      ":zipper_mouth_face:",
+      "🤐",
+    ].any? {|x| self.include?(x)}
+  end
+
   def contains_block?
     [
       ":no_entry_sign:",

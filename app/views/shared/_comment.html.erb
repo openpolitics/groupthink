@@ -1,6 +1,7 @@
 <% boxclass = 'well' %>
 <% boxclass = 'alert alert-danger' if body.contains_block? %>
 <% boxclass = 'alert alert-warning' if body.contains_no? %>
+<% boxclass = 'alert alert-warning' if body.contains_abstention? %>
 <% boxclass = 'alert alert-success' if body.contains_yes? %>
 <div class='comment <%= boxclass %> <%= by_author ? 'pull-left' : 'pull-right' %>'  style='width: 75%'>
   <p class='<%= by_author ? 'pull-left' : 'pull-right' %>'>
