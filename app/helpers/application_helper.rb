@@ -60,7 +60,7 @@ module ApplicationHelper
       icon: 'ban',
     },
     'abstention' => {
-      class: 'warning',
+      class: 'info',
       icon: 'meh-o',
     },
     'participating' => {
