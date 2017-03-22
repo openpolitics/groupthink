@@ -19,7 +19,7 @@ class String
     ].any? {|x| self.include?(x)}
   end
 
-  def contains_abstain?
+  def contains_abstention?
     [
       ":zipper_mouth_face:",
       "🤐",

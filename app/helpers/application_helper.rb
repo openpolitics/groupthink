@@ -59,7 +59,7 @@ module ApplicationHelper
       class: 'danger',
       icon: 'ban',
     },
-    'abstain' => {
+    'abstention' => {
       class: 'warning',
       icon: 'meh-o',
     },

@@ -82,8 +82,8 @@ module VoteCounter
         interaction.update_attributes!(last_vote: nil)
       end
     end
-    if comment.body.contains_abstain?
-      interaction.abstain! 
+    if comment.body.contains_abstention?
+      interaction.abstention! 
     end
     if comment.body.contains_no?
       interaction.no! 

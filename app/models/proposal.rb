@@ -103,8 +103,8 @@ class Proposal < ApplicationRecord
     interactions.where(last_vote: "no")
   end
 
-  def abstain
-    interactions.where(last_vote: "abstain")
+  def abstention
+    interactions.where(last_vote: "abstention")
   end
 
   def close!

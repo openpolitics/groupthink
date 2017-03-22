@@ -36,7 +36,7 @@ class ProposalsController < ApplicationController
         comment += "\n\nVote: ✅"
       when "no"
         comment += "\n\nVote: ❎"
-      when "abstain"
+      when "abstention"
         comment += "\n\nVote: 🤐"
       when "block"
         comment += "\n\nVote: 🚫"

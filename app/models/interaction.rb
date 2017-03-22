@@ -6,7 +6,7 @@ class Interaction < ApplicationRecord
   validates :user, presence: true
   validates :proposal, presence: true
   
-  validates :last_vote, inclusion: {in: %w(yes block no abstain), allow_nil: true}
+  validates :last_vote, inclusion: {in: %w(yes block no abstention), allow_nil: true}
   
   def yes!
     update_attributes! last_vote: "yes"
@@ -16,8 +16,8 @@ class Interaction < ApplicationRecord
     update_attributes! last_vote: "no"
   end
   
-  def abstain!
-    update_attributes! last_vote: "abstain"
+  def abstention!
+    update_attributes! last_vote: "abstention"
   end
   
   def block!

@@ -44,7 +44,7 @@ RSpec.describe VoteCounter do
         score: -1
       },
       {
-        vote: "abstain",
+        vote: "abstention",
         symbols: [":zipper_mouth_face:", "🤐"],
         score: 0
       },
