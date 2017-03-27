@@ -2,7 +2,12 @@
   <div class='panel panel-default' style='clear: both'>
     <div class="panel-heading">
       <%= link_to "@#{proposal.proposer.login}", proposal.proposer %> edited <code><%= file[:filename] %></code>
-      - <%= link_to time_ago_in_words(proposal.submitted_at)+" ago", proposal.url %>
+      - <%= link_to time_ago_in_words(proposal.submitted_at)+" ago", proposal.url %>    
+      <span class='pull-right'>      
+        <% if @is_author %>
+          <%= link_to fa_icon("pencil"), "https://github.com/#{proposal.repo}/edit/#{proposal.branch}/#{file[:filename]}?pr=/#{ENV['GITHUB_REPO']}/pull/#{proposal.number}" %>
+        <% end %>
+      </span>
     </div>
     <div class='panel-body'>
       <%= render_diff(file[:patch]).html_safe %>
