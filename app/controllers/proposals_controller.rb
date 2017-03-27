@@ -49,6 +49,7 @@ class ProposalsController < ApplicationController
   
   def get_proposal
     @proposal = Proposal.find_by_number(params[:id])
+    raise ActiveRecord::RecordNotFound if @proposal.nil?
   end
   
   def on_issue_comment(json)
