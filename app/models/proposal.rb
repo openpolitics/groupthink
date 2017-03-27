@@ -179,5 +179,13 @@ class Proposal < ApplicationRecord
   def diff(sha)
     github_diff(sha)
   end
+  
+  def repo
+    github_repo
+  end
+  
+  def branch
+    github_branch
+  end
 
 end
