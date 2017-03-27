@@ -5,8 +5,8 @@
       <%= link_to "@#{proposal.proposer.login}", proposal.proposer %> edited <code><%= file[:filename] %></code>
       - <%= link_to time_ago_in_words(proposal.submitted_at)+" ago", proposal.url %>    
       <span class='pull-right'>      
-        <% if @is_author %>
-          <%= link_to fa_icon("pencil"), "https://github.com/#{proposal.repo}/edit/#{proposal.branch}/#{file[:filename]}?pr=/#{ENV['GITHUB_REPO']}/pull/#{proposal.number}" %>
+        <% if @is_author %>        
+          <%= link_to fa_icon("pencil") + " Edit", "https://github.com/#{proposal.repo}/edit/#{proposal.branch}/#{file[:filename]}?pr=/#{ENV['GITHUB_REPO']}/pull/#{proposal.number}", :class => "btn btn-default btn-xs" %>
         <% end %>
         <a role="button" data-toggle="collapse" data-parent="#accordion" href="#<%= id %>" aria-expanded="true" aria-controls="<%= id %>">
           <%= fa_icon 'chevron-down' %>
