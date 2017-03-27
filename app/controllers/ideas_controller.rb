@@ -5,6 +5,7 @@ class IdeasController < ApplicationController
 
   def show
     @idea = Octokit.issue(ENV['GITHUB_REPO'], params[:id].to_i)
+    raise ActiveRecord::RecordNotFound if @idea.nil?
     @activity = []
     @author = User.find_or_create_by(login: @idea.user.login)
     # Add original description

@@ -19,6 +19,6 @@
 
 <div>
   <%= link_to "#{fa_icon('globe')} #{t(:return)}".html_safe, @return_to, class: 'btn btn-primary' if @return_to %>
-  <%= link_to "#{fa_icon('code-fork')} #{t(:view)}".html_safe, "/proposals/#{@pr}", class: 'btn btn-default' %>
-  <%= link_to "#{fa_icon('list')} #{t(:view_all)}".html_safe, "/proposals", class: 'btn btn-default' %>
+  <%= link_to "#{fa_icon('code-fork')} #{t(:view)}".html_safe, proposal_path(@pr), class: 'btn btn-default' %>
+  <%= link_to "#{fa_icon('list')} #{t(:view_all)}".html_safe, proposals_path, class: 'btn btn-default' %>
 </div>

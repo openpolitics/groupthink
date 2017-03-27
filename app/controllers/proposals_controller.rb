@@ -49,6 +49,7 @@ class ProposalsController < ApplicationController
   
   def get_proposal
     @proposal = Proposal.find_by_number(params[:id])
+    raise ActiveRecord::RecordNotFound if @proposal.nil?
   end
   
   def on_issue_comment(json)
@@ -70,16 +71,16 @@ class ProposalsController < ApplicationController
   def on_issue_comment_created(json)
     issue = json['issue']
     if issue['state'] == 'open' && issue['pull_request']
-      Proposal.find_by(number: issue['number']).try(:update_from_github!)
+      Proposal.find_or_create_by(number: issue['number']).try(:update_from_github!)
     end
   end
 
   def on_pull_request_opened(json)
-    Proposal.create(number: json['number'])
+    Proposal.find_or_create_by(number: json['number'])
   end
   
   def on_pull_request_closed(json)
-    Proposal.find_by(number: json['number']).try(:close!)
+    Proposal.find_or_create_by(number: json['number']).try(:close!)
   end
   
 end
