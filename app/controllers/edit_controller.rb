@@ -159,7 +159,7 @@ class EditController < ApplicationController
 
   def open_pr(head, base, title, description)
     pr = github.create_pull_request original_repo_path, base, head, title, description
-    pr.number
+    Proposal.find_or_create_by(number: pr.number)
   end
   
   def commit_file(repo, name, content, message, base_sha, branch_name)    
