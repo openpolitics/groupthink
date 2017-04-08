@@ -10,7 +10,7 @@ RSpec.describe "webhook POST" do
   it "/ should parse github issue comments correctly" do
     # Should result in PR 32 being updated
     double = instance_double("proposal", number: 32)
-    expect(Proposal).to receive(:find_or_create_by).with(number: 32).and_return(double)
+    expect(Proposal).to receive(:find_by).with(number: 32).and_return(double)
     expect(double).to receive(:update_from_github!)
     # Set POST
     post '/webhook', 
@@ -34,7 +34,7 @@ RSpec.describe "webhook POST" do
   it "/ should handle pull request closes correctly" do
     # Should result in PR 43 being closed
     double = instance_double("proposal", number: 43)
-    expect(Proposal).to receive(:find_or_create_by).with(number: 43).and_return(double)
+    expect(Proposal).to receive(:find_by).with(number: 43).and_return(double)
     expect(double).to receive(:close!)
     # Set POST
     post '/webhook', 
