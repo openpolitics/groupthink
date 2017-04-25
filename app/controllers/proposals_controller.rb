@@ -77,7 +77,9 @@ class ProposalsController < ApplicationController
   end
 
   def on_pull_request_opened(json)
-    Proposal.find_or_create_by(number: json['number'].to_i)
+    # Delay creation by a few seconds in case the proposal is already being created elsewhere
+    # This is necessary because we were getting race conditions in job creation
+    CreateProposalJob.set(wait: 5.seconds).perform_later(json['number'].to_i)
   end
   
   def on_pull_request_closed(json)

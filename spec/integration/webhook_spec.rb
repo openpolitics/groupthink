@@ -19,14 +19,17 @@ RSpec.describe "webhook POST" do
   end
 
   it "/ should parse github pull requests correctly" do
-    # Should result in PR 43 being updated
-    expect(Proposal).to receive(:find_or_create_by).with(number: 43).once
+    Timecop.freeze
     # Set POST
     post '/webhook', 
       params: {payload: load_fixture('requests/pull_request')}, 
       headers: {'X-Github-Event' => "pull_request"}
     # Check response
     expect(response).to be_ok
+    # Should result in PR 43 being updated
+    expect(CreateProposalJob).to have_been_enqueued.with(43)
+    expect(CreateProposalJob).to have_been_enqueued.at(5.seconds.from_now)
+    Timecop.return
   end
 
   it "/ should handle pull request closes correctly" do
