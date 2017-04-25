@@ -37,7 +37,7 @@ RSpec.describe Proposal do
 
     before :each do
       @mail = double("mail")
-      allow(@mail).to receive(:deliver_now)
+      allow(@mail).to receive(:deliver_later)
     end
   
     it "should go to voters" do
