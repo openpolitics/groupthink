@@ -117,7 +117,8 @@
   },
   "addons": [
     "heroku-postgresql",
-    "scheduler"
+    "scheduler",
+    "heroku-redis:hobby-dev"
   ],
   "buildpacks": [
     {
