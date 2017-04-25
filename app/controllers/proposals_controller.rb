@@ -83,7 +83,7 @@ class ProposalsController < ApplicationController
   end
   
   def on_pull_request_closed(json)
-    Proposal.find_by(number: json['number'].to_i).try(:close!)
+    CloseProposalJob.perform_later(json['number'].to_i)
   end
   
 end

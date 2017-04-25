@@ -33,16 +33,14 @@ RSpec.describe "webhook POST" do
   end
 
   it "/ should handle pull request closes correctly" do
-    # Should result in PR 43 being closed
-    double = instance_double("proposal", number: 43)
-    expect(Proposal).to receive(:find_by).with(number: 43).and_return(double)
-    expect(double).to receive(:close!)
     # Set POST
     post '/webhook', 
       params: {payload: load_fixture('requests/close_pull_request')}, 
       headers: {'X-Github-Event' => "pull_request"}
     # Check response
     expect(response).to be_ok
+    # Should result in PR 43 being closed
+    expect(CloseProposalJob).to have_been_enqueued.with(43)
   end
 
   it "/ should not accept other Github posts" do
