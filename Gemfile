@@ -52,6 +52,7 @@ gem 'kaminari'
 # Postgres in production for Heroku
 group :production do
   gem "pg"
+  gem "sidekiq"
 end  
 
 group :development, :test do
