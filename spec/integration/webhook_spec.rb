@@ -8,16 +8,14 @@ RSpec.describe "webhook POST" do
   end
 
   it "/ should parse github issue comments correctly" do
-    # Should result in PR 32 being updated
-    double = instance_double("proposal", number: 32)
-    expect(Proposal).to receive(:find_by).with(number: 32).and_return(double)
-    expect(double).to receive(:update_from_github!)
     # Set POST
     post '/webhook', 
       params: {payload: load_fixture('requests/issue_comment')}, 
       headers: {'X-Github-Event' => "issue_comment"}
     # Check response
     expect(response).to be_ok
+    # Should result in PR 32 being updated
+    expect(UpdateProposalJob).to have_been_enqueued.with(32)
   end
 
   it "/ should parse github pull requests correctly" do

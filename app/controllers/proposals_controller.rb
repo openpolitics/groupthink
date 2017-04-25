@@ -72,7 +72,7 @@ class ProposalsController < ApplicationController
   def on_issue_comment_created(json)
     issue = json['issue']
     if issue['state'] == 'open' && issue['pull_request']
-      Proposal.find_by(number: issue['number'].to_i).try(:update_from_github!)
+      UpdateProposalJob.perform_later issue['number'].to_i
     end
   end
 
