@@ -15,8 +15,12 @@ class Proposal < ApplicationRecord
   validates :proposer, presence: true
 
   before_validation :load_from_github, on: :create
-  after_create :count_votes!
+  after_create :queue_vote_count
   after_create :notify_voters
+
+  def queue_vote_count
+    VoteCounterJob.perform_later self
+  end
 
   def self.update_all_from_github!
     Rails.logger.info "Updating proposals"
