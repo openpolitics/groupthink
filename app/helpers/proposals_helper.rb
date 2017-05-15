@@ -40,6 +40,7 @@ module ProposalsHelper
   end
 
   def render_diff(str)
+    return "" if str.nil?
     sections = [[:unchanged, ""]]
     last_type = " "
     str.split("\n").map do |line|
