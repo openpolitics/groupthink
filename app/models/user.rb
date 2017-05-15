@@ -40,6 +40,10 @@ class User < ApplicationRecord
     self.email ||= github_user.email
     self.contributor = update_github_contributor_status
     nil # to avoid halting validation chain until 5.1
+  rescue Octokit::NotFound
+    # TODO Need to do something here if the user has been deleted, but for now we'll just log an error
+    logger.warn "User #{login} not found in GitHub - could have been deleted"
+    nil
   end
 
   def update_github_contributor_status
