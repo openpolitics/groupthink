@@ -95,6 +95,10 @@ class Proposal < ApplicationRecord
     update_attributes!(state: state)
   end
 
+  def merge_if_passed!
+    merge_pr! if state == "passed"
+  end
+
   def yes
     interactions.where(last_vote: "yes")
   end
