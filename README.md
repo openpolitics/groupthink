@@ -84,11 +84,13 @@ Save the webhook. It will probably complain with the test payload, but should wo
 
 Go to the `_config.yml` file in your site's GitHub repository, and add the URL of your deployed Heroku app to the `votebot_url` setting. It will be the same as what you put in above for the GitHub application homepage, i.e. `https://your-unique-votebot-app-name.herokuapp.com`
 
-### Enable the nightly update task
+### Enable the nightly tasks
 
 Visit the Heroku dashboard for your app, and on the "Resources" tab, choose the Heroku Scheduler. Add a new job, `rake update`, on a free dyno on a daily schedule. It's probably sensible to set the update time sometime in the small hours of the morning. 
 
 This task will update all proposals each night, and make sure that time checks are correct.
+
+If you would like to enable automatic merging of proposals, you can also add `rake merge`. We suggest running `rake merge` *before* `rake update` so that once proposals are passed, they don't auto-merge straight away, but the next night instead.
 
 ### Enable automatic deployment
 
