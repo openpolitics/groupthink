@@ -1,6 +1,6 @@
 task :merge => :environment do  
   Rails.logger = ActiveSupport::Logger.new(STDOUT)
-  Proposal.all.each do |p|
+  Proposal.where(state: "passed").each do |p|
     case p.merge_if_passed!
     when true
       logger.error "##{p.number} was merged"
