@@ -60,6 +60,10 @@ module GithubPullRequest
   
   def merge_pr!
     Octokit.merge_pull_request(ENV['GITHUB_REPO'], number)
+    true
+  rescue Octokit::MethodNotAllowed
+    # PR couldn't be merged
+    false
   end
   
   def time_of_last_commit
