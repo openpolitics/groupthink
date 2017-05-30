@@ -3,9 +3,9 @@ task :merge => :environment do
   Proposal.where(state: "passed").each do |p|
     case p.merge_if_passed!
     when true
-      logger.error "##{p.number} was merged"
+      Rails.logger.error "##{p.number} was merged"
     when false
-      logger.error "##{p.number} couldn't be merged - may have conflicts, CLA, or update"
+      Rails.logger.error "##{p.number} couldn't be merged - may have conflicts, CLA, or update"
     else
       # Nothing happened
     end
