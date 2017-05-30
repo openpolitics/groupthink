@@ -86,11 +86,15 @@ Go to the `_config.yml` file in your site's GitHub repository, and add the URL o
 
 ### Enable the nightly tasks
 
-Visit the Heroku dashboard for your app, and on the "Resources" tab, choose the Heroku Scheduler. Add a new job, `rake update`, on a free dyno on a daily schedule. It's probably sensible to set the update time sometime in the small hours of the morning. 
+Visit the Heroku dashboard for your app, and on the "Resources" tab, choose the Heroku Scheduler. Add a new job, `rake nightly`, on a free dyno on a daily schedule. It's probably sensible to run it sometime in the small hours of the morning. 
 
-This task will update all proposals each night, and make sure that time checks are correct.
+This task will run the following tasks, in this order:
 
-If you would like to enable automatic merging of proposals, you can also add `rake merge`. We suggest running `rake merge` *before* `rake update` so that once proposals are passed, they don't auto-merge straight away, but the next night instead.
+ * `rake merge`: merges any proposals that have been passed
+ * `rake close`: closes any proposals that are over the maximum age
+ * `rake update`: reloads data from github, counts votes, and performs time checks.
+
+Because `update` is run last, proposals will be marked as passed or dead, and only closed or merged on the next run of the rake task. If run nightly, this gives 24 hours of grace before automatic actions are taken.
 
 ### Enable automatic deployment
 
