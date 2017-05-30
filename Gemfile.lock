@@ -269,7 +269,7 @@ GEM
     turbolinks-source (5.0.0)
     tzinfo (1.2.2)
       thread_safe (~> 0.1)
-    uglifier (3.1.1)
+    uglifier (3.2.0)
       execjs (>= 0.3.0, < 3)
     vcr (3.0.3)
     warden (1.2.7)
@@ -325,7 +325,7 @@ DEPENDENCIES
   timecop
   turbolinks (~> 5)
   tzinfo-data
-  uglifier (~> 3.0)
+  uglifier (~> 3.2)
   vcr
   web-console
   webmock
