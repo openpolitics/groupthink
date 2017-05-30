@@ -99,6 +99,10 @@ class Proposal < ApplicationRecord
     merge_pr! if state == "passed"
   end
 
+  def close_if_dead!
+    close_pr! if state == "dead"
+  end
+
   def yes
     interactions.where(last_vote: "yes")
   end

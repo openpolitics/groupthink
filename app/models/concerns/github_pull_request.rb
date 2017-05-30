@@ -66,6 +66,12 @@ module GithubPullRequest
     false
   end
   
+  def close_pr!
+    Octokit.add_comment(ENV['GITHUB_REPO'], number, "Closed automatically: maximum age exceeded")
+    Octokit.close_pull_request(ENV['GITHUB_REPO'], number)
+    true
+  end
+
   def time_of_last_commit
     time = DateTime.new(1970)
     if sha
