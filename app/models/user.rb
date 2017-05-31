@@ -59,7 +59,9 @@ class User < ApplicationRecord
     Rails.logger.info "Updating existing users"
     User.all.each do |user|
       Rails.logger.info " - #{user.login}"
-      user.load_from_github and user.save!
+      user.load_from_github
+      Rails.logger.info "     has become a contributor" if user.contributor_changed?
+      user.save! if user.changed?
     end
     Rails.logger.info "Updating new contributors from GitHub"
     Octokit.contributors(ENV["GITHUB_REPO"]).each do |contributor|
