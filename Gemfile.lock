@@ -42,7 +42,7 @@ GEM
       public_suffix (~> 2.0, >= 2.0.2)
     arel (7.1.4)
     bcrypt (3.1.11)
-    bugsnag (5.2.0)
+    bugsnag (5.3.2)
     builder (3.2.3)
     byebug (9.0.6)
     coffee-rails (4.2.2)
