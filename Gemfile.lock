@@ -97,7 +97,7 @@ GEM
     github-markup (1.6.0)
     globalid (0.4.0)
       activesupport (>= 4.2.0)
-    hashdiff (0.3.2)
+    hashdiff (0.3.4)
     hashie (3.5.5)
     htmlentities (4.3.4)
     i18n (0.8.4)
@@ -280,7 +280,7 @@ GEM
       activemodel (>= 5.0)
       debug_inspector
       railties (>= 5.0)
-    webmock (2.3.2)
+    webmock (3.0.1)
       addressable (>= 2.3.6)
       crack (>= 0.3.2)
       hashdiff
