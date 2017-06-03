@@ -1,6 +1,6 @@
 class ProposalsController < ApplicationController
   protect_from_forgery except: :webhook
-  before_filter :get_proposal, except: [:index, :webhook]
+  before_action :get_proposal, except: [:index, :webhook]
   before_action :authenticate_user!, only: [:comment]
 
   def index

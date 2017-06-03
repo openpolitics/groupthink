@@ -1,6 +1,6 @@
 class EditController < ApplicationController
-  before_filter :get_parameters, except: :index
-  before_filter :check_logged_in, except: :index
+  before_action :get_parameters, except: :index
+  before_action :check_logged_in, except: :index
   
   extend Memoist
 

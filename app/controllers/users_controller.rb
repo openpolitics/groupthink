@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
 
-  before_filter :get_user, except: [:index]
+  before_action :get_user, except: [:index]
   before_action :authorise, only: [:edit, :update]
   
   def index
