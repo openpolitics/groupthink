@@ -115,6 +115,7 @@ RSpec.configure do |config|
   end
 
   config.around(:each) do |example|
+    clear_enqueued_jobs
     DatabaseCleaner.cleaning do
       example.run
     end
