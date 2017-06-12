@@ -47,7 +47,8 @@ class User < ApplicationRecord
   end
 
   def update_github_contributor_status
-    @contributors ||= Octokit.contributors(ENV["GITHUB_REPO"])
+    # TODO fix autopagination not working here: https://github.com/openpolitics/votebot/issues/176
+    @contributors ||= Octokit.contributors(ENV["GITHUB_REPO"], per_page: 100)
     self.contributor = !@contributors.find{|x| x.login == login}.nil?
   end
   
