@@ -4,6 +4,7 @@ task :merge => :environment do
     case p.merge_if_passed!
     when true
       Rails.logger.error "##{p.number} was merged"
+      sleep(10)
     when false
       Rails.logger.error "##{p.number} couldn't be merged - may have conflicts, CLA, or update"
     else
