@@ -67,7 +67,7 @@ module GithubPullRequest
   end
   
   def close_pr!
-    Octokit.add_comment(ENV['GITHUB_REPO'], number, "Closed automatically: maximum age exceeded. Please feel free to resubmit this as a new proposal, however, based on the current text.")
+    Octokit.add_comment(ENV['GITHUB_REPO'], number, "Closed automatically: maximum age exceeded. Please feel free to resubmit this as a new proposal, but remember you will need to base any new proposal on the current policy text.")
     Octokit.close_pull_request(ENV['GITHUB_REPO'], number)
     true
   end
