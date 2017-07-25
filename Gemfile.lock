@@ -94,7 +94,7 @@ GEM
     ffi (1.9.17)
     font-awesome-rails (4.7.0.2)
       railties (>= 3.2, < 5.2)
-    github-markup (1.6.0)
+    github-markup (1.6.1)
     globalid (0.4.0)
       activesupport (>= 4.2.0)
     hashdiff (0.3.4)
