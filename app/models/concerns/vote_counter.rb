@@ -32,7 +32,7 @@ module VoteCounter
       text = "The proposal is waiting for more votes; #{ENV["PASS_THRESHOLD"].to_i - score} more needed."
     end
     # Update github commit status
-    set_build_status(status, text, "votebot/votes")
+    set_build_status(status, text, "groupthink/votes")
   end
 
   def set_time_build_status
@@ -48,7 +48,7 @@ module VoteCounter
       text = "The change has been open long enough to be merged (age: #{age}d)."
     end
     # Update github commit status
-    set_build_status(status, text, "votebot/time")    
+    set_build_status(status, text, "groupthink/time")    
   end
 
   def instructions_posted?(comments)
