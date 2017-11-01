@@ -11,7 +11,7 @@ It has two main functions:
 
 2. Monitor discussion in those pull requests, and layer on a voting system to determine what should be merged in. Voting is done using special symbols in pull requests, which are counted by the app. Status is set using the GitHub commit status API.
 
-The system was originally implemented for the collaborative manifesto project at https://openpolitics.org.uk/manifesto. The canonical instance of this app for that project is https://groupthink.openpolitics.org.uk
+The system was originally implemented for the collaborative manifesto project at https://openpolitics.org.uk/manifesto. The canonical instance of this app for that project is https://votebot.openpolitics.org.uk
 
 ## Usage
 
@@ -25,7 +25,7 @@ The system was originally implemented for the collaborative manifesto project at
 
 If you want to run your own open democratic platform, you can! This isn't a simple process yet, unfortunately, but we'll help you through as best we can...
 
-Note that currently the style and headers of the deployed app will still match the [OpenPolitics Manifesto version](https://groupthink.openpolitics.org.uk). A [change for that](https://github.com/openpolitics/groupthink/issues/42) will be coming soon.
+Note that currently the style and headers of the deployed app will still match the [OpenPolitics Manifesto version](https://votebot.openpolitics.org.uk). A [change for that](https://github.com/openpolitics/groupthink/issues/42) will be coming soon.
 
 ### Set up a GitHub repository for your content
 
