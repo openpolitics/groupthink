@@ -169,7 +169,7 @@ GEM
       omniauth (~> 1.2)
     orm_adapter (0.5.0)
     pg (0.21.0)
-    public_suffix (3.0.0)
+    public_suffix (3.0.1)
     puma (3.10.0)
     rack (2.0.3)
     rack-protection (2.0.0)
@@ -287,7 +287,7 @@ GEM
       activemodel (>= 5.0)
       bindex (>= 0.4.0)
       railties (>= 5.0)
-    webmock (3.1.0)
+    webmock (3.1.1)
       addressable (>= 2.3.6)
       crack (>= 0.3.2)
       hashdiff
