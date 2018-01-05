@@ -1,15 +1,15 @@
 source 'https://rubygems.org'
 
-ruby "2.4.1"
+ruby "2.4.2"
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 5.1'
 # Use Puma as the app server
-gem 'puma', '~> 3.9'
+gem 'puma', '~> 3.11'
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 5.0'
 # Use Uglifier as compressor for JavaScript assets
-gem 'uglifier', '~> 3.2'
+gem 'uglifier', '~> 4.1'
 # Use CoffeeScript for .coffee assets and views
 gem 'coffee-rails', '~> 4.2'
 # See https://github.com/rails/execjs#readme for more supported runtimes
@@ -30,7 +30,7 @@ gem 'jbuilder', '~> 2.7'
 # gem 'capistrano-rails', group: :development
 
 # Github 
-gem "octokit", "~> 4.7"
+gem "octokit", "~> 4.8"
 
 # Bug tracking with bugsnag
 gem "bugsnag"
