@@ -11,7 +11,7 @@ env:
   - GITHUB_APP_ID: abc123
   - GITHUB_APP_SECRET: abc123
   - GITHUB_REPO: openpolitics/manifesto
-  - SITE_URL: https://votebot.example.com
+  - SITE_URL: https://groupthink.example.com
   - EMAIL_DOMAIN: example.com
   - BLOCK_WEIGHT: -1000
   - YES_WEIGHT: 1
