@@ -277,7 +277,7 @@ GEM
     turbolinks-source (5.0.0)
     tzinfo (1.2.4)
       thread_safe (~> 0.1)
-    uglifier (4.1.1)
+    uglifier (4.1.2)
       execjs (>= 0.3.0, < 3)
     vcr (4.0.0)
     warden (1.2.7)
