@@ -155,7 +155,7 @@ GEM
       multi_json (~> 1.3)
       multi_xml (~> 0.5)
       rack (>= 1.2, < 3)
-    octokit (4.9.0)
+    octokit (4.10.0)
       sawyer (~> 0.8.0, >= 0.5.3)
     omniauth (1.6.1)
       hashie (>= 3.4.6, < 3.6.0)
@@ -315,7 +315,7 @@ DEPENDENCIES
   letter_opener
   listen (~> 3.0)
   memoist
-  octokit (~> 4.9)
+  octokit (~> 4.10)
   omniauth-github
   pg
   puma (~> 3.11)
