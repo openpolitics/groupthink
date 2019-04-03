@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.org/openpolitics/groupthink.png?branch=master)](https://travis-ci.org/openpolitics/groupthink) [![Coverage Status](https://coveralls.io/repos/github/openpolitics/groupthink/badge.svg?branch=master)](https://coveralls.io/github/openpolitics/groupthink?branch=master) [![Dependency Status](https://gemnasium.com/badges/github.com/openpolitics/groupthink.svg)](https://gemnasium.com/github.com/openpolitics/groupthink) [![Code Climate](https://codeclimate.com/github/openpolitics/groupthink/badges/gpa.svg)](https://codeclimate.com/github/openpolitics/groupthink)
+[![Build status](https://img.shields.io/circleci/project/github/openpolitics/groupthink/master.svg)](https://circleci.com/gh/openpolitics/groupthink) [![Coverage Status](https://coveralls.io/repos/github/openpolitics/groupthink/badge.svg?branch=master)](https://coveralls.io/github/openpolitics/groupthink?branch=master) [![Dependency Status](https://gemnasium.com/badges/github.com/openpolitics/groupthink.svg)](https://gemnasium.com/github.com/openpolitics/groupthink) [![Code Climate](https://codeclimate.com/github/openpolitics/groupthink/badges/gpa.svg)](https://codeclimate.com/github/openpolitics/groupthink)
 
 
 # Groupthink
@@ -29,7 +29,7 @@ Note that currently the style and headers of the deployed app will still match t
 
 ### Set up a GitHub repository for your content
 
-You can use Groupthink to edit any GitHub repository you like, but we've set up a template site using GitHub Pages and Jekyll to get you started. 
+You can use Groupthink to edit any GitHub repository you like, but we've set up a template site using GitHub Pages and Jekyll to get you started.
 
 [Click here to create your very own copy, ready to go.](https://github.com/openpolitics/template/fork)
 
@@ -46,7 +46,7 @@ Visit the [Personal Access Tokens page](https://github.com/settings/tokens) on y
 
 * public_repo
 * repo:status
-* user:email 
+* user:email
 * write:repo_hook
 
 Keep hold of the generated token - you'll need it in a minute.
@@ -59,7 +59,7 @@ Again, keep hold of the client ID and secret. You'll need them in the next step.
 
 ### Deploy the code to Heroku
 
-Hit this big deploy button here: 
+Hit this big deploy button here:
 
 [![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy)
 
@@ -86,7 +86,7 @@ Go to the `_config.yml` file in your site's GitHub repository, and add the URL o
 
 ### Enable the nightly tasks
 
-Visit the Heroku dashboard for your app, and on the "Resources" tab, choose the Heroku Scheduler. Add a new job, `rake nightly`, on a free dyno on a daily schedule. It's probably sensible to run it sometime in the small hours of the morning. 
+Visit the Heroku dashboard for your app, and on the "Resources" tab, choose the Heroku Scheduler. Add a new job, `rake nightly`, on a free dyno on a daily schedule. It's probably sensible to run it sometime in the small hours of the morning.
 
 This task will run the following tasks, in this order:
 
