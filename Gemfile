@@ -70,6 +70,9 @@ group :development, :test do
   gem "email_spec"
   gem "factory_bot_rails", "~> 4.9"
   gem "faker"
+  gem 'rubocop', require: false
+  gem "rubocop-rails_config", require: false
+  gem "rubocop-rspec", require: false
 end
 
 group :development do

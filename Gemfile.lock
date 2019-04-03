@@ -41,6 +41,7 @@ GEM
     addressable (2.5.2)
       public_suffix (>= 2.0.2, < 4.0)
     arel (8.0.0)
+    ast (2.4.0)
     bcrypt (3.1.12)
     bindex (0.5.0)
     bugsnag (6.11.1)
@@ -104,6 +105,7 @@ GEM
     htmlentities (4.3.4)
     i18n (1.6.0)
       concurrent-ruby (~> 1.0)
+    jaro_winkler (1.5.2)
     jbuilder (2.8.0)
       activesupport (>= 4.2.0)
       multi_json (>= 1.2)
@@ -167,7 +169,11 @@ GEM
       oauth2 (~> 1.0)
       omniauth (~> 1.2)
     orm_adapter (0.5.0)
+    parallel (1.17.0)
+    parser (2.6.2.0)
+      ast (~> 2.4.0)
     pg (1.1.4)
+    psych (3.1.0)
     public_suffix (3.0.3)
     puma (3.12.1)
     rack (2.0.6)
@@ -198,6 +204,7 @@ GEM
       method_source
       rake (>= 0.8.7)
       thor (>= 0.18.1, < 2.0)
+    rainbow (3.0.0)
     rake (12.3.2)
     rb-fsevent (0.9.8)
     rb-inotify (0.9.8)
@@ -225,6 +232,20 @@ GEM
       rspec-mocks (~> 3.8.0)
       rspec-support (~> 3.8.0)
     rspec-support (3.8.0)
+    rubocop (0.66.0)
+      jaro_winkler (~> 1.5.1)
+      parallel (~> 1.10)
+      parser (>= 2.5, != 2.5.1.1)
+      psych (>= 3.1.0)
+      rainbow (>= 2.2.2, < 4.0)
+      ruby-progressbar (~> 1.7)
+      unicode-display_width (>= 1.4.0, < 1.6)
+    rubocop-rails_config (0.5.0)
+      railties (>= 3.0)
+      rubocop (~> 0.60)
+    rubocop-rspec (1.32.0)
+      rubocop (>= 0.60.0)
+    ruby-progressbar (1.10.0)
     ruby_dep (1.5.0)
     safe_yaml (1.0.4)
     sass (3.5.3)
@@ -278,6 +299,7 @@ GEM
       thread_safe (~> 0.1)
     uglifier (4.1.20)
       execjs (>= 0.3.0, < 3)
+    unicode-display_width (1.5.0)
     vcr (4.0.0)
     warden (1.2.8)
       rack (>= 2.0.6)
@@ -324,6 +346,9 @@ DEPENDENCIES
   redcarpet
   rinku
   rspec-rails
+  rubocop
+  rubocop-rails_config
+  rubocop-rspec
   sass-rails (~> 5.0)
   sidekiq
   spring
