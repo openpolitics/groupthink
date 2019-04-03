@@ -56,7 +56,7 @@ module VoteCounter
     def instructions_posted?(comments)
       instructions_found = false
       comments.each do |c|
-        if c.body =~ /<!-- votebot instructions -->/
+        if /<!-- votebot instructions -->/.match?(c.body)
           instructions_found = true
         end
       end
@@ -65,7 +65,7 @@ module VoteCounter
 
     def count_vote_in_comment(comment, time_of_last_commit)
       # Skip instructions
-      if comment.body =~ /<!-- votebot instructions -->/
+      if /<!-- votebot instructions -->/.match?(comment.body)
         return
       end
       # Find the user
