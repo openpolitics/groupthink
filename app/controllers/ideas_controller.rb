@@ -2,16 +2,16 @@
 
 class IdeasController < ApplicationController
   def index
-    @ideas = Octokit.issues(ENV['GITHUB_REPO'], labels: "idea")
+    @ideas = Octokit.issues(ENV["GITHUB_REPO"], labels: "idea")
   end
 
   def show
-    @idea = Octokit.issue(ENV['GITHUB_REPO'], params[:id].to_i)
+    @idea = Octokit.issue(ENV["GITHUB_REPO"], params[:id].to_i)
     raise ActiveRecord::RecordNotFound if @idea.nil?
     @activity = []
     @author = User.find_or_create_by(login: @idea.user.login)
     # Add original description
-    @activity << ['comment', {
+    @activity << ["comment", {
       body: @idea[:body].blank? ? "*The author didn't add any more detail*" : @idea[:body],
       user: @author,
       by_author: true,
@@ -19,9 +19,9 @@ class IdeasController < ApplicationController
       time: @idea.created_at
     }]
     # Add comments
-    comments = Octokit.issue_comments(ENV['GITHUB_REPO'], params[:id].to_i)
+    comments = Octokit.issue_comments(ENV["GITHUB_REPO"], params[:id].to_i)
     @activity.concat(comments.map { |comment|
-      ['comment', {
+      ["comment", {
         body: comment.body,
         user: User.find_or_create_by(login: comment.user.login),
         by_author: (@author.login == comment.user.login),

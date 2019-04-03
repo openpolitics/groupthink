@@ -68,7 +68,7 @@ class EditController < ApplicationController
       @branch = params[:branch]
       @title = params[:title]
       @filename = params[:filename] || params[:path]
-      @format = params[:format] || (@filename ? @filename.split('.').last : "md")
+      @format = params[:format] || (@filename ? @filename.split(".").last : "md")
       if @title.present? && @filename.nil?
         @filename = @title.parameterize + ".#{@format}"
       end
@@ -83,11 +83,11 @@ class EditController < ApplicationController
     end
 
     def original_repo_path
-      ENV['GITHUB_REPO']
+      ENV["GITHUB_REPO"]
     end
 
     def user_repo_path
-      repo_name = ENV['GITHUB_REPO'].split("/").last
+      repo_name = ENV["GITHUB_REPO"].split("/").last
       "#{current_user.login}/#{repo_name}"
     end
 
@@ -99,7 +99,7 @@ class EditController < ApplicationController
 
     def latest_commit(repo, branch_name)
       branch_data = github.branch repo, branch_name
-      branch_data['commit']['sha']
+      branch_data["commit"]["sha"]
     end
     memoize :latest_commit
 
@@ -110,16 +110,16 @@ class EditController < ApplicationController
 
     def blob_shas(repo, branch, path)
       tree = tree(repo, branch).tree
-      Hash[tree.select { |x| x[:path] =~ /^#{path}$/ && x[:type] == 'blob' }.map { |x| [x.path, x.sha] }]
+      Hash[tree.select { |x| x[:path] =~ /^#{path}$/ && x[:type] == "blob" }.map { |x| [x.path, x.sha] }]
     end
     memoize :blob_shas
 
     def blob_content(repo, sha)
       blob = github.blob repo, sha
-      if blob['encoding'] == 'base64'
-        Base64.decode64(blob['content'])
+      if blob["encoding"] == "base64"
+        Base64.decode64(blob["content"])
       else
-        blob['content']
+        blob["content"]
       end
     end
     memoize :blob_content

@@ -19,7 +19,7 @@ class ProposalsController < ApplicationController
   end
 
   def webhook
-    case request.env['HTTP_X_GITHUB_EVENT']
+    case request.env["HTTP_X_GITHUB_EVENT"]
     when "issue_comment"
       on_issue_comment(JSON.parse(params[:payload]))
       head 200
@@ -44,7 +44,7 @@ class ProposalsController < ApplicationController
     when "block"
       comment += "\n\nVote: 🚫"
     end
-    github.add_comment(ENV['GITHUB_REPO'], @proposal.number, comment)
+    github.add_comment(ENV["GITHUB_REPO"], @proposal.number, comment)
     redirect_to @proposal
   end
 
@@ -56,35 +56,35 @@ class ProposalsController < ApplicationController
     end
 
     def on_issue_comment(json)
-      case json['action']
-      when 'created'
+      case json["action"]
+      when "created"
         on_issue_comment_created(json)
       end
     end
 
     def on_pull_request(json)
-      case json['action']
-      when 'opened'
+      case json["action"]
+      when "opened"
         on_pull_request_opened(json)
-      when 'closed'
+      when "closed"
         on_pull_request_closed(json)
       end
     end
 
     def on_issue_comment_created(json)
-      issue = json['issue']
-      if issue['state'] == 'open' && issue['pull_request']
-        UpdateProposalJob.perform_later issue['number'].to_i
+      issue = json["issue"]
+      if issue["state"] == "open" && issue["pull_request"]
+        UpdateProposalJob.perform_later issue["number"].to_i
       end
     end
 
     def on_pull_request_opened(json)
       # Delay creation by a few seconds in case the proposal is already being created elsewhere
       # This is necessary because we were getting race conditions in job creation
-      CreateProposalJob.set(wait: 5.seconds).perform_later(json['number'].to_i)
+      CreateProposalJob.set(wait: 5.seconds).perform_later(json["number"].to_i)
     end
 
     def on_pull_request_closed(json)
-      CloseProposalJob.perform_later(json['number'].to_i)
+      CloseProposalJob.perform_later(json["number"].to_i)
     end
 end

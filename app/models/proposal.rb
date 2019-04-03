@@ -26,7 +26,7 @@ class Proposal < ApplicationRecord
 
   def self.update_all_from_github!
     Rails.logger.info "Updating proposals"
-    Octokit.pull_requests(ENV['GITHUB_REPO'], state: "all").each do |pr|
+    Octokit.pull_requests(ENV["GITHUB_REPO"], state: "all").each do |pr|
       Rails.logger.info " - #{pr["number"]}: #{pr["title"]}"
       pr = Proposal.find_or_create_by(number: pr["number"].to_i)
       pr.update_from_github!
@@ -157,7 +157,7 @@ class Proposal < ApplicationRecord
     activity = []
     # Add commits
     activity.concat(github_commits.map { |commit|
-      ['diff', {
+      ["diff", {
         sha: commit[:sha],
         user: User.find_by_login(commit[:commit][:author][:name]),
         proposal: self,
@@ -166,7 +166,7 @@ class Proposal < ApplicationRecord
       }]
     })
     # Add original description
-    activity << ['comment', {
+    activity << ["comment", {
       body: description,
       user: proposer,
       by_author: true,
@@ -176,7 +176,7 @@ class Proposal < ApplicationRecord
     # Add comments
     activity.concat(github_comments.map { |comment|
       next if comment.body =~ /votebot instructions/
-      ['comment', {
+      ["comment", {
         body: comment.body,
         user: User.find_by_login(comment.user.login),
         by_author: (comment.user.login == proposer.login),

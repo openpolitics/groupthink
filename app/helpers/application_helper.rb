@@ -2,7 +2,7 @@
 
 module ApplicationHelper
   def bootstrap_url
-    ENV['BOOTSTRAP_CSS_URL'] || "//maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css"
+    ENV["BOOTSTRAP_CSS_URL"] || "//maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css"
   end
 
   def new_session_path(_scope)
@@ -17,56 +17,56 @@ module ApplicationHelper
   end
 
   @@state_style = {
-    'waiting' => {
-      class: 'warning',
-      icon:  'clock-o',
+    "waiting" => {
+      class: "warning",
+      icon:  "clock-o",
     },
-    'blocked' => {
-      class: 'danger',
-      icon:  'ban',
+    "blocked" => {
+      class: "danger",
+      icon:  "ban",
     },
-    'rejected' => {
-      class: 'danger',
-      icon:  'ban',
+    "rejected" => {
+      class: "danger",
+      icon:  "ban",
     },
-    'dead' => {
-      class: 'danger',
-      icon:  'ban',
+    "dead" => {
+      class: "danger",
+      icon:  "ban",
     },
-    'accepted' => {
-      class: 'success',
-      icon:  'check',
+    "accepted" => {
+      class: "success",
+      icon:  "check",
     },
-    'passed' => {
-      class: 'success',
-      icon:  'check',
+    "passed" => {
+      class: "success",
+      icon:  "check",
     },
-    'agreed' => {
-      class: 'success',
-      icon:  'check',
+    "agreed" => {
+      class: "success",
+      icon:  "check",
     },
   }
 
   @@vote_style = {
-    'yes' => {
-      class: 'success',
-      icon: 'check',
+    "yes" => {
+      class: "success",
+      icon: "check",
     },
-    'no' => {
-      class: 'warning',
-      icon: 'times',
+    "no" => {
+      class: "warning",
+      icon: "times",
     },
-    'block' => {
-      class: 'danger',
-      icon: 'ban',
+    "block" => {
+      class: "danger",
+      icon: "ban",
     },
-    'abstention' => {
-      class: 'info',
-      icon: 'meh-o',
+    "abstention" => {
+      class: "info",
+      icon: "meh-o",
     },
-    'participating' => {
-      class: 'default',
-      icon: 'comments-o',
+    "participating" => {
+      class: "default",
+      icon: "comments-o",
     },
   }
 

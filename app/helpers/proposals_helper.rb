@@ -3,7 +3,7 @@
 module ProposalsHelper
   def render_github_markdown(markdown)
     markdown = replace_emoji(markdown)
-    markdown = GitHub::Markup.render('comment.markdown', markdown).html_safe
+    markdown = GitHub::Markup.render("comment.markdown", markdown).html_safe
     markdown = link_usernames(markdown)
     markdown = link_proposals(markdown)
     auto_link(markdown)

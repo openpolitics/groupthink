@@ -8,7 +8,7 @@ module GithubPullRequest
   private
 
     def github_pr
-      @github_pr ||= Octokit.pull_request(ENV['GITHUB_REPO'], number)
+      @github_pr ||= Octokit.pull_request(ENV["GITHUB_REPO"], number)
     end
 
     def head_sha
@@ -33,7 +33,7 @@ module GithubPullRequest
 
 
     def set_build_status(state, text, context)
-      Octokit.create_status(ENV['GITHUB_REPO'], sha, state,
+      Octokit.create_status(ENV["GITHUB_REPO"], sha, state,
         target_url: "#{ENV['SITE_URL']}/proposals/#{number}",
         description: text,
         context: context)
@@ -41,7 +41,7 @@ module GithubPullRequest
 
     def github_diff(sha = nil)
       sha ||= head_sha
-      Octokit.compare(ENV['GITHUB_REPO'], base_sha, sha).files
+      Octokit.compare(ENV["GITHUB_REPO"], base_sha, sha).files
     end
 
     def github_url
@@ -49,7 +49,7 @@ module GithubPullRequest
     end
 
     def github_commits
-      Octokit.pull_request_commits(ENV['GITHUB_REPO'], number)
+      Octokit.pull_request_commits(ENV["GITHUB_REPO"], number)
     end
 
     def pr_closed?
@@ -61,7 +61,7 @@ module GithubPullRequest
     end
 
     def merge_pr!
-      Octokit.merge_pull_request(ENV['GITHUB_REPO'], number)
+      Octokit.merge_pull_request(ENV["GITHUB_REPO"], number)
       true
     rescue Octokit::MethodNotAllowed
       # PR couldn't be merged
@@ -69,8 +69,8 @@ module GithubPullRequest
     end
 
     def close_pr!
-      Octokit.add_comment(ENV['GITHUB_REPO'], number, "Closed automatically: maximum age exceeded. Please feel free to resubmit this as a new proposal, but remember you will need to base any new proposal on the current policy text.")
-      Octokit.close_pull_request(ENV['GITHUB_REPO'], number)
+      Octokit.add_comment(ENV["GITHUB_REPO"], number, "Closed automatically: maximum age exceeded. Please feel free to resubmit this as a new proposal, but remember you will need to base any new proposal on the current policy text.")
+      Octokit.close_pull_request(ENV["GITHUB_REPO"], number)
       true
     end
 

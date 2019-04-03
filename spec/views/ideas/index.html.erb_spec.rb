@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require 'rails_helper'
+require "rails_helper"
 
 RSpec.describe "ideas/index.html.erb", type: :view do
   pending "add some examples to (or delete) #{__FILE__}"

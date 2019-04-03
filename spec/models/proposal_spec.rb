@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require 'rails_helper'
+require "rails_helper"
 
 RSpec.describe Proposal do
   context "checking overall state" do
@@ -11,7 +11,7 @@ RSpec.describe Proposal do
       # Test
       pr = create :proposal
       pr.update_state!
-      expect(pr.state).to eq 'accepted'
+      expect(pr.state).to eq "accepted"
     end
 
     it "should store closed and unmerged pull requests as rejected", :vcr do
@@ -21,7 +21,7 @@ RSpec.describe Proposal do
       # Test
       pr = create :proposal
       pr.update_state!
-      expect(pr.state).to eq 'rejected'
+      expect(pr.state).to eq "rejected"
     end
   end
 

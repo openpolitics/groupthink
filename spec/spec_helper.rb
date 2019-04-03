@@ -19,17 +19,17 @@
 #
 # See http://rubydoc.info/gems/rspec-core/RSpec/Core/Configuration
 
-require 'vcr'
-require 'timecop'
-require 'coveralls'
-require 'database_cleaner'
+require "vcr"
+require "timecop"
+require "coveralls"
+require "database_cleaner"
 
 Coveralls.wear!
 
 VCR.configure do |c|
-  c.cassette_library_dir = 'spec/fixtures/cassettes'
+  c.cassette_library_dir = "spec/fixtures/cassettes"
   c.hook_into :webmock
-  c.filter_sensitive_data('<GITHUB_OAUTH_TOKEN>') { ENV['GITHUB_OAUTH_TOKEN'] }
+  c.filter_sensitive_data("<GITHUB_OAUTH_TOKEN>") { ENV["GITHUB_OAUTH_TOKEN"] }
   c.configure_rspec_metadata!
   c.default_cassette_options = { record: :once }
 end
@@ -91,7 +91,7 @@ RSpec.configure do |config|
     # Use the documentation formatter for detailed output,
     # unless a formatter has already been configured
     # (e.g. via a command-line flag).
-    config.default_formatter = 'doc'
+    config.default_formatter = "doc"
   end
 
   # Print the 10 slowest examples and example groups at the
@@ -125,5 +125,5 @@ RSpec.configure do |config|
 end
 
 def load_fixture(filename)
-  File.read(File.join(File.dirname(__FILE__), 'fixtures', filename))
+  File.read(File.join(File.dirname(__FILE__), "fixtures", filename))
 end
