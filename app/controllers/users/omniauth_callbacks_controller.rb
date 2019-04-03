@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
   def github
     # You need to implement the method below in your model (e.g. app/models/user.rb)

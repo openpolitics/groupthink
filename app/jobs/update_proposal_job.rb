@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class UpdateProposalJob < ApplicationJob
   queue_as :default
 

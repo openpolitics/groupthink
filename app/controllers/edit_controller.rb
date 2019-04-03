@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class EditController < ApplicationController
   before_action :get_parameters, except: :index
   before_action :check_logged_in, except: :index

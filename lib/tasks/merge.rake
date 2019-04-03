@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 task :merge => :environment do
   Rails.logger = ActiveSupport::Logger.new(STDOUT)
   Proposal.where(state: "passed").each do |p|

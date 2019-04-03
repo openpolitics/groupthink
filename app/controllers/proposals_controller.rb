@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class ProposalsController < ApplicationController
   protect_from_forgery except: :webhook
   before_action :get_proposal, except: [:index, :webhook]

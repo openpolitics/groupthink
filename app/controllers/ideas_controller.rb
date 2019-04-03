@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class IdeasController < ApplicationController
   def index
     @ideas = Octokit.issues(ENV['GITHUB_REPO'], labels: "idea")

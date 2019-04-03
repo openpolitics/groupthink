@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class UsersController < ApplicationController
   before_action :get_user, except: [:index]
   before_action :authorise, only: [:edit, :update]

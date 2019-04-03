@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module ProposalsHelper
   def render_github_markdown(markdown)
     markdown = replace_emoji(markdown)

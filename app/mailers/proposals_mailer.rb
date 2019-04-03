@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class ProposalsMailer < ApplicationMailer
   default_url_options[:host] = ENV["SITE_URL"]
 
