@@ -29,7 +29,7 @@ gem 'jbuilder', '~> 2.8'
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
-# Github 
+# Github
 gem "octokit", "~> 4.14"
 
 # Bug tracking with bugsnag
@@ -53,7 +53,7 @@ gem 'kaminari'
 group :production do
   gem "pg"
   gem "sidekiq"
-end  
+end
 
 group :development, :test do
   # Use sqlite3 as the database for Active Record
@@ -68,7 +68,7 @@ group :development, :test do
   gem "dotenv-rails"
   gem "database_cleaner"
   gem "email_spec"
-  gem "factory_girl_rails"
+  gem "factory_bot_rails", "~> 4.9"
   gem "faker"
 end
 
