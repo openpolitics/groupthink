@@ -1,4 +1,6 @@
-require: rubocop-rspec
+require:
+  - rubocop-rspec
+  - rubocop-i18n
 
 inherit_gem:
   rubocop-rails_config:
@@ -7,10 +9,16 @@ inherit_gem:
 AllCops:
   TargetRubyVersion: 2.6
 
+GetText:
+  Enabled: false
+
 Rails:
   Enabled: true
 
 Rails/SaveBang:
+  Enabled: true
+
+RailsI18n:
   Enabled: true
 
 Layout/ClassStructure:
