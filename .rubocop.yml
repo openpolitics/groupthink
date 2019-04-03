@@ -16,6 +16,9 @@ Rails/SaveBang:
 Layout/ClassStructure:
   Enabled: true
 
+Performance/CaseWhenSplat:
+  Enabled: true
+
 Style/ImplicitRuntimeError:
   Enabled: true
 
