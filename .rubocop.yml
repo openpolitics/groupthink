@@ -1,4 +1,5 @@
+require: rubocop-rspec
+
 inherit_gem:
-  rubocop-rspec:
   rubocop-rails_config:
     - config/rails.yml
