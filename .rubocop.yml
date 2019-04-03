@@ -10,5 +10,8 @@ AllCops:
 Rails:
   Enabled: true
 
+Rails/SaveBang:
+  Enabled: true
+
 Layout/ClassStructure:
   Enabled: true

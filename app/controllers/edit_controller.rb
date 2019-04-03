@@ -161,7 +161,7 @@ class EditController < ApplicationController
 
     def open_pr(head, base, title, description)
       pr = github.create_pull_request original_repo_path, base, head, title, description
-      Proposal.find_or_create_by(
+      Proposal.find_or_create_by!(
         number: pr.number,
         opened_at: DateTime.now,
         title: title,

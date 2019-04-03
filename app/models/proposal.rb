@@ -28,7 +28,7 @@ class Proposal < ApplicationRecord
     Rails.logger.info "Updating proposals"
     Octokit.pull_requests(ENV["GITHUB_REPO"], state: "all").each do |pr|
       Rails.logger.info " - #{pr["number"]}: #{pr["title"]}"
-      pr = Proposal.find_or_create_by(number: pr["number"].to_i)
+      pr = Proposal.find_or_create_by!(number: pr["number"].to_i)
       pr.update_from_github!
     end
   end
@@ -51,7 +51,7 @@ class Proposal < ApplicationRecord
     self.opened_at ||= github_pr.created_at
     self.title     ||= github_pr.title
     self.state     ||= "waiting"
-    self.proposer  ||= User.find_or_create_by(login: github_pr.user.login)
+    self.proposer  ||= User.find_or_create_by!(login: github_pr.user.login)
   end
 
   def age

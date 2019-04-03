@@ -69,7 +69,7 @@ module VoteCounter
         return
       end
       # Find the user
-      user = User.find_or_create_by(login: comment.user.login)
+      user = User.find_or_create_by!(login: comment.user.login)
       # Ignore proposer and non-contributors
       if user == proposer || !user.contributor
         return

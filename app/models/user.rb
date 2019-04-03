@@ -30,7 +30,7 @@ class User < ApplicationRecord
     # Find by oauth details, or if not available, by login only as some may have been created before.
     u = find_by(provider: auth.provider, uid: auth.uid) || find_by(login: auth.extra.raw_info.login)
     if u.nil?
-      u = User.create(provider: auth.provider, uid: auth.uid, login: auth.extra.raw_info.login)
+      u = User.create!(provider: auth.provider, uid: auth.uid, login: auth.extra.raw_info.login)
     end
     u
   end
@@ -70,7 +70,7 @@ class User < ApplicationRecord
       params = { login: contributor["login"] }
       unless User.find_by(params)
         Rails.logger.info " - #{contributor["login"]}"
-        user = User.create(params)
+        user = User.create!(params)
         user.contributor = true
         user.save!
       end

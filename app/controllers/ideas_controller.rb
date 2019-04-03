@@ -9,7 +9,7 @@ class IdeasController < ApplicationController
     @idea = Octokit.issue(ENV["GITHUB_REPO"], params[:id].to_i)
     raise ActiveRecord::RecordNotFound if @idea.nil?
     @activity = []
-    @author = User.find_or_create_by(login: @idea.user.login)
+    @author = User.find_or_create_by!(login: @idea.user.login)
     # Add original description
     @activity << ["comment", {
       body: @idea[:body].blank? ? "*The author didn't add any more detail*" : @idea[:body],
