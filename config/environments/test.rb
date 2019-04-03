@@ -36,10 +36,12 @@ Rails.application.configure do
 
   # Print deprecation notices to the stderr.
   config.active_support.deprecation = :stderr
-  
+
   # Process delayed jobs inline
   config.active_job.queue_adapter   = :test
 
   # Raises error for missing translations
   # config.action_view.raise_on_missing_translations = true
+
+  config.active_record.sqlite3.represent_boolean_as_integer = true
 end
