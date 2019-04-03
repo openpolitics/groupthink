@@ -122,7 +122,7 @@ class Proposal < ApplicationRecord
   end
 
   def close!
-    proposer.update_github_contributor_status and proposer.save!
+    proposer.update_github_contributor_status && proposer.save!
     update_state!
   end
 
