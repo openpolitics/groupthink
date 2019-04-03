@@ -1,7 +1,6 @@
 require 'rails_helper'
 
 RSpec.describe VoteCounter do
-
   before :each do
     @voter1 = create :user, contributor: true, notify_new: false
     @voter2 = create :user, contributor: true, notify_new: false
@@ -64,7 +63,7 @@ RSpec.describe VoteCounter do
               user: OpenStruct.new(
                 login: @voter1.login
               )
-            )      
+            )
           ]
           expect(pr).to receive(:time_of_last_commit).and_return(1.day.ago)
           pr.send(:count_votes_in_comments, comments)
@@ -74,7 +73,7 @@ RSpec.describe VoteCounter do
       end
     end
   end
-  
+
   it "should ignore votes from proposer" do
     pr = create :proposal
     comments = [
@@ -132,5 +131,4 @@ RSpec.describe VoteCounter do
     expect(pr.participants.count).to eq 1
     expect(pr.score).to eq 0
   end
-
 end

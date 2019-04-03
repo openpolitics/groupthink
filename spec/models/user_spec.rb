@@ -1,7 +1,6 @@
 require 'rails_helper'
 
 RSpec.describe User do
-
   it "should fill in extra user data from github on creation" do
     login = "test"
     expect(Octokit).to receive(:user).with(login).and_return(
@@ -20,5 +19,4 @@ RSpec.describe User do
     expect(u.email).to eq "test@example.com"
     expect(u.contributor).to eq true
   end
-
 end

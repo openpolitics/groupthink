@@ -1,9 +1,8 @@
 module ApplicationHelper
-  
   def bootstrap_url
     ENV['BOOTSTRAP_CSS_URL'] || "//maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css"
   end
-  
+
   def new_session_path(_scope)
     new_user_session_path
   end
@@ -14,7 +13,7 @@ module ApplicationHelper
     end
     fa_icon(icon)
   end
-  
+
   @@state_style = {
     'waiting' => {
       class: 'warning',
@@ -72,11 +71,11 @@ module ApplicationHelper
   def row_class(pr)
     @@state_style[pr.state][:class]
   end
-  
+
   def user_row_class(state)
     @@vote_style[state][:class]
   end
-  
+
   def vote_icon(vote, options = {})
     fa_sized_icon(@@vote_style[vote][:icon], options[:size])
   end
@@ -84,5 +83,4 @@ module ApplicationHelper
   def state_icon(state, options = {})
     fa_sized_icon(@@state_style[state][:icon], options[:size])
   end
-
 end

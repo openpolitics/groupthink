@@ -11,7 +11,6 @@ require 'rails_helper'
 #   end
 # end
 RSpec.describe ProposalsHelper, type: :helper do
-  
   context "replacing emoji" do
     {
       ":thumbsup:" => "👍",
@@ -26,15 +25,14 @@ RSpec.describe ProposalsHelper, type: :helper do
       end
     end
   end
-  
+
   context "linking usernames" do
-    
     it "at the start of a string" do
       input = "@hello there"
       output = "<a href='/users/hello'>@hello</a> there"
       expect(helper.link_usernames(input)).to eql output
     end
-        
+
     it "in the middle of a string" do
       input = "well @hello there"
       output = "well <a href='/users/hello'>@hello</a> there"
@@ -58,17 +56,15 @@ RSpec.describe ProposalsHelper, type: :helper do
       output = "bob@example.com"
       expect(helper.link_usernames(input)).to eql output
     end
-
   end
 
   context "linking proposals" do
-    
     it "at the start of a string" do
       input = "#434 is relevant"
       output = "<a href='/proposals/434'>#434</a> is relevant"
       expect(helper.link_proposals(input)).to eql output
     end
-        
+
     it "in the middle of a string" do
       input = "I think #434 is relevant"
       output = "I think <a href='/proposals/434'>#434</a> is relevant"
@@ -92,8 +88,5 @@ RSpec.describe ProposalsHelper, type: :helper do
       output = "&#434;"
       expect(helper.link_proposals(input)).to eql output
     end
-
-
   end
-
 end

@@ -1,5 +1,4 @@
 class String
-
   def contains_yes?
     [
       ":white_check_mark:",
@@ -7,7 +6,7 @@ class String
       ":thumbsup:",
       ":+1:",
       "👍",
-    ].any? {|x| self.include?(x)}
+    ].any? { |x| self.include?(x) }
   end
 
   def contains_no?
@@ -16,14 +15,14 @@ class String
       "❎",
       ":hand:",
       "✋",
-    ].any? {|x| self.include?(x)}
+    ].any? { |x| self.include?(x) }
   end
 
   def contains_abstention?
     [
       ":zipper_mouth_face:",
       "🤐",
-    ].any? {|x| self.include?(x)}
+    ].any? { |x| self.include?(x) }
   end
 
   def contains_block?
@@ -33,7 +32,6 @@ class String
       ":thumbsdown:",
       ":-1:",
       "👎",
-    ].any? {|x| self.include?(x)}
+    ].any? { |x| self.include?(x) }
   end
-
 end

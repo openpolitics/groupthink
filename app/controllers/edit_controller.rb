@@ -1,17 +1,17 @@
 class EditController < ApplicationController
   before_action :get_parameters, except: :index
   before_action :check_logged_in, except: :index
-  
+
   extend Memoist
 
   def index
   end
-  
+
   def new
     @content = ""
   end
-  
-  def edit    
+
+  def edit
     @content = get_files(original_repo_path, @filename)[@filename]
     @lineendings = detect_line_endings(@content)
   end
@@ -26,7 +26,7 @@ class EditController < ApplicationController
       github.fork original_repo_path
     end
   end
-  
+
   def commit
     # Fix line endings
     @content = convert_line_endings(@content, @lineendings)
@@ -50,152 +50,151 @@ class EditController < ApplicationController
     r = Faraday.get @cla_url
     @has_cla = (r.status == 200)
   end
-  
+
   private
-  
-  def check_logged_in
-    unless user_signed_in?
-      session[:original_path] = request.path
-      redirect_to action: :index
+
+    def check_logged_in
+      unless user_signed_in?
+        session[:original_path] = request.path
+        redirect_to action: :index
+      end
     end
-  end
-  
-  def get_parameters
-    @owner = params[:owner]
-    @repo = params[:repo]
-    @branch = params[:branch]
-    @title = params[:title]
-    @filename = params[:filename] || params[:path]
-    @format = params[:format] || (@filename ? @filename.split('.').last : "md")
-    if @title.present? && @filename.nil?
-      @filename = @title.parameterize + ".#{@format}"
+
+    def get_parameters
+      @owner = params[:owner]
+      @repo = params[:repo]
+      @branch = params[:branch]
+      @title = params[:title]
+      @filename = params[:filename] || params[:path]
+      @format = params[:format] || (@filename ? @filename.split('.').last : "md")
+      if @title.present? && @filename.nil?
+        @filename = @title.parameterize + ".#{@format}"
+      end
+      @content = params[:content]
+      @summary = params[:summary]
+      @description = params[:description]
+      @lineendings = params[:lineendings] || :crlf
     end
-    @content = params[:content]
-    @summary = params[:summary]
-    @description = params[:description]
-    @lineendings = params[:lineendings] || :crlf
-  end
 
-  def github
-    @github ||= Octokit::Client.new(:access_token => session[:github_token])
-  end
-
-  def original_repo_path
-    ENV['GITHUB_REPO']
-  end
-  
-  def user_repo_path
-    repo_name = ENV['GITHUB_REPO'].split("/").last
-    "#{current_user.login}/#{repo_name}"
-  end
-  
-  def branch
-    params[:branch]
-  end
-  
-  GITHUB_REPO_REGEX = /github.com[:\/]([^\/]*)\/([^\.]*)/
-
-  def latest_commit(repo, branch_name)
-    branch_data = github.branch repo, branch_name
-    branch_data['commit']['sha']
-  end
-  memoize :latest_commit
-
-  def tree(repo, branch)
-    github.tree(repo, branch, :recursive => true)
-  end
-  memoize :tree
-
-  def blob_shas(repo, branch, path)
-    tree = tree(repo, branch).tree
-    Hash[tree.select{|x| x[:path] =~ /^#{path}$/ && x[:type] == 'blob'}.map{|x| [x.path, x.sha]}]
-  end
-  memoize :blob_shas
-  
-  def blob_content(repo, sha)
-    blob = github.blob repo, sha
-    if blob['encoding'] == 'base64'
-      Base64.decode64(blob['content'])
-    else
-      blob['content']
+    def github
+      @github ||= Octokit::Client.new(:access_token => session[:github_token])
     end
-  end
-  memoize :blob_content
-  
 
-  def create_blob(repo, content)
-    github.create_blob repo, content, "utf-8"
-  end
-
-  def add_blob_to_tree(repo, blob_sha, filename, base_sha)
-    new_tree = github.create_tree repo, [{
-      path: filename,
-      mode: "100644",
-      type: "blob",
-      sha: blob_sha
-    }], base_tree: base_sha
-    new_tree.sha
-  end
-
-  def get_files(repo, name)
-    blobs = blob_shas(repo, @branch, name)
-    Hash[blobs.map{|x| [x[0], blob_content(repo, x[1])]}]
-  end
-
-  def commit_sha(repo, sha, message, parent_sha)
-    commit = github.create_commit repo, message, sha, parent_sha
-    commit.sha
-  end
-  
-  def create_branch(repo, name, sha)
-    branch = github.create_reference repo, "heads/#{name}", sha
-    branch.ref
-  end
-
-  def update_branch(repo, name, sha)
-    branch = github.update_reference repo, "heads/#{name}", sha
-    branch.ref
-  end
-
-  def open_pr(head, base, title, description)
-    pr = github.create_pull_request original_repo_path, base, head, title, description
-    Proposal.find_or_create_by(
-      number: pr.number,
-      opened_at: DateTime.now,
-      title: title,
-      proposer: @current_user
-    )
-  end
-  
-  def commit_file(repo, name, content, message, base_sha, branch_name)    
-    blob_sha = create_blob(repo, content)
-    tree_sha = add_blob_to_tree(repo, blob_sha, name, base_sha)
-    commit_sha = commit_sha(repo, tree_sha, message, base_sha)
-    update_branch(repo, branch_name, commit_sha)
-  end
-
-  def detect_line_endings(str)
-    case str
-    when /\r\n/
-      :crlf
-    when /\r/
-      :cr
-    when /\n/
-      :lf
-    else
-      nil
+    def original_repo_path
+      ENV['GITHUB_REPO']
     end
-  end
 
-  def convert_line_endings(str, lineendings)
-    case lineendings.to_sym
-    when :cr
-      str.gsub("\r\n", "\r")
-    when :lf
-      str.gsub("\r\n", "\n")
-    else
-      str
+    def user_repo_path
+      repo_name = ENV['GITHUB_REPO'].split("/").last
+      "#{current_user.login}/#{repo_name}"
     end
-  end
 
+    def branch
+      params[:branch]
+    end
+
+    GITHUB_REPO_REGEX = /github.com[:\/]([^\/]*)\/([^\.]*)/
+
+    def latest_commit(repo, branch_name)
+      branch_data = github.branch repo, branch_name
+      branch_data['commit']['sha']
+    end
+    memoize :latest_commit
+
+    def tree(repo, branch)
+      github.tree(repo, branch, :recursive => true)
+    end
+    memoize :tree
+
+    def blob_shas(repo, branch, path)
+      tree = tree(repo, branch).tree
+      Hash[tree.select { |x| x[:path] =~ /^#{path}$/ && x[:type] == 'blob' }.map { |x| [x.path, x.sha] }]
+    end
+    memoize :blob_shas
+
+    def blob_content(repo, sha)
+      blob = github.blob repo, sha
+      if blob['encoding'] == 'base64'
+        Base64.decode64(blob['content'])
+      else
+        blob['content']
+      end
+    end
+    memoize :blob_content
+
+
+    def create_blob(repo, content)
+      github.create_blob repo, content, "utf-8"
+    end
+
+    def add_blob_to_tree(repo, blob_sha, filename, base_sha)
+      new_tree = github.create_tree repo, [{
+        path: filename,
+        mode: "100644",
+        type: "blob",
+        sha: blob_sha
+      }], base_tree: base_sha
+      new_tree.sha
+    end
+
+    def get_files(repo, name)
+      blobs = blob_shas(repo, @branch, name)
+      Hash[blobs.map { |x| [x[0], blob_content(repo, x[1])] }]
+    end
+
+    def commit_sha(repo, sha, message, parent_sha)
+      commit = github.create_commit repo, message, sha, parent_sha
+      commit.sha
+    end
+
+    def create_branch(repo, name, sha)
+      branch = github.create_reference repo, "heads/#{name}", sha
+      branch.ref
+    end
+
+    def update_branch(repo, name, sha)
+      branch = github.update_reference repo, "heads/#{name}", sha
+      branch.ref
+    end
+
+    def open_pr(head, base, title, description)
+      pr = github.create_pull_request original_repo_path, base, head, title, description
+      Proposal.find_or_create_by(
+        number: pr.number,
+        opened_at: DateTime.now,
+        title: title,
+        proposer: @current_user
+      )
+    end
+
+    def commit_file(repo, name, content, message, base_sha, branch_name)
+      blob_sha = create_blob(repo, content)
+      tree_sha = add_blob_to_tree(repo, blob_sha, name, base_sha)
+      commit_sha = commit_sha(repo, tree_sha, message, base_sha)
+      update_branch(repo, branch_name, commit_sha)
+    end
+
+    def detect_line_endings(str)
+      case str
+      when /\r\n/
+        :crlf
+      when /\r/
+        :cr
+      when /\n/
+        :lf
+      else
+        nil
+      end
+    end
+
+    def convert_line_endings(str, lineendings)
+      case lineendings.to_sym
+      when :cr
+        str.gsub("\r\n", "\r")
+      when :lf
+        str.gsub("\r\n", "\n")
+      else
+        str
+      end
+    end
 end

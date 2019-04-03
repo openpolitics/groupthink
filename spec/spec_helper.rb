@@ -120,7 +120,6 @@ RSpec.configure do |config|
       example.run
     end
   end
-  
 end
 
 def load_fixture(filename)

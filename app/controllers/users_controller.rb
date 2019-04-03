@@ -1,8 +1,7 @@
 class UsersController < ApplicationController
-
   before_action :get_user, except: [:index]
   before_action :authorise, only: [:edit, :update]
-  
+
   def index
     @contributors = User.where(contributor: true)
     @others = User.where(contributor: false)
@@ -23,7 +22,7 @@ class UsersController < ApplicationController
 
   def edit
   end
-  
+
   def update
     @user.update_attributes!(user_params)
     redirect_to edit_user_path(@user)
@@ -45,5 +44,4 @@ private
   def user_params
     params.require(:user).permit(:email, :notify_new)
   end
-
 end

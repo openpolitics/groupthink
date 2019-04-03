@@ -1,5 +1,4 @@
 FactoryBot.define do
-
   factory :proposal do
     number { Faker::Number.number(3) }
     state { "waiting" }
@@ -17,5 +16,4 @@ FactoryBot.define do
       x.class.set_callback(:validation, :before, :load_from_github, on: :create)
     end
   end
-
 end

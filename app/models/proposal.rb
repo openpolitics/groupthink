@@ -10,7 +10,7 @@ class Proposal < ApplicationRecord
   belongs_to :proposer, class_name: "User"
 
   validates :number, presence: true, uniqueness: true
-  validates :state, inclusion: { in: %w(waiting agreed passed blocked dead accepted rejected)}
+  validates :state, inclusion: { in: %w(waiting agreed passed blocked dead accepted rejected) }
   validates :title, presence: true
   validates :proposer, presence: true
 
@@ -55,12 +55,12 @@ class Proposal < ApplicationRecord
   def age
     (Date.today - opened_at.to_date).to_i
   end
-  
+
   def too_old?
     age >= ENV["MAX_AGE"].to_i
   end
-  
-  def too_new? 
+
+  def too_new?
     age < ENV["MIN_AGE"].to_i
   end
 
@@ -71,11 +71,11 @@ class Proposal < ApplicationRecord
   def passed?
     score >= ENV["PASS_THRESHOLD"].to_i
   end
-  
+
   def blocked?
     score < ENV["BLOCK_THRESHOLD"].to_i
   end
-  
+
   def update_state!
     # default
     state = "waiting"
@@ -106,11 +106,11 @@ class Proposal < ApplicationRecord
   def yes
     interactions.where(last_vote: "yes")
   end
-  
+
   def block
     interactions.where(last_vote: "block")
   end
-  
+
   def no
     interactions.where(last_vote: "no")
   end
@@ -123,7 +123,7 @@ class Proposal < ApplicationRecord
     proposer.update_github_contributor_status and proposer.save!
     update_state!
   end
-  
+
   def closed?
     %w(accepted rejected).include? state
   end
@@ -135,18 +135,18 @@ class Proposal < ApplicationRecord
   def self.open
     self.where(state: %w(waiting agreed passed blocked dead))
   end
-  
+
   def url
     github_url
   end
-  
+
   def notify_voters
     # Notify users that there is a new proposal to vote on
     User.where.not(email: nil).where(notify_new: true, contributor: true).all.each do |user|
       ProposalsMailer.new_proposal(user, self).deliver_later unless user == proposer
     end
   end
-  
+
   def to_param
     number.to_s
   end
@@ -154,11 +154,11 @@ class Proposal < ApplicationRecord
   def activity_log
     activity = []
     # Add commits
-    activity.concat(github_commits.map{|commit|
+    activity.concat(github_commits.map { |commit|
       ['diff', {
         sha: commit[:sha],
         user: User.find_by_login(commit[:commit][:author][:name]),
-        proposal: self, 
+        proposal: self,
         original_url: url,
         time: commit[:commit][:author][:date]
       }]
@@ -166,17 +166,17 @@ class Proposal < ApplicationRecord
     # Add original description
     activity << ['comment', {
       body: description,
-      user: proposer, 
+      user: proposer,
       by_author: true,
       original_url: url,
       time: submitted_at
     }] if description
-    # Add comments    
-    activity.concat(github_comments.map{|comment|
+    # Add comments
+    activity.concat(github_comments.map { |comment|
       next if comment.body =~ /votebot instructions/
       ['comment', {
-        body: comment.body, 
-        user: User.find_by_login(comment.user.login), 
+        body: comment.body,
+        user: User.find_by_login(comment.user.login),
         by_author: (comment.user.login == proposer.login),
         original_url: comment.html_url,
         time: comment.created_at
@@ -187,17 +187,16 @@ class Proposal < ApplicationRecord
     # Sort by time
     activity.sort_by { |a| a[1][:time] }
   end
-  
+
   def diff(sha)
     github_diff(sha)
   end
-  
+
   def repo
     github_repo
   end
-  
+
   def branch
     github_branch
   end
-
 end

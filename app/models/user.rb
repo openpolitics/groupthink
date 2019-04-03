@@ -1,5 +1,4 @@
 class User < ApplicationRecord
-  
   default_scope { order(:login) }
 
   devise :omniauthable, :omniauth_providers => [:github]
@@ -9,7 +8,7 @@ class User < ApplicationRecord
 
   validates :login, presence: true, uniqueness: true
   validates :avatar_url, presence: true
-  
+
   before_validation :load_from_github, on: :create
 
   def proposed
@@ -49,9 +48,9 @@ class User < ApplicationRecord
   def update_github_contributor_status
     # TODO fix autopagination not working here: https://github.com/openpolitics/groupthink/issues/176
     @contributors ||= Octokit.contributors(ENV["GITHUB_REPO"], per_page: 100)
-    self.contributor = !@contributors.find{|x| x.login == login}.nil?
+    self.contributor = !@contributors.find { |x| x.login == login }.nil?
   end
-  
+
   def vote(proposal)
     interactions.find_by(proposal: proposal).try(:state)
   end
@@ -66,7 +65,7 @@ class User < ApplicationRecord
     end
     Rails.logger.info "Updating new contributors from GitHub"
     Octokit.contributors(ENV["GITHUB_REPO"]).each do |contributor|
-      params = {login: contributor["login"]}
+      params = { login: contributor["login"] }
       unless User.find_by(params)
         Rails.logger.info " - #{contributor["login"]}"
         user = User.create(params)
@@ -75,9 +74,8 @@ class User < ApplicationRecord
       end
     end
   end
-  
+
   def to_param
     login
   end
-  
 end

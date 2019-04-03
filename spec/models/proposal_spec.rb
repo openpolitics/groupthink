@@ -1,9 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe Proposal do
-  
   context "checking overall state" do
-    
     it "should store merged pull requests as accepted" do
       # stub state indicators
       allow_any_instance_of(Proposal).to receive(:pr_closed?).and_return(true)
@@ -23,11 +21,9 @@ RSpec.describe Proposal do
       pr.update_state!
       expect(pr.state).to eq 'rejected'
     end
-
   end
-  
+
   context "notification of new proposals" do
-  
     before :all do
       @proposer = create :user, contributor: true, notify_new: true
       @voter = create :user, contributor: true, notify_new: true
@@ -39,7 +35,7 @@ RSpec.describe Proposal do
       @mail = double("mail")
       allow(@mail).to receive(:deliver_later)
     end
-  
+
     it "should go to voters" do
       expect(ProposalsMailer).to receive(:new_proposal).once do |user, proposal|
         expect(user).to eql @voter
@@ -48,7 +44,7 @@ RSpec.describe Proposal do
       end
       proposal = create :proposal, proposer: @proposer
     end
-    
+
     it "should not go to proposer" do
       expect(ProposalsMailer).to receive(:new_proposal).at_least(:once) do |user, proposal|
         expect(user).not_to eql @proposer
@@ -75,7 +71,5 @@ RSpec.describe Proposal do
       end
       proposal = create :proposal, proposer: @proposer
     end
-
   end
-
 end

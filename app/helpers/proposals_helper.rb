@@ -1,5 +1,4 @@
 module ProposalsHelper
-
   def render_github_markdown(markdown)
     markdown = replace_emoji(markdown)
     markdown = GitHub::Markup.render('comment.markdown', markdown).html_safe
@@ -31,7 +30,7 @@ module ProposalsHelper
     end
     str.html_safe
   end
-  
+
   def link_proposals(str)
     str.scan(/(\s|^|\>)#(\d+)/).each do |match|
       str = str.gsub "##{match[1]}", "<a href='/proposals/#{match[1]}'>##{match[1]}</a>"
@@ -63,11 +62,10 @@ module ProposalsHelper
       "<div class='diff #{section[0]}'>#{render_github_markdown(section[1])}</div>"
     end.join
   end
-  
+
   # Wrap tag_options until rinku updates its code to work in Rails 5.1.1
   # See https://github.com/vmg/rinku/issues/70
   def tag_options(options, escape = true)
     tag_builder.tag_options(options, escape)
   end
-  
 end
