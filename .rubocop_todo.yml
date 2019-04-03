@@ -53,13 +53,6 @@ Style/DateTime:
     - 'app/controllers/edit_controller.rb'
     - 'app/models/concerns/github_pull_request.rb'
 
-# Offense count: 2
-# Configuration parameters: SuspiciousParamNames.
-# SuspiciousParamNames: options, opts, args, params, parameters
-Style/OptionHash:
-  Exclude:
-    - 'app/helpers/application_helper.rb'
-
 # Offense count: 8
 Style/Send:
   Exclude:

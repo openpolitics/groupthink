@@ -9,7 +9,7 @@ module ApplicationHelper
     new_user_session_path
   end
 
-  def fa_sized_icon(icon, size = nil)
+  def fa_sized_icon(icon, size)
     if size
       icon += " #{size}"
     end
@@ -78,11 +78,11 @@ module ApplicationHelper
     @@vote_style[state][:class]
   end
 
-  def vote_icon(vote, options = {})
-    fa_sized_icon(@@vote_style[vote][:icon], options[:size])
+  def vote_icon(vote, size: nil)
+    fa_sized_icon(@@vote_style[vote][:icon], size)
   end
 
-  def state_icon(state, options = {})
-    fa_sized_icon(@@state_style[state][:icon], options[:size])
+  def state_icon(state, size: nil)
+    fa_sized_icon(@@state_style[state][:icon], size)
   end
 end
