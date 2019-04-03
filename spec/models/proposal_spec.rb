@@ -44,7 +44,7 @@ RSpec.describe Proposal do
         expect(proposal).to be_valid
         @mail
       end
-      proposal = create :proposal, proposer: @proposer
+      create :proposal, proposer: @proposer
     end
 
     it "should not go to proposer" do
@@ -53,7 +53,7 @@ RSpec.describe Proposal do
         expect(proposal).to be_valid
         @mail
       end
-      proposal = create :proposal, proposer: @proposer
+      create :proposal, proposer: @proposer
     end
 
     it "should not go to a voter who has turned off notifications" do
@@ -62,7 +62,7 @@ RSpec.describe Proposal do
         expect(proposal).to be_valid
         @mail
       end
-      proposal = create :proposal, proposer: @proposer
+      create :proposal, proposer: @proposer
     end
 
     it "should not go to people who don't have the vote" do
@@ -71,7 +71,7 @@ RSpec.describe Proposal do
         expect(proposal).to be_valid
         @mail
       end
-      proposal = create :proposal, proposer: @proposer
+      create :proposal, proposer: @proposer
     end
   end
 end
