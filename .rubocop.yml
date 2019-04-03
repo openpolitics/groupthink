@@ -27,8 +27,8 @@ RailsI18n:
 Layout/ClassStructure:
   Enabled: true
 
-Metrics:
-  Enabled: true
+# Metrics:
+#   Enabled: true
 
 Performance/CaseWhenSplat:
   Enabled: true
