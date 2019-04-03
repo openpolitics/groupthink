@@ -48,11 +48,6 @@ class Proposal < ApplicationRecord
   end
 
   def load_from_github
-    # Handle deleted PRs
-    if github_pr.nil?
-      self.state = "closed"
-      return
-    end
     self.opened_at ||= github_pr.created_at
     self.title     ||= github_pr.title
     self.state     ||= "waiting"

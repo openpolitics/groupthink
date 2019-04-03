@@ -57,7 +57,7 @@ module GithubPullRequest
     end
 
     def pr_merged?
-      github_pr && github_pr.merged
+      github_pr.merged
     end
 
     def merge_pr!
