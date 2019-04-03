@@ -67,6 +67,7 @@ group :development, :test do
   gem "timecop"
   gem "coveralls"
   gem "rspec-rails"
+  gem "rspec_junit_formatter" # For CircleCI test reporting
   gem "dotenv-rails"
   gem "database_cleaner"
   gem "email_spec"
