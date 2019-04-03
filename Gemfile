@@ -68,7 +68,7 @@ group :development, :test do
   gem "dotenv-rails"
   gem "database_cleaner"
   gem "email_spec"
-  gem "factory_bot_rails", "~> 4.9"
+  gem "factory_bot_rails"
   gem "faker"
   gem 'rubocop', require: false
   gem "rubocop-rails_config", require: false
