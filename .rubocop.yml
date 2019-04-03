@@ -15,3 +15,10 @@ Rails/SaveBang:
 
 Layout/ClassStructure:
   Enabled: true
+
+Style/ImplicitRuntimeError:
+  Enabled: true
+
+Style/StringMethods:
+  Enabled: true
+
