@@ -10,3 +10,5 @@ AllCops:
 Rails:
   Enabled: true
 
+Layout/ClassStructure:
+  Enabled: true

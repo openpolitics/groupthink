@@ -5,6 +5,7 @@ class EditController < ApplicationController
   before_action :check_logged_in, except: :index
 
   extend Memoist
+  GITHUB_REPO_REGEX = /github.com[:\/]([^\/]*)\/([^\.]*)/
 
   def index
   end
@@ -95,7 +96,6 @@ class EditController < ApplicationController
       params[:branch]
     end
 
-    GITHUB_REPO_REGEX = /github.com[:\/]([^\/]*)\/([^\.]*)/
 
     def latest_commit(repo, branch_name)
       branch_data = github.branch repo, branch_name
