@@ -53,7 +53,7 @@ module GithubPullRequest
     end
 
     def pr_closed?
-      github_pr.state == "closed"
+      github_pr.nil? || github_pr.state == "closed"
     end
 
     def pr_merged?
