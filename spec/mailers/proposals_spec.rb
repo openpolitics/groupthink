@@ -3,9 +3,9 @@ require "rails_helper"
 RSpec.describe ProposalsMailer, type: :mailer do
   describe "new_proposal" do
     
-    let(:proposer) { FactoryGirl.create :user }
-    let(:contributor) { FactoryGirl.create :user, email: "contributor@example.com" }
-    let(:proposal) { FactoryGirl.create :proposal, proposer: contributor }
+    let(:proposer) { FactoryBot.create :user }
+    let(:contributor) { FactoryBot.create :user, email: "contributor@example.com" }
+    let(:proposal) { FactoryBot.create :proposal, proposer: contributor }
     let(:mail) { ProposalsMailer.new_proposal(contributor, proposal) }
   
     it "renders the headers" do
