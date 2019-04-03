@@ -27,12 +27,32 @@ RailsI18n:
 Layout/ClassStructure:
   Enabled: true
 
+Metrics:
+  Enabled: true
+
 Performance/CaseWhenSplat:
   Enabled: true
+
+# Performance/OpenStruct:
+#   Enabled: true
+
+# Style/DateTime:
+#   Enabled: true
+
+# Style/DocumentationMethod:
+#   Enabled: true
 
 Style/ImplicitRuntimeError:
   Enabled: true
 
+# Style/Send:
+#   Enabled: true
+
+# Style/StringHashKeys:
+#   Enabled: true
+
 Style/StringMethods:
   Enabled: true
 
+# Style/OptionHash:
+#   Enabled: true
