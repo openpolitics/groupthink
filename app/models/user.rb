@@ -3,7 +3,7 @@
 class User < ApplicationRecord
   default_scope { order(:login) }
 
-  devise :omniauthable, :omniauth_providers => [:github]
+  devise :omniauthable, omniauth_providers: [:github]
 
   has_many :interactions, dependent: :destroy
   has_many :participating, through: :interactions, source: :proposal

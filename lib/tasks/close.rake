@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-task :close => :environment do
+task close: :environment do
   Rails.logger = ActiveSupport::Logger.new(STDOUT)
   Proposal.where(state: "dead").each do |p|
     p.close_if_dead!

@@ -31,7 +31,7 @@ VCR.configure do |c|
   c.hook_into :webmock
   c.filter_sensitive_data('<GITHUB_OAUTH_TOKEN>') { ENV['GITHUB_OAUTH_TOKEN'] }
   c.configure_rspec_metadata!
-  c.default_cassette_options = { :record => :once }
+  c.default_cassette_options = { record: :once }
 end
 
 RSpec.configure do |config|

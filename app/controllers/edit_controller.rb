@@ -36,7 +36,7 @@ class EditController < ApplicationController
     forked = !github.repository(original_repo_path).permissions.push
     repo_path = forked ? user_repo_path : original_repo_path
     # Get the SHA of the edited branch - this is the head we want to add to
-    base_sha = github.tree(original_repo_path, @branch, :recursive => true).sha
+    base_sha = github.tree(original_repo_path, @branch, recursive: true).sha
     # What shall we call our new branch?
     branch_name = DateTime.now.to_s(:number)
     # Update fork if appropriate by making a new branch from the upstream base SHA
@@ -79,7 +79,7 @@ class EditController < ApplicationController
     end
 
     def github
-      @github ||= Octokit::Client.new(:access_token => session[:github_token])
+      @github ||= Octokit::Client.new(access_token: session[:github_token])
     end
 
     def original_repo_path
@@ -104,7 +104,7 @@ class EditController < ApplicationController
     memoize :latest_commit
 
     def tree(repo, branch)
-      github.tree(repo, branch, :recursive => true)
+      github.tree(repo, branch, recursive: true)
     end
     memoize :tree
 

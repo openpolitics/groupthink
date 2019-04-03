@@ -32,7 +32,7 @@ class ProposalsController < ApplicationController
   end
 
   def comment
-    github = Octokit::Client.new(:access_token => session[:github_token])
+    github = Octokit::Client.new(access_token: session[:github_token])
     comment = params[:comment]
     case params[:vote]
     when "yes"
