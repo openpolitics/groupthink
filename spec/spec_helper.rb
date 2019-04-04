@@ -120,7 +120,7 @@ RSpec.configure do |config|
     DatabaseCleaner.clean_with(:truncation)
   end
 
-  config.around(:each) do |example|
+  config.around do |example|
     clear_enqueued_jobs
     DatabaseCleaner.cleaning do
       example.run

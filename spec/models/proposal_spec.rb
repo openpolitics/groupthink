@@ -33,7 +33,7 @@ RSpec.describe Proposal do
       @participant = create :user, contributor: false, notify_new: true
     end
 
-    before :each do
+    before do
       @mail = double("mail")
       allow(@mail).to receive(:deliver_later)
     end

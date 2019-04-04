@@ -3,7 +3,7 @@
 require "rails_helper"
 
 RSpec.describe VoteCounter do
-  before :each do
+  before do
     @voter1 = create :user, contributor: true, notify_new: false
     @voter2 = create :user, contributor: true, notify_new: false
   end

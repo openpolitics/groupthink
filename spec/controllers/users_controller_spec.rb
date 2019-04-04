@@ -5,7 +5,7 @@ require "rails_helper"
 RSpec.describe UsersController, type: :controller do
   render_views
 
-  before :each do
+  before do
     @user = create :user, contributor: true, notify_new: true
   end
 
