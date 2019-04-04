@@ -26,14 +26,11 @@ RSpec.describe Proposal do
   end
 
   context "notification of new proposals" do
-    before :all do
+    before do
       @proposer = create :user, contributor: true, notify_new: true
       @voter = create :user, contributor: true, notify_new: true
       @no_notifications = create :user, contributor: true, notify_new: false
       @participant = create :user, contributor: false, notify_new: true
-    end
-
-    before do
       @mail = double("mail")
       allow(@mail).to receive(:deliver_later)
     end
