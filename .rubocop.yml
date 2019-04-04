@@ -23,6 +23,9 @@ Rails/SaveBang:
 RailsI18n:
   Enabled: true
 
+RSpec:
+  Enabled: true
+
 Layout/ClassStructure:
   Enabled: true
 

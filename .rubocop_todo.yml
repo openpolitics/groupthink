@@ -57,6 +57,126 @@ Metrics/PerceivedComplexity:
     - 'app/models/proposal.rb'
     - 'app/models/concerns/vote_counter.rb'
 
+# Offense count: 13
+RSpec/AnyInstance:
+  Exclude:
+    - 'spec/models/proposal_spec.rb'
+    - 'spec/controllers/ideas_controller_spec.rb'
+    - 'spec/controllers/proposals_controller_spec.rb'
+
+# Offense count: 1
+RSpec/BeforeAfterAll:
+  Exclude:
+    - 'spec/spec_helper.rb'
+    - 'spec/rails_helper.rb'
+    - 'spec/support/**/*.rb'
+    - 'spec/models/proposal_spec.rb'
+
+# Offense count: 7
+# Configuration parameters: Prefixes.
+# Prefixes: when, with, without
+RSpec/ContextWording:
+  Exclude:
+    - 'spec/controllers/proposals_controller_spec.rb'
+    - 'spec/helpers/proposals_helper_spec.rb'
+    - 'spec/models/proposal_spec.rb'
+    - 'spec/models/vote_counter_spec.rb'
+
+# Offense count: 1
+RSpec/DescribeClass:
+  Exclude:
+    - 'spec/integration/webhook_spec.rb'
+
+# Offense count: 4
+# Cop supports --auto-correct.
+# Configuration parameters: SkipBlocks, EnforcedStyle.
+# SupportedStyles: described_class, explicit
+RSpec/DescribedClass:
+  Exclude:
+    - 'spec/models/proposal_spec.rb'
+
+# Offense count: 2
+# Configuration parameters: CustomIncludeMethods.
+RSpec/EmptyExampleGroup:
+  Exclude:
+    - 'spec/helpers/ideas_helper_spec.rb'
+    - 'spec/helpers/users_helper_spec.rb'
+
+# Offense count: 2
+# Cop supports --auto-correct.
+RSpec/EmptyLineAfterHook:
+  Exclude:
+    - 'spec/factories/proposal.rb'
+    - 'spec/factories/user.rb'
+
+# Offense count: 13
+# Configuration parameters: Max.
+RSpec/ExampleLength:
+  Exclude:
+    - 'spec/controllers/ideas_controller_spec.rb'
+    - 'spec/controllers/proposals_controller_spec.rb'
+    - 'spec/integration/webhook_spec.rb'
+    - 'spec/models/proposal_spec.rb'
+    - 'spec/models/user_spec.rb'
+    - 'spec/models/vote_counter_spec.rb'
+
+# Offense count: 20
+# Cop supports --auto-correct.
+# Configuration parameters: CustomTransform, IgnoredWords.
+RSpec/ExampleWording:
+  Exclude:
+    - 'spec/controllers/proposals_controller_spec.rb'
+    - 'spec/controllers/users_controller_spec.rb'
+    - 'spec/mailers/proposals_spec.rb'
+    - 'spec/models/proposal_spec.rb'
+    - 'spec/models/user_spec.rb'
+    - 'spec/models/vote_counter_spec.rb'
+
+# Offense count: 1
+# Configuration parameters: CustomTransform, IgnoreMethods.
+RSpec/FilePath:
+  Exclude:
+    - 'spec/mailers/proposals_spec.rb'
+
+# Offense count: 5
+# Cop supports --auto-correct.
+# Configuration parameters: .
+# SupportedStyles: implicit, each, example
+RSpec/HookArgument:
+  EnforcedStyle: each
+
+# Offense count: 28
+# Configuration parameters: AssignmentOnly.
+RSpec/InstanceVariable:
+  Exclude:
+    - 'spec/controllers/proposals_controller_spec.rb'
+    - 'spec/controllers/users_controller_spec.rb'
+    - 'spec/models/proposal_spec.rb'
+    - 'spec/models/vote_counter_spec.rb'
+
+# Offense count: 13
+# Configuration parameters: .
+# SupportedStyles: have_received, receive
+RSpec/MessageSpies:
+  EnforcedStyle: receive
+
+# Offense count: 21
+# Configuration parameters: AggregateFailuresByDefault.
+RSpec/MultipleExpectations:
+  Max: 8
+
+# Offense count: 1
+# Cop supports --auto-correct.
+RSpec/ReceiveNever:
+  Exclude:
+    - 'spec/controllers/proposals_controller_spec.rb'
+
+# Offense count: 1
+# Configuration parameters: IgnoreNameless, IgnoreSymbolicNames.
+RSpec/VerifiedDoubles:
+  Exclude:
+    - 'spec/models/proposal_spec.rb'
+
 # Offense count: 5
 RailsI18n/DecorateString:
   Exclude:
