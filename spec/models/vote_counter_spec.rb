@@ -3,10 +3,8 @@
 require "rails_helper"
 
 RSpec.describe VoteCounter do
-  before do
-    @voter1 = create :user, contributor: true, notify_new: false
-    @voter2 = create :user, contributor: true, notify_new: false
-  end
+  let(:voter1) { create :user, contributor: true, notify_new: false }
+  let(:voter2) { create :user, contributor: true, notify_new: false }
 
   it "counts only latest vote per person" do
     pr = create :proposal
@@ -15,21 +13,21 @@ RSpec.describe VoteCounter do
         body: "✅",
         created_at: 2.hours.ago,
         user: OpenStruct.new(
-          login: @voter1.login
+          login: voter1.login
         )
       ),
       OpenStruct.new(
         body: "✅",
         created_at: 1.hour.ago,
         user: OpenStruct.new(
-          login: @voter1.login
+          login: voter1.login
         )
       )
     ]
     expect(pr).to receive(:time_of_last_commit).and_return(1.day.ago).at_least(:once)
     pr.send(:count_votes_in_comments, comments)
     expect(pr.score).to eq 1
-    expect(pr.yes.first.user).to eq @voter1
+    expect(pr.yes.first.user).to eq voter1
   end
 
   context "casting votes in comments" do
@@ -63,7 +61,7 @@ RSpec.describe VoteCounter do
               body: "here is a vote! #{symbol}",
               created_at: 2.hours.ago,
               user: OpenStruct.new(
-                login: @voter1.login
+                login: voter1.login
               )
             )
           ]
@@ -115,7 +113,7 @@ RSpec.describe VoteCounter do
         body: "✅",
         created_at: 2.hours.ago,
         user: OpenStruct.new(
-          login: @voter1.login
+          login: voter1.login
         )
       )
     ]

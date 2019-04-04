@@ -89,15 +89,6 @@ RSpec/FilePath:
   Exclude:
     - 'spec/mailers/proposals_spec.rb'
 
-# Offense count: 28
-# Configuration parameters: AssignmentOnly.
-RSpec/InstanceVariable:
-  Exclude:
-    - 'spec/controllers/proposals_controller_spec.rb'
-    - 'spec/controllers/users_controller_spec.rb'
-    - 'spec/models/proposal_spec.rb'
-    - 'spec/models/vote_counter_spec.rb'
-
 # Offense count: 13
 # Configuration parameters: .
 # SupportedStyles: have_received, receive
