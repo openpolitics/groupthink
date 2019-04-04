@@ -29,6 +29,10 @@ Layout/ClassStructure:
 Metrics:
   Enabled: true
 
+Metrics/BlockLength:
+  Exclude:
+    - 'spec/**/*.rb'
+
 Performance/CaseWhenSplat:
   Enabled: true
 
