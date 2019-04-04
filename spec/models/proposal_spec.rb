@@ -4,7 +4,7 @@ require "rails_helper"
 
 RSpec.describe Proposal do
   context "checking overall state" do
-    it "should store merged pull requests as accepted" do
+    it "stores merged pull requests as accepted" do
       # stub state indicators
       allow_any_instance_of(described_class).to receive(:pr_closed?).and_return(true)
       allow_any_instance_of(described_class).to receive(:pr_merged?).and_return(true)
@@ -14,7 +14,7 @@ RSpec.describe Proposal do
       expect(pr.state).to eq "accepted"
     end
 
-    it "should store closed and unmerged pull requests as rejected", :vcr do
+    it "stores closed and unmerged pull requests as rejected", :vcr do
       # stub state indicators
       allow_any_instance_of(described_class).to receive(:pr_closed?).and_return(true)
       allow_any_instance_of(described_class).to receive(:pr_merged?).and_return(false)
@@ -38,7 +38,7 @@ RSpec.describe Proposal do
       allow(@mail).to receive(:deliver_later)
     end
 
-    it "should go to voters" do
+    it "goes to voters" do
       expect(ProposalsMailer).to receive(:new_proposal).once do |user, proposal|
         expect(user).to eql @voter
         expect(proposal).to be_valid
@@ -47,7 +47,7 @@ RSpec.describe Proposal do
       create :proposal, proposer: @proposer
     end
 
-    it "should not go to proposer" do
+    it "does not go to proposer" do
       expect(ProposalsMailer).to receive(:new_proposal).at_least(:once) do |user, proposal|
         expect(user).not_to eql @proposer
         expect(proposal).to be_valid
@@ -56,7 +56,7 @@ RSpec.describe Proposal do
       create :proposal, proposer: @proposer
     end
 
-    it "should not go to a voter who has turned off notifications" do
+    it "does not go to a voter who has turned off notifications" do
       expect(ProposalsMailer).to receive(:new_proposal).at_least(:once) do |user, proposal|
         expect(user).not_to eql @no_notifications
         expect(proposal).to be_valid
@@ -65,7 +65,7 @@ RSpec.describe Proposal do
       create :proposal, proposer: @proposer
     end
 
-    it "should not go to people who don't have the vote" do
+    it "does not go to people who don't have the vote" do
       expect(ProposalsMailer).to receive(:new_proposal).at_least(:once) do |user, proposal|
         expect(user).not_to eql @participant
         expect(proposal).to be_valid

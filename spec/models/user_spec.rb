@@ -3,7 +3,7 @@
 require "rails_helper"
 
 RSpec.describe User do
-  it "should fill in extra user data from github on creation" do
+  it "fills in extra user data from github on creation" do
     login = "test"
     expect(Octokit).to receive(:user).with(login).and_return(
       OpenStruct.new(

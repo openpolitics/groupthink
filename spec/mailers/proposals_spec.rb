@@ -15,15 +15,15 @@ RSpec.describe ProposalsMailer, type: :mailer do
       expect(mail.subject).to eq("OpenPolitics Manifesto: new proposal ready for your vote")
     end
 
-    it "should include title of proposal" do
+    it "includes title of proposal" do
       expect(mail.body.encoded).to match(proposal.title)
     end
 
-    it "should include link to vote" do
+    it "includes link to vote" do
       expect(mail.body.encoded).to match("#{ENV["SITE_URL"]}/proposals/#{proposal.number}")
     end
 
-    it "should include link to edit settings for user" do
+    it "includes link to edit settings for user" do
       expect(mail.body.encoded).to match(/http.*\/users\/#{contributor.login}\/edit/)
     end
   end

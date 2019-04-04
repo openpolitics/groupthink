@@ -10,13 +10,13 @@ RSpec.describe ProposalsController, type: :controller do
     @proposal = create :proposal, proposer: @proposer
   end
 
-  it "should show index page" do
+  it "shows index page" do
     get :index
     expect(response).to be_ok
     expect(response.body).to include "https://openpolitics.org.uk"
   end
 
-  it "should show individual proposal page" do
+  it "shows individual proposal page" do
     # Stub out the calls to github data
     allow_any_instance_of(GithubPullRequest).to receive(:github_commits).and_return([])
     allow_any_instance_of(Proposal).to receive(:description).and_return("test")
@@ -29,14 +29,14 @@ RSpec.describe ProposalsController, type: :controller do
   end
 
   context "adding comments" do
-    it "should redirect to login if not logged in" do
+    it "redirects to login if not logged in" do
       expect_any_instance_of(Octokit::Client).not_to receive(:add_comment)
       put :comment, params: { id: @proposal.number }
       expect(response).to be_redirect
       expect(response.redirect_url).to eq "http://test.host/sign_in"
     end
 
-    it "should post comment if logged in" do
+    it "posts comment if logged in" do
       expect_any_instance_of(Octokit::Client).to receive(:add_comment).once
       sign_in @proposer
       put :comment, params: { id: @proposal.number, comment: "hello" }

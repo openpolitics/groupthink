@@ -8,7 +8,7 @@ RSpec.describe VoteCounter do
     @voter2 = create :user, contributor: true, notify_new: false
   end
 
-  it "should only count latest vote per person" do
+  it "counts only latest vote per person" do
     pr = create :proposal
     comments = [
       OpenStruct.new(
@@ -76,7 +76,7 @@ RSpec.describe VoteCounter do
     end
   end
 
-  it "should ignore votes from proposer" do
+  it "ignores votes from proposer" do
     pr = create :proposal
     comments = [
       OpenStruct.new(
@@ -92,7 +92,7 @@ RSpec.describe VoteCounter do
     expect(pr.score).to eq 0
   end
 
-  it "should ignore votes before last commit" do
+  it "ignores votes before last commit" do
     pr = create :proposal
     comments = [
       OpenStruct.new(
@@ -108,7 +108,7 @@ RSpec.describe VoteCounter do
     expect(pr.score).to eq 0
   end
 
-  it "should actively remove yes votes cast before the last commit" do
+  it "removes yes votes cast before the last commit" do
     pr = create :proposal
     comments = [
       OpenStruct.new(
