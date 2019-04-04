@@ -6,8 +6,8 @@ RSpec.describe Proposal do
   context "checking overall state" do
     it "should store merged pull requests as accepted" do
       # stub state indicators
-      allow_any_instance_of(Proposal).to receive(:pr_closed?).and_return(true)
-      allow_any_instance_of(Proposal).to receive(:pr_merged?).and_return(true)
+      allow_any_instance_of(described_class).to receive(:pr_closed?).and_return(true)
+      allow_any_instance_of(described_class).to receive(:pr_merged?).and_return(true)
       # Test
       pr = create :proposal
       pr.update_state!
@@ -16,8 +16,8 @@ RSpec.describe Proposal do
 
     it "should store closed and unmerged pull requests as rejected", :vcr do
       # stub state indicators
-      allow_any_instance_of(Proposal).to receive(:pr_closed?).and_return(true)
-      allow_any_instance_of(Proposal).to receive(:pr_merged?).and_return(false)
+      allow_any_instance_of(described_class).to receive(:pr_closed?).and_return(true)
+      allow_any_instance_of(described_class).to receive(:pr_merged?).and_return(false)
       # Test
       pr = create :proposal
       pr.update_state!
