@@ -97,13 +97,6 @@ RSpec/EmptyExampleGroup:
     - 'spec/helpers/ideas_helper_spec.rb'
     - 'spec/helpers/users_helper_spec.rb'
 
-# Offense count: 2
-# Cop supports --auto-correct.
-RSpec/EmptyLineAfterHook:
-  Exclude:
-    - 'spec/factories/proposal.rb'
-    - 'spec/factories/user.rb'
-
 # Offense count: 13
 # Configuration parameters: Max.
 RSpec/ExampleLength:
