@@ -18,7 +18,9 @@ class User < ApplicationRecord
   end
 
   def voted_on
-    Proposal.joins(:interactions).where('interactions.user': self).where.not('interactions.last_vote': nil, proposer: self)
+    Proposal.joins(:interactions).
+      where('interactions.user': self).
+      where.not('interactions.last_vote': nil, proposer: self)
   end
 
   def not_voted_on
@@ -27,7 +29,8 @@ class User < ApplicationRecord
   end
 
   def self.from_omniauth(auth)
-    # Find by oauth details, or if not available, by login only as some may have been created before.
+    # Find by oauth details, or if not available,
+    # by login only as some may have been created before.
     u = find_by(provider: auth.provider, uid: auth.uid) || find_by(login: auth.extra.raw_info.login)
     if u.nil?
       u = User.create!(provider: auth.provider, uid: auth.uid, login: auth.extra.raw_info.login)
@@ -42,7 +45,8 @@ class User < ApplicationRecord
     self.contributor = update_github_contributor_status
     nil # to avoid halting validation chain until 5.1
   rescue Octokit::NotFound
-    # TODO Need to do something here if the user has been deleted, but for now we'll just log an error
+    # TODO Need to do something here if the user has been deleted,
+    # but for now we'll just log an error
     logger.warn "User #{login} not found in GitHub - could have been deleted"
     nil
   end

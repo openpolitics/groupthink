@@ -134,23 +134,6 @@ Style/StringHashKeys:
 # URISchemes: http, https
 Metrics/LineLength:
   Exclude:
-    - 'app/models/proposal.rb'
-    - 'app/models/interaction.rb'
     - 'app/models/concerns/vote_counter.rb'
     - 'app/models/concerns/github_pull_request.rb'
-    - 'app/models/user.rb'
-    - 'app/controllers/proposals_controller.rb'
-    - 'app/controllers/users/omniauth_callbacks_controller.rb'
-    - 'app/controllers/edit_controller.rb'
-    - 'app/controllers/ideas_controller.rb'
-    - 'app/helpers/proposals_helper.rb'
-    - 'app/helpers/application_helper.rb'
-    - 'spec/mailers/proposals_spec.rb'
-    - 'spec/models/vote_counter_spec.rb'
-    - 'spec/models/proposal_spec.rb'
-    - 'spec/factories/proposal.rb'
-    - 'spec/factories/user.rb'
-    - 'spec/rails_helper.rb'
-    - 'spec/controllers/proposals_controller_spec.rb'
     - 'spec/controllers/ideas_controller_spec.rb'
-    - 'lib/tasks/merge.rake'

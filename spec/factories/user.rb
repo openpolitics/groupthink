@@ -9,9 +9,13 @@ FactoryBot.define do
     provider { "github" }
 
     # Don't run load_from_github callback when creating from factory, but put it back after
-    after(:build) { |x| x.class.skip_callback(:validation, :before, :load_from_github) }
+    after(:build) do |x|
+      x.class.skip_callback(:validation, :before, :load_from_github)
+    end
 
-    after(:create) { |x| x.class.set_callback(:validation, :before, :load_from_github, on: :create) }
+    after(:create) do |x|
+      x.class.set_callback(:validation, :before, :load_from_github, on: :create)
+    end
   end
 
   factory :user_with_github_data, class: User do
