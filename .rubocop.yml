@@ -3,6 +3,7 @@ inherit_from: .rubocop_todo.yml
 require:
   - rubocop-rspec
   - rubocop-i18n
+  - rubocop-performance
 
 inherit_gem:
   rubocop-rails_config:

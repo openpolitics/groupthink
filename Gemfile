@@ -75,6 +75,7 @@ group :development, :test do
   gem "rubocop-i18n", require: false
   gem "rubocop-rails_config", require: false
   gem "rubocop-rspec", require: false
+  gem "rubocop-performance", require: false
 end
 
 group :development do

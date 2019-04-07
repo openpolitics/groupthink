@@ -252,6 +252,8 @@ GEM
       unicode-display_width (>= 1.4.0, < 1.6)
     rubocop-i18n (2.0.0)
       rubocop (~> 0.51)
+    rubocop-performance (1.0.0)
+      rubocop (>= 0.58.0)
     rubocop-rails_config (0.5.0)
       railties (>= 3.0)
       rubocop (~> 0.60)
@@ -359,6 +361,7 @@ DEPENDENCIES
   rspec_junit_formatter
   rubocop
   rubocop-i18n
+  rubocop-performance
   rubocop-rails_config
   rubocop-rspec
   sassc-rails (~> 2.1)
