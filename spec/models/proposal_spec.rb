@@ -30,7 +30,7 @@ RSpec.describe Proposal do
     let!(:voter) { create :user, contributor: true, notify_new: true }
     let!(:no_notifications) { create :user, contributor: true, notify_new: false }
     let!(:participant) { create :user, contributor: false, notify_new: true }
-    let!(:mail) { double("mail") }
+    let!(:mail) { instance_double("mail") }
 
     before do
       allow(mail).to receive(:deliver_later)

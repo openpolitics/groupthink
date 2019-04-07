@@ -100,12 +100,6 @@ RSpec/MessageSpies:
 RSpec/MultipleExpectations:
   Max: 8
 
-# Offense count: 1
-# Configuration parameters: IgnoreNameless, IgnoreSymbolicNames.
-RSpec/VerifiedDoubles:
-  Exclude:
-    - 'spec/models/proposal_spec.rb'
-
 # Offense count: 5
 RailsI18n/DecorateString:
   Exclude:
