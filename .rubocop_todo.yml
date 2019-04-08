@@ -105,7 +105,6 @@ RailsI18n/DecorateString:
   Exclude:
     - 'app/models/concerns/github_pull_request.rb'
     - 'app/models/concerns/vote_counter.rb'
-    - 'spec/rails_helper.rb'
 
 # Offense count: 3
 # Configuration parameters: AllowCoercion.
