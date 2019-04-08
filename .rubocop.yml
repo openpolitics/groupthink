@@ -23,8 +23,6 @@ Rails/SaveBang:
 
 RailsI18n:
   Enabled: true
-  Exclude:
-    - 'spec/**/*.rb'
 
 RSpec:
   Enabled: true
