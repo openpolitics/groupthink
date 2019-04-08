@@ -89,12 +89,6 @@ RSpec/FilePath:
   Exclude:
     - 'spec/mailers/proposals_spec.rb'
 
-# Offense count: 13
-# Configuration parameters: .
-# SupportedStyles: have_received, receive
-RSpec/MessageSpies:
-  EnforcedStyle: receive
-
 # Offense count: 21
 # Configuration parameters: AggregateFailuresByDefault.
 RSpec/MultipleExpectations:

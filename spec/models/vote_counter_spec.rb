@@ -24,7 +24,7 @@ RSpec.describe VoteCounter do
         )
       )
     ]
-    expect(pr).to receive(:time_of_last_commit).and_return(1.day.ago).at_least(:once)
+    allow(pr).to receive(:time_of_last_commit).and_return(1.day.ago)
     pr.send(:count_votes_in_comments, comments)
     expect(pr.score).to eq 1
     expect(pr.yes.first.user).to eq voter1
@@ -65,7 +65,7 @@ RSpec.describe VoteCounter do
               )
             )
           ]
-          expect(pr).to receive(:time_of_last_commit).and_return(1.day.ago)
+          allow(pr).to receive(:time_of_last_commit).and_return(1.day.ago)
           pr.send(:count_votes_in_comments, comments)
           expect(pr.score).to eq set[:score]
           expect(pr.send(set[:vote]).count).to eq 1
@@ -85,7 +85,7 @@ RSpec.describe VoteCounter do
         )
       )
     ]
-    expect(pr).to receive(:time_of_last_commit).and_return(1.day.ago)
+    allow(pr).to receive(:time_of_last_commit).and_return(1.day.ago)
     pr.send(:count_votes_in_comments, comments)
     expect(pr.score).to eq 0
   end
@@ -101,7 +101,7 @@ RSpec.describe VoteCounter do
         )
       )
     ]
-    expect(pr).to receive(:time_of_last_commit).and_return(1.hour.ago)
+    allow(pr).to receive(:time_of_last_commit).and_return(1.hour.ago)
     pr.send(:count_votes_in_comments, comments)
     expect(pr.score).to eq 0
   end
@@ -118,14 +118,14 @@ RSpec.describe VoteCounter do
       )
     ]
     # First, calculate the vote count without a recent commit
-    expect(pr).to receive(:time_of_last_commit).and_return(3.hours.ago)
+    allow(pr).to receive(:time_of_last_commit).and_return(3.hours.ago)
     pr.send(:count_votes_in_comments, comments)
     expect(pr.yes.count).to eq 1
     expect(pr.participants.count).to eq 1
     expect(pr.score).to eq 1
     # Now, with the same DB data, let's have a newer commit and check that
     # the score has changed when we recount.
-    expect(pr).to receive(:time_of_last_commit).and_return(1.hour.ago)
+    allow(pr).to receive(:time_of_last_commit).and_return(1.hour.ago)
     pr.send(:count_votes_in_comments, comments)
     expect(pr.yes.count).to eq 0
     expect(pr.participants.count).to eq 1
