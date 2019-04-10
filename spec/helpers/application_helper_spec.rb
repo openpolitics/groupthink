@@ -32,7 +32,7 @@ RSpec.describe ApplicationHelper, type: :helper do
       passed: "check",
       agreed: "check",
     }.each_pair do |state, icon|
-      it("can create an icon for the '#{state}' state") do
+      it("displays a '#{icon}' icon when #{state}") do
         html = helper.state_icon(state.to_s)
         expect(html).to eq("<i class=\"fa fa-#{icon}\"></i>")
       end
