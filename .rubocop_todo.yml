@@ -73,12 +73,6 @@ RSpec/ExampleLength:
     - 'spec/models/proposal_spec.rb'
     - 'spec/models/vote_counter_spec.rb'
 
-# Offense count: 1
-# Configuration parameters: CustomTransform, IgnoreMethods.
-RSpec/FilePath:
-  Exclude:
-    - 'spec/mailers/proposals_spec.rb'
-
 # Offense count: 21
 # Configuration parameters: AggregateFailuresByDefault.
 RSpec/MultipleExpectations:
