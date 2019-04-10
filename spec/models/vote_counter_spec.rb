@@ -30,7 +30,7 @@ RSpec.describe VoteCounter do
     expect(pr.yes.first.user).to eq voter1
   end
 
-  context "casting votes in comments" do
+  context "when casting votes in comments" do
     [
       {
         vote: "yes",

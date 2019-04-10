@@ -64,16 +64,6 @@ RSpec/AnyInstance:
     - 'spec/controllers/ideas_controller_spec.rb'
     - 'spec/controllers/proposals_controller_spec.rb'
 
-# Offense count: 7
-# Configuration parameters: Prefixes.
-# Prefixes: when, with, without
-RSpec/ContextWording:
-  Exclude:
-    - 'spec/controllers/proposals_controller_spec.rb'
-    - 'spec/helpers/proposals_helper_spec.rb'
-    - 'spec/models/proposal_spec.rb'
-    - 'spec/models/vote_counter_spec.rb'
-
 # Offense count: 13
 # Configuration parameters: Max.
 RSpec/ExampleLength:

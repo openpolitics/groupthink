@@ -13,7 +13,7 @@ require "rails_helper"
 #   end
 # end
 RSpec.describe ProposalsHelper, type: :helper do
-  context "replacing emoji" do
+  context "when replacing emoji" do
     {
       ":thumbsup:" => "👍",
       ":thumbsdown:" => "👎",
@@ -28,7 +28,7 @@ RSpec.describe ProposalsHelper, type: :helper do
     end
   end
 
-  context "linking usernames" do
+  context "when linking usernames" do
     it "at the start of a string" do
       input = "@hello there"
       output = "<a href='/users/hello'>@hello</a> there"
@@ -60,7 +60,7 @@ RSpec.describe ProposalsHelper, type: :helper do
     end
   end
 
-  context "linking proposals" do
+  context "when linking proposals" do
     it "at the start of a string" do
       input = "#434 is relevant"
       output = "<a href='/proposals/434'>#434</a> is relevant"

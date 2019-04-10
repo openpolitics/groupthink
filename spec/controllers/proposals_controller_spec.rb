@@ -26,7 +26,7 @@ RSpec.describe ProposalsController, type: :controller do
     expect(response.body).to include proposer.login
   end
 
-  context "adding comments" do
+  context "when adding comments" do
     it "redirects to login if not logged in" do
       expect_any_instance_of(Octokit::Client).not_to receive(:add_comment)
       put :comment, params: { id: proposal.number }

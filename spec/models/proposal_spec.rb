@@ -3,7 +3,7 @@
 require "rails_helper"
 
 RSpec.describe Proposal do
-  context "checking overall state" do
+  context "when checking overall state" do
     it "stores merged pull requests as accepted" do
       # stub state indicators
       allow_any_instance_of(described_class).to receive(:pr_closed?).and_return(true)
@@ -25,7 +25,7 @@ RSpec.describe Proposal do
     end
   end
 
-  context "notification of new proposals" do
+  context "with notification of new proposals" do
     let!(:proposer) { create :user, contributor: true, notify_new: true }
     let!(:voter) { create :user, contributor: true, notify_new: true }
     let!(:no_notifications) { create :user, contributor: true, notify_new: false }
