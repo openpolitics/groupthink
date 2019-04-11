@@ -98,15 +98,6 @@ Style/Send:
     - 'app/jobs/vote_counter_job.rb'
     - 'spec/models/vote_counter_spec.rb'
 
-# Offense count: 34
-# Cop supports --auto-correct.
-Style/StringHashKeys:
-  Exclude:
-    - 'app/helpers/application_helper.rb'
-    - 'app/helpers/proposals_helper.rb'
-    - 'spec/helpers/proposals_helper_spec.rb'
-    - 'spec/controllers/proposals_controller_spec.rb'
-
 # Offense count: 58
 # Configuration parameters: AllowHeredoc, AllowURI, URISchemes, IgnoreCopDirectives, IgnoredPatterns.
 # URISchemes: http, https

@@ -15,15 +15,15 @@ require "rails_helper"
 RSpec.describe ProposalsHelper, type: :helper do
   context "when replacing emoji" do
     {
-      ":thumbsup:" => "👍",
-      ":thumbsdown:" => "👎",
-      ":+1:" => "👍",
-      ":-1:" => "👎",
-      ":hand:" => "✋",
-      ":smiley:" => "😃",
+      ":thumbsup:": "👍",
+      ":thumbsdown:": "👎",
+      ":+1:": "👍",
+      ":-1:": "👎",
+      ":hand:": "✋",
+      ":smiley:": "😃",
     }.each_pair do |input, output|
       it "#{input} with #{output}" do
-        expect(helper.replace_emoji(input)).to eql output
+        expect(helper.replace_emoji(input.to_s)).to eql output
       end
     end
   end

@@ -17,72 +17,72 @@ module ApplicationHelper
   end
 
   @@state_style = {
-    "waiting" => {
+    waiting: {
       class: "warning",
       icon:  "clock-o",
     },
-    "blocked" => {
+    blocked: {
       class: "danger",
       icon:  "ban",
     },
-    "rejected" => {
+    rejected: {
       class: "danger",
       icon:  "ban",
     },
-    "dead" => {
+    dead: {
       class: "danger",
       icon:  "ban",
     },
-    "accepted" => {
+    accepted: {
       class: "success",
       icon:  "check",
     },
-    "passed" => {
+    passed: {
       class: "success",
       icon:  "check",
     },
-    "agreed" => {
+    agreed: {
       class: "success",
       icon:  "check",
     },
   }
 
   @@vote_style = {
-    "yes" => {
+    yes: {
       class: "success",
       icon: "check",
     },
-    "no" => {
+    no: {
       class: "warning",
       icon: "times",
     },
-    "block" => {
+    block: {
       class: "danger",
       icon: "ban",
     },
-    "abstention" => {
+    abstention: {
       class: "info",
       icon: "meh-o",
     },
-    "participating" => {
+    participating: {
       class: "default",
       icon: "comments-o",
     },
   }
 
   def row_class(pr)
-    @@state_style[pr.state][:class]
+    @@state_style[pr.state.to_sym][:class]
   end
 
   def user_row_class(state)
-    @@vote_style[state][:class]
+    @@vote_style[state.to_sym][:class]
   end
 
   def vote_icon(vote, size: nil)
-    fa_sized_icon(@@vote_style[vote][:icon], size)
+    fa_sized_icon(@@vote_style[vote.to_sym][:icon], size)
   end
 
   def state_icon(state, size: nil)
-    fa_sized_icon(@@state_style[state][:icon], size)
+    fa_sized_icon(@@state_style[state.to_sym][:icon], size)
   end
 end
