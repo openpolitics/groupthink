@@ -68,9 +68,7 @@ RSpec/AnyInstance:
 # Configuration parameters: Max.
 RSpec/ExampleLength:
   Exclude:
-    - 'spec/controllers/ideas_controller_spec.rb'
     - 'spec/controllers/proposals_controller_spec.rb'
-    - 'spec/models/vote_counter_spec.rb'
 
 # Offense count: 21
 # Configuration parameters: AggregateFailuresByDefault.
