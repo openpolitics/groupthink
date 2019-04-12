@@ -126,8 +126,16 @@ RSpec.configure do |config|
       example.run
     end
   end
+
+  config.around(:example, :freeze) do |example|
+    Timecop.freeze example.metadata[:freeze] do
+      example.run
+    end
+  end
+
 end
 
 def load_fixture(filename)
   File.read(File.join(File.dirname(__FILE__), "fixtures", filename))
 end
+
