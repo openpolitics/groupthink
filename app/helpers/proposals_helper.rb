@@ -10,18 +10,18 @@ module ProposalsHelper
   end
 
   def replace_emoji(str)
-    {
-      ":white_check_mark:" => "✅",
-      ":negative_squared_cross_mark:" => "❎",
-      ":no_entry_sign:" => "🚫",
-      ":thumbsup:" => "👍",
-      ":thumbsdown:" => "👎",
-      ":+1:" => "👍",
-      ":-1:" => "👎",
-      ":hand:" => "✋",
-      ":smiley:" => "😃",
-    }.each_pair do |before, after|
-      str = str.gsub(before, after)
+    [
+      [":white_check_mark:", "✅"],
+      [":negative_squared_cross_mark:", "❎"],
+      [":no_entry_sign:", "🚫"],
+      [":thumbsup:", "👍"],
+      [":thumbsdown:", "👎"],
+      [":+1:", "👍"],
+      [":-1:", "👎"],
+      [":hand:", "✋"],
+      [":smiley:", "😃"],
+    ].each do |replacement|
+      str = str.gsub(replacement[0], replacement[1])
     end
     str
   end
@@ -52,12 +52,12 @@ module ProposalsHelper
         sections.last[1] += "\n#{line[1..-1]}"
       else
         types = {
-          "+" => :added,
-          "-" => :removed,
-          " " => :unchanged
+          "+": :added,
+          "-": :removed,
+          " ": :unchanged
         }
         last_type = line[0]
-        sections << [types[line[0]], line[1..-1]]
+        sections << [types[line[0].to_sym], line[1..-1]]
       end
     end
     sections.map do |section|
