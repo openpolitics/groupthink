@@ -85,7 +85,7 @@ group :development do
   gem "spring-watcher-listen", "~> 2.0"
   gem "letter_opener"
   gem "guard"
-  gem 'guard-rspec', require: false
+  gem "guard-rspec", require: false
   gem "pry"
 end
 
