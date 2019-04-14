@@ -36,6 +36,7 @@ Metrics:
 Metrics/BlockLength:
   Exclude:
     - 'spec/**/*.rb'
+    - 'Guardfile'
 
 Metrics/LineLength:
   Max: 100
