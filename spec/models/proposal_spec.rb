@@ -3,7 +3,7 @@
 require "rails_helper"
 
 RSpec.describe Proposal do
-  context "checking overall state" do
+  context "when checking overall state" do
     it "stores merged pull requests as accepted" do
       # stub state indicators
       allow_any_instance_of(described_class).to receive(:pr_closed?).and_return(true)
@@ -25,7 +25,7 @@ RSpec.describe Proposal do
     end
   end
 
-  context "notification of new proposals" do
+  context "with notification of new proposals" do
     let!(:proposer) { create :user, contributor: true, notify_new: true }
     let!(:voter) { create :user, contributor: true, notify_new: true }
     let!(:no_notifications) { create :user, contributor: true, notify_new: false }
@@ -34,42 +34,39 @@ RSpec.describe Proposal do
 
     before do
       allow(mail).to receive(:deliver_later)
+      allow(ProposalsMailer).to receive(:new_proposal).and_return(mail)
     end
 
     it "goes to voters" do
-      expect(ProposalsMailer).to receive(:new_proposal).once do |user, proposal|
+      create :proposal, proposer: proposer
+      expect(ProposalsMailer).to have_received(:new_proposal).once do |user, proposal|
         expect(user).to eql voter
         expect(proposal).to be_valid
-        mail
       end
-      create :proposal, proposer: proposer
     end
 
     it "does not go to proposer" do
-      expect(ProposalsMailer).to receive(:new_proposal).at_least(:once) do |user, proposal|
+      create :proposal, proposer: proposer
+      expect(ProposalsMailer).to have_received(:new_proposal).at_least(:once) do |user, proposal|
         expect(user).not_to eql proposer
         expect(proposal).to be_valid
-        mail
       end
-      create :proposal, proposer: proposer
     end
 
     it "does not go to a voter who has turned off notifications" do
-      expect(ProposalsMailer).to receive(:new_proposal).at_least(:once) do |user, proposal|
+      create :proposal, proposer: proposer
+      expect(ProposalsMailer).to have_received(:new_proposal).at_least(:once) do |user, proposal|
         expect(user).not_to eql no_notifications
         expect(proposal).to be_valid
-        mail
       end
-      create :proposal, proposer: proposer
     end
 
     it "does not go to people who don't have the vote" do
-      expect(ProposalsMailer).to receive(:new_proposal).at_least(:once) do |user, proposal|
+      create :proposal, proposer: proposer
+      expect(ProposalsMailer).to have_received(:new_proposal).at_least(:once) do |user, proposal|
         expect(user).not_to eql participant
         expect(proposal).to be_valid
-        mail
       end
-      create :proposal, proposer: proposer
     end
   end
 end

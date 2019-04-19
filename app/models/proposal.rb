@@ -67,7 +67,9 @@ class Proposal < ApplicationRecord
   end
 
   def score
-    (yes.count * ENV["YES_WEIGHT"].to_i) + (no.count * ENV["NO_WEIGHT"].to_i) + (block.count * ENV["BLOCK_WEIGHT"].to_i)
+    (yes.count * ENV["YES_WEIGHT"].to_i) +
+    (no.count * ENV["NO_WEIGHT"].to_i) +
+    (block.count * ENV["BLOCK_WEIGHT"].to_i)
   end
 
   def passed?

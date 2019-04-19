@@ -37,6 +37,9 @@ Metrics/BlockLength:
   Exclude:
     - 'spec/**/*.rb'
 
+Metrics/LineLength:
+  Max: 100
+
 Performance/CaseWhenSplat:
   Enabled: true
 

@@ -110,7 +110,9 @@ class EditController < ApplicationController
 
     def blob_shas(repo, branch, path)
       tree = tree(repo, branch).tree
-      Hash[tree.select { |x| x[:path] =~ /^#{path}$/ && x[:type] == "blob" }.map { |x| [x.path, x.sha] }]
+      Hash[tree.select do |x|
+        x[:path] =~ /^#{path}$/ && x[:type] == "blob"
+      end.map { |x| [x.path, x.sha] }]
     end
     memoize :blob_shas
 

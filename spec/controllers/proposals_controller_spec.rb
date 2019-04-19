@@ -26,7 +26,7 @@ RSpec.describe ProposalsController, type: :controller do
     expect(response.body).to include proposer.login
   end
 
-  context "adding comments" do
+  context "when adding comments" do
     it "redirects to login if not logged in" do
       expect_any_instance_of(Octokit::Client).not_to receive(:add_comment)
       put :comment, params: { id: proposal.number }
@@ -60,8 +60,7 @@ RSpec.describe ProposalsController, type: :controller do
       expect(UpdateProposalJob).to have_been_enqueued.with(32)
     end
 
-    it "/ should parse github pull requests correctly" do
-      Timecop.freeze
+    it "/ should parse github pull requests correctly", freeze: Time.now do
       # Set POST
       request.headers["X-Github-Event"] = "pull_request"
       post :webhook,
@@ -71,7 +70,6 @@ RSpec.describe ProposalsController, type: :controller do
       # Should result in PR 43 being updated
       expect(CreateProposalJob).to have_been_enqueued.with(43)
       expect(CreateProposalJob).to have_been_enqueued.at(5.seconds.from_now)
-      Timecop.return
     end
 
     it "/ should handle pull request closes correctly" do

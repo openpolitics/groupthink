@@ -30,8 +30,9 @@ module VoteCounter
         status = "success"
         text = "The proposal has been agreed."
       else
+        remaining_votes = ENV["PASS_THRESHOLD"].to_i - score
         status = "pending"
-        text = "The proposal is waiting for more votes; #{ENV["PASS_THRESHOLD"].to_i - score} more needed."
+        text = "The proposal is waiting for more votes; #{remaining_votes} more needed."
       end
       # Update github commit status
       set_build_status(status, text, "groupthink/votes")
