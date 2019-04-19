@@ -4,6 +4,6 @@ class VoteCounterJob < ApplicationJob
   queue_as :default
 
   def perform(proposal)
-    proposal.public_send :count_votes!
+    proposal.count_votes!
   end
 end
