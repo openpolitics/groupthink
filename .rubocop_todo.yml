@@ -89,12 +89,6 @@ Style/DateTime:
     - 'app/controllers/edit_controller.rb'
     - 'app/models/concerns/github_pull_request.rb'
 
-# Offense count: 8
-Style/Send:
-  Exclude:
-    - 'app/jobs/vote_counter_job.rb'
-    - 'spec/models/vote_counter_spec.rb'
-
 # Offense count: 58
 # Configuration parameters: AllowHeredoc, AllowURI, URISchemes, IgnoreCopDirectives, IgnoredPatterns.
 # URISchemes: http, https

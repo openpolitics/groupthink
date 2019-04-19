@@ -46,24 +46,24 @@ RSpec.describe VoteCounter do
   ].each do |set|
     set[:symbols].each do |sym|
       it "counts a '#{sym}' in a comment as a #{set[:vote]} vote" do
-        pr.send(:count_votes_in_comments, [
+        pr.__send__(:count_votes_in_comments, [
           mock_vote(vote: sym, created_at: 2.hours.ago, login: voter1.login)
         ])
         expect(pr.score).to eq set[:score]
-        expect(pr.send(set[:vote]).count).to eq 1
+        expect(pr.public_send(set[:vote]).count).to eq 1
       end
     end
   end
 
   it "ignores votes cast by proposer" do
-    pr.send(:count_votes_in_comments, [
+    pr.__send__(:count_votes_in_comments, [
       mock_vote(login: pr.proposer.login)
     ])
     expect(pr.score).to eq 0
   end
 
   it "counts only the most recent vote cast by each voter" do
-    pr.send(:count_votes_in_comments, [
+    pr.__send__(:count_votes_in_comments, [
       mock_vote(vote: "❎", created_at: 2.hours.ago, login: voter1.login),
       mock_vote(vote: "✅", created_at: 1.hours.ago, login: voter1.login)
     ])
@@ -75,21 +75,21 @@ RSpec.describe VoteCounter do
     let (:login) { voter1.login }
 
     it "discards yes votes" do
-      pr.send(:count_votes_in_comments, [
+      pr.__send__(:count_votes_in_comments, [
         mock_vote(created_at: time_before_last_commit, login: login)
       ])
       expect(pr.score).to eq 0
     end
 
     it "preserves no votes" do
-      pr.send(:count_votes_in_comments, [
+      pr.__send__(:count_votes_in_comments, [
         mock_vote(vote: "❎", created_at: time_before_last_commit, login: login)
       ])
       expect(pr.score).to eq(-1)
     end
 
     it "preserves block votes" do
-      pr.send(:count_votes_in_comments, [
+      pr.__send__(:count_votes_in_comments, [
         mock_vote(vote: "🚫", created_at: time_before_last_commit, login: login)
       ])
       expect(pr.score).to eq(-1000)
