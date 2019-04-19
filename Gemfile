@@ -63,6 +63,8 @@ group :development, :test do
   gem "vcr"
   gem "webmock"
   gem "timecop"
+  gem "simplecov"
+  gem "simplecov-lcov"
   gem "coveralls"
   gem "rspec-rails"
   gem "rspec_junit_formatter" # For CircleCI test reporting
