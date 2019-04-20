@@ -7,7 +7,7 @@ A collaborative writing platform built on top of GitHub, originally designed for
 
 It has two main functions:
 
-1. Provide a friendly interface to make changes (using pull requests) to GitHub-hosted Jekyll websites, using Markdown.
+1. Provide a user-friendly interface to make changes (using pull requests) to GitHub-hosted Jekyll websites, using Markdown.
 
 2. Monitor discussion in those pull requests, and layer on a voting system to determine what should be merged in. Voting is done using special symbols in pull requests, which are counted by the app. Status is set using the GitHub commit status API.
 
@@ -23,9 +23,9 @@ The system was originally implemented for the collaborative manifesto project at
 
 ## Get your own!
 
-If you want to run your own open democratic platform, you can! This isn't a simple process yet, unfortunately, but we'll help you through as best we can...
+If you want to run your own open democratic platform, you can! This isn't a simple process yet, but we'll help you through as best we can...
 
-Note that currently the style and headers of the deployed app will still match the [OpenPolitics Manifesto version](https://votebot.openpolitics.org.uk). A [change for that](https://github.com/openpolitics/groupthink/issues/42) will be coming soon.
+Note that the style and headers of the deployed app will still match the [OpenPolitics Manifesto version](https://votebot.openpolitics.org.uk). A [change for that](https://github.com/openpolitics/groupthink/issues/42) will be coming soon.
 
 ### Set up a GitHub repository for your content
 
@@ -73,7 +73,7 @@ Go back to the GitHub setting tab for your repository and click on `webhooks`, t
 
 Enter the Payload URL `https://your-unique-groupthink-app-name.herokuapp.com/webhook`, changing the root URL to be the one you're using for your deployed groupthink.
 
-Leave the rest of the settings on default except for "which events would you like to trigger this webhook?". Select "Let me select individual events" and then choose just:
+Leave the rest of the settings on default except for "which events would you like to trigger this webhook?". Select "Let me select individual events" and then choose:
 
 * Issue comment
 * Pull request
@@ -94,7 +94,7 @@ This task will run the following tasks, in this order:
  * `rake close`: closes any proposals that are over the maximum age
  * `rake update`: reloads data from github, counts votes, and performs time checks.
 
-Because `update` is run last, proposals will be marked as passed or dead, and only closed or merged on the next run of the rake task. If run nightly, this gives 24 hours of grace before automatic actions are taken.
+Because `update` is run last, proposals will be marked as passed or dead, and closed or merged on the next run of the rake task. If run nightly, this gives 24 hours of grace before automatic actions are taken.
 
 ### Enable automatic deployment
 
