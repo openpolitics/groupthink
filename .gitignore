@@ -24,3 +24,4 @@
 
 coverage
 spec/examples.txt
+.yardoc

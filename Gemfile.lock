@@ -125,6 +125,11 @@ GEM
     htmlentities (4.3.4)
     i18n (1.6.0)
       concurrent-ruby (~> 1.0)
+    inch (0.8.0)
+      pry
+      sparkr (>= 0.2.0)
+      term-ansicolor
+      yard (~> 0.9.12)
     jaro_winkler (1.5.2)
     jbuilder (2.8.0)
       activesupport (>= 4.2.0)
@@ -314,6 +319,7 @@ GEM
       simplecov-html (~> 0.10.0)
     simplecov-html (0.10.2)
     simplecov-lcov (0.7.0)
+    sparkr (0.4.1)
     spring (2.0.2)
       activesupport (>= 4.2)
     spring-watcher-listen (2.0.1)
@@ -357,6 +363,7 @@ GEM
     websocket-driver (0.7.0)
       websocket-extensions (>= 0.1.0)
     websocket-extensions (0.1.3)
+    yard (0.9.19)
 
 PLATFORMS
   ruby
@@ -376,6 +383,7 @@ DEPENDENCIES
   github-markup
   guard
   guard-rspec
+  inch
   jbuilder (~> 2.8)
   jquery-rails
   kaminari
@@ -411,6 +419,7 @@ DEPENDENCIES
   vcr
   web-console
   webmock
+  yard
 
 RUBY VERSION
    ruby 2.6.1p33
