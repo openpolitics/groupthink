@@ -1,4 +1,4 @@
-[![Build status](https://img.shields.io/circleci/project/github/openpolitics/groupthink/master.svg)](https://circleci.com/gh/openpolitics/groupthink) [![Coverage Status](https://coveralls.io/repos/github/openpolitics/groupthink/badge.svg?branch=master)](https://coveralls.io/github/openpolitics/groupthink?branch=master) [![Code Climate](https://codeclimate.com/github/openpolitics/groupthink/badges/gpa.svg)](https://codeclimate.com/github/openpolitics/groupthink)
+[![Build status](https://img.shields.io/circleci/project/github/openpolitics/groupthink/master.svg)](https://circleci.com/gh/openpolitics/groupthink) [![Coverage Status](https://coveralls.io/repos/github/openpolitics/groupthink/badge.svg?branch=master)](https://coveralls.io/github/openpolitics/groupthink?branch=master) [![Code Climate](https://codeclimate.com/github/openpolitics/groupthink/badges/gpa.svg)](https://codeclimate.com/github/openpolitics/groupthink) [![Inline docs](http://inch-ci.org/github/openpolitics/groupthink.svg?branch=master)](http://inch-ci.org/github/openpolitics/groupthink)
 
 
 # Groupthink
