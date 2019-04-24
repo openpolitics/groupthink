@@ -12,7 +12,7 @@ def mock_vote(vote: "✅", created_at: 1.hour.ago, login: "test")
   )
 end
 
-RSpec.describe VoteCounter do
+RSpec.describe VoteCounter, type: :model do
   let(:voter1) { create :user, contributor: true, notify_new: false }
   let(:voter2) { create :user, contributor: true, notify_new: false }
 

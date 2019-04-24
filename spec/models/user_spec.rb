@@ -2,7 +2,7 @@
 
 require "rails_helper"
 
-RSpec.describe User do
+RSpec.describe User, type: :model do
   let!(:login) { "test" }
   let!(:mock_user) {
     OpenStruct.new(

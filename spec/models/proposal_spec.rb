@@ -2,7 +2,7 @@
 
 require "rails_helper"
 
-RSpec.describe Proposal do
+RSpec.describe Proposal, type: :model do
   context "when checking overall state" do
     it "stores merged pull requests as accepted" do
       # stub state indicators
