@@ -9,9 +9,15 @@ RSpec.describe ProposalsMailer, type: :mailer do
     let(:proposal) { FactoryBot.create :proposal, proposer: contributor }
     let(:mail) { ProposalsMailer.new_proposal(contributor, proposal) }
 
-    it "renders the headers" do
+    it "sends email to right person" do
       expect(mail.to).to eq(["contributor@example.com"])
+    end
+
+    it "sends email from specified domain" do
       expect(mail.from).to eq(["no-reply@#{ENV["EMAIL_DOMAIN"]}"])
+    end
+
+    it "sets email subject" do
       expect(mail.subject).to eq("OpenPolitics Manifesto: new proposal ready for your vote")
     end
 

@@ -23,10 +23,19 @@ RSpec.describe User do
     allow(Octokit).to receive(:contributors).and_return(mock_contributors)
   end
 
-  it "fills in extra user data from github on creation" do
-    u = create :user_with_github_data, login: login
-    expect(u.avatar_url).to eq "https://example.com/avatar.png"
-    expect(u.email).to eq "test@example.com"
-    expect(u.contributor).to eq true
+  context "when filling in extra user data from github on creation" do
+    let(:u) { create :user_with_github_data, login: login }
+
+    it "sets avatar URL" do
+      expect(u.avatar_url).to eq "https://example.com/avatar.png"
+    end
+
+    it "sets email" do
+      expect(u.email).to eq "test@example.com"
+    end
+
+    it "sets contributor state" do
+      expect(u.contributor).to eq true
+    end
   end
 end

@@ -45,12 +45,20 @@ RSpec.describe VoteCounter do
     },
   ].each do |set|
     set[:symbols].each do |sym|
-      it "counts a '#{sym}' in a comment as a #{set[:vote]} vote" do
-        pr.__send__(:count_votes_in_comments, [
-          mock_vote(vote: sym, created_at: 2.hours.ago, login: voter1.login)
-        ])
-        expect(pr.score).to eq set[:score]
-        expect(pr.public_send(set[:vote]).count).to eq 1
+      context "when casting a vote with '#{sym}'" do
+        before do
+          pr.__send__(:count_votes_in_comments, [
+            mock_vote(vote: sym, created_at: 2.hours.ago, login: voter1.login)
+          ])
+        end
+
+        it "counts as a #{set[:vote]} vote" do
+          expect(pr.public_send(set[:vote]).count).to eq 1
+        end
+
+        it "calculates correct score for a #{set[:vote]} vote" do
+          expect(pr.score).to eq set[:score]
+        end
       end
     end
   end

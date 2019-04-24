@@ -11,6 +11,10 @@ RSpec.describe ProposalsController, type: :controller do
   it "shows index page" do
     get :index
     expect(response).to be_ok
+  end
+
+  it "includes site URL in index page" do
+    get :index
     expect(response.body).to include "https://openpolitics.org.uk"
   end
 
@@ -22,24 +26,35 @@ RSpec.describe ProposalsController, type: :controller do
     allow_any_instance_of(Octokit::Client).to receive(:issue_comments).and_return([])
     # Test show page
     get :show, params: { id: proposal.number }
-    expect(response).to be_ok
     expect(response.body).to include proposer.login
   end
 
   context "when adding comments" do
-    it "redirects to login if not logged in" do
-      expect_any_instance_of(Octokit::Client).not_to receive(:add_comment)
-      put :comment, params: { id: proposal.number }
-      expect(response).to be_redirect
-      expect(response.redirect_url).to eq "http://test.host/sign_in"
+    context "when not logged in" do
+      it "redirects to login" do
+        put :comment, params: { id: proposal.number }
+        expect(response.redirect_url).to eq "http://test.host/sign_in"
+      end
+
+      it "does not add comment" do
+        expect_any_instance_of(Octokit::Client).not_to receive(:add_comment)
+        put :comment, params: { id: proposal.number }
+      end
     end
 
-    it "posts comment if logged in" do
-      expect_any_instance_of(Octokit::Client).to receive(:add_comment).once
-      sign_in proposer
-      put :comment, params: { id: proposal.number, comment: "hello" }
-      expect(response).to be_redirect
-      expect(response.redirect_url).to eq "http://test.host/proposals/#{proposal.number}"
+    context "when logged in" do
+      it "posts comment" do
+        expect_any_instance_of(Octokit::Client).to receive(:add_comment).once
+        sign_in proposer
+        put :comment, params: { id: proposal.number, comment: "hello" }
+      end
+
+      it "redirects back to proposal page after posting" do
+        allow_any_instance_of(Octokit::Client).to receive(:add_comment).once
+        sign_in proposer
+        put :comment, params: { id: proposal.number, comment: "hello" }
+        expect(response.redirect_url).to eq "http://test.host/proposals/#{proposal.number}"
+      end
     end
   end
 
@@ -49,36 +64,29 @@ RSpec.describe ProposalsController, type: :controller do
       expect(response).to be_bad_request
     end
 
-    it "/ should parse github issue comments correctly" do
+    it "/ should enqueue github issue comments correctly" do
       # Set POST
       request.headers["X-Github-Event"] = "issue_comment"
       post :webhook,
         params: { payload: load_fixture("requests/issue_comment") }
-      # Check response
-      expect(response).to be_ok
       # Should result in PR 32 being updated
       expect(UpdateProposalJob).to have_been_enqueued.with(32)
     end
 
-    it "/ should parse github pull requests correctly", freeze: Time.now do
+    it "/ should enqueue github pull requests correctly" do
       # Set POST
       request.headers["X-Github-Event"] = "pull_request"
       post :webhook,
         params: { payload: load_fixture("requests/pull_request") }
-      # Check response
-      expect(response).to be_ok
-      # Should result in PR 43 being updated
+      # Should result in PR 43 being created
       expect(CreateProposalJob).to have_been_enqueued.with(43)
-      expect(CreateProposalJob).to have_been_enqueued.at(5.seconds.from_now)
     end
 
-    it "/ should handle pull request closes correctly" do
+    it "/ should enqueue pull request closes correctly" do
       # Set POST
       request.headers["X-Github-Event"] = "pull_request"
       post :webhook,
         params: { payload: load_fixture("requests/close_pull_request") }
-      # Check response
-      expect(response).to be_ok
       # Should result in PR 43 being closed
       expect(CloseProposalJob).to have_been_enqueued.with(43)
     end

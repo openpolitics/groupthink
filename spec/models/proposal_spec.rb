@@ -38,35 +38,23 @@ RSpec.describe Proposal do
     end
 
     it "goes to voters" do
-      create :proposal, proposer: proposer
-      expect(ProposalsMailer).to have_received(:new_proposal).once do |user, proposal|
-        expect(user).to eql voter
-        expect(proposal).to be_valid
-      end
+      proposal = create :proposal, proposer: proposer
+      expect(ProposalsMailer).to have_received(:new_proposal).with(voter, proposal)
     end
 
     it "does not go to proposer" do
-      create :proposal, proposer: proposer
-      expect(ProposalsMailer).to have_received(:new_proposal).at_least(:once) do |user, proposal|
-        expect(user).not_to eql proposer
-        expect(proposal).to be_valid
-      end
+      proposal = create :proposal, proposer: proposer
+      expect(ProposalsMailer).not_to have_received(:new_proposal).with(proposer, proposal)
     end
 
     it "does not go to a voter who has turned off notifications" do
-      create :proposal, proposer: proposer
-      expect(ProposalsMailer).to have_received(:new_proposal).at_least(:once) do |user, proposal|
-        expect(user).not_to eql no_notifications
-        expect(proposal).to be_valid
-      end
+      proposal = create :proposal, proposer: proposer
+      expect(ProposalsMailer).not_to have_received(:new_proposal).with(no_notifications, proposal)
     end
 
     it "does not go to people who don't have the vote" do
-      create :proposal, proposer: proposer
-      expect(ProposalsMailer).to have_received(:new_proposal).at_least(:once) do |user, proposal|
-        expect(user).not_to eql participant
-        expect(proposal).to be_valid
-      end
+      proposal = create :proposal, proposer: proposer
+      expect(ProposalsMailer).not_to have_received(:new_proposal).with(participant, proposal)
     end
   end
 end

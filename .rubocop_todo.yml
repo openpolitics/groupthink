@@ -70,11 +70,6 @@ RSpec/ExampleLength:
   Exclude:
     - 'spec/controllers/proposals_controller_spec.rb'
 
-# Offense count: 21
-# Configuration parameters: AggregateFailuresByDefault.
-RSpec/MultipleExpectations:
-  Max: 8
-
 # Offense count: 5
 RailsI18n/DecorateString:
   Exclude:
