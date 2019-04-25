@@ -57,19 +57,6 @@ Metrics/PerceivedComplexity:
     - 'app/models/proposal.rb'
     - 'app/models/concerns/vote_counter.rb'
 
-# Offense count: 13
-RSpec/AnyInstance:
-  Exclude:
-    - 'spec/models/proposal_spec.rb'
-    - 'spec/controllers/ideas_controller_spec.rb'
-    - 'spec/controllers/proposals_controller_spec.rb'
-
-# Offense count: 13
-# Configuration parameters: Max.
-RSpec/ExampleLength:
-  Exclude:
-    - 'spec/controllers/proposals_controller_spec.rb'
-
 # Offense count: 5
 RailsI18n/DecorateString:
   Exclude:

@@ -5,7 +5,7 @@ require "rails_helper"
 RSpec.describe IdeasController, type: :controller do
   describe "GET #index" do
     before do
-      allow_any_instance_of(Octokit::Client).to receive(:issues).and_return([])
+      allow(Octokit).to receive(:issues).and_return([])
     end
 
     it "returns http success" do
@@ -18,7 +18,7 @@ RSpec.describe IdeasController, type: :controller do
     let(:login) { "test" }
 
     before do
-      allow_any_instance_of(Octokit::Client).to receive(:issue).and_return(
+      allow(Octokit).to receive(:issue).and_return(
         OpenStruct.new(
           user: OpenStruct.new(
             login: login
@@ -26,7 +26,7 @@ RSpec.describe IdeasController, type: :controller do
         )
       )
       allow(User).to receive(:find_or_create_by!).with(login: login).and_return(create :user, login: login)
-      allow_any_instance_of(Octokit::Client).to receive(:issue_comments).and_return([])
+      allow(Octokit).to receive(:issue_comments).and_return([])
     end
 
     it "returns http success" do

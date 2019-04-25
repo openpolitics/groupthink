@@ -6,7 +6,7 @@ RSpec.describe ProposalsController, type: :controller do
   render_views
 
   let(:proposer) { create :user, contributor: true, notify_new: true }
-  let(:proposal) { create :proposal, proposer: proposer }
+  let!(:proposal) { create :proposal, proposer: proposer }
 
   it "shows index page" do
     get :index
@@ -18,18 +18,36 @@ RSpec.describe ProposalsController, type: :controller do
     expect(response.body).to include "https://openpolitics.org.uk"
   end
 
-  it "shows individual proposal page" do
-    # Stub out the calls to github data
-    allow_any_instance_of(GithubPullRequest).to receive(:github_commits).and_return([])
-    allow_any_instance_of(Proposal).to receive(:description).and_return("test")
-    allow_any_instance_of(Proposal).to receive(:submitted_at).and_return(1.hour.ago)
-    allow_any_instance_of(Octokit::Client).to receive(:issue_comments).and_return([])
-    # Test show page
-    get :show, params: { id: proposal.number }
-    expect(response.body).to include proposer.login
+  context "when showing proposal page" do
+    before do
+      allow(Octokit).to receive(:pull_request_commits).and_return([])
+      allow(Octokit).to receive(:pull_request).and_return(
+        OpenStruct.new(
+          body: "Lorem Ipsum Proposal Title",
+          created_at: 1.hour.ago,
+        )
+      )
+      allow(Octokit).to receive(:issue_comments).and_return([])
+      get :show, params: { id: proposal.number }
+    end
+
+    it "includes details of the proposer" do
+      expect(response.body).to include proposer.login
+    end
+
+    it "includes the proposal title" do
+      expect(response.body).to include "Lorem Ipsum Proposal Title"
+    end
   end
 
   context "when adding comments" do
+    let(:client) { instance_double(Octokit::Client) }
+
+    before do
+      allow(Octokit::Client).to receive(:new).and_return(client)
+      allow(client).to receive(:add_comment)
+    end
+
     context "when not logged in" do
       it "redirects to login" do
         put :comment, params: { id: proposal.number }
@@ -37,21 +55,22 @@ RSpec.describe ProposalsController, type: :controller do
       end
 
       it "does not add comment" do
-        expect_any_instance_of(Octokit::Client).not_to receive(:add_comment)
         put :comment, params: { id: proposal.number }
+        expect(client).not_to have_received(:add_comment)
       end
     end
 
     context "when logged in" do
-      it "posts comment" do
-        expect_any_instance_of(Octokit::Client).to receive(:add_comment).once
+      before do
         sign_in proposer
+      end
+
+      it "posts comment" do
         put :comment, params: { id: proposal.number, comment: "hello" }
+        expect(client).to have_received(:add_comment).once
       end
 
       it "redirects back to proposal page after posting" do
-        allow_any_instance_of(Octokit::Client).to receive(:add_comment).once
-        sign_in proposer
         put :comment, params: { id: proposal.number, comment: "hello" }
         expect(response.redirect_url).to eq "http://test.host/proposals/#{proposal.number}"
       end
