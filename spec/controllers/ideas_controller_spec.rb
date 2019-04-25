@@ -25,7 +25,9 @@ RSpec.describe IdeasController, type: :controller do
           )
         )
       )
-      allow(User).to receive(:find_or_create_by!).with(login: login).and_return(create :user, login: login)
+      allow(User).to receive(:find_or_create_by!)
+        .with(login: login)
+        .and_return(create :user, login: login)
       allow(Octokit).to receive(:issue_comments).and_return([])
     end
 

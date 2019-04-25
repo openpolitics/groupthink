@@ -64,11 +64,10 @@ RailsI18n/DecorateString:
     - 'app/models/concerns/vote_counter.rb'
     - 'spec/rails_helper.rb'
 
-# Offense count: 58
+# Offense count: 2
 # Configuration parameters: AllowHeredoc, AllowURI, URISchemes, IgnoreCopDirectives, IgnoredPatterns.
 # URISchemes: http, https
 Metrics/LineLength:
   Exclude:
     - 'app/models/concerns/vote_counter.rb'
     - 'app/models/concerns/github_pull_request.rb'
-    - 'spec/controllers/ideas_controller_spec.rb'
