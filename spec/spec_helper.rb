@@ -23,10 +23,10 @@
 
 require "vcr"
 require "timecop"
-require "coveralls"
+require "simplecov"
 require "database_cleaner"
 
-Coveralls.wear!
+SimpleCov.start
 
 VCR.configure do |c|
   c.cassette_library_dir = "spec/fixtures/cassettes"
