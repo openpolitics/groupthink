@@ -76,10 +76,8 @@ Style/DocumentationMethod:
   Exclude:
     - 'spec/**/*.rb'
     - 'app/mailers/proposals_mailer.rb'
-    - 'app/mailers/application_mailer.rb'
     - 'app/models/proposal.rb'
     - 'app/models/interaction.rb'
-    - 'app/models/application_record.rb'
     - 'app/models/concerns/vote_counter.rb'
     - 'app/models/concerns/github_pull_request.rb'
     - 'app/models/concerns/github_issue.rb'
@@ -88,7 +86,6 @@ Style/DocumentationMethod:
     - 'app/jobs/close_proposal_job.rb'
     - 'app/jobs/vote_counter_job.rb'
     - 'app/jobs/create_proposal_job.rb'
-    - 'app/controllers/application_controller.rb'
     - 'app/controllers/proposals_controller.rb'
     - 'app/controllers/users_controller.rb'
     - 'app/controllers/users/omniauth_callbacks_controller.rb'
