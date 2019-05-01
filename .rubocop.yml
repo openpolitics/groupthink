@@ -52,6 +52,9 @@ Performance/OpenStruct:
 Style/DateTime:
   Enabled: true
 
+Style/Documentation:
+  Enabled: true
+
 Style/ImplicitRuntimeError:
   Enabled: true
 
