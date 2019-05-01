@@ -1,5 +1,8 @@
 # frozen_string_literal: true
 
+#
+# Methods for models that can be voted on
+#
 module VoteCounter
   extend ActiveSupport::Concern
 

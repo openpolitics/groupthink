@@ -1,5 +1,9 @@
 # frozen_string_literal: true
 
+#
+# An interaction between a User and a Proposal.
+# Records whether a user is voting, or just commenting, and if voting, how.
+#
 class Interaction < ApplicationRecord
   belongs_to :user
   belongs_to :proposal

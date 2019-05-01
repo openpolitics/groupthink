@@ -1,5 +1,8 @@
 # frozen_string_literal: true
 
+#
+# Sends emails for updates to proposals
+#
 class ProposalsMailer < ApplicationMailer
   default_url_options[:host] = ENV["SITE_URL"]
 

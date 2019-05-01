@@ -1,5 +1,9 @@
 # frozen_string_literal: true
 
+#
+# A proposed change to the repository.
+# Underneath, this is a GitHub pull request.
+#
 class Proposal < ApplicationRecord
   include VoteCounter
   include GithubPullRequest

@@ -1,5 +1,9 @@
 # frozen_string_literal: true
 
+#
+# Closes a proposal.
+# Triggered when a PR is closed on GitHub.
+#
 class CloseProposalJob < ApplicationJob
   queue_as :default
 

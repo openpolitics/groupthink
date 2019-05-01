@@ -1,5 +1,8 @@
 # frozen_string_literal: true
 
+#
+# Shows proposal pages and handles webhook updates from GitHub.
+#
 class ProposalsController < ApplicationController
   protect_from_forgery except: :webhook
   before_action :get_proposal, except: [:index, :webhook]

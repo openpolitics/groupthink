@@ -1,5 +1,8 @@
 # frozen_string_literal: true
 
+#
+# Displays lists of submitted ideas, and individual idea pages.
+#
 class IdeasController < ApplicationController
   def index
     @ideas = Octokit.issues(ENV["GITHUB_REPO"], labels: "idea")

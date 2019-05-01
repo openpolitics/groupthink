@@ -1,5 +1,8 @@
 # frozen_string_literal: true
 
+#
+# Displays lists of users and individual user profile pages.
+#
 class UsersController < ApplicationController
   before_action :get_user, except: [:index]
   before_action :authorise, only: [:edit, :update]

@@ -1,5 +1,8 @@
 # frozen_string_literal: true
 
+#
+# Common view helper methods
+#
 module ApplicationHelper
   def bootstrap_url
     ENV["BOOTSTRAP_CSS_URL"] || "//maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css"

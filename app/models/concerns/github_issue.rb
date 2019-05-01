@@ -1,5 +1,8 @@
 # frozen_string_literal: true
 
+#
+# Methods for models that wrap around a GitHub issue.
+#
 module GithubIssue
   extend ActiveSupport::Concern
 

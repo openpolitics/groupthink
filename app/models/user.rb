@@ -1,5 +1,8 @@
 # frozen_string_literal: true
 
+#
+# Generic humanoid carbon unit
+#
 class User < ApplicationRecord
   default_scope { order(:login) }
 

@@ -72,31 +72,6 @@ Metrics/LineLength:
     - 'app/models/concerns/vote_counter.rb'
     - 'app/models/concerns/github_pull_request.rb'
 
-# Offense count: 22
-Style/Documentation:
-  Exclude:
-    - 'app/mailers/proposals_mailer.rb'
-    - 'app/mailers/application_mailer.rb'
-    - 'app/models/proposal.rb'
-    - 'app/models/interaction.rb'
-    - 'app/models/application_record.rb'
-    - 'app/models/concerns/vote_counter.rb'
-    - 'app/models/concerns/github_pull_request.rb'
-    - 'app/models/concerns/github_issue.rb'
-    - 'app/models/user.rb'
-    - 'app/jobs/update_proposal_job.rb'
-    - 'app/jobs/close_proposal_job.rb'
-    - 'app/jobs/vote_counter_job.rb'
-    - 'app/jobs/create_proposal_job.rb'
-    - 'app/controllers/application_controller.rb'
-    - 'app/controllers/proposals_controller.rb'
-    - 'app/controllers/users_controller.rb'
-    - 'app/controllers/users/omniauth_callbacks_controller.rb'
-    - 'app/controllers/edit_controller.rb'
-    - 'app/controllers/ideas_controller.rb'
-    - 'app/helpers/proposals_helper.rb'
-    - 'app/helpers/application_helper.rb'
-
 Style/DocumentationMethod:
   Exclude:
     - 'spec/**/*.rb'
