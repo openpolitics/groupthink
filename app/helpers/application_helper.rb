@@ -19,7 +19,7 @@ module ApplicationHelper
     fa_icon(icon)
   end
 
-  @@state_style = {
+  STATE_STYLE = {
     waiting: {
       class: "warning",
       icon:  "clock-o",
@@ -50,7 +50,7 @@ module ApplicationHelper
     },
   }
 
-  @@vote_style = {
+  VOTE_STYLE = {
     yes: {
       class: "success",
       icon: "check",
@@ -74,18 +74,18 @@ module ApplicationHelper
   }
 
   def row_class(pr)
-    @@state_style[pr.state.to_sym][:class]
+    STATE_STYLE[pr.state.to_sym][:class]
   end
 
   def user_row_class(state)
-    @@vote_style[state.to_sym][:class]
+    VOTE_STYLE[state.to_sym][:class]
   end
 
   def vote_icon(vote, size: nil)
-    fa_sized_icon(@@vote_style[vote.to_sym][:icon], size)
+    fa_sized_icon(VOTE_STYLE[vote.to_sym][:icon], size)
   end
 
   def state_icon(state, size: nil)
-    fa_sized_icon(@@state_style[state.to_sym][:icon], size)
+    fa_sized_icon(STATE_STYLE[state.to_sym][:icon], size)
   end
 end
