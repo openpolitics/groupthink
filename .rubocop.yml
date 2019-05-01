@@ -55,6 +55,9 @@ Style/DateTime:
 Style/Documentation:
   Enabled: true
 
+Style/DocumentationMethod:
+  Enabled: true
+
 Style/ImplicitRuntimeError:
   Enabled: true
 
