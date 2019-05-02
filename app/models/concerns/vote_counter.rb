@@ -27,14 +27,14 @@ module VoteCounter
 
     def set_vote_build_status
       if blocked?
-        status = "failure"
+        status = :failure
         text = "The proposal is blocked."
       elsif passed?
-        status = "success"
+        status = :success
         text = "The proposal has been agreed."
       else
         remaining_votes = ENV["PASS_THRESHOLD"].to_i - score
-        status = "pending"
+        status = :pending
         text = "The proposal is waiting for more votes; #{remaining_votes} more needed."
       end
       # Update github commit status
@@ -44,13 +44,13 @@ module VoteCounter
     def set_time_build_status
       # Check age
       if too_old?
-        status = "failure"
+        status = :failure
         text = "The change has been open for more than #{ENV["MAX_AGE"]} days, and should be closed (age: #{age}d)."
       elsif too_new?
-        status = "pending"
+        status = :pending
         text = "The change has not yet been open for #{ENV["MIN_AGE"]} days (age: #{age}d)."
       else
-        status = "success"
+        status = :success
         text = "The change has been open long enough to be merged (age: #{age}d)."
       end
       # Update github commit status

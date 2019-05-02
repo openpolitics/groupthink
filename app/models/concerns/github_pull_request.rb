@@ -36,7 +36,7 @@ module GithubPullRequest
 
 
     def set_build_status(state, text, context)
-      Octokit.create_status(ENV["GITHUB_REPO"], sha, state,
+      Octokit.create_status(ENV["GITHUB_REPO"], sha, state.to_s,
         target_url: "#{ENV['SITE_URL']}/proposals/#{number}",
         description: text,
         context: context)

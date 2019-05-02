@@ -113,7 +113,7 @@ RSpec.describe VoteCounter, type: :model do
     it "sets blocked status" do
       allow(pr).to receive(:blocked?).and_return(true)
       pr.__send__(:set_vote_build_status)
-      expect(pr).to have_received(:set_build_status).with("failure",
+      expect(pr).to have_received(:set_build_status).with(:failure,
         "The proposal is blocked.", "groupthink/votes")
     end
 
@@ -121,7 +121,7 @@ RSpec.describe VoteCounter, type: :model do
       allow(pr).to receive(:blocked?).and_return(false)
       allow(pr).to receive(:passed?).and_return(true)
       pr.__send__(:set_vote_build_status)
-      expect(pr).to have_received(:set_build_status).with("success",
+      expect(pr).to have_received(:set_build_status).with(:success,
         "The proposal has been agreed.", "groupthink/votes")
     end
 
@@ -129,7 +129,7 @@ RSpec.describe VoteCounter, type: :model do
       allow(pr).to receive(:blocked?).and_return(false)
       allow(pr).to receive(:passed?).and_return(false)
       pr.__send__(:set_vote_build_status)
-      expect(pr).to have_received(:set_build_status).with("pending",
+      expect(pr).to have_received(:set_build_status).with(:pending,
         "The proposal is waiting for more votes; 1 more needed.", "groupthink/votes")
     end
   end
@@ -142,7 +142,7 @@ RSpec.describe VoteCounter, type: :model do
     it "sets dead status" do
       allow(pr).to receive(:age).and_return(300)
       pr.__send__(:set_time_build_status)
-      expect(pr).to have_received(:set_build_status).with("failure",
+      expect(pr).to have_received(:set_build_status).with(:failure,
         "The change has been open for more than 90 days, and should be closed (age: 300d).",
         "groupthink/time")
     end
@@ -150,7 +150,7 @@ RSpec.describe VoteCounter, type: :model do
     it "sets successful status" do
       allow(pr).to receive(:age).and_return(10)
       pr.__send__(:set_time_build_status)
-      expect(pr).to have_received(:set_build_status).with("success",
+      expect(pr).to have_received(:set_build_status).with(:success,
         "The change has been open long enough to be merged (age: 10d).",
         "groupthink/time")
     end
@@ -158,7 +158,7 @@ RSpec.describe VoteCounter, type: :model do
     it "sets waiting status" do
       allow(pr).to receive(:age).and_return(3)
       pr.__send__(:set_time_build_status)
-      expect(pr).to have_received(:set_build_status).with("pending",
+      expect(pr).to have_received(:set_build_status).with(:pending,
         "The change has not yet been open for 7 days (age: 3d).",
         "groupthink/time")
     end
