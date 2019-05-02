@@ -8,6 +8,8 @@ module VoteCounter
 
   private
 
+    INSTRUCTION_HEADER = "<!-- votebot instructions -->"
+
     def count_votes!
       comments = github_comments
       # Post instructions if they're not already there
@@ -60,7 +62,7 @@ module VoteCounter
     def instructions_posted?(comments)
       instructions_found = false
       comments.each do |c|
-        if /<!-- votebot instructions -->/.match?(c.body)
+        if Regexp.new(INSTRUCTION_HEADER).match?(c.body)
           instructions_found = true
         end
       end
@@ -69,7 +71,7 @@ module VoteCounter
 
     def count_vote_in_comment(comment, time_of_last_commit)
       # Skip instructions
-      if /<!-- votebot instructions -->/.match?(comment.body)
+      if Regexp.new(INSTRUCTION_HEADER).match?(comment.body)
         return
       end
       # Find the user
@@ -104,27 +106,19 @@ module VoteCounter
     end
 
     def post_instructions
-      github_add_comment <<-EOF
-<!-- votebot instructions -->
-This proposal is open for discussion and voting. If you are a [contributor](#{ENV['SITE_URL']}/users/) to this repository (and not the proposer), you may vote on whether or not it is accepted.
-
-## How to vote
-Vote by entering one of the following symbols in a comment on this pull request. Only your last vote will be counted, and you may change your vote at any time until the change is accepted or closed.
-
-|vote|symbol|type this|points|
-|--|--|--|--|
-|Yes|:white_check_mark:|`:white_check_mark:`|#{ENV["YES_WEIGHT"]}|
-|No|:negative_squared_cross_mark:|`:negative_squared_cross_mark:`|#{ENV["NO_WEIGHT"]}|
-|Abstain|:zipper_mouth_face:|`:zipper_mouth_face:`|0|
-|Block|:no_entry_sign:|`:no_entry_sign:`|#{ENV["BLOCK_WEIGHT"]}|
-
-Proposals will be accepted and merged once they have a total of #{ENV["PASS_THRESHOLD"]} points when all votes are counted. Votes will be open for a minimum of #{ENV["MIN_AGE"]} days, but will be closed if the proposal is not accepted after #{ENV["MAX_AGE"]}.
-
-Votes are counted [automatically here](#{ENV['SITE_URL']}/proposals/#{number}), and results are set in the merge status checks below.
-
-## Changes
-
-@#{proposer.login}, if you want to make further changes to this proposal, you can do so by [clicking on the pencil icons here](https://github.com/#{ENV['GITHUB_REPO']}/pull/#{number}/files). If a change is made to the proposal, no votes cast before that change will be counted, and votes must be recast.
-EOF
+      vars = {
+        site_url: ENV["SITE_URL"],
+        yes_weight: ENV["YES_WEIGHT"],
+        no_weight: ENV["NO_WEIGHT"],
+        block_weight: ENV["BLOCK_WEIGHT"],
+        pass_threshold: ENV["PASS_THRESHOLD"],
+        min_age: ENV["MIN_AGE"],
+        max_age: ENV["MAX_AGE"],
+        proposal_number: number,
+        repo: ENV["GITHUB_REPO"],
+        proposer: proposer.login,
+      }
+      instructions = [INSTRUCTION_HEADER, I18n.t("help.instruction_comment", vars)].join("\n")
+      github_add_comment instructions
     end
 end

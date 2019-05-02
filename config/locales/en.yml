@@ -38,6 +38,26 @@ en:
     description: If you want to, you can add a more detailed description that describes the background to your change, or explains to reviewers why it should be accepted.
     success_title: Thanks! Your change has been submitted.
     success: Your change will now go into a queue to be reviewed before it's merged in. If you'd like to look at the queue, and see the votes and comments on your submission, press the "View all proposals" button.
+    instruction_comment: |
+      This proposal is open for discussion and voting. If you are a [contributor](%{site_url}/users/) to this repository (and not the proposer), you may vote on whether or not it is accepted.
+
+      ## How to vote
+      Vote by entering one of the following symbols in a comment on this pull request. Only your last vote will be counted, and you may change your vote at any time until the change is accepted or closed.
+
+      |vote|symbol|type this|points|
+      |--|--|--|--|
+      |Yes|:white_check_mark:|`:white_check_mark:`|%{yes_weight}|
+      |No|:negative_squared_cross_mark:|`:negative_squared_cross_mark:`|%{no_weight}|
+      |Abstain|:zipper_mouth_face:|`:zipper_mouth_face:`|0|
+      |Block|:no_entry_sign:|`:no_entry_sign:`|%{block_weight}|
+
+      Proposals will be accepted and merged once they have a total of %{pass_threshold} points when all votes are counted. Votes will be open for a minimum of %{min_age} days, but will be closed if the proposal is not accepted after %{max_age}.
+
+      Votes are counted [automatically here](%{site_url}/proposals/%{proposal_number}), and results are set in the merge status checks below.
+
+      ## Changes
+
+      @%{proposer}, if you want to make further changes to this proposal, you can do so by [clicking on the pencil icons here](https://github.com/%{repo}/pull/%{proposal_number}/files). If a change is made to the proposal, no votes cast before that change will be counted, and votes must be recast.
   proposals_mailer:
     new:
       subject: "OpenPolitics Manifesto: new proposal ready for your vote"
