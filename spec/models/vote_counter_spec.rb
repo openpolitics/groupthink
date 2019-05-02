@@ -103,4 +103,64 @@ RSpec.describe VoteCounter, type: :model do
       expect(pr.score).to eq(-1000)
     end
   end
+
+  context "when setting vote build status" do
+    before do
+      allow(pr).to receive(:set_build_status)
+      allow(pr).to receive(:score).and_return(1)
+    end
+
+    it "sets blocked status" do
+      allow(pr).to receive(:blocked?).and_return(true)
+      pr.__send__(:set_vote_build_status)
+      expect(pr).to have_received(:set_build_status).with("failure",
+        "The proposal is blocked.", "groupthink/votes")
+    end
+
+    it "sets passed status" do
+      allow(pr).to receive(:blocked?).and_return(false)
+      allow(pr).to receive(:passed?).and_return(true)
+      pr.__send__(:set_vote_build_status)
+      expect(pr).to have_received(:set_build_status).with("success",
+        "The proposal has been agreed.", "groupthink/votes")
+    end
+
+    it "sets pending status" do
+      allow(pr).to receive(:blocked?).and_return(false)
+      allow(pr).to receive(:passed?).and_return(false)
+      pr.__send__(:set_vote_build_status)
+      expect(pr).to have_received(:set_build_status).with("pending",
+        "The proposal is waiting for more votes; 1 more needed.", "groupthink/votes")
+    end
+  end
+
+  context "when setting time build status" do
+    before do
+      allow(pr).to receive(:set_build_status)
+    end
+
+    it "sets dead status" do
+      allow(pr).to receive(:age).and_return(300)
+      pr.__send__(:set_time_build_status)
+      expect(pr).to have_received(:set_build_status).with("failure",
+        "The change has been open for more than 90 days, and should be closed (age: 300d).",
+        "groupthink/time")
+    end
+
+    it "sets successful status" do
+      allow(pr).to receive(:age).and_return(10)
+      pr.__send__(:set_time_build_status)
+      expect(pr).to have_received(:set_build_status).with("success",
+        "The change has been open long enough to be merged (age: 10d).",
+        "groupthink/time")
+    end
+
+    it "sets waiting status" do
+      allow(pr).to receive(:age).and_return(3)
+      pr.__send__(:set_time_build_status)
+      expect(pr).to have_received(:set_build_status).with("pending",
+        "The change has not yet been open for 7 days (age: 3d).",
+        "groupthink/time")
+    end
+  end
 end
