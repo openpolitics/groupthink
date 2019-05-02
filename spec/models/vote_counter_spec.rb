@@ -163,4 +163,88 @@ RSpec.describe VoteCounter, type: :model do
         "groupthink/time")
     end
   end
+
+  context "when checking for posted instructions" do
+    it "can tell if instructions have already been posted" do
+      comments = [
+        instance_double("comment", body: "a comment"),
+        instance_double("comment", body: "oh hai it's some <!-- votebot instructions --> wow"),
+      ]
+      expect(pr.__send__(:instructions_posted?, comments)).to be true
+    end
+
+    it "can tell if instructions are missing" do
+      comments = [
+        instance_double("comment", body: "no votebot instructions here"),
+        instance_double("comment", body: "a comment"),
+      ]
+      expect(pr.__send__(:instructions_posted?, comments)).to be false
+    end
+  end
+
+  context "when posting instructions" do
+    before do
+      allow(pr).to receive(:github_add_comment)
+    end
+
+    it "contains the magic comment for finding instruction blocks" do
+      pr.__send__(:post_instructions)
+      expect(pr).to have_received(:github_add_comment)
+        .with(/<!-- votebot instructions -->/)
+    end
+
+    it "contains a link to the contributor list" do
+      pr.__send__(:post_instructions)
+      expect(pr).to have_received(:github_add_comment)
+        .with(/\[contributor\]\(http:\/\/localhost:3000\/users\/\)/)
+    end
+
+    it "contains voting table with info on yes votes" do
+      pr.__send__(:post_instructions)
+      expect(pr).to have_received(:github_add_comment)
+        .with(/|`:white_check_mark:`|1|/)
+    end
+
+    it "contains voting table with info on no votes" do
+      pr.__send__(:post_instructions)
+      expect(pr).to have_received(:github_add_comment)
+        .with(/|`:negative_squared_cross_mark:`|-1|/)
+    end
+
+    it "contains voting table with info on block votes" do
+      pr.__send__(:post_instructions)
+      expect(pr).to have_received(:github_add_comment)
+        .with(/|`:no_entry_sign:`|-1000|/)
+    end
+
+    it "contains details of pass threshold" do
+      pr.__send__(:post_instructions)
+      expect(pr).to have_received(:github_add_comment)
+        .with(/Proposals will be accepted and merged once they have a total of 2 points/)
+    end
+
+    it "contains details of minimum age" do
+      pr.__send__(:post_instructions)
+      expect(pr).to have_received(:github_add_comment)
+        .with(/Votes will be open for a minimum of 7 days/)
+    end
+
+    it "contains link to proposal page" do
+      pr.__send__(:post_instructions)
+      expect(pr).to have_received(:github_add_comment)
+        .with(/\[automatically here\]\(http:\/\/localhost:3000\/proposals\/#{pr.number}\)/)
+    end
+
+    it "mentions the original author" do
+      pr.__send__(:post_instructions)
+      expect(pr).to have_received(:github_add_comment)
+        .with(/@#{pr.proposer.login},/)
+    end
+
+    it "includes a link to edit the proposal files" do
+      pr.__send__(:post_instructions)
+      expect(pr).to have_received(:github_add_comment)
+        .with(/here\]\(https:\/\/github.com\/openpolitics\/manifesto\/pull\/#{pr.number}\/files\)/)
+    end
+  end
 end
