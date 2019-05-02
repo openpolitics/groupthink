@@ -28,14 +28,14 @@ module VoteCounter
     def set_vote_build_status
       if blocked?
         status = :failure
-        text = "The proposal is blocked."
+        text = I18n.t("build_status.votes.blocked")
       elsif passed?
         status = :success
-        text = "The proposal has been agreed."
+        text = I18n.t("build_status.votes.agreed")
       else
         remaining_votes = ENV["PASS_THRESHOLD"].to_i - score
         status = :pending
-        text = "The proposal is waiting for more votes; #{remaining_votes} more needed."
+        text = I18n.t("build_status.votes.waiting", remaining: remaining_votes)
       end
       # Update github commit status
       set_build_status(status, text, "groupthink/votes")
@@ -45,13 +45,13 @@ module VoteCounter
       # Check age
       if too_old?
         status = :failure
-        text = "The change has been open for more than #{ENV["MAX_AGE"]} days, and should be closed (age: #{age}d)."
+        text = I18n.t("build_status.time.too_old", max_age: ENV["MAX_AGE"], age: age)
       elsif too_new?
         status = :pending
-        text = "The change has not yet been open for #{ENV["MIN_AGE"]} days (age: #{age}d)."
+        text = I18n.t("build_status.time.too_new", min_age: ENV["MIN_AGE"], age: age)
       else
         status = :success
-        text = "The change has been open long enough to be merged (age: #{age}d)."
+        text = I18n.t("build_status.time.success", age: age)
       end
       # Update github commit status
       set_build_status(status, text, "groupthink/time")

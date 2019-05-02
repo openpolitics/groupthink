@@ -41,3 +41,12 @@ en:
   proposals_mailer:
     new:
       subject: "OpenPolitics Manifesto: new proposal ready for your vote"
+  build_status:
+    votes:
+      agreed: The proposal has been agreed.
+      blocked: The proposal is blocked.
+      waiting: The proposal is waiting for more votes; %{remaining} more needed.
+    time:
+      too_old: "The change has been open for more than %{max_age} days, and should be closed (age: %{age}d)."
+      too_new: "The change has not yet been open for %{min_age} days (age: %{age}d)."
+      success: "The change has been open long enough to be merged (age: %{age}d)."
