@@ -60,9 +60,9 @@ Metrics/PerceivedComplexity:
 # Offense count: 5
 RailsI18n/DecorateString:
   Exclude:
+    - 'spec/**/*.rb'
     - 'app/models/concerns/github_pull_request.rb'
     - 'app/models/concerns/vote_counter.rb'
-    - 'spec/rails_helper.rb'
 
 # Offense count: 2
 # Configuration parameters: AllowHeredoc, AllowURI, URISchemes, IgnoreCopDirectives, IgnoredPatterns.
