@@ -18,6 +18,15 @@ RSpec.describe User, type: :model do
     ]
   }
 
+  around do |example|
+    env = {
+      GITHUB_REPO: "example/repo"
+    }
+    ClimateControl.modify env do
+      example.run
+    end
+  end
+
   before do
     allow(Octokit).to receive(:user).with(login).and_return(mock_user)
     allow(Octokit).to receive(:contributors).and_return(mock_contributors)

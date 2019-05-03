@@ -8,14 +8,33 @@ RSpec.describe ProposalsController, type: :controller do
   let(:proposer) { create :user, contributor: true, notify_new: true }
   let!(:proposal) { create :proposal, proposer: proposer }
 
+  around do |example|
+    env = {
+      YES_WEIGHT: "1",
+      NO_WEIGHT: "-1",
+      BLOCK_WEIGHT: "-1000",
+      PASS_THRESHOLD: "2",
+      BLOCK_THRESHOLD: "-1",
+      MIN_AGE: "7",
+      MAX_AGE: "90",
+      PROJECT_NAME: "Test Project",
+      PROJECT_URL: "http://project.example.com",
+      SITE_URL: "http://groupthink.example.com",
+      GITHUB_REPO: "example/repo"
+    }
+    ClimateControl.modify env do
+      example.run
+    end
+  end
+
   it "shows index page" do
     get :index
     expect(response).to be_ok
   end
 
-  it "includes site URL in index page" do
+  it "includes project URL in index page" do
     get :index
-    expect(response.body).to include "https://openpolitics.org.uk"
+    expect(response.body).to include "http://project.example.com"
   end
 
   context "when showing proposal page" do

@@ -3,6 +3,15 @@
 require "rails_helper"
 
 RSpec.describe IdeasController, type: :controller do
+  around do |example|
+    env = {
+      GITHUB_REPO: "example/repo"
+    }
+    ClimateControl.modify env do
+      example.run
+    end
+  end
+
   describe "GET #index" do
     before do
       allow(Octokit).to receive(:issues).and_return([])

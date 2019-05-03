@@ -7,6 +7,17 @@ RSpec.describe UsersController, type: :controller do
 
   let!(:user) { create :user, contributor: true, notify_new: true }
 
+  around do |example|
+    env = {
+      PROJECT_NAME: "Test Project",
+      PROJECT_URL: "http://project.example.com",
+      SITE_URL: "http://groupthink.example.com",
+    }
+    ClimateControl.modify env do
+      example.run
+    end
+  end
+
   context "when fetching user list page" do
     before do
       get :index
