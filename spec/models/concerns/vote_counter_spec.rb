@@ -18,6 +18,22 @@ RSpec.describe VoteCounter, type: :model do
 
   let!(:pr) { create :proposal }
 
+  around do |example|
+    env = {
+      YES_WEIGHT: "1",
+      NO_WEIGHT: "-1",
+      BLOCK_WEIGHT: "-1000",
+      PASS_THRESHOLD: "2",
+      MIN_AGE: "7",
+      MAX_AGE: "90",
+      SITE_URL: "http://example.com",
+      GITHUB_REPO: "example/repo"
+    }
+    ClimateControl.modify env do
+      example.run
+    end
+  end
+
   before do
     allow(pr).to receive(:time_of_last_commit).and_return(1.day.ago)
   end
@@ -196,7 +212,7 @@ RSpec.describe VoteCounter, type: :model do
     it "contains a link to the contributor list" do
       pr.__send__(:post_instructions)
       expect(pr).to have_received(:github_add_comment)
-        .with(/\[contributor\]\(http:\/\/localhost:3000\/users\/\)/)
+        .with(/\[contributor\]\(http:\/\/example.com\/users\/\)/)
     end
 
     it "contains voting table with info on yes votes" do
@@ -232,7 +248,7 @@ RSpec.describe VoteCounter, type: :model do
     it "contains link to proposal page" do
       pr.__send__(:post_instructions)
       expect(pr).to have_received(:github_add_comment)
-        .with(/\[automatically here\]\(http:\/\/localhost:3000\/proposals\/#{pr.number}\)/)
+        .with(/\[automatically here\]\(http:\/\/example.com\/proposals\/#{pr.number}\)/)
     end
 
     it "mentions the original author" do
@@ -244,7 +260,7 @@ RSpec.describe VoteCounter, type: :model do
     it "includes a link to edit the proposal files" do
       pr.__send__(:post_instructions)
       expect(pr).to have_received(:github_add_comment)
-        .with(/here\]\(https:\/\/github.com\/openpolitics\/manifesto\/pull\/#{pr.number}\/files\)/)
+        .with(/here\]\(https:\/\/github.com\/example\/repo\/pull\/#{pr.number}\/files\)/)
     end
   end
 end
