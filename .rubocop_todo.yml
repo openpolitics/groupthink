@@ -57,14 +57,6 @@ Metrics/PerceivedComplexity:
     - 'app/models/proposal.rb'
     - 'app/models/concerns/vote_counter.rb'
 
-# Offense count: 2
-# Configuration parameters: AllowHeredoc, AllowURI, URISchemes, IgnoreCopDirectives, IgnoredPatterns.
-# URISchemes: http, https
-Metrics/LineLength:
-  Exclude:
-    - 'app/models/concerns/vote_counter.rb'
-    - 'app/models/concerns/github_pull_request.rb'
-
 Style/DocumentationMethod:
   Exclude:
     - 'spec/**/*.rb'
