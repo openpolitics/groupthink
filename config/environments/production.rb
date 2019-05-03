@@ -67,7 +67,7 @@ Rails.application.configure do
   config.action_mailer.smtp_settings = {
     address:              ENV.fetch("SMTP_SERVER"),
     port:                 587,
-    domain:               ENV.fetch("DOMAIN"),
+    domain:               ENV.fetch("EMAIL_DOMAIN"),
     user_name:            ENV.fetch("SMTP_USERNAME"),
     password:             ENV.fetch("SMTP_PASSWORD"),
     authentication:       'plain',
