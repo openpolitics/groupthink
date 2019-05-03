@@ -4,24 +4,75 @@ require "rails_helper"
 
 RSpec.describe Proposal, type: :model do
   context "when checking overall state" do
-    it "stores merged pull requests as accepted" do
-      pr = create :proposal
-      # stub state indicators
-      allow(pr).to receive(:pr_closed?).and_return(true)
-      allow(pr).to receive(:pr_merged?).and_return(true)
-      # Test
-      pr.update_state!
-      expect(pr.state).to eq "accepted"
+    let(:pr) { create :proposal }
+
+    context "when the upstream PR has been closed" do
+      before do
+        allow(pr).to receive(:pr_closed?).and_return(true)
+      end
+
+      it "merged PRs are marked as accepted" do
+        allow(pr).to receive(:pr_merged?).and_return(true)
+        pr.update_state!
+        expect(pr.state).to eq "accepted"
+      end
+
+      it "unmerged PRs are marked as rejected", :vcr do
+        allow(pr).to receive(:pr_merged?).and_return(false)
+        pr.update_state!
+        expect(pr.state).to eq "rejected"
+      end
     end
 
-    it "stores closed and unmerged pull requests as rejected", :vcr do
-      pr = create :proposal
-      # stub state indicators
-      allow(pr).to receive(:pr_closed?).and_return(true)
-      allow(pr).to receive(:pr_merged?).and_return(false)
-      # Test
-      pr.update_state!
-      expect(pr.state).to eq "rejected"
+    context "when the upstream PR is still open" do
+      around do |example|
+        env = {
+          YES_WEIGHT: "1",
+          NO_WEIGHT: "-1",
+          BLOCK_WEIGHT: "-1000",
+          PASS_THRESHOLD: "2",
+          BLOCK_THRESHOLD: "-1",
+          MIN_AGE: "7",
+          MAX_AGE: "90",
+        }
+        ClimateControl.modify env do
+          example.run
+        end
+      end
+
+      before do
+        allow(pr).to receive(:pr_closed?).and_return(false)
+      end
+
+      it "stores old pull requests as dead" do
+        allow(pr).to receive_messages(age: 100)
+        pr.update_state!
+        expect(pr.state).to eq "dead"
+      end
+
+      it "stores blocked pull requests as blocked" do
+        allow(pr).to receive_messages(score: -500, age: 10)
+        pr.update_state!
+        expect(pr.state).to eq "blocked"
+      end
+
+      it "stores PRs with enough votes and enough time as passed" do
+        allow(pr).to receive_messages(score: 5, age: 10)
+        pr.update_state!
+        expect(pr.state).to eq "passed"
+      end
+
+      it "stores PRs with enough votes and not enough time as agreed" do
+        allow(pr).to receive_messages(score: 5, age: 5)
+        pr.update_state!
+        expect(pr.state).to eq "agreed"
+      end
+
+      it "stores PRs with not enough votes and not enough time as pending" do
+        allow(pr).to receive_messages(score: 1, age: 5)
+        pr.update_state!
+        expect(pr.state).to eq "waiting"
+      end
     end
   end
 
