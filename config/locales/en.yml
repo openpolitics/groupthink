@@ -38,6 +38,7 @@ en:
     description: If you want to, you can add a more detailed description that describes the background to your change, or explains to reviewers why it should be accepted.
     success_title: Thanks! Your change has been submitted.
     success: Your change will now go into a queue to be reviewed before it's merged in. If you'd like to look at the queue, and see the votes and comments on your submission, press the "View all proposals" button.
+    resubmit: "Closed automatically: maximum age exceeded. Please feel free to resubmit this as a new proposal, but remember you will need to base any new proposal on the current policy text."
     instruction_comment: |
       This proposal is open for discussion and voting. If you are a [contributor](%{site_url}/users/) to this repository (and not the proposer), you may vote on whether or not it is accepted.
 
