@@ -28,6 +28,13 @@ require "database_cleaner"
 
 SimpleCov.start
 
+# Some env vars we need for basic app setup
+ENV["EMAIL_DOMAIN"] = "example.com"
+ENV["GITHUB_APP_ID"] = "abc123"
+ENV["GITHUB_APP_SECRET"] = "abc123"
+ENV["GITHUB_OAUTH_TOKEN"] = "abc123"
+
+
 VCR.configure do |c|
   c.cassette_library_dir = "spec/fixtures/cassettes"
   c.hook_into :webmock

@@ -80,6 +80,7 @@ group :development, :test do
   gem "rubocop-rspec", require: false
   gem "rubocop-performance", require: false
   gem "yard"
+  gem "climate_control"
 end
 
 group :development do
