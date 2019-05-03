@@ -54,7 +54,6 @@ Metrics/ParameterLists:
 # Offense count: 2
 Metrics/PerceivedComplexity:
   Exclude:
-    - 'app/models/proposal.rb'
     - 'app/models/concerns/vote_counter.rb'
 
 Style/DocumentationMethod:

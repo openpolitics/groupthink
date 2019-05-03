@@ -85,21 +85,7 @@ class Proposal < ApplicationRecord
   end
 
   def update_state!
-    # default
-    state = "waiting"
-    # If closed, was it accepted or rejected?
-    if pr_closed?
-      state = pr_merged? ? "accepted" : "rejected"
-    else
-      if too_old?
-        state = "dead"
-      elsif blocked?
-        state = "blocked"
-      elsif passed?
-        state = too_new? ? "agreed" : "passed"
-      end
-    end
-    # Store final state in DB
+    state = pr_closed? ? closed_state : open_state
     update_attributes!(state: state)
   end
 
@@ -207,4 +193,21 @@ class Proposal < ApplicationRecord
   def branch
     github_branch
   end
+
+  private
+
+    def closed_state
+      return nil unless pr_closed?
+      pr_merged? ? "accepted" : "rejected"
+    end
+
+    def open_state
+      return nil if pr_closed?
+      return "dead" if too_old?
+      return "blocked" if blocked?
+      if passed?
+        return too_new? ? "agreed" : "passed"
+      end
+      "waiting"
+    end
 end
