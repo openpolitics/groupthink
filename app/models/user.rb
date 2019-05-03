@@ -56,7 +56,7 @@ class User < ApplicationRecord
 
   def update_github_contributor_status
     # TODO fix autopagination not working here: https://github.com/openpolitics/groupthink/issues/176
-    @contributors ||= Octokit.contributors(ENV["GITHUB_REPO"], per_page: 100)
+    @contributors ||= Octokit.contributors(ENV.fetch("GITHUB_REPO"), per_page: 100)
     self.contributor = !@contributors.find { |x| x.login == login }.nil?
   end
 
@@ -73,7 +73,7 @@ class User < ApplicationRecord
       user.save! if user.changed?
     end
     Rails.logger.info "Updating new contributors from GitHub"
-    Octokit.contributors(ENV["GITHUB_REPO"]).each do |contributor|
+    Octokit.contributors(ENV.fetch("GITHUB_REPO")).each do |contributor|
       params = { login: contributor["login"] }
       unless User.find_by(params)
         Rails.logger.info " - #{contributor["login"]}"

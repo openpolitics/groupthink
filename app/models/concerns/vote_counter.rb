@@ -35,7 +35,7 @@ module VoteCounter
         status = :success
         text = I18n.t("build_status.votes.agreed")
       else
-        remaining_votes = ENV["PASS_THRESHOLD"].to_i - score
+        remaining_votes = ENV.fetch("PASS_THRESHOLD").to_i - score
         status = :pending
         text = I18n.t("build_status.votes.waiting", remaining: remaining_votes)
       end
@@ -47,10 +47,10 @@ module VoteCounter
       # Check age
       if too_old?
         status = :failure
-        text = I18n.t("build_status.time.too_old", max_age: ENV["MAX_AGE"], age: age)
+        text = I18n.t("build_status.time.too_old", max_age: ENV.fetch("MAX_AGE"), age: age)
       elsif too_new?
         status = :pending
-        text = I18n.t("build_status.time.too_new", min_age: ENV["MIN_AGE"], age: age)
+        text = I18n.t("build_status.time.too_new", min_age: ENV.fetch("MIN_AGE"), age: age)
       else
         status = :success
         text = I18n.t("build_status.time.success", age: age)
@@ -107,15 +107,15 @@ module VoteCounter
 
     def post_instructions
       vars = {
-        site_url: ENV["SITE_URL"],
-        yes_weight: ENV["YES_WEIGHT"],
-        no_weight: ENV["NO_WEIGHT"],
-        block_weight: ENV["BLOCK_WEIGHT"],
-        pass_threshold: ENV["PASS_THRESHOLD"],
-        min_age: ENV["MIN_AGE"],
-        max_age: ENV["MAX_AGE"],
+        site_url: ENV.fetch("SITE_URL"),
+        yes_weight: ENV.fetch("YES_WEIGHT"),
+        no_weight: ENV.fetch("NO_WEIGHT"),
+        block_weight: ENV.fetch("BLOCK_WEIGHT"),
+        pass_threshold: ENV.fetch("PASS_THRESHOLD"),
+        min_age: ENV.fetch("MIN_AGE"),
+        max_age: ENV.fetch("MAX_AGE"),
         proposal_number: number,
-        repo: ENV["GITHUB_REPO"],
+        repo: ENV.fetch("GITHUB_REPO"),
         proposer: proposer.login,
       }
       instructions = [INSTRUCTION_HEADER, I18n.t("help.instruction_comment", vars)].join("\n")

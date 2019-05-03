@@ -87,11 +87,11 @@ class EditController < ApplicationController
     end
 
     def original_repo_path
-      ENV["GITHUB_REPO"]
+      ENV.fetch("GITHUB_REPO")
     end
 
     def user_repo_path
-      repo_name = ENV["GITHUB_REPO"].split("/").last
+      repo_name = ENV.fetch("GITHUB_REPO").split("/").last
       "#{current_user.login}/#{repo_name}"
     end
 

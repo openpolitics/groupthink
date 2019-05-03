@@ -2,6 +2,6 @@
 
 # @!visibility private
 class ApplicationMailer < ActionMailer::Base
-  default from: "no-reply@#{ENV['EMAIL_DOMAIN']}"
+  default from: "no-reply@#{ENV.fetch("EMAIL_DOMAIN")}"
   layout "mailer"
 end

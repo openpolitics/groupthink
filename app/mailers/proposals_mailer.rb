@@ -4,7 +4,7 @@
 # Sends emails for updates to proposals
 #
 class ProposalsMailer < ApplicationMailer
-  default_url_options[:host] = ENV["SITE_URL"]
+  default_url_options[:host] = ENV.fetch("SITE_URL")
 
 
   def new_proposal(recipient, proposal)

@@ -1,13 +1,13 @@
 <html>
   <head>
-    <title><%= ENV['PROJECT_NAME'] %></title>
+    <title><%= ENV.fetch("PROJECT_NAME") %></title>
     <%= csrf_meta_tags %>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <link rel="stylesheet" href="<%= bootstrap_url %>">
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
-    <%= favicon_link_tag ENV['FAVICON_URL'], type: 'image/png' if ENV['FAVICON_URL'] %>
+    <%= favicon_link_tag ENV.fetch("FAVICON_URL"), type: 'image/png' if ENV.fetch("FAVICON_URL", nil) %>
     <%= favicon_link_tag 'apple-touch-icon.png', rel: 'apple-touch-icon', type: 'image/png' %>
     <style>
        body {
@@ -16,7 +16,7 @@
      </style>
   </head>
   <body>
-    
+
     <div class="navbar navbar-inverse navbar-fixed-top">
         <div class="container">
           <div class="navbar-header">
@@ -25,8 +25,8 @@
               <span class="icon-bar"></span>
               <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="<%= ENV['PROJECT_URL'] %>">
-              <%= image_tag ENV['PROJECT_LOGO'], alt: "logo", height: "20", style: "vertical-align: text-bottom; display: inline-block" if ENV['PROJECT_LOGO']%>&nbsp;<%= ENV['PROJECT_NAME'] %>
+            <a class="navbar-brand" href="<%= ENV.fetch("PROJECT_URL") %>">
+              <%= image_tag ENV.fetch("PROJECT_LOGO"), alt: "logo", height: "20", style: "vertical-align: text-bottom; display: inline-block" if ENV.fetch("PROJECT_LOGO", nil)%>&nbsp;<%= ENV.fetch("PROJECT_NAME") %>
             </a>
           </div>
           <div class="collapse navbar-collapse">
@@ -49,8 +49,8 @@
             </ul>
           </div><!--/.nav-collapse -->
         </div>
-      </div>  
-    
+      </div>
+
     <div class='container'>
 
       <% if notice %>
@@ -65,9 +65,9 @@
       <footer class='well'>
         Code available on <a href='https://github.com/openpolitics/groupthink'>GitHub</a>. Error tracking generously provided by <a href='http://bugsnag.com'>Bugsnag</a>.
       </footer>
-      
+
     </div>
-    
+
     <script src="//code.jquery.com/jquery-2.1.3.min.js"></script>
     <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
 

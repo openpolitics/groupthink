@@ -11,7 +11,7 @@ module GithubPullRequest
   private
 
     def github_pr
-      @github_pr ||= Octokit.pull_request(ENV["GITHUB_REPO"], number)
+      @github_pr ||= Octokit.pull_request(ENV.fetch("GITHUB_REPO"), number)
     end
 
     def head_sha
@@ -36,23 +36,23 @@ module GithubPullRequest
 
 
     def set_build_status(state, text, context)
-      Octokit.create_status(ENV["GITHUB_REPO"], sha, state.to_s,
-        target_url: "#{ENV['SITE_URL']}/proposals/#{number}",
+      Octokit.create_status(ENV.fetch("GITHUB_REPO"), sha, state.to_s,
+        target_url: "#{ENV.fetch("SITE_URL")}/proposals/#{number}",
         description: text,
         context: context)
     end
 
     def github_diff(sha = nil)
       sha ||= head_sha
-      Octokit.compare(ENV["GITHUB_REPO"], base_sha, sha).files
+      Octokit.compare(ENV.fetch("GITHUB_REPO"), base_sha, sha).files
     end
 
     def github_url
-      "https://github.com/#{ENV['GITHUB_REPO']}/pull/#{number}"
+      "https://github.com/#{ENV.fetch("GITHUB_REPO")}/pull/#{number}"
     end
 
     def github_commits
-      Octokit.pull_request_commits(ENV["GITHUB_REPO"], number)
+      Octokit.pull_request_commits(ENV.fetch("GITHUB_REPO"), number)
     end
 
     def pr_closed?
@@ -64,7 +64,7 @@ module GithubPullRequest
     end
 
     def merge_pr!
-      Octokit.merge_pull_request(ENV["GITHUB_REPO"], number)
+      Octokit.merge_pull_request(ENV.fetch("GITHUB_REPO"), number)
       true
     rescue Octokit::MethodNotAllowed
       # PR couldn't be merged
@@ -72,8 +72,8 @@ module GithubPullRequest
     end
 
     def close_pr!
-      Octokit.add_comment(ENV["GITHUB_REPO"], number, I18n.t("help.resubmit"))
-      Octokit.close_pull_request(ENV["GITHUB_REPO"], number)
+      Octokit.add_comment(ENV.fetch("GITHUB_REPO"), number, I18n.t("help.resubmit"))
+      Octokit.close_pull_request(ENV.fetch("GITHUB_REPO"), number)
       true
     end
 

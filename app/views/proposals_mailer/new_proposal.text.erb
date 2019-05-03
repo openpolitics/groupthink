@@ -1,6 +1,6 @@
 Hi,
 
-A new proposal has been submitted to the OpenPolitics Manifesto, and as a 
+A new proposal has been submitted to the OpenPolitics Manifesto, and as a
 previous contributor you can vote on whether or not it's accepted.
 
 <%= @proposal.title %>: <%= url_for(@proposal) %>
@@ -10,7 +10,7 @@ You can comment and vote using the form at the bottom of the page.
 thanks,
 The OpenPolitics Team
 
-P.S. You are receiving this email because you are a contributor to the 
-OpenPolitics Manifesto. If you don't want to receive notifications like this 
-in future, please update your email settings at 
-<%= ENV['SITE_URL'] %>/users/<%= @recipient.login %>/edit
+P.S. You are receiving this email because you are a contributor to the
+OpenPolitics Manifesto. If you don't want to receive notifications like this
+in future, please update your email settings at
+<%= ENV.fetch("SITE_URL") %>/users/<%= @recipient.login %>/edit

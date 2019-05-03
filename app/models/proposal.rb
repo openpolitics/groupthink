@@ -30,7 +30,7 @@ class Proposal < ApplicationRecord
 
   def self.update_all_from_github!
     Rails.logger.info "Updating proposals"
-    Octokit.pull_requests(ENV["GITHUB_REPO"], state: "all").each do |pr|
+    Octokit.pull_requests(ENV.fetch("GITHUB_REPO"), state: "all").each do |pr|
       Rails.logger.info " - #{pr["number"]}: #{pr["title"]}"
       pr = Proposal.find_or_create_by!(number: pr["number"].to_i)
       pr.update_from_github!
@@ -63,25 +63,25 @@ class Proposal < ApplicationRecord
   end
 
   def too_old?
-    age >= ENV["MAX_AGE"].to_i
+    age >= ENV.fetch("MAX_AGE").to_i
   end
 
   def too_new?
-    age < ENV["MIN_AGE"].to_i
+    age < ENV.fetch("MIN_AGE").to_i
   end
 
   def score
-    (yes.count * ENV["YES_WEIGHT"].to_i) +
-    (no.count * ENV["NO_WEIGHT"].to_i) +
-    (block.count * ENV["BLOCK_WEIGHT"].to_i)
+    (yes.count * ENV.fetch("YES_WEIGHT").to_i) +
+    (no.count * ENV.fetch("NO_WEIGHT").to_i) +
+    (block.count * ENV.fetch("BLOCK_WEIGHT").to_i)
   end
 
   def passed?
-    score >= ENV["PASS_THRESHOLD"].to_i
+    score >= ENV.fetch("PASS_THRESHOLD").to_i
   end
 
   def blocked?
-    score < ENV["BLOCK_THRESHOLD"].to_i
+    score < ENV.fetch("BLOCK_THRESHOLD").to_i
   end
 
   def update_state!

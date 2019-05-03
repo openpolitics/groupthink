@@ -47,7 +47,7 @@ class ProposalsController < ApplicationController
     when "block"
       comment += "\n\nVote: 🚫"
     end
-    github.add_comment(ENV["GITHUB_REPO"], @proposal.number, comment)
+    github.add_comment(ENV.fetch("GITHUB_REPO"), @proposal.number, comment)
     redirect_to @proposal
   end
 

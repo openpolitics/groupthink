@@ -14,7 +14,7 @@ RSpec.describe ProposalsMailer, type: :mailer do
     end
 
     it "sends email from specified domain" do
-      expect(mail.from).to eq(["no-reply@#{ENV["EMAIL_DOMAIN"]}"])
+      expect(mail.from).to eq(["no-reply@#{ENV.fetch("EMAIL_DOMAIN")}"])
     end
 
     it "sets email subject" do
@@ -26,7 +26,7 @@ RSpec.describe ProposalsMailer, type: :mailer do
     end
 
     it "includes link to vote" do
-      expect(mail.body.encoded).to match("#{ENV["SITE_URL"]}/proposals/#{proposal.number}")
+      expect(mail.body.encoded).to match("#{ENV.fetch("SITE_URL")}/proposals/#{proposal.number}")
     end
 
     it "includes link to edit settings for user" do
