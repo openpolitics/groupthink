@@ -108,4 +108,79 @@ RSpec.describe Proposal, type: :model do
       expect(ProposalsMailer).not_to have_received(:new_proposal).with(participant, proposal)
     end
   end
+
+  context "when generating merged activity log" do
+    let(:pr) { create :proposal }
+
+    around do |example|
+      env = {
+        GITHUB_REPO: "example/repo",
+      }
+      ClimateControl.modify env do
+        example.run
+      end
+    end
+
+    context "with a description" do
+      let(:item) { pr.activity_log[0] }
+      let!(:submission_time) { 1.day.ago }
+
+      before do
+        allow(pr).to receive(:github_commits).and_return([])
+        allow(pr).to receive(:github_comments).and_return([])
+        allow(pr).to receive(:description).and_return("Lorem ipsum this is a description")
+        allow(pr).to receive(:submitted_at).and_return(submission_time)
+      end
+
+      it "marks the description as a comment type" do
+        expect(item[0]).to eq("comment")
+      end
+
+      it "includes the description in the body" do
+        expect(item[1][:body]).to eq("Lorem ipsum this is a description")
+      end
+
+      it "includes the submitted date" do
+        expect(item[1][:time]).to eq(submission_time)
+      end
+    end
+
+    context "with a comment" do
+      let(:item) { pr.activity_log[0] }
+      let!(:submission_time) { 1.hour.ago }
+
+      before do
+        create :user, login: "noobmaster69"
+        allow(pr).to receive(:github_commits).and_return([])
+        allow(pr).to receive(:github_comments).and_return([
+          OpenStruct.new(
+            body: "This is a comment",
+            user: OpenStruct.new(
+              login: "noobmaster69", # 💜Korg
+            ),
+            created_at: submission_time,
+          )
+        ])
+        allow(pr).to receive(:description).and_return(nil)
+      end
+
+      it "marks comments as a comment type" do
+        expect(item[0]).to eq("comment")
+      end
+
+      it "includes the comment text in the body" do
+        expect(item[1][:body]).to eq("This is a comment")
+      end
+
+      it "includes the submitted date" do
+        expect(item[1][:time]).to eq(submission_time)
+      end
+
+      it "includes details of the user who made the comment" do
+        expect(item[1][:user].login).to eq("noobmaster69")
+      end
+
+    end
+
+  end
 end
