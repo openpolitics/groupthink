@@ -13,6 +13,12 @@ class Interaction < ApplicationRecord
 
   validates :last_vote, inclusion: { in: %w(yes block no abstention), allow_nil: true }
 
+  scope :yes, -> { where(last_vote: "yes") }
+  scope :no, -> { where(last_vote: "no") }
+  scope :abstention, -> { where(last_vote: "abstention") }
+  scope :block, -> { where(last_vote: "block") }
+  scope :participating, -> { where(last_vote: nil) }
+
   def yes!
     update_attributes! last_vote: "yes"
   end

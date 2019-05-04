@@ -69,7 +69,7 @@ RSpec.describe VoteCounter, type: :model do
         end
 
         it "counts as a #{set[:vote]} vote" do
-          expect(pr.public_send(set[:vote]).count).to eq 1
+          expect(pr.interactions.public_send(set[:vote]).count).to eq 1
         end
 
         it "calculates correct score for a #{set[:vote]} vote" do

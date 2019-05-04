@@ -71,9 +71,9 @@ class Proposal < ApplicationRecord
   end
 
   def score
-    (yes.count * ENV.fetch("YES_WEIGHT").to_i) +
-    (no.count * ENV.fetch("NO_WEIGHT").to_i) +
-    (block.count * ENV.fetch("BLOCK_WEIGHT").to_i)
+    (interactions.yes.count * ENV.fetch("YES_WEIGHT").to_i) +
+    (interactions.no.count * ENV.fetch("NO_WEIGHT").to_i) +
+    (interactions.block.count * ENV.fetch("BLOCK_WEIGHT").to_i)
   end
 
   def passed?
@@ -95,22 +95,6 @@ class Proposal < ApplicationRecord
 
   def close_if_dead!
     close_pr! if state == "dead"
-  end
-
-  def yes
-    interactions.where(last_vote: "yes")
-  end
-
-  def block
-    interactions.where(last_vote: "block")
-  end
-
-  def no
-    interactions.where(last_vote: "no")
-  end
-
-  def abstention
-    interactions.where(last_vote: "abstention")
   end
 
   def close!
