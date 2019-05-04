@@ -24,6 +24,9 @@ class Proposal < ApplicationRecord
   after_create :queue_vote_count
   after_create :notify_voters
 
+  scope :closed, -> { where(state: %w(accepted rejected)) }
+  scope :open, -> { where(state: %w(waiting agreed passed blocked dead)) }
+
   def queue_vote_count
     VoteCounterJob.perform_later self
   end
@@ -104,14 +107,6 @@ class Proposal < ApplicationRecord
 
   def closed?
     %w(accepted rejected).include? state
-  end
-
-  def self.closed
-    self.where(state: %w(accepted rejected))
-  end
-
-  def self.open
-    self.where(state: %w(waiting agreed passed blocked dead))
   end
 
   def url
