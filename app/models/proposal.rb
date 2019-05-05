@@ -74,9 +74,14 @@ class Proposal < ApplicationRecord
   end
 
   def score
-    (interactions.yes.count * ENV.fetch("YES_WEIGHT").to_i) +
-    (interactions.no.count * ENV.fetch("NO_WEIGHT").to_i) +
-    (interactions.block.count * ENV.fetch("BLOCK_WEIGHT").to_i)
+    weights = {
+      yes: ENV.fetch("YES_WEIGHT").to_i,
+      no: ENV.fetch("NO_WEIGHT").to_i,
+      block: ENV.fetch("BLOCK_WEIGHT").to_i,
+    }
+    interactions.all.inject(0) do |sum, i|
+      sum + (weights[i.last_vote.try(:to_sym)] || 0)
+    end
   end
 
   def passed?
