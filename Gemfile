@@ -91,6 +91,7 @@ group :development do
   gem "letter_opener"
   gem "guard"
   gem "guard-rspec", require: false
+  gem "guard-rubocop"
   gem "pry"
 end
 
