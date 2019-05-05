@@ -150,13 +150,13 @@ RSpec.describe Proposal, type: :model do
       let!(:submission_time) { 1.hour.ago }
 
       before do
-        create :user, login: "noobmaster69" # 💜 Korg
+        user = create :user, login: "noobmaster69" # 💜 Korg
         allow(pr).to receive(:github_commits).and_return([])
         allow(pr).to receive(:github_comments).and_return([
           OpenStruct.new(
             body: "This is a comment",
             user: OpenStruct.new(
-              login: "noobmaster69",
+              login: user.login,
             ),
             created_at: submission_time,
           )
@@ -197,5 +197,42 @@ RSpec.describe Proposal, type: :model do
       end
     end
 
+    context "with commits" do
+      let(:item) { pr.activity_log[0] }
+      let!(:submission_time) { 1.hour.ago }
+
+      before do
+        user = create :user, login: "noobmaster69" # 💜 Korg
+        allow(pr).to receive(:github_commits).and_return([
+          OpenStruct.new(
+            sha: "123456",
+            commit: {
+              author: {
+                name: user.login,
+                date: submission_time,
+              }
+            },
+          )
+        ])
+        allow(pr).to receive(:github_comments).and_return([])
+        allow(pr).to receive(:description).and_return(nil)
+      end
+
+      it "marks commits as a diff type" do
+        expect(item[0]).to eq("diff")
+      end
+
+      it "includes the commit SHA" do
+        expect(item[1][:sha]).to eq("123456")
+      end
+
+      it "includes the submitted date" do
+        expect(item[1][:time]).to eq(submission_time)
+      end
+
+      it "includes details of the user who made the comment" do
+        expect(item[1][:user].login).to eq("noobmaster69")
+      end
+    end
   end
 end
