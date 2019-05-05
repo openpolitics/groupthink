@@ -8,6 +8,10 @@ module GithubPullRequest
 
   include GithubIssue
 
+  def github_commits
+    Octokit.pull_request_commits(ENV.fetch("GITHUB_REPO"), number)
+  end
+
   private
 
     def github_pr
@@ -48,10 +52,6 @@ module GithubPullRequest
 
     def github_url
       "https://github.com/#{ENV.fetch("GITHUB_REPO")}/pull/#{number}"
-    end
-
-    def github_commits
-      Octokit.pull_request_commits(ENV.fetch("GITHUB_REPO"), number)
     end
 
     def pr_closed?

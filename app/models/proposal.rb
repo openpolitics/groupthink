@@ -124,13 +124,6 @@ class Proposal < ApplicationRecord
     number.to_s
   end
 
-  def activity_log
-    activity = [description_to_activity_item] +
-      github_commits.map { |x| commit_to_activity_item(x) } +
-      github_comments.map { |x| comment_to_activity_item(x) }
-    activity.compact.sort_by { |a| a[1][:time] }
-  end
-
   def diff(sha)
     github_diff(sha)
   end
@@ -158,37 +151,5 @@ class Proposal < ApplicationRecord
         return too_new? ? "agreed" : "passed"
       end
       "waiting"
-    end
-
-    def commit_to_activity_item(commit)
-      ["diff", {
-        sha: commit[:sha],
-        user: User.find_by_login(commit[:commit][:author][:name]),
-        proposal: self,
-        original_url: url,
-        time: commit[:commit][:author][:date]
-      }]
-    end
-
-    def description_to_activity_item
-      return nil unless description
-      ["comment", {
-        body: description,
-        user: proposer,
-        by_author: true,
-        original_url: url,
-        time: submitted_at
-      }]
-    end
-
-    def comment_to_activity_item(comment)
-      return nil if comment.body =~ /votebot instructions/
-      ["comment", {
-        body: comment.body,
-        user: User.find_by_login(comment.user.login),
-        by_author: (comment.user.login == proposer.login),
-        original_url: comment.html_url,
-        time: comment.created_at
-      }]
     end
 end

@@ -18,7 +18,8 @@ class ProposalsController < ApplicationController
     # Can the current user vote?
     @can_vote = current_user.try(:contributor) && !@is_author
     # Get activity list
-    @activity = @proposal.activity_log
+    presenter = ProposalPresenter.new(@proposal)
+    @activity = presenter.activity_log
   end
 
   def webhook

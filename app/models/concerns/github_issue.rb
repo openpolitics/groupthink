@@ -6,11 +6,11 @@
 module GithubIssue
   extend ActiveSupport::Concern
 
-  private
+  def github_comments
+    Octokit.issue_comments(ENV.fetch("GITHUB_REPO"), number)
+  end
 
-    def github_comments
-      Octokit.issue_comments(ENV.fetch("GITHUB_REPO"), number)
-    end
+  private
 
     def github_add_comment(body)
       Octokit.add_comment(ENV.fetch("GITHUB_REPO"), number, body)
