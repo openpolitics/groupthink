@@ -27,10 +27,6 @@ class Proposal < ApplicationRecord
   scope :closed, -> { where(state: %w(accepted rejected)) }
   scope :open, -> { where(state: %w(waiting agreed passed blocked dead)) }
 
-  def queue_vote_count
-    VoteCounterJob.perform_later self
-  end
-
   def self.update_all_from_github!
     Rails.logger.info "Updating proposals"
     Octokit.pull_requests(ENV.fetch("GITHUB_REPO"), state: "all").each do |pr|

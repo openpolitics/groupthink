@@ -6,6 +6,10 @@
 module VoteCounter
   extend ActiveSupport::Concern
 
+  def queue_vote_count
+    VoteCounterJob.perform_later self
+  end
+
   private
 
     INSTRUCTION_HEADER = "<!-- votebot instructions -->"
