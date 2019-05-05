@@ -150,13 +150,13 @@ RSpec.describe Proposal, type: :model do
       let!(:submission_time) { 1.hour.ago }
 
       before do
-        create :user, login: "noobmaster69"
+        create :user, login: "noobmaster69" # 💜 Korg
         allow(pr).to receive(:github_commits).and_return([])
         allow(pr).to receive(:github_comments).and_return([
           OpenStruct.new(
             body: "This is a comment",
             user: OpenStruct.new(
-              login: "noobmaster69", # 💜Korg
+              login: "noobmaster69",
             ),
             created_at: submission_time,
           )
@@ -179,7 +179,22 @@ RSpec.describe Proposal, type: :model do
       it "includes details of the user who made the comment" do
         expect(item[1][:user].login).to eq("noobmaster69")
       end
+    end
 
+    context "with only an instruction comment" do
+      before do
+        allow(pr).to receive(:github_commits).and_return([])
+        allow(pr).to receive(:github_comments).and_return([
+          instance_double("comment",
+            body: "<!-- votebot instructions --> this comment should be ignored",
+          )
+        ])
+        allow(pr).to receive(:description).and_return(nil)
+      end
+
+      it "has an empty activity log" do
+        expect(pr.activity_log).to be_empty
+      end
     end
 
   end
