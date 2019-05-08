@@ -64,26 +64,6 @@ class User < ApplicationRecord
     interactions.find_by(proposal: proposal).try(:state)
   end
 
-  def self.update_all_from_github!
-    Rails.logger.info "Updating existing users"
-    User.all.each do |user|
-      Rails.logger.info " - #{user.login}"
-      user.load_from_github
-      Rails.logger.info "     has become a contributor" if user.contributor_changed?
-      user.save! if user.changed?
-    end
-    Rails.logger.info "Updating new contributors from GitHub"
-    Octokit.contributors(ENV.fetch("GITHUB_REPO")).each do |contributor|
-      params = { login: contributor["login"] }
-      unless User.find_by(params)
-        Rails.logger.info " - #{contributor["login"]}"
-        user = User.create!(params)
-        user.contributor = true
-        user.save!
-      end
-    end
-  end
-
   def to_param
     login
   end

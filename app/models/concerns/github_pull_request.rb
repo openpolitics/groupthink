@@ -12,6 +12,57 @@ module GithubPullRequest
     Octokit.pull_request_commits(ENV.fetch("GITHUB_REPO"), number)
   end
 
+  def description
+    github_pr.body
+  end
+
+  def submitted_at
+    github_pr.created_at
+  end
+
+  def diff(sha = nil)
+    sha ||= head_sha
+    Octokit.compare(ENV.fetch("GITHUB_REPO"), base_sha, sha).files
+  end
+
+  def repo
+    @repo ||= github_pr.head.repo.full_name
+  end
+
+  def branch
+    @branch ||= github_pr.head.ref
+  end
+
+  def url
+    "https://github.com/#{ENV.fetch("GITHUB_REPO")}/pull/#{number}"
+  end
+
+  def set_vote_build_status
+    status = "groupthink/votes"
+    if blocked?
+      set_build_status(:failure, I18n.t("build_status.votes.blocked"), status)
+    elsif passed?
+      set_build_status(:success, I18n.t("build_status.votes.agreed"), status)
+    else
+      remaining_votes = ENV.fetch("PASS_THRESHOLD").to_i - score
+      set_build_status(:pending,
+        I18n.t("build_status.votes.waiting", remaining: remaining_votes), status)
+    end
+  end
+
+  def set_time_build_status
+    status = "groupthink/time"
+    if too_old?
+      set_build_status(:failure,
+        I18n.t("build_status.time.too_old", max_age: ENV.fetch("MAX_AGE"), age: age), status)
+    elsif too_new?
+      set_build_status(:pending,
+        I18n.t("build_status.time.too_new", min_age: ENV.fetch("MIN_AGE"), age: age), status)
+    else
+      set_build_status(:success, I18n.t("build_status.time.success", age: age), status)
+    end
+  end
+
   private
 
     def github_pr
@@ -30,28 +81,11 @@ module GithubPullRequest
       @sha ||= github_pr.head.sha
     end
 
-    def github_repo
-      @github_repo ||= github_pr.head.repo.full_name
-    end
-
-    def github_branch
-      @github_branch ||= github_pr.head.ref
-    end
-
     def set_build_status(state, text, context)
       Octokit.create_status(ENV.fetch("GITHUB_REPO"), sha, state.to_s,
         target_url: "#{ENV.fetch("SITE_URL")}/proposals/#{number}",
         description: text,
         context: context)
-    end
-
-    def github_diff(sha = nil)
-      sha ||= head_sha
-      Octokit.compare(ENV.fetch("GITHUB_REPO"), base_sha, sha).files
-    end
-
-    def github_url
-      "https://github.com/#{ENV.fetch("GITHUB_REPO")}/pull/#{number}"
     end
 
     def pr_closed?

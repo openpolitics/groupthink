@@ -9,41 +9,39 @@
 # Offense count: 10
 Metrics/AbcSize:
   Exclude:
-    - 'app/models/proposal.rb'
     - 'app/helpers/proposals_helper.rb'
-    - 'app/models/concerns/vote_counter.rb'
+    - 'app/models/concerns/votable.rb'
     - 'app/models/user.rb'
     - 'app/controllers/proposals_controller.rb'
     - 'app/controllers/users/omniauth_callbacks_controller.rb'
     - 'app/controllers/edit_controller.rb'
     - 'app/controllers/ideas_controller.rb'
+    - 'lib/tasks/update.rake'
 
 # Offense count: 2
 # Configuration parameters: CountComments.
 Metrics/ClassLength:
   Exclude:
-    - 'app/models/proposal.rb'
     - 'app/controllers/edit_controller.rb'
 
 # Offense count: 3
 Metrics/CyclomaticComplexity:
   Exclude:
-    - 'app/models/proposal.rb'
-    - 'app/models/concerns/vote_counter.rb'
+    - 'app/models/concerns/votable.rb'
     - 'app/controllers/edit_controller.rb'
 
 # Offense count: 13
 # Configuration parameters: CountComments, ExcludedMethods.
 Metrics/MethodLength:
   Exclude:
-    - 'app/models/proposal.rb'
-    - 'app/models/concerns/vote_counter.rb'
+    - 'app/models/concerns/votable.rb'
     - 'app/helpers/proposals_helper.rb'
     - 'app/models/user.rb'
     - 'app/controllers/proposals_controller.rb'
     - 'app/controllers/users/omniauth_callbacks_controller.rb'
     - 'app/controllers/edit_controller.rb'
     - 'app/controllers/ideas_controller.rb'
+    - 'lib/tasks/update.rake'
 
 # Offense count: 1
 # Configuration parameters: CountKeywordArgs.
@@ -54,15 +52,16 @@ Metrics/ParameterLists:
 # Offense count: 2
 Metrics/PerceivedComplexity:
   Exclude:
-    - 'app/models/concerns/vote_counter.rb'
+    - 'app/models/concerns/votable.rb'
 
 Style/DocumentationMethod:
   Exclude:
     - 'spec/**/*.rb'
     - 'app/mailers/proposals_mailer.rb'
+    - 'app/presenters/proposal_presenter.rb'
     - 'app/models/proposal.rb'
     - 'app/models/interaction.rb'
-    - 'app/models/concerns/vote_counter.rb'
+    - 'app/models/concerns/votable.rb'
     - 'app/models/concerns/github_pull_request.rb'
     - 'app/models/concerns/github_issue.rb'
     - 'app/models/user.rb'
@@ -77,3 +76,4 @@ Style/DocumentationMethod:
     - 'app/controllers/ideas_controller.rb'
     - 'app/helpers/proposals_helper.rb'
     - 'app/helpers/application_helper.rb'
+    - 'lib/tasks/update.rake'

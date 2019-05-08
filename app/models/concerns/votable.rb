@@ -3,11 +3,30 @@
 #
 # Methods for models that can be voted on
 #
-module VoteCounter
+module Votable
   extend ActiveSupport::Concern
 
   def queue_vote_count
     VoteCounterJob.perform_later self
+  end
+
+  def score
+    weights = {
+      yes: ENV.fetch("YES_WEIGHT").to_i,
+      no: ENV.fetch("NO_WEIGHT").to_i,
+      block: ENV.fetch("BLOCK_WEIGHT").to_i,
+    }
+    interactions.all.inject(0) do |sum, i|
+      sum + (weights[i.last_vote.try(:to_sym)] || 0)
+    end
+  end
+
+  def passed?
+    score >= ENV.fetch("PASS_THRESHOLD").to_i
+  end
+
+  def blocked?
+    score < ENV.fetch("BLOCK_THRESHOLD").to_i
   end
 
   private
@@ -29,38 +48,6 @@ module VoteCounter
         set_vote_build_status
         set_time_build_status
       end
-    end
-
-    def set_vote_build_status
-      if blocked?
-        status = :failure
-        text = I18n.t("build_status.votes.blocked")
-      elsif passed?
-        status = :success
-        text = I18n.t("build_status.votes.agreed")
-      else
-        remaining_votes = ENV.fetch("PASS_THRESHOLD").to_i - score
-        status = :pending
-        text = I18n.t("build_status.votes.waiting", remaining: remaining_votes)
-      end
-      # Update github commit status
-      set_build_status(status, text, "groupthink/votes")
-    end
-
-    def set_time_build_status
-      # Check age
-      if too_old?
-        status = :failure
-        text = I18n.t("build_status.time.too_old", max_age: ENV.fetch("MAX_AGE"), age: age)
-      elsif too_new?
-        status = :pending
-        text = I18n.t("build_status.time.too_new", min_age: ENV.fetch("MIN_AGE"), age: age)
-      else
-        status = :success
-        text = I18n.t("build_status.time.success", age: age)
-      end
-      # Update github commit status
-      set_build_status(status, text, "groupthink/time")
     end
 
     def instructions_posted?(comments)
