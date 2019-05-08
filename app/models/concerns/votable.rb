@@ -62,40 +62,20 @@ module Votable
 
     def count_vote_in_comment(comment, time_of_last_commit)
       # Skip instructions
-      if Regexp.new(INSTRUCTION_HEADER).match?(comment.body)
-        return
-      end
-      # Find the user
-      user = User.find_or_create_by!(login: comment.user.login)
+      return if Regexp.new(INSTRUCTION_HEADER).match?(comment.body)
       # Ignore proposer and non-contributors
-      if user == proposer || !user.contributor
-        return
-      end
-      # Votes are stores in an interaction record
+      user = User.find_or_create_by!(login: comment.user.login)
+      return if user == proposer || !user.contributor
+      # Store vote in an interaction record
       interaction = interactions.find_or_create_by!(user: user)
-      # It's a yes if there is a yes vote AND the comment is since the last commit
-      if comment.body.contains_yes?
-        if comment.created_at >= time_of_last_commit
-          interaction.yes!
-        else
-          interaction.update_attributes!(last_vote: nil)
-        end
-      end
-      if comment.body.contains_abstention?
-        interaction.abstention!
-      end
-      if comment.body.contains_no?
-        interaction.no!
-      end
-      if comment.body.contains_block?
-        interaction.block!
-      end
+      interaction.set_last_vote_from_comment!(comment, time_of_last_commit)
     end
 
     def count_votes_in_comments(comments)
       comments.each { |c| count_vote_in_comment(c, time_of_last_commit) }
     end
 
+    # rubocop:disable Metrics/MethodLength
     def post_instructions
       vars = {
         site_url: ENV.fetch("SITE_URL"),
@@ -109,7 +89,6 @@ module Votable
         repo: ENV.fetch("GITHUB_REPO"),
         proposer: proposer.login,
       }
-      instructions = [INSTRUCTION_HEADER, I18n.t("help.instruction_comment", vars)].join("\n")
-      github_add_comment instructions
+      github_add_comment [INSTRUCTION_HEADER, I18n.t("help.instruction_comment", vars)].join("\n")
     end
 end

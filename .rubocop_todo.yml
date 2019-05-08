@@ -10,7 +10,6 @@
 Metrics/AbcSize:
   Exclude:
     - 'app/helpers/proposals_helper.rb'
-    - 'app/models/concerns/votable.rb'
     - 'app/models/user.rb'
     - 'app/controllers/proposals_controller.rb'
     - 'app/controllers/users/omniauth_callbacks_controller.rb'
@@ -27,14 +26,12 @@ Metrics/ClassLength:
 # Offense count: 3
 Metrics/CyclomaticComplexity:
   Exclude:
-    - 'app/models/concerns/votable.rb'
     - 'app/controllers/edit_controller.rb'
 
 # Offense count: 13
 # Configuration parameters: CountComments, ExcludedMethods.
 Metrics/MethodLength:
   Exclude:
-    - 'app/models/concerns/votable.rb'
     - 'app/helpers/proposals_helper.rb'
     - 'app/models/user.rb'
     - 'app/controllers/proposals_controller.rb'
@@ -48,11 +45,6 @@ Metrics/MethodLength:
 Metrics/ParameterLists:
   Exclude:
     - 'app/controllers/edit_controller.rb'
-
-# Offense count: 2
-Metrics/PerceivedComplexity:
-  Exclude:
-    - 'app/models/concerns/votable.rb'
 
 Style/DocumentationMethod:
   Exclude:
