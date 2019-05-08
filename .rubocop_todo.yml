@@ -53,7 +53,6 @@ Style/DocumentationMethod:
     - 'app/models/interaction.rb'
     - 'app/models/concerns/votable.rb'
     - 'app/models/concerns/github_pull_request.rb'
-    - 'app/models/concerns/github_issue.rb'
     - 'app/models/user.rb'
     - 'app/jobs/update_proposal_job.rb'
     - 'app/jobs/close_proposal_job.rb'
