@@ -8,6 +8,7 @@ end
 
 SimpleCov.formatter = SimpleCov::Formatter::MultiFormatter.new([
    SimpleCov::Formatter::LcovFormatter,
+   SimpleCov::Formatter::HTMLFormatter,
 ])
 
 SimpleCov.start do
