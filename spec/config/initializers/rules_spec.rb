@@ -3,7 +3,6 @@
 require "rails_helper"
 
 RSpec.describe Rules do
-
   around do |example|
     env = {
       YES_WEIGHT: "1",
@@ -30,11 +29,11 @@ RSpec.describe Rules do
     end
 
     it "loads 'no' weight" do
-      expect(described_class.no_weight).to eq -1
+      expect(described_class.no_weight).to eq(-1)
     end
 
     it "loads 'block' weight" do
-      expect(described_class.block_weight).to eq -10
+      expect(described_class.block_weight).to eq(-10)
     end
 
     it "loads pass threshold" do
@@ -42,7 +41,7 @@ RSpec.describe Rules do
     end
 
     it "loads block threshold" do
-      expect(described_class.block_threshold).to eq -1
+      expect(described_class.block_threshold).to eq(-1)
     end
 
     it "loads minimum age" do
