@@ -51,6 +51,9 @@ gem "rinku", require: "rails_rinku"
 
 gem "kaminari"
 
+# Custom application configuration
+gem "config"
+
 # Postgres in production for Heroku
 group :production do
   gem "pg"

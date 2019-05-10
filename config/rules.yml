@@ -1,0 +1,7 @@
+yes_weight: <%= ENV.fetch("YES_WEIGHT") %>
+no_weight: <%= ENV.fetch("NO_WEIGHT") %>
+block_weight: <%= ENV.fetch("BLOCK_WEIGHT") %>
+pass_threshold: <%= ENV.fetch("PASS_THRESHOLD") %>
+block_threshold: <%= ENV.fetch("BLOCK_THRESHOLD") %>
+min_age: <%= ENV.fetch("MIN_AGE") %>
+max_age: <%= ENV.fetch("MAX_AGE") %>
