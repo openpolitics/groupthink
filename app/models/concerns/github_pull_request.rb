@@ -44,7 +44,7 @@ module GithubPullRequest
     elsif passed?
       set_build_status(:success, I18n.t("build_status.votes.agreed"), status)
     else
-      remaining_votes = ENV.fetch("PASS_THRESHOLD").to_i - score
+      remaining_votes = Rules.pass_threshold - score
       set_build_status(:pending,
         I18n.t("build_status.votes.waiting", remaining: remaining_votes), status)
     end
@@ -54,10 +54,10 @@ module GithubPullRequest
     status = "groupthink/time"
     if too_old?
       set_build_status(:failure,
-        I18n.t("build_status.time.too_old", max_age: ENV.fetch("MAX_AGE"), age: age), status)
+        I18n.t("build_status.time.too_old", max_age: Rules.max_age, age: age), status)
     elsif too_new?
       set_build_status(:pending,
-        I18n.t("build_status.time.too_new", min_age: ENV.fetch("MIN_AGE"), age: age), status)
+        I18n.t("build_status.time.too_new", min_age: Rules.min_age, age: age), status)
     else
       set_build_status(:success, I18n.t("build_status.time.success", age: age), status)
     end

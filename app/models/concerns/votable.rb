@@ -12,9 +12,9 @@ module Votable
 
   def score
     weights = {
-      yes: ENV.fetch("YES_WEIGHT").to_i,
-      no: ENV.fetch("NO_WEIGHT").to_i,
-      block: ENV.fetch("BLOCK_WEIGHT").to_i,
+      yes: Rules.yes_weight,
+      no: Rules.no_weight,
+      block: Rules.block_weight,
     }
     interactions.all.inject(0) do |sum, i|
       sum + (weights[i.last_vote.try(:to_sym)] || 0)
@@ -22,11 +22,11 @@ module Votable
   end
 
   def passed?
-    score >= ENV.fetch("PASS_THRESHOLD").to_i
+    score >= Rules.pass_threshold
   end
 
   def blocked?
-    score < ENV.fetch("BLOCK_THRESHOLD").to_i
+    score < Rules.block_threshold
   end
 
   private
@@ -75,20 +75,13 @@ module Votable
       comments.each { |c| count_vote_in_comment(c, time_of_last_commit) }
     end
 
-    # rubocop:disable Metrics/MethodLength
     def post_instructions
       vars = {
         site_url: ENV.fetch("SITE_URL"),
-        yes_weight: ENV.fetch("YES_WEIGHT"),
-        no_weight: ENV.fetch("NO_WEIGHT"),
-        block_weight: ENV.fetch("BLOCK_WEIGHT"),
-        pass_threshold: ENV.fetch("PASS_THRESHOLD"),
-        min_age: ENV.fetch("MIN_AGE"),
-        max_age: ENV.fetch("MAX_AGE"),
         proposal_number: number,
         repo: ENV.fetch("GITHUB_REPO"),
         proposer: proposer.login,
-      }
+      }.merge(Rules)
       github_add_comment [INSTRUCTION_HEADER, I18n.t("help.instruction_comment", vars)].join("\n")
     end
 end

@@ -45,11 +45,11 @@ class Proposal < ApplicationRecord
   end
 
   def too_old?
-    age >= ENV.fetch("MAX_AGE").to_i
+    age >= Rules.max_age
   end
 
   def too_new?
-    age < ENV.fetch("MIN_AGE").to_i
+    age < Rules.min_age
   end
 
   def update_state!
