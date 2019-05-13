@@ -139,17 +139,17 @@ RSpec.describe ProposalsHelper, type: :helper do
       expect(helper.render_diff(diff)).to include(expected)
     end
 
-    it "renders additions inside a 'removed' div" do
+    it "renders removals inside a 'removed' div" do
       expected = "<div class='diff removed'><p>The Named is the mother of all things.</p></div>"
       expect(helper.render_diff(diff)).to include(expected)
     end
 
-    it "renders additions inside an 'unchanged' div" do
-      expected = "<div class='diff unchanged'><p>The Nameless is the origin of Heaven and Earth;</p></div>"
-      expect(helper.render_diff(diff)).to include(expected)
+    it "renders untouches lines inside an 'unchanged' div" do
+      x = "<div class='diff unchanged'><p>The Nameless is the origin of Heaven and Earth;</p></div>"
+      expect(helper.render_diff(diff)).to include(x)
     end
 
-    it "combines contiguous lines into one section" do
+    it "combines contiguous lines of the same type into one chunk" do
       expected = <<~EOF.strip
       <div class='diff removed'><p>The Way that can be told of is not the eternal Way;
       The name that can be named is not the eternal name.</p></div>

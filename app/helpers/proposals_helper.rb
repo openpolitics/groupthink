@@ -62,24 +62,24 @@ module ProposalsHelper
     }[line[0].to_sym]
   end
 
-  def calculate_diff(str)
-    sections = [[:unchanged, ""]]
-    last_type = :unchanged
-    str.split("\n").map do |line|
-      line_type = diff_line_type(line)
-      if line_type == last_type
-        sections.last[1] += "\n#{line[1..-1]}"
-      elsif line_type
-        last_type = line_type
-        sections << [line_type, line[1..-1]]
-      end
-    end
-    sections
+  def parse_diff_line(line)
+    line_type = diff_line_type(line)
+    line_type ? [line_type, line[1..-1]] : nil
   end
 
-  def render_diff(str)
-    return "" if str.nil?
-    calculate_diff(str).map do |section|
+  def chunk_diff(diff)
+    # Parse all lines
+    lines = [[:unchanged, ""]]
+    lines += diff.split("\n").map { |line| parse_diff_line(line) }.compact
+    # Detect groups where the line type changes
+    grouped_lines = lines.slice_when { |before, after| before[0] != after[0] }
+    # Merge grouped lines into a single chunk
+    grouped_lines.map { |x| [x[0][0], x.map { |y| y[1] }.join("\n")] }
+  end
+
+  def render_diff(diff)
+    return "" if diff.nil?
+    chunk_diff(diff).map do |section|
       "<div class='diff #{section[0]}'>#{render_github_markdown(section[1]).strip}</div>"
     end.join
   end

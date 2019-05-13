@@ -30,7 +30,6 @@ Metrics/CyclomaticComplexity:
 # Configuration parameters: CountComments, ExcludedMethods.
 Metrics/MethodLength:
   Exclude:
-    - 'app/helpers/proposals_helper.rb'
     - 'app/controllers/proposals_controller.rb'
     - 'app/controllers/users/omniauth_callbacks_controller.rb'
     - 'app/controllers/edit_controller.rb'
