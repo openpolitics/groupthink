@@ -70,7 +70,7 @@ module ProposalsHelper
   def render_diff(str)
     return "" if str.nil?
     calculate_diff(str).map do |section|
-      "<div class='diff #{section[0]}'>#{render_github_markdown(section[1])}</div>"
+      "<div class='diff #{section[0]}'>#{render_github_markdown(section[1]).strip}</div>"
     end.join
   end
 end

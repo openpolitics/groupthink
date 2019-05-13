@@ -111,34 +111,24 @@ RSpec.describe ProposalsHelper, type: :helper do
     end
 
     it "renders additions inside an 'added' div" do
-      expected = <<~EOF.strip
-      <div class='diff added'><p>The named is the mother of all things.</p>
-      </div>
-      EOF
+      expected = "<div class='diff added'><p>The named is the mother of all things.</p></div>"
       expect(helper.render_diff(diff)).to include(expected)
     end
 
     it "renders additions inside a 'removed' div" do
-      expected = <<~EOF.strip
-      <div class='diff removed'><p>The Named is the mother of all things.</p>
-      </div>
-      EOF
+      expected = "<div class='diff removed'><p>The Named is the mother of all things.</p></div>"
       expect(helper.render_diff(diff)).to include(expected)
     end
 
     it "renders additions inside an 'unchanged' div" do
-      expected = <<~EOF.strip
-      <div class='diff unchanged'><p>Therefore let there always be non-being,</p>
-      </div>
-      EOF
+      expected = "<div class='diff unchanged'><p>Therefore let there always be non-being,</p></div>"
       expect(helper.render_diff(diff)).to include(expected)
     end
 
-    it "combines contiguous lines into one" do
+    it "combines contiguous lines into one section" do
       expected = <<~EOF.strip
       <div class='diff removed'><p>The Way that can be told of is not the eternal Way;
-      The name that can be named is not the eternal name.</p>
-      </div>
+      The name that can be named is not the eternal name.</p></div>
       EOF
       expect(helper.render_diff(diff)).to include(expected)
     end
