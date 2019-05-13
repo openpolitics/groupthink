@@ -45,23 +45,33 @@ module ProposalsHelper
     str.html_safe
   end
 
+  def ignore_diff_line?(line)
+    ["@", "---", "+++"].any? do |prefix|
+      line.starts_with?(prefix)
+    end
+  end
+
+  def diff_line_type(line)
+    # Ignore some lines completely
+    return nil if ignore_diff_line?(line)
+    # Detect type
+    {
+      "+": :added,
+      "-": :removed,
+      " ": :unchanged
+    }[line[0].to_sym]
+  end
+
   def calculate_diff(str)
     sections = [[:unchanged, ""]]
-    last_type = " "
+    last_type = :unchanged
     str.split("\n").map do |line|
-      if line.starts_with?("@") || line.starts_with?("---") || line.starts_with?("+++")
-        next
-      end
-      if line.starts_with?(last_type)
+      line_type = diff_line_type(line)
+      if line_type == last_type
         sections.last[1] += "\n#{line[1..-1]}"
-      else
-        types = {
-          "+": :added,
-          "-": :removed,
-          " ": :unchanged
-        }
-        last_type = line[0]
-        sections << [types[line[0].to_sym], line[1..-1]]
+      elsif line_type
+        last_type = line_type
+        sections << [line_type, line[1..-1]]
       end
     end
     sections
