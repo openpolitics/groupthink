@@ -142,6 +142,5 @@ RSpec.describe ProposalsHelper, type: :helper do
       EOF
       expect(helper.render_diff(diff)).to include(expected)
     end
-
   end
 end
