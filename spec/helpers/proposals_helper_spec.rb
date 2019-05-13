@@ -96,18 +96,42 @@ RSpec.describe ProposalsHelper, type: :helper do
     # Example diff from the GNU diff man pages: https://www.gnu.org/software/diffutils/manual/html_node/Example-Unified.html
     let(:diff) {
       <<~EOF.strip
+      --- lao	2002-02-21 23:30:39.942229878 -0800
+      +++ tzu	2002-02-21 23:30:50.442260588 -0800
       @@ -1,7 +1,6 @@
       -The Way that can be told of is not the eternal Way;
       -The name that can be named is not the eternal name.
        The Nameless is the origin of Heaven and Earth;
       -The Named is the mother of all things.
       +The named is the mother of all things.
+      +
        Therefore let there always be non-being,
+         so we may see their subtlety,
+       And let there always be being,
+      @@ -9,3 +8,6 @@
+       The two are the same,
+       But after they are produced,
+         they have different names.
+      +They both may be called deep and profound.
+      +Deeper and more profound,
+      +The door of all subtleties!
       EOF
     }
 
+    it "always starts with an empty unchanged section" do
+      expect(helper.render_diff(diff)).to start_with("<div class='diff unchanged'></div>")
+    end
+
     it "ignores range lines" do
       expect(helper.render_diff(diff)).not_to include("-1,7")
+    end
+
+    it "ignores filename lines with ---" do
+      expect(helper.render_diff(diff)).not_to include("lao")
+    end
+
+    it "ignores filename lines with +++" do
+      expect(helper.render_diff(diff)).not_to include("tzu")
     end
 
     it "renders additions inside an 'added' div" do
@@ -121,7 +145,7 @@ RSpec.describe ProposalsHelper, type: :helper do
     end
 
     it "renders additions inside an 'unchanged' div" do
-      expected = "<div class='diff unchanged'><p>Therefore let there always be non-being,</p></div>"
+      expected = "<div class='diff unchanged'><p>The Nameless is the origin of Heaven and Earth;</p></div>"
       expect(helper.render_diff(diff)).to include(expected)
     end
 
