@@ -45,8 +45,7 @@ module ProposalsHelper
     str.html_safe
   end
 
-  def render_diff(str)
-    return "" if str.nil?
+  def calculate_diff(str)
     sections = [[:unchanged, ""]]
     last_type = " "
     str.split("\n").map do |line|
@@ -65,7 +64,12 @@ module ProposalsHelper
         sections << [types[line[0].to_sym], line[1..-1]]
       end
     end
-    sections.map do |section|
+    sections
+  end
+
+  def render_diff(str)
+    return "" if str.nil?
+    calculate_diff(str).map do |section|
       "<div class='diff #{section[0]}'>#{render_github_markdown(section[1])}</div>"
     end.join
   end

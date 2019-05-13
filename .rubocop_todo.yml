@@ -9,7 +9,6 @@
 # Offense count: 10
 Metrics/AbcSize:
   Exclude:
-    - 'app/helpers/proposals_helper.rb'
     - 'app/controllers/proposals_controller.rb'
     - 'app/controllers/users/omniauth_callbacks_controller.rb'
     - 'app/controllers/edit_controller.rb'
