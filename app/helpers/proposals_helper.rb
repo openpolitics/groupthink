@@ -12,18 +12,20 @@ module ProposalsHelper
     auto_link(markdown)
   end
 
+  EMOJI_REPLACEMENTS = [
+    [":white_check_mark:", "✅"],
+    [":negative_squared_cross_mark:", "❎"],
+    [":no_entry_sign:", "🚫"],
+    [":thumbsup:", "👍"],
+    [":thumbsdown:", "👎"],
+    [":+1:", "👍"],
+    [":-1:", "👎"],
+    [":hand:", "✋"],
+    [":smiley:", "😃"],
+  ]
+
   def replace_emoji(str)
-    [
-      [":white_check_mark:", "✅"],
-      [":negative_squared_cross_mark:", "❎"],
-      [":no_entry_sign:", "🚫"],
-      [":thumbsup:", "👍"],
-      [":thumbsdown:", "👎"],
-      [":+1:", "👍"],
-      [":-1:", "👎"],
-      [":hand:", "✋"],
-      [":smiley:", "😃"],
-    ].each do |replacement|
+    EMOJI_REPLACEMENTS.each do |replacement|
       str = str.gsub(replacement[0], replacement[1])
     end
     str
