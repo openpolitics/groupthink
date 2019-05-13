@@ -67,10 +67,4 @@ module ProposalsHelper
       "<div class='diff #{section[0]}'>#{render_github_markdown(section[1])}</div>"
     end.join
   end
-
-  # Wrap tag_options until rinku updates its code to work in Rails 5.1.1
-  # See https://github.com/vmg/rinku/issues/70
-  def tag_options(options, escape = true)
-    tag_builder.tag_options(options, escape)
-  end
 end
