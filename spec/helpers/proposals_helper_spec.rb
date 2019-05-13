@@ -91,4 +91,57 @@ RSpec.describe ProposalsHelper, type: :helper do
       expect(helper.link_proposals(input)).to eql output
     end
   end
+
+  context "when rendering diffs" do
+    # Example diff from the GNU diff man pages: https://www.gnu.org/software/diffutils/manual/html_node/Example-Unified.html
+    let(:diff) {
+      <<~EOF.strip
+      @@ -1,7 +1,6 @@
+      -The Way that can be told of is not the eternal Way;
+      -The name that can be named is not the eternal name.
+       The Nameless is the origin of Heaven and Earth;
+      -The Named is the mother of all things.
+      +The named is the mother of all things.
+       Therefore let there always be non-being,
+      EOF
+    }
+
+    it "ignores range lines" do
+      expect(helper.render_diff(diff)).not_to include("-1,7")
+    end
+
+    it "renders additions inside an 'added' div" do
+      expected = <<~EOF.strip
+      <div class='diff added'><p>The named is the mother of all things.</p>
+      </div>
+      EOF
+      expect(helper.render_diff(diff)).to include(expected)
+    end
+
+    it "renders additions inside a 'removed' div" do
+      expected = <<~EOF.strip
+      <div class='diff removed'><p>The Named is the mother of all things.</p>
+      </div>
+      EOF
+      expect(helper.render_diff(diff)).to include(expected)
+    end
+
+    it "renders additions inside an 'unchanged' div" do
+      expected = <<~EOF.strip
+      <div class='diff unchanged'><p>Therefore let there always be non-being,</p>
+      </div>
+      EOF
+      expect(helper.render_diff(diff)).to include(expected)
+    end
+
+    it "combines contiguous lines into one" do
+      expected = <<~EOF.strip
+      <div class='diff removed'><p>The Way that can be told of is not the eternal Way;
+      The name that can be named is not the eternal name.</p>
+      </div>
+      EOF
+      expect(helper.render_diff(diff)).to include(expected)
+    end
+
+  end
 end
