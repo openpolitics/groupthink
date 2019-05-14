@@ -13,5 +13,5 @@ SimpleCov.formatter = SimpleCov::Formatter::MultiFormatter.new([
 
 SimpleCov.start do
    add_filter 'spec/'
-   track_files '{app,lib}/**/*.{rb,rake}'
+   track_files '{app,lib}/**/*.{rb,rake,erb}'
 end
