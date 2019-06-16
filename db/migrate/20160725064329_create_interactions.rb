@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class CreateInteractions < ActiveRecord::Migration[5.0]
   def change
     create_table :interactions do |t|
@@ -5,6 +7,6 @@ class CreateInteractions < ActiveRecord::Migration[5.0]
       t.references :pull_request, null: false
       t.string :last_vote
       t.timestamps
-    end    
+    end
   end
 end

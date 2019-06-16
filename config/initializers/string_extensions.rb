@@ -1,1 +1,3 @@
-require 'string_extensions'
+# frozen_string_literal: true
+
+require "string_extensions"

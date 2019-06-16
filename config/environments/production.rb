@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 Rails.application.configure do
   # Settings specified here will take precedence over those in config/application.rb.
 
@@ -53,11 +55,11 @@ Rails.application.configure do
   # config.cache_store = :mem_cache_store
 
   # Use a real queuing backend for Active Job (and separate queues per environment)
-  config.active_job.queue_adapter     = :sidekiq
+  config.active_job.queue_adapter = :sidekiq
   # config.active_job.queue_name_prefix = "groupthink_#{Rails.env}"
 
   config.action_mailer.perform_caching = false
-  config.action_mailer.default_url_options = { host: ENV.fetch("SITE_URL").split('/').last }
+  config.action_mailer.default_url_options = { host: ENV.fetch("SITE_URL").split("/").last }
 
   # Ignore bad email addresses and do not raise email delivery errors.
   # Set this to true and configure the email server for immediate delivery to raise delivery errors.
@@ -70,7 +72,7 @@ Rails.application.configure do
     domain:               ENV.fetch("EMAIL_DOMAIN"),
     user_name:            ENV.fetch("SMTP_USERNAME"),
     password:             ENV.fetch("SMTP_PASSWORD"),
-    authentication:       'plain',
+    authentication:       "plain",
     enable_starttls_auto: true  }
 
   # Enable locale fallbacks for I18n (makes lookups for any locale fall back to

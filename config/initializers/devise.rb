@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # Use this hook to configure devise mailer, warden hooks and so forth.
 # Many of these configuration options can be set straight in your model.
 Devise.setup do |config|
@@ -24,7 +26,7 @@ Devise.setup do |config|
   # Load and configure the ORM. Supports :active_record (default) and
   # :mongoid (bson_ext recommended) by default. Other ORMs may be
   # available as additional gems.
-  require 'devise/orm/active_record'
+  require "devise/orm/active_record"
 
   # ==> Configuration for any authentication mechanism
   # Configure which keys are used when authenticating a user. The default is
@@ -247,7 +249,7 @@ Devise.setup do |config|
   # ==> OmniAuth
   # Add a new OmniAuth provider. Check the wiki for more information on setting
   # up on your models and hooks.
-  config.omniauth :github, ENV.fetch("GITHUB_APP_ID"), ENV.fetch("GITHUB_APP_SECRET"), scope: 'user:email,public_repo'
+  config.omniauth :github, ENV.fetch("GITHUB_APP_ID"), ENV.fetch("GITHUB_APP_SECRET"), scope: "user:email,public_repo"
 
   # ==> Warden configuration
   # If you want to use other strategies, that are not supported by Devise, or
