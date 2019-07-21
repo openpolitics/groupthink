@@ -82,7 +82,6 @@ class Proposal < ApplicationRecord
   end
 
   private
-
     def closed_state
       return nil unless pr_closed?
       pr_merged? ? "accepted" : "rejected"

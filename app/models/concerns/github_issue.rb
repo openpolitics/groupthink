@@ -16,7 +16,6 @@ module GithubIssue
   end
 
   private
-
     #
     # Add a comment to the GitHub issue
     #

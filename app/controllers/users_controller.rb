@@ -34,7 +34,6 @@ class UsersController < ApplicationController
   end
 
 private
-
   def get_user
     @user = User.find_by_login(params[:id])
     raise ActiveRecord::RecordNotFound if @user.nil?

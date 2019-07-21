@@ -30,7 +30,6 @@ module Votable
   end
 
   private
-
     INSTRUCTION_HEADER = "<!-- votebot instructions -->"
 
     def count_votes!

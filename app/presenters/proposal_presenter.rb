@@ -17,7 +17,6 @@ class ProposalPresenter < SimpleDelegator
   end
 
   private
-
     def commit_to_activity_item(commit)
       ["diff", {
         sha: commit[:sha],

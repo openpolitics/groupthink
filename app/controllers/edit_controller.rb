@@ -58,7 +58,6 @@ class EditController < ApplicationController
   end
 
   private
-
     def check_logged_in
       unless user_signed_in?
         session[:original_path] = request.path

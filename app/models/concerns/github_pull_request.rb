@@ -64,7 +64,6 @@ module GithubPullRequest
   end
 
   private
-
     def github_pr
       @github_pr ||= Octokit.pull_request(ENV.fetch("GITHUB_REPO"), number)
     end
