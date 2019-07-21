@@ -4,6 +4,7 @@ require:
   - rubocop-rspec
   - rubocop-i18n
   - rubocop-performance
+  - rubocop-rails
 
 inherit_gem:
   rubocop-rails_config:
