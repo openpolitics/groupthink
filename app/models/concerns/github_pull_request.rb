@@ -63,6 +63,14 @@ module GithubPullRequest
     end
   end
 
+  def merge_pr!
+    Octokit.merge_pull_request(ENV.fetch("GITHUB_REPO"), number)
+    true
+  rescue Octokit::MethodNotAllowed
+    # PR couldn't be merged
+    false
+  end
+
   private
     def github_pr
       @github_pr ||= Octokit.pull_request(ENV.fetch("GITHUB_REPO"), number)
@@ -93,14 +101,6 @@ module GithubPullRequest
 
     def pr_merged?
       github_pr.merged
-    end
-
-    def merge_pr!
-      Octokit.merge_pull_request(ENV.fetch("GITHUB_REPO"), number)
-      true
-    rescue Octokit::MethodNotAllowed
-      # PR couldn't be merged
-      false
     end
 
     def close_pr!
