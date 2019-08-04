@@ -39,7 +39,7 @@ class ProposalPresenter < SimpleDelegator
     end
 
     def comment_to_activity_item(comment)
-      return nil if comment.body =~ /votebot instructions/
+      return nil if /votebot instructions/.match?(comment.body)
       ["comment", {
         body: comment.body,
         user: User.find_by_login(comment.user.login),

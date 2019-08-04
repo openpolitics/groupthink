@@ -13,7 +13,7 @@ RSpec.describe ProposalsMailer, type: :mailer do
     let(:proposer) { FactoryBot.create :user }
     let(:contributor) { FactoryBot.create :user, email: "contributor@mydomain.com" }
     let(:proposal) { FactoryBot.create :proposal, proposer: contributor }
-    let(:mail) { ProposalsMailer.new_proposal(contributor, proposal) }
+    let(:mail) { described_class.new_proposal(contributor, proposal) }
 
     it "sends email to right person" do
       expect(mail.to).to eq(["contributor@mydomain.com"])

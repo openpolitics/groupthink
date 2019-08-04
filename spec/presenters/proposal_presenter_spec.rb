@@ -16,7 +16,7 @@ RSpec.describe ProposalPresenter, type: :presenter do
     end
 
     context "with a description" do
-      let(:item) { ProposalPresenter.new(pr).activity_log[0] }
+      let(:item) { described_class.new(pr).activity_log[0] }
       let!(:submission_time) { 1.day.ago }
 
       before do
@@ -40,7 +40,7 @@ RSpec.describe ProposalPresenter, type: :presenter do
     end
 
     context "with a comment" do
-      let(:item) { ProposalPresenter.new(pr).activity_log[0] }
+      let(:item) { described_class.new(pr).activity_log[0] }
       let!(:submission_time) { 1.hour.ago }
 
       before do
@@ -87,12 +87,12 @@ RSpec.describe ProposalPresenter, type: :presenter do
       end
 
       it "has an empty activity log" do
-        expect(ProposalPresenter.new(pr).activity_log).to be_empty
+        expect(described_class.new(pr).activity_log).to be_empty
       end
     end
 
     context "with commits" do
-      let(:item) { ProposalPresenter.new(pr).activity_log[0] }
+      let(:item) { described_class.new(pr).activity_log[0] }
       let!(:submission_time) { 1.hour.ago }
 
       before do
