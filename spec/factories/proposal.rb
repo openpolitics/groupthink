@@ -2,7 +2,7 @@
 
 FactoryBot.define do
   factory :proposal do
-    number { Faker::Number.number(3) }
+    number { Faker::Number.number(digits: 3) }
     state { "waiting" }
     title { Faker::Book.title }
     proposer { create :user }
