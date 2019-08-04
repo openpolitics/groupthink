@@ -22,13 +22,12 @@ Rails.application.routes.draw do
   post "webhook", to: "proposals#webhook", as: :webhook
 
   constraints(path: /[^\?]+/) do
-    get "/edit/:branch/*path": "edit#edit", format: false
-    get "/new/:branch": "edit#new", format: false
+    get "edit/:branch/*path", to: "edit#edit", format: false
+    get "new/:branch", to: "edit#new", format: false
   end
-  post "/edit/message": "edit#message"
-  post "/edit/commit": "edit#commit"
-  get "/edit": "edit#index"
-
+  post "edit/message", to: "edit#message"
+  post "edit/commit", to: "edit#commit"
+  get "edit", to: "edit#index"
 
   root "proposals#index"
 end
