@@ -54,7 +54,7 @@ class Proposal < ApplicationRecord
 
   def update_state!
     state = pr_closed? ? closed_state : open_state
-    update_attributes!(state: state)
+    update!(state: state)
   end
 
   def close_if_dead!
