@@ -6,7 +6,7 @@ FactoryBot.define do
     state { "waiting" }
     title { Faker::Book.title }
     proposer { create :user }
-    opened_at { Time.now }
+    opened_at { Time.zone.now }
 
     # Don't run load_from_github callback when creating from factory, but put it back after
     after(:build) do |x|

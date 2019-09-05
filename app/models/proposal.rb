@@ -41,7 +41,7 @@ class Proposal < ApplicationRecord
   end
 
   def age
-    (Date.today - opened_at.to_date).to_i
+    (Time.zone.today - opened_at.to_date).to_i
   end
 
   def too_old?

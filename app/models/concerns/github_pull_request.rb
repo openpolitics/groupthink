@@ -110,7 +110,7 @@ module GithubPullRequest
     end
 
     def time_of_last_commit
-      time = Time.new(1970)
+      time = Time.zone.local(1970)
       if sha
         commit = github_commits.find { |x| x.sha == sha }
         time = commit.commit.committer.date
