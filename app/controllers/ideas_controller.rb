@@ -15,7 +15,7 @@ class IdeasController < ApplicationController
     @author = User.find_or_create_by!(login: @idea.user.login)
     # Add original description
     @activity << ["comment", {
-      body: @idea[:body].blank? ? "*The author didn't add any more detail*" : @idea[:body],
+      body: @idea[:body].presence || "*The author didn't add any more detail*",
       user: @author,
       by_author: true,
       original_url: @idea[:html_url],

@@ -32,6 +32,6 @@ class Interaction < ApplicationRecord
     last_vote = "abstention" if comment.body.contains_abstention?
     last_vote = "no" if comment.body.contains_no?
     last_vote = "block"  if comment.body.contains_block?
-    update_attributes! last_vote: last_vote
+    update! last_vote: last_vote
   end
 end

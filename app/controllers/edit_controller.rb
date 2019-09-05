@@ -42,7 +42,7 @@ class EditController < ApplicationController
     # Get the SHA of the edited branch - this is the head we want to add to
     base_sha = github.tree(original_repo_path, @branch, recursive: true).sha
     # What shall we call our new branch?
-    branch_name = Time.now.to_s(:number)
+    branch_name = Time.zone.now.to_s(:number)
     # Update fork if appropriate by making a new branch from the upstream base SHA
     # We do this even if not forking, as there's no harm in doing so
     create_branch(repo_path, branch_name, base_sha)
@@ -167,7 +167,7 @@ class EditController < ApplicationController
       pr = github.create_pull_request original_repo_path, base, head, title, description
       Proposal.find_or_create_by!(
         number: pr.number,
-        opened_at: Time.now,
+        opened_at: Time.zone.now,
         title: title,
         proposer: @current_user
       )

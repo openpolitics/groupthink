@@ -41,7 +41,7 @@ class Proposal < ApplicationRecord
   end
 
   def age
-    (Date.today - opened_at.to_date).to_i
+    (Time.zone.today - opened_at.to_date).to_i
   end
 
   def too_old?
@@ -54,7 +54,7 @@ class Proposal < ApplicationRecord
 
   def update_state!
     state = pr_closed? ? closed_state : open_state
-    update_attributes!(state: state)
+    update!(state: state)
   end
 
   def close_if_dead!
@@ -72,7 +72,7 @@ class Proposal < ApplicationRecord
 
   def notify_voters
     # Notify users that there is a new proposal to vote on
-    User.where.not(email: nil).where(notify_new: true, contributor: true).all.each do |user|
+    User.where.not(email: nil).where(notify_new: true, contributor: true).all.find_each do |user|
       ProposalsMailer.new_proposal(user, self).deliver_later unless user == proposer
     end
   end

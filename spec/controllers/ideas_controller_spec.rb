@@ -3,6 +3,8 @@
 require "rails_helper"
 
 RSpec.describe IdeasController, type: :controller do
+  render_views
+
   around do |example|
     env = {
       GITHUB_REPO: "example/repo"
@@ -29,6 +31,7 @@ RSpec.describe IdeasController, type: :controller do
     before do
       allow(Octokit).to receive(:issue).and_return(
         OpenStruct.new(
+          created_at: 1.hour.ago,
           user: OpenStruct.new(
             login: login
           )

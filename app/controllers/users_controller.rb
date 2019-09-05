@@ -29,13 +29,13 @@ class UsersController < ApplicationController
   end
 
   def update
-    @user.update_attributes!(user_params)
+    @user.update!(user_params)
     redirect_to edit_user_path(@user)
   end
 
 private
   def get_user
-    @user = User.find_by_login(params[:id])
+    @user = User.find_by(login: params[:id])
     raise ActiveRecord::RecordNotFound if @user.nil?
   end
 

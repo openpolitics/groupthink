@@ -20,7 +20,7 @@ class ProposalPresenter < SimpleDelegator
     def commit_to_activity_item(commit)
       ["diff", {
         sha: commit[:sha],
-        user: User.find_by_login(commit[:commit][:author][:name]),
+        user: User.find_by(login: commit[:commit][:author][:name]),
         proposal: @proposal,
         original_url: @proposal.url,
         time: commit[:commit][:author][:date]
@@ -42,7 +42,7 @@ class ProposalPresenter < SimpleDelegator
       return nil if /votebot instructions/.match?(comment.body)
       ["comment", {
         body: comment.body,
-        user: User.find_by_login(comment.user.login),
+        user: User.find_by(login: comment.user.login),
         by_author: (comment.user.login == @proposal.proposer.login),
         original_url: comment.html_url,
         time: comment.created_at

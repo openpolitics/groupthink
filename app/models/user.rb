@@ -23,12 +23,15 @@ class User < ApplicationRecord
   def voted_on
     Proposal.joins(:interactions).
       where('interactions.user': self).
-      where.not('interactions.last_vote': nil, proposer: self)
+      where.not('interactions.last_vote': nil).
+      where.not(proposer: self)
   end
 
   def not_voted_on
     # There might be a better way to do this
-    Proposal.open.where.not(proposer: self, id: voted_on)
+    Proposal.open.
+      where.not(proposer: self).
+      where.not(id: voted_on)
   end
 
   def self.from_omniauth(auth)

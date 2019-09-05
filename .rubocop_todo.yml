@@ -64,3 +64,7 @@ Style/DocumentationMethod:
     - 'app/helpers/proposals_helper.rb'
     - 'app/helpers/application_helper.rb'
     - 'lib/tasks/update.rake'
+
+Rails/OutputSafety:
+  Exclude:
+    - 'app/helpers/proposals_helper.rb'
