@@ -31,6 +31,7 @@ RSpec.describe IdeasController, type: :controller do
     before do
       allow(Octokit).to receive(:issue).and_return(
         OpenStruct.new(
+          created_at: 1.hour.ago,
           user: OpenStruct.new(
             login: login
           )
