@@ -54,7 +54,7 @@ class ProposalsController < ApplicationController
 
   private
     def get_proposal
-      @proposal = Proposal.find_by_number(params[:id])
+      @proposal = Proposal.find_by(number: params[:id])
       raise ActiveRecord::RecordNotFound if @proposal.nil?
     end
 
