@@ -3,6 +3,8 @@
 require "rails_helper"
 
 RSpec.describe IdeasController, type: :controller do
+  render_views
+
   around do |example|
     env = {
       GITHUB_REPO: "example/repo"
