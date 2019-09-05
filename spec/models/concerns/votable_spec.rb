@@ -90,7 +90,7 @@ RSpec.describe Votable, type: :model do
   it "counts only the most recent vote cast by each voter" do
     pr.__send__(:count_votes_in_comments, [
       mock_vote(vote: "❎", created_at: 2.hours.ago, login: voter1.login),
-      mock_vote(vote: "✅", created_at: 1.hours.ago, login: voter1.login)
+      mock_vote(vote: "✅", created_at: 1.hour.ago, login: voter1.login)
     ])
     expect(pr.score).to eq 1
   end
