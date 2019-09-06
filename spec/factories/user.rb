@@ -3,7 +3,7 @@
 FactoryBot.define do
   factory :user do
     login { Faker::Internet.user_name }
-    contributor { true }
+    author { true }
     email { Faker::Internet.email }
     avatar_url { Faker::Internet.url }
     provider { "github" }

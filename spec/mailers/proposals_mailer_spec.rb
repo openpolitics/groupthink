@@ -11,12 +11,12 @@ RSpec.describe ProposalsMailer, type: :mailer do
 
   describe "new_proposal" do
     let(:proposer) { FactoryBot.create :user }
-    let(:contributor) { FactoryBot.create :user, email: "contributor@mydomain.com" }
-    let(:proposal) { FactoryBot.create :proposal, proposer: contributor }
-    let(:mail) { described_class.new_proposal(contributor, proposal) }
+    let(:author) { FactoryBot.create :user, email: "author@mydomain.com" }
+    let(:proposal) { FactoryBot.create :proposal, proposer: author }
+    let(:mail) { described_class.new_proposal(author, proposal) }
 
     it "sends email to right person" do
-      expect(mail.to).to eq(["contributor@mydomain.com"])
+      expect(mail.to).to eq(["author@mydomain.com"])
     end
 
     it "sends email from specified domain" do
@@ -36,7 +36,7 @@ RSpec.describe ProposalsMailer, type: :mailer do
     end
 
     it "includes link to edit settings for user" do
-      expect(mail.body.encoded).to match(/http.*\/users\/#{contributor.login}\/edit/)
+      expect(mail.body.encoded).to match(/http.*\/users\/#{author.login}\/edit/)
     end
   end
 end

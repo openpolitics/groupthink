@@ -48,7 +48,7 @@ class User < ApplicationRecord
     github_user = Octokit.user(login)
     self.avatar_url = github_user.avatar_url
     self.email ||= github_user.email
-    self.contributor = update_github_contributor_status
+    self.author = update_author_status_from_github
     nil # to avoid halting validation chain until 5.1
   rescue Octokit::NotFound
     # TODO Need to do something here if the user has been deleted,
@@ -57,10 +57,10 @@ class User < ApplicationRecord
     nil
   end
 
-  def update_github_contributor_status
+  def update_author_status_from_github
     # TODO fix autopagination not working here: https://github.com/openpolitics/groupthink/issues/176
-    @contributors ||= Octokit.contributors(ENV.fetch("GITHUB_REPO"), per_page: 100)
-    self.contributor = !@contributors.find { |x| x.login == login }.nil?
+    @authors ||= Octokit.contributors(ENV.fetch("GITHUB_REPO"), per_page: 100)
+    self.author = !@authors.find { |x| x.login == login }.nil?
   end
 
   def vote(proposal)

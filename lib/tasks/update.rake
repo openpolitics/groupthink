@@ -15,16 +15,16 @@ def update_users!
   User.all.each do |user|
     Rails.logger.info " - #{user.login}"
     user.load_from_github
-    Rails.logger.info "     has become a contributor" if user.contributor_changed?
+    Rails.logger.info "     has become an author" if user.author_changed?
     user.save! if user.changed?
   end
-  Rails.logger.info "Updating new contributors from GitHub"
-  Octokit.contributors(ENV.fetch("GITHUB_REPO")).each do |contributor|
-    params = { login: contributor["login"] }
+  Rails.logger.info "Updating new authors from GitHub"
+  Octokit.contributors(ENV.fetch("GITHUB_REPO")).each do |author|
+    params = { login: author["login"] }
     unless User.find_by(params)
-      Rails.logger.info " - #{contributor["login"]}"
+      Rails.logger.info " - #{author["login"]}"
       user = User.create!(params)
-      user.contributor = true
+      user.author = true
       user.save!
     end
   end

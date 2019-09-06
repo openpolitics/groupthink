@@ -16,7 +16,7 @@ class ProposalsController < ApplicationController
   def show
     @is_author = current_user == @proposal.proposer
     # Can the current user vote?
-    @can_vote = current_user.try(:contributor) && !@is_author
+    @can_vote = current_user.try(:author) && !@is_author
     # Get activity list
     presenter = ProposalPresenter.new(@proposal)
     @activity = presenter.activity_log

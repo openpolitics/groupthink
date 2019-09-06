@@ -62,9 +62,9 @@ module Votable
     def count_vote_in_comment(comment, time_of_last_commit)
       # Skip instructions
       return if Regexp.new(INSTRUCTION_HEADER).match?(comment.body)
-      # Ignore proposer and non-contributors
+      # Ignore proposer and non-authors
       user = User.find_or_create_by!(login: comment.user.login)
-      return if user == proposer || !user.contributor
+      return if user == proposer || !user.author
       # Store vote in an interaction record
       interaction = interactions.find_or_create_by!(user: user)
       interaction.set_last_vote_from_comment!(comment, time_of_last_commit)
