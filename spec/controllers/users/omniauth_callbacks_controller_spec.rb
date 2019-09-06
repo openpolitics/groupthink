@@ -4,10 +4,6 @@ require "rails_helper"
 
 # Make sure that https://nvd.nist.gov/vuln/detail/CVE-2015-9284 is mitigated
 RSpec.describe "CVE-2015-9284", type: :request do
-  after do
-    ActionController::Base.allow_forgery_protection = @allow_forgery_protection
-  end
-
   describe "GET /auth/:provider" do
     it do
       get user_github_omniauth_authorize_path
@@ -16,9 +12,14 @@ RSpec.describe "CVE-2015-9284", type: :request do
   end
 
   describe "POST /auth/:provider without CSRF token" do
+    let(:old_allow_forgery_protection) { ActionController::Base.allow_forgery_protection }
+
     before do
-      @allow_forgery_protection = ActionController::Base.allow_forgery_protection
       ActionController::Base.allow_forgery_protection = true
+    end
+
+    after do
+      ActionController::Base.allow_forgery_protection = old_allow_forgery_protection
     end
 
     it do
