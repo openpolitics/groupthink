@@ -43,7 +43,7 @@
                   <%= render partial: "shared/person", locals: {person: current_user, size: "toolbar"} %>
                 </li>
               <% else %>
-                <li><%= link_to ("Sign in "+fa_icon("sign-in")).html_safe, user_github_omniauth_authorize_path %></li>
+                <li><%= link_to ("Sign in "+fa_icon("sign-in")).html_safe, user_github_omniauth_authorize_path, method: :post %></li>
               <% end %>
               </li>
             </ul>

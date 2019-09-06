@@ -40,6 +40,7 @@ gem "bugsnag"
 # Devise and github for login
 gem "devise"
 gem "omniauth-github"
+gem "omniauth-rails_csrf_protection", "~> 0.1"
 
 gem "font-awesome-rails"
 
