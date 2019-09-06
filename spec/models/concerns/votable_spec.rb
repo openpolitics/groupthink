@@ -13,8 +13,8 @@ def mock_vote(vote: "✅", created_at: 1.hour.ago, login: "test")
 end
 
 RSpec.describe Votable, type: :model do
-  let(:voter1) { create :user, contributor: true, notify_new: false }
-  let(:voter2) { create :user, contributor: true, notify_new: false }
+  let(:voter1) { create :user, author: true, notify_new: false }
+  let(:voter2) { create :user, author: true, notify_new: false }
 
   let!(:pr) { create :proposal }
 
@@ -150,10 +150,10 @@ RSpec.describe Votable, type: :model do
         .with(/<!-- votebot instructions -->/)
     end
 
-    it "contains a link to the contributor list" do
+    it "contains a link to the author list" do
       pr.__send__(:post_instructions)
       expect(pr).to have_received(:github_add_comment)
-        .with(/\[contributor\]\(http:\/\/example.com\/users\/\)/)
+        .with(/\[.*?\]\(http:\/\/example.com\/users\/\)/)
     end
 
     it "contains voting table with info on yes votes" do

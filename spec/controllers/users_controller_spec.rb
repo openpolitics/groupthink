@@ -5,7 +5,7 @@ require "rails_helper"
 RSpec.describe UsersController, type: :controller do
   render_views
 
-  let!(:user) { create :user, contributor: true, notify_new: true }
+  let!(:user) { create :user, author: true, notify_new: true }
 
   around do |example|
     env = {
@@ -27,8 +27,8 @@ RSpec.describe UsersController, type: :controller do
       expect(response).to be_ok
     end
 
-    it "includes contributor list" do
-      expect(response.body).to include "Contributors"
+    it "includes author list" do
+      expect(response.body).to include "Authors"
     end
 
     it "includes current user" do

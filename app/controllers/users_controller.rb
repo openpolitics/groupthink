@@ -8,8 +8,8 @@ class UsersController < ApplicationController
   before_action :authorise, only: [:edit, :update]
 
   def index
-    @contributors = User.where(contributor: true)
-    @others = User.where(contributor: false)
+    @authors = User.where(author: true)
+    @others = User.where(author: false)
   end
 
   def show

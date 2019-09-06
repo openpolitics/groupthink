@@ -43,8 +43,8 @@ RSpec.describe User, type: :model do
       expect(u.email).to eq "test@example.com"
     end
 
-    it "sets contributor state" do
-      expect(u.contributor).to eq true
+    it "sets author state" do
+      expect(u.author).to eq true
     end
   end
 end

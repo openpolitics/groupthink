@@ -5,8 +5,8 @@
   <%= @user.login %> <a href='https://github.com/<%= @user.login %>'><%= fa_icon 'github' %></a>
 </h1>
 
-<% if @user.contributor %>
-  <div class='label label-primary'>contributor</div>
+<% if @user.author %>
+  <div class='label label-primary'>author</div>
 <% end %>
 
 <h2 style='clear: right'>Not voted on yet:</h2>
@@ -30,9 +30,9 @@
           <span class='hidden-xs'><%= pr.state.capitalize %></span>
         </span>
       </td>
-      <td><a href='/proposals/<%= pr.number %>'><%= pr.title %></a></td> 
-      <td class="text-center"><%= vote_icon(@user.vote(pr)) %></td> 
-      <td class="proposer text-center"><%= render partial: 'shared/person', locals: {person: pr.proposer, size: "small" } %></td> 
+      <td><a href='/proposals/<%= pr.number %>'><%= pr.title %></a></td>
+      <td class="text-center"><%= vote_icon(@user.vote(pr)) %></td>
+      <td class="proposer text-center"><%= render partial: 'shared/person', locals: {person: pr.proposer, size: "small" } %></td>
     </tr>
   <% end %>
 </table>

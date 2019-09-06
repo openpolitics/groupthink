@@ -2,15 +2,15 @@
 
 Click on a user image to see their activity history.
 
-<h2>Contributors (<%= @contributors.count %>)</h2>
+<h2>Authors (<%= @authors.count %>)</h2>
 
 <p>
-  Contributors have had a proposal accepted, and thus under the rules, get voting
+  Authors have had a proposal accepted, and thus under the rules, get voting
   rights on future proposals.
 </p>
 
 <div class='userlist'>
-  <% @contributors.each do |user| %>
+  <% @authors.each do |user| %>
     <%= render partial: 'shared/person', locals: {person: user } %>
   <% end %>
 </div>
