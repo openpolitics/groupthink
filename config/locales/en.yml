@@ -40,7 +40,7 @@ en:
     success: Your change will now go into a queue to be reviewed before it's merged in. If you'd like to look at the queue, and see the votes and comments on your submission, press the "View all proposals" button.
     resubmit: "Closed automatically: maximum age exceeded. Please feel free to resubmit this as a new proposal, but remember you will need to base any new proposal on the current policy text."
     instruction_comment: |
-      This proposal is open for discussion and voting. If you are a [contributor](%{site_url}/users/) to this repository (and not the proposer), you may vote on whether or not it is accepted.
+      This proposal is open for discussion and voting. If you are an [eligible voter](%{site_url}/users/) on this project (and not the proposer), you may cast your vote on whether or not it is accepted.
 
       ## How to vote
       Vote by entering one of the following symbols in a comment on this pull request. Only your last vote will be counted, and you may change your vote at any time until the change is accepted or closed.

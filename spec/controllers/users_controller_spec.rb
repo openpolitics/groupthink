@@ -31,6 +31,10 @@ RSpec.describe UsersController, type: :controller do
       expect(response.body).to include "Authors"
     end
 
+    it "includes voter list" do
+      expect(response.body).to include "Voters"
+    end
+
     it "includes current user" do
       expect(response.body).to include user.login
     end
