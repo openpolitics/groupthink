@@ -47,4 +47,35 @@ RSpec.describe User, type: :model do
       expect(u.author).to eq true
     end
   end
+
+  context "when checking if a user can vote" do
+    it "allows voting if the voter flag is true" do
+      user = create :user, voter: true
+      expect(user.can_vote?).to eq true
+    end
+
+    it "doesn't allows voting if the voter flag is false" do
+      user = create :user, voter: false
+      expect(user.can_vote?).to eq false
+    end
+
+    it "doesn't allow authors to vote by default" do
+      user = create :user, author: true
+      expect(user.can_vote?).to eq false
+    end
+
+    it "allows authors to vote if ALL_AUTHORS_CAN_VOTE is true" do
+      ClimateControl.modify ALL_AUTHORS_CAN_VOTE: "true" do
+        user = create :user, author: true
+        expect(user.can_vote?).to eq true
+      end
+    end
+
+    it "doesn't allow non-authors to vote even if ALL_AUTHORS_CAN_VOTE is true" do
+      ClimateControl.modify ALL_AUTHORS_CAN_VOTE: "true" do
+        user = create :user, author: false
+        expect(user.can_vote?).to eq false
+      end
+    end
+  end
 end
