@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_09_06_211203) do
+ActiveRecord::Schema.define(version: 2019_09_07_082416) do
 
   create_table "interactions", force: :cascade do |t|
     t.integer "user_id", null: false
@@ -43,6 +43,7 @@ ActiveRecord::Schema.define(version: 2019_09_06_211203) do
     t.string "provider"
     t.string "uid"
     t.boolean "notify_new", default: true
+    t.boolean "voter", default: false, null: false
   end
 
 end
