@@ -64,8 +64,7 @@ class User < ApplicationRecord
   end
 
   def can_vote?
-    # For now, authors are voters - this will be expanded upon
-    author
+    voter || ((ENV.fetch("ALL_AUTHORS_CAN_VOTE", false) == "true") && author)
   end
 
   def vote(proposal)
