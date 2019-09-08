@@ -13,8 +13,8 @@ def mock_vote(vote: "✅", created_at: 1.hour.ago, login: "test")
 end
 
 RSpec.describe Votable, type: :model do
-  let(:voter1) { create :user, author: true, notify_new: false }
-  let(:voter2) { create :user, author: true, notify_new: false }
+  let(:voter1) { create :user, voter: true }
+  let(:voter2) { create :user, voter: true }
 
   let!(:pr) { create :proposal }
 

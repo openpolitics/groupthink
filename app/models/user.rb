@@ -63,9 +63,8 @@ class User < ApplicationRecord
     self.author = !@authors.find { |x| x.login == login }.nil?
   end
 
-  def voter
-    # For now, authors are voters - this will be expanded upon
-    author
+  def can_vote?
+    voter || ((ENV.fetch("ALL_AUTHORS_CAN_VOTE", false) == "true") && author)
   end
 
   def vote(proposal)

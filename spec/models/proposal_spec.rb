@@ -77,10 +77,10 @@ RSpec.describe Proposal, type: :model do
   end
 
   context "with notification of new proposals" do
-    let!(:proposer) { create :user, author: true, notify_new: true }
-    let!(:voter) { create :user, author: true, notify_new: true }
-    let!(:no_notifications) { create :user, author: true, notify_new: false }
-    let!(:participant) { create :user, author: false, notify_new: true }
+    let!(:proposer) { create :user, voter: true, notify_new: true }
+    let!(:voter) { create :user, voter: true, notify_new: true }
+    let!(:no_notifications) { create :user, voter: true, notify_new: false }
+    let!(:participant) { create :user, voter: false, notify_new: true }
     let!(:mail) { instance_double("mail") }
 
     before do

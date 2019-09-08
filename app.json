@@ -90,6 +90,11 @@
       "value": "-1",
       "description": "Proposals with votes below this threshold will be considered 'blocked' when calculating status."
     },
+    "ALL_AUTHORS_CAN_VOTE": {
+      "required": false,
+      "value": "false",
+      "description": "Do all authors automatically get the right to vote? (set to true or false)"
+    },
     "SMTP_SERVER": {
       "required": true,
       "value": "smtp.sendgrid.net",

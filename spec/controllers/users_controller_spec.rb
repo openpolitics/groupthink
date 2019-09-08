@@ -5,7 +5,7 @@ require "rails_helper"
 RSpec.describe UsersController, type: :controller do
   render_views
 
-  let!(:user) { create :user, author: true, notify_new: true }
+  let!(:user) { create :user }
 
   around do |example|
     env = {
