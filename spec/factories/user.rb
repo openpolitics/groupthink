@@ -3,7 +3,9 @@
 FactoryBot.define do
   factory :user do
     login { Faker::Internet.user_name }
-    author { true }
+    author { false }
+    voter { false }
+    notify_new { false }
     email { Faker::Internet.email }
     avatar_url { Faker::Internet.url }
     provider { "github" }

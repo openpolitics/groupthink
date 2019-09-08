@@ -5,7 +5,7 @@ require "rails_helper"
 RSpec.describe ProposalsController, type: :controller do
   render_views
 
-  let(:proposer) { create :user, author: true, notify_new: true }
+  let(:proposer) { create :user }
   let!(:proposal) { create :proposal, proposer: proposer }
 
   around do |example|
