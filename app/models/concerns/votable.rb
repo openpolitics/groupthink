@@ -64,7 +64,7 @@ module Votable
       return if Regexp.new(INSTRUCTION_HEADER).match?(comment.body)
       # Ignore proposer and non-voters
       user = User.find_or_create_by!(login: comment.user.login)
-      return if user == proposer || !user.voter
+      return if user == proposer || !user.can_vote?
       # Store vote in an interaction record
       interaction = interactions.find_or_create_by!(user: user)
       interaction.set_last_vote_from_comment!(comment, time_of_last_commit)

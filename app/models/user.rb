@@ -63,7 +63,7 @@ class User < ApplicationRecord
     self.author = !@authors.find { |x| x.login == login }.nil?
   end
 
-  def voter
+  def can_vote?
     # For now, authors are voters - this will be expanded upon
     author
   end

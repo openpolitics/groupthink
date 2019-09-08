@@ -1,4 +1,4 @@
 <a href='/users/<%= person.login %>'><img src='<%= person.avatar_url %>'
 alt='<%= person.login %>'
 title='<%= person.login %>'
-class="img-rounded avatar <%= size rescue nil %> <%= "author" if person.author %> <%= "voter" if person.voter %>" /></a>
+class="img-rounded avatar <%= size rescue nil %> <%= "author" if person.author %> <%= "voter" if person.can_vote? %>" /></a>

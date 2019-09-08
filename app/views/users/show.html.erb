@@ -9,7 +9,7 @@
   <div class='label label-primary'>author</div>
 <% end %>
 
-<% if @user.voter %>
+<% if @user.can_vote? %>
   <div class='label label-primary'>voter</div>
 <% end %>
 
