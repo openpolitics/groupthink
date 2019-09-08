@@ -16,6 +16,7 @@ def update_users!
     Rails.logger.info " - #{user.login}"
     user.load_from_github
     Rails.logger.info "     has become an author" if user.author_changed?
+    Rails.logger.info "     has become an #{user.role}" if user.role_changed?
     user.save! if user.changed?
   end
   Rails.logger.info "Updating new authors from GitHub"
