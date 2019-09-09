@@ -12,6 +12,7 @@ RailsAdmin.config do |config|
   # == PaperTrail ==
   # config.audit_with :paper_trail, 'User', 'PaperTrail::Version' # PaperTrail >= 3.0.0
 
+  config.included_models = [ User, Proposal ]
   config.actions do
     dashboard
     index
