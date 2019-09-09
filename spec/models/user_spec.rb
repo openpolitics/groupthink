@@ -54,7 +54,7 @@ RSpec.describe User, type: :model do
     end
 
     it "sets role" do
-      expect(u.role).to eq :admin
+      expect(u.admin?).to eq true
     end
   end
 
