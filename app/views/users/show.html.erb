@@ -13,6 +13,10 @@
   <div class='label label-primary'>voter</div>
 <% end %>
 
+<% if @user.admin? %>
+  <div class='label label-danger'>admin</div>
+<% end %>
+
 <h2 style='clear: right'>Not voted on yet:</h2>
 
 <%= render partial: 'shared/proposal_list', locals: {proposals: @not_voted} %>

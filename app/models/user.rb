@@ -16,6 +16,13 @@ class User < ApplicationRecord
 
   before_validation :load_from_github, on: :create
 
+  enum role: { user: 0, admin: 1 }
+  after_initialize :set_default_role, if: :new_record?
+
+  def set_default_role
+    self.role ||= :user
+  end
+
   def proposed
     Proposal.where(proposer: self)
   end
@@ -49,12 +56,23 @@ class User < ApplicationRecord
     self.avatar_url = github_user.avatar_url
     self.email ||= github_user.email
     self.author = update_author_status_from_github
+    self.role = update_role_from_github
     nil # to avoid halting validation chain until 5.1
   rescue Octokit::NotFound
     # TODO Need to do something here if the user has been deleted,
     # but for now we'll just log an error
     logger.warn "User #{login} not found in GitHub - could have been deleted"
     nil
+  end
+
+  def update_role_from_github
+    p = Octokit.permission_level(ENV.fetch("GITHUB_REPO"), login).permission rescue nil
+    case p
+    when "admin"
+      self.role = :admin
+    else
+      self.role = :user
+    end
   end
 
   def update_author_status_from_github
