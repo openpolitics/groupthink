@@ -41,6 +41,8 @@ gem "bugsnag"
 gem "devise"
 gem "omniauth-github"
 gem "omniauth-rails_csrf_protection", "~> 0.1"
+gem "cancancan"
+gem "rails_admin"
 
 gem "font-awesome-rails"
 

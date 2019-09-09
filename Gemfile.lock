@@ -42,6 +42,10 @@ GEM
       globalid (>= 0.3.6)
     activemodel (6.0.0)
       activesupport (= 6.0.0)
+    activemodel-serializers-xml (1.0.2)
+      activemodel (> 5.x)
+      activesupport (> 5.x)
+      builder (~> 3.1)
     activerecord (6.0.0)
       activemodel (= 6.0.0)
       activesupport (= 6.0.0)
@@ -65,6 +69,7 @@ GEM
       concurrent-ruby (~> 1.0)
     builder (3.2.3)
     byebug (11.0.1)
+    cancancan (3.0.1)
     climate_control (0.2.0)
     coderay (1.1.2)
     coffee-rails (5.0.0)
@@ -166,6 +171,9 @@ GEM
     guard-rubocop (1.3.0)
       guard (~> 2.0)
       rubocop (~> 0.20)
+    haml (5.1.2)
+      temple (>= 0.8.0)
+      tilt
     hashdiff (1.0.0)
     hashie (3.6.0)
     htmlentities (4.3.4)
@@ -183,6 +191,8 @@ GEM
       rails-dom-testing (>= 1, < 3)
       railties (>= 4.2.0)
       thor (>= 0.14, < 2.0)
+    jquery-ui-rails (6.0.1)
+      railties (>= 3.2.16)
     json (2.2.0)
     jwt (2.2.1)
     kaminari (1.1.1)
@@ -223,6 +233,7 @@ GEM
     multi_xml (0.6.0)
     multipart-post (2.1.1)
     nenv (0.3.0)
+    nested_form (0.3.2)
     nio4r (2.5.1)
     nokogiri (1.10.4)
       mini_portile2 (~> 2.4.0)
@@ -261,6 +272,9 @@ GEM
     puma (4.1.0)
       nio4r (~> 2.0)
     rack (2.0.7)
+    rack-pjax (1.1.0)
+      nokogiri (~> 1.5)
+      rack (>= 1.1)
     rack-protection (2.0.7)
       rack
     rack-test (1.1.0)
@@ -285,6 +299,18 @@ GEM
       nokogiri (>= 1.6)
     rails-html-sanitizer (1.2.0)
       loofah (~> 2.2, >= 2.2.2)
+    rails_admin (2.0.0)
+      activemodel-serializers-xml (>= 1.0)
+      builder (~> 3.1)
+      haml (>= 4.0, < 6)
+      jquery-rails (>= 3.0, < 5)
+      jquery-ui-rails (>= 5.0, < 7)
+      kaminari (>= 0.14, < 2.0)
+      nested_form (~> 0.3)
+      rack-pjax (>= 0.7)
+      rails (>= 5.0, < 7)
+      remotipart (~> 1.3)
+      sassc-rails (>= 1.3, < 3)
     railties (6.0.0)
       actionpack (= 6.0.0)
       activesupport (= 6.0.0)
@@ -298,6 +324,7 @@ GEM
       ffi (~> 1.0)
     redcarpet (3.5.0)
     redis (4.1.2)
+    remotipart (1.4.3)
     responders (3.0.0)
       actionpack (>= 5.0)
       railties (>= 5.0)
@@ -386,6 +413,7 @@ GEM
       activesupport (>= 4.0)
       sprockets (>= 3.0.0)
     sqlite3 (1.4.1)
+    temple (0.8.1)
     term-ansicolor (1.7.1)
       tins (~> 1.0)
     thor (0.20.3)
@@ -425,6 +453,7 @@ PLATFORMS
 DEPENDENCIES
   bugsnag
   byebug
+  cancancan
   climate_control
   coffee-rails (~> 5.0)
   config
@@ -453,6 +482,7 @@ DEPENDENCIES
   pry
   puma (~> 4.1)
   rails (~> 6.0)
+  rails_admin
   redcarpet
   rinku
   rspec-rails
