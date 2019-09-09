@@ -10,7 +10,7 @@ RailsAdmin.config do |config|
   config.authorize_with :cancancan
 
   # == PaperTrail ==
-  # config.audit_with :paper_trail, 'User', 'PaperTrail::Version' # PaperTrail >= 3.0.0
+  config.audit_with :paper_trail, 'User', 'PaperTrail::Version'
 
   config.included_models = [ User, Proposal ]
 
@@ -21,8 +21,8 @@ RailsAdmin.config do |config|
     show_in_app
     delete
 
-    ## With an audit adapter, you can add:
-    # history_index
-    # history_show
+    # PaperTrail
+    history_index
+    history_show
   end
 end

@@ -5,6 +5,7 @@
 #
 class User < ApplicationRecord
   include UserAdmin
+  has_paper_trail
 
   default_scope { order(:login) }
 
