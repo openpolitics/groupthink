@@ -4,6 +4,8 @@
 # Generic humanoid carbon unit
 #
 class User < ApplicationRecord
+  include UserAdmin
+
   default_scope { order(:login) }
 
   devise :omniauthable, omniauth_providers: [:github]
