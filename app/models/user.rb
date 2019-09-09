@@ -66,7 +66,8 @@ class User < ApplicationRecord
   end
 
   def update_role_from_github
-    case Octokit.permission_level(ENV.fetch("GITHUB_REPO"), login)
+    permission_level = Octokit.permission_level(ENV.fetch("GITHUB_REPO"), login).permission rescue nil
+    case permission_level
     when "admin"
       self.role = :admin
     else

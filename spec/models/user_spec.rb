@@ -17,6 +17,11 @@ RSpec.describe User, type: :model do
       )
     ]
   }
+  let!(:mock_permissions) {
+    OpenStruct.new(
+      permission: "admin"
+    )
+  }
 
   around do |example|
     env = {
@@ -30,6 +35,7 @@ RSpec.describe User, type: :model do
   before do
     allow(Octokit).to receive(:user).with(login).and_return(mock_user)
     allow(Octokit).to receive(:contributors).and_return(mock_contributors)
+    allow(Octokit).to receive(:permission_level).and_return(mock_permissions)
   end
 
   context "when filling in extra user data from github on creation" do
@@ -45,6 +51,10 @@ RSpec.describe User, type: :model do
 
     it "sets author state" do
       expect(u.author).to eq true
+    end
+
+    it "sets role" do
+      expect(u.role).to eq :admin
     end
   end
 
