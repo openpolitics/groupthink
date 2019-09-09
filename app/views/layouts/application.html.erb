@@ -34,6 +34,7 @@
               <li><%= link_to "Proposals", proposals_path %></li>
               <li><%= link_to "Ideas", ideas_path %></li>
               <li><%= link_to "People", users_path %></li>
+              <% if can? :access, :rails_admin %><li><%= link_to "Admin", rails_admin_path %></li><% end %>
             </ul>
             <ul class="nav navbar-nav navbar-right">
               <% if signed_in? %>
