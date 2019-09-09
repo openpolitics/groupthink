@@ -4,6 +4,9 @@
 # Generic humanoid carbon unit
 #
 class User < ApplicationRecord
+  include UserAdmin
+  has_paper_trail
+
   default_scope { order(:login) }
 
   devise :omniauthable, omniauth_providers: [:github]

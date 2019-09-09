@@ -47,6 +47,7 @@ Style/DocumentationMethod:
     - 'spec/**/*.rb'
     - 'app/mailers/proposals_mailer.rb'
     - 'app/presenters/proposal_presenter.rb'
+    - 'app/models/ability.rb'
     - 'app/models/proposal.rb'
     - 'app/models/interaction.rb'
     - 'app/models/concerns/votable.rb'
