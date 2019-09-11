@@ -7,9 +7,7 @@ class ApplicationController < ActionController::Base
   rescue_from ActiveRecord::RecordNotFound, with: :not_found_error
 
   protected
-
-  def not_found_error
-    render file: 'public/404', status: :not_found
-  end
-
+    def not_found_error
+      render file: "public/404", status: :not_found
+    end
 end
