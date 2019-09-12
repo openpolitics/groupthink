@@ -95,21 +95,6 @@
       "value": "false",
       "description": "Do all authors automatically get the right to vote? (set to true or false)"
     },
-    "SMTP_SERVER": {
-      "required": true,
-      "value": "smtp.sendgrid.net",
-      "description": "The name of your SMTP server, for sending mail"
-    },
-    "SMTP_USERNAME": {
-      "required": true,
-      "value": "username",
-      "description": "The login username for your SMTP server, for sending mail"
-    },
-    "SMTP_PASSWORD": {
-      "required": true,
-      "value": "password",
-      "description": "The password for your SMTP server, for sending mail"
-    },
     "BOOTSTRAP_CSS_URL": {
       "required": false,
       "description": "A URL for a Bootstrap 3 CSS file. If not specified, the default theme will be used"
@@ -126,7 +111,8 @@
   "addons": [
     "heroku-postgresql",
     "scheduler",
-    "heroku-redis:hobby-dev"
+    "heroku-redis:hobby-dev",
+    "sendgrid:starter"
   ],
   "buildpacks": [
     {
