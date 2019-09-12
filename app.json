@@ -5,10 +5,6 @@
     "postdeploy": "bundle exec rake db:schema:load"
   },
   "env": {
-    "BUGSNAG_API_KEY": {
-      "required": false,
-      "description": "API key for Bugsnag error reporting. Error reporting will not be enabled if API key is not present."
-    },
     "GITHUB_OAUTH_TOKEN": {
       "required": true,
       "description": "OAuth token for GitHub API access. Generate a token at https://github.com/settings/tokens."
@@ -112,7 +108,8 @@
     "heroku-postgresql",
     "scheduler",
     "heroku-redis:hobby-dev",
-    "sendgrid:starter"
+    "sendgrid:starter",
+    "bugsnag:tauron2"
   ],
   "buildpacks": [
     {
