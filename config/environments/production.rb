@@ -69,8 +69,8 @@ Rails.application.configure do
     address:              ENV.fetch("SMTP_SERVER", "smtp.sendgrid.net"),
     port:                 587,
     domain:               ENV.fetch("EMAIL_DOMAIN"),
-    user_name:            ENV.fetch("SMTP_USERNAME", ENV.fetch("SENDGRID_USERNAME"))
-    password:             ENV.fetch("SMTP_PASSWORD", ENV.fetch("SENDGRID_PASSWORD"))
+    user_name:            ENV.fetch("SMTP_USERNAME", ENV.fetch("SENDGRID_USERNAME")),
+    password:             ENV.fetch("SMTP_PASSWORD", ENV.fetch("SENDGRID_PASSWORD")),
     authentication:       "plain",
     enable_starttls_auto: true  }
 
