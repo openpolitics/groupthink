@@ -102,6 +102,13 @@ RSpec.describe ProposalsController, type: :controller do
       expect(response).to be_bad_request
     end
 
+    it "/ should respond to pings with a 200" do
+      # Set POST
+      request.headers["X-Github-Event"] = "ping"
+      post :webhook
+      expect(response).to be_ok
+    end
+
     it "/ should enqueue github issue comments correctly" do
       # Set POST
       request.headers["X-Github-Event"] = "issue_comment"

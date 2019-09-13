@@ -30,6 +30,8 @@ class ProposalsController < ApplicationController
     when "pull_request"
       on_pull_request(JSON.parse(params[:payload]))
       head 200
+    when "ping"
+      head 200
     else
       head 400
     end
