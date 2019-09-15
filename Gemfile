@@ -88,7 +88,6 @@ group :development, :test do
   gem "rubocop-performance", require: false
   gem "yard"
   gem "climate_control"
-  gem "foreman"
 end
 
 group :development do
