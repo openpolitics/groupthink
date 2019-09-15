@@ -27,3 +27,4 @@ spec/examples.txt
 .yardoc
 doc
 .vscode
+dump.rdb
