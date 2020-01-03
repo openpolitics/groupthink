@@ -6,7 +6,7 @@ version: 2
 jobs:
   build:
     docker:
-      - image: circleci/ruby:2.6.5-node-browsers
+      - image: circleci/ruby:2.7.0-node-browsers
         environment:
           GITHUB_OAUTH_TOKEN: abc123
           GITHUB_APP_ID: abc123
