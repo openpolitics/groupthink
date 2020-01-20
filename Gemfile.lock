@@ -68,7 +68,7 @@ GEM
     bugsnag (6.12.2)
       concurrent-ruby (~> 1.0)
     builder (3.2.4)
-    byebug (11.0.1)
+    byebug (11.1.0)
     cancancan (3.0.2)
     climate_control (0.2.0)
     coderay (1.1.2)
