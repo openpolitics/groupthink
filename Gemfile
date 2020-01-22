@@ -63,8 +63,6 @@ gem "config"
 group :production do
   gem "pg"
   gem "sidekiq"
-  gem "dotenv-rails"
-
 end
 
 group :development, :test do
