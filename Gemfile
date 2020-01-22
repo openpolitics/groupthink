@@ -60,10 +60,11 @@ gem "kaminari"
 # Custom application configuration
 gem "config"
 
+gem "sidekiq"
+
 # Postgres in production for Heroku
 group :production do
   gem "pg"
-  gem "sidekiq"
 end
 
 group :development, :test do
