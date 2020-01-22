@@ -4,6 +4,8 @@ jobs:
   test:
     runs-on: ubuntu-latest
     steps:
+      - name: Install sqlite3
+        run: sudo apt-get install libsqlite3-dev
       - uses: actions/checkout@v1
       - uses: eregon/use-ruby-action@master
         with:
@@ -21,6 +23,8 @@ jobs:
   lint:
     runs-on: ubuntu-latest
     steps:
+      - name: Install sqlite3
+        run: sudo apt-get install libsqlite3-dev
       - uses: actions/checkout@v1
       - uses: eregon/use-ruby-action@master
         with:
