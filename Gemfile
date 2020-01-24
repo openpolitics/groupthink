@@ -10,7 +10,8 @@ gem "rails", "~> 6.0"
 gem "puma", "~> 4.3"
 # Use SCSS for stylesheets
 gem "sassc-rails", "~> 2.1"
-gem "sassc", "~> 2.0.1" # Pin version to fix https://github.com/sass/sassc-ruby/issues/133
+gem "sassc", "~> 2.0"
+gem "sprockets", "< 4"
 # Use Uglifier as compressor for JavaScript assets
 gem "uglifier", "~> 4.2"
 # Use CoffeeScript for .coffee assets and views
@@ -59,10 +60,11 @@ gem "kaminari"
 # Custom application configuration
 gem "config"
 
+gem "sidekiq"
+
 # Postgres in production for Heroku
 group :production do
   gem "pg"
-  gem "sidekiq"
 end
 
 group :development, :test do
