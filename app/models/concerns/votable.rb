@@ -29,25 +29,25 @@ module Votable
     score < Rules.block_threshold
   end
 
+  def count_votes!
+    comments = github_comments
+    # Post instructions if they're not already there
+    if !instructions_posted?(comments) && !pr_closed?
+      post_instructions
+    end
+    # Count up all the votes
+    count_votes_in_comments(comments)
+    # Update the state flag
+    update_state!
+    # Set build statuses on github
+    unless closed?
+      set_vote_build_status
+      set_time_build_status
+    end
+  end
+
   private
     INSTRUCTION_HEADER = "<!-- votebot instructions -->"
-
-    def count_votes!
-      comments = github_comments
-      # Post instructions if they're not already there
-      if !instructions_posted?(comments) && !pr_closed?
-        post_instructions
-      end
-      # Count up all the votes
-      count_votes_in_comments(comments)
-      # Update the state flag
-      update_state!
-      # Set build statuses on github
-      unless closed?
-        set_vote_build_status
-        set_time_build_status
-      end
-    end
 
     def instructions_posted?(comments)
       instructions_found = false
