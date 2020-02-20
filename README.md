@@ -40,9 +40,15 @@ Then visit the cloned repository's settings page, and:
 
 Your new site will be visible at `https://{{your-username}}.github.io/{{repository-name}}`. If you've set up a CNAME on your user site, the URL will be different, but you're advanced enough to work that out yourself.
 
+You'll also need to add an `idea` label which will be used when creating new idea issues.
+
 ### Create a GitHub API token
 
-Visit the [Personal Access Tokens page](https://github.com/settings/tokens) on your GitHub account to create a token for accessing the API. Generate a new token. You'll need to allow the following permissions:
+Visit the [Personal Access Tokens page](https://github.com/settings/tokens) on your GitHub account to create a token for accessing the API.
+
+**Note:** you may want to create a new 'robot' GitHub account for this token. For example, the OpenPolitics Manifesto uses [openpolitics-bot](https://github.com/openpolitics-bot).
+
+Generate a new token. You'll need to allow the following permissions:
 
 * public_repo
 * repo:status
@@ -56,6 +62,8 @@ Keep hold of the generated token - you'll need it in a minute.
 Visit the [Developer applications page](https://github.com/settings/developers) on your GitHub account to set up user login via GitHub. Register a new application; in the homepage and callback URLs enter the URL of the application you are about to deploy. Yes, that's slightly tricky. It will be something like `https://your-unique-groupthink-app-name.herokuapp.com`. Make up the `your-unique-groupthink-app-name` part. The name of your project will probably do.
 
 Again, keep hold of the client ID and secret. You'll need them in the next step.
+
+**Note:** if you created the manifesto repository in a GitHub organisation, the OAuth application should be owned by the same organisation. If not, users in the organisation will not be able to create new proposals unless they manually grant access to the organisation when they log in. 
 
 ### Deploy the code to Heroku
 
@@ -77,6 +85,8 @@ Leave the rest of the settings on default except for "which events would you lik
 
 * Issue comment
 * Pull request
+
+**Note:** *Pushes* is selected by default, so make sure you uncheck it.
 
 Save the webhook. It will probably complain with the test payload, but should work for the real thing. [We'll fix this soon](https://github.com/openpolitics/groupthink/issues/44). [We might even be able to automate it](https://github.com/openpolitics/groupthink/issues/43).
 
