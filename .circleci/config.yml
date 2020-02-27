@@ -23,6 +23,7 @@ jobs:
           BLOCK_THRESHOLD: -1
           PROJECT_URL: https://openpolitics.org.uk/manifesto
           PROJECT_NAME: The OpenPolitics Manifesto
+          RAILS_ENV: test
     working_directory: ~/repo
     steps:
       - checkout
