@@ -14,6 +14,17 @@ rescue Octokit::NotFound
 end
 
 unless Rails.env.test?
+  # Enable issues and other repo-wide settings
+  repo_options = {
+    delete_branch_on_merge: true,
+    has_issues: true,
+    allow_squash_merge: false,
+    allow_rebase_merge: false,
+    has_wiki: false,
+    has_projects: false,
+  }
+  Octokit.edit_repository(ENV.fetch("GITHUB_REPO"), repo_options)
+  # Set up labels
   create_label_if_missing(label: "groupthink::proposal", colour: "d4c5f9", description: "Proposals to be voted on in Groupthink")
   create_label_if_missing(label: "groupthink::idea", colour: "fbca04", description: "Ideas for future proposals")
 end
