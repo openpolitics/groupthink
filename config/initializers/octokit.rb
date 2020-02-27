@@ -14,6 +14,25 @@ rescue Octokit::NotFound
 end
 
 unless Rails.env.test?
+  # Configure GitHub webhook automatically
+  begin
+    webhook_url = "#{ENV.fetch("SITE_URL")}/webhook"
+    Octokit.create_hook(
+      ENV.fetch("GITHUB_REPO"),
+      "web",
+      {
+        url: webhook_url,
+        content_type: "form",
+      },
+      {
+        events: ["issue_comment", "pull_request"],
+        active: true,
+      }
+    )
+  rescue Octokit::UnprocessableEntity => e
+    # The hook already exists, no problem
+    nil
+  end
   create_label_if_missing(label: "groupthink::proposal", colour: "d4c5f9", description: "Proposals to be voted on in Groupthink")
   create_label_if_missing(label: "groupthink::idea", colour: "fbca04", description: "Ideas for future proposals")
 end
