@@ -40,8 +40,6 @@ Then visit the cloned repository's settings page, and:
 
 Your new site will be visible at `https://{{your-username}}.github.io/{{repository-name}}`. If you've set up a CNAME on your user site, the URL will be different, but you're advanced enough to work that out yourself.
 
-You'll also need to add an `idea` label which will be used when creating new idea issues.
-
 ### Create a GitHub API token
 
 Visit the [Personal Access Tokens page](https://github.com/settings/tokens) on your GitHub account to create a token for accessing the API.
@@ -63,7 +61,7 @@ Visit the [Developer applications page](https://github.com/settings/developers) 
 
 Again, keep hold of the client ID and secret. You'll need them in the next step.
 
-**Note:** if you created the manifesto repository in a GitHub organisation, the OAuth application should be owned by the same organisation. If not, users in the organisation will not be able to create new proposals unless they manually grant access to the organisation when they log in. 
+**Note:** if you created the manifesto repository in a GitHub organisation, the OAuth application should be owned by the same organisation. If not, users in the organisation will not be able to create new proposals unless they manually grant access to the organisation when they log in.
 
 ### Deploy the code to Heroku
 

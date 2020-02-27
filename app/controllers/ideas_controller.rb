@@ -5,7 +5,7 @@
 #
 class IdeasController < ApplicationController
   def index
-    @ideas = Octokit.issues(ENV.fetch("GITHUB_REPO"), labels: "idea")
+    @ideas = Octokit.issues(ENV.fetch("GITHUB_REPO"), labels: "groupthink::idea")
   end
 
   def show
