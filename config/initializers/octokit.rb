@@ -13,5 +13,7 @@ rescue Octokit::NotFound
   Octokit.add_label(ENV.fetch("GITHUB_REPO"), label, colour, description: description)
 end
 
-create_label_if_missing(label: "groupthink::proposal", colour: "d4c5f9", description: "Proposals to be voted on in Groupthink")
-create_label_if_missing(label: "groupthink::idea", colour: "fbca04", description: "Ideas for future proposals")
+unless Rails.env.test?
+  create_label_if_missing(label: "groupthink::proposal", colour: "d4c5f9", description: "Proposals to be voted on in Groupthink")
+  create_label_if_missing(label: "groupthink::idea", colour: "fbca04", description: "Ideas for future proposals")
+end
