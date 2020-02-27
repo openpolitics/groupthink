@@ -9,7 +9,7 @@ It has two main functions:
 
 1. Provide a user-friendly interface to make changes (using pull requests) to GitHub-hosted Jekyll websites, using Markdown.
 
-2. Monitor discussion in those pull requests, and layer on a voting system to determine what should be merged in. Voting is done using special symbols in pull requests, which are counted by the app. Status is set using the GitHub commit status API.
+1. Monitor discussion in those pull requests, and layer on a voting system to determine what should be merged in. Voting is done using special symbols in pull requests, which are counted by the app. Status is set using the GitHub commit status API.
 
 The system was originally implemented for the collaborative manifesto project at https://openpolitics.org.uk/manifesto. The canonical instance of this app for that project is https://votebot.openpolitics.org.uk
 
