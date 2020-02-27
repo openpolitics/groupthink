@@ -14,6 +14,25 @@ rescue Octokit::NotFound
 end
 
 unless Rails.env.test?
+  # Configure GitHub webhook automatically
+  begin
+    webhook_url = "#{ENV.fetch("SITE_URL")}/webhook"
+    Octokit.create_hook(
+      ENV.fetch("GITHUB_REPO"),
+      "web",
+      {
+        url: webhook_url,
+        content_type: "form",
+      },
+      {
+        events: ["issue_comment", "pull_request"],
+        active: true,
+      }
+    )
+  rescue Octokit::UnprocessableEntity => e
+    # The hook already exists, no problem
+    nil
+  end
   # Enable issues and other repo-wide settings
   repo_options = {
     delete_branch_on_merge: true,

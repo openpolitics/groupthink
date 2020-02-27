@@ -73,21 +73,6 @@ Then, enter all the relevant details. Use the same app name you did in the step 
 
 Enter the personal access token, client ID, and secret from the previous stage. Enter the repository path of your cloned template site - it should be something like `your-username/repository-name`.
 
-### Set up the GitHub webhook
-
-Go back to the GitHub setting tab for your repository and click on `webhooks`, then `Add a webhook`.
-
-Enter the Payload URL `https://your-unique-groupthink-app-name.herokuapp.com/webhook`, changing the root URL to be the one you're using for your deployed groupthink.
-
-Leave the rest of the settings on default except for "which events would you like to trigger this webhook?". Select "Let me select individual events" and then choose:
-
-* Issue comment
-* Pull request
-
-**Note:** *Pushes* is selected by default, so make sure you uncheck it.
-
-Save the webhook. It will probably complain with the test payload, but should work for the real thing. [We'll fix this soon](https://github.com/openpolitics/groupthink/issues/44). [We might even be able to automate it](https://github.com/openpolitics/groupthink/issues/43).
-
 ### Configure the editor link on your site
 
 Go to the `_config.yml` file in your site's GitHub repository, and add the URL of your deployed Heroku app to the `groupthink_url` setting. It will be the same as what you put in above for the GitHub application homepage, i.e. `https://your-unique-groupthink-app-name.herokuapp.com`
