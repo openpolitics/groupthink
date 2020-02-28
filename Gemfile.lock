@@ -181,7 +181,7 @@ GEM
     haml (5.1.2)
       temple (>= 0.8.0)
       tilt
-    hashdiff (1.0.0)
+    hashdiff (1.0.1)
     hashie (3.6.0)
     htmlentities (4.3.4)
     i18n (1.8.2)
