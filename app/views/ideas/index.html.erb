@@ -1,5 +1,5 @@
 <div class='pull-right'>
-  <a href='https://github.com/<%= ENV.fetch("GITHUB_REPO") %>/issues/new?labels=groupthink::idea' class='btn btn-primary' style='margin: 25px 0px'>
+  <a href='https://github.com/<%= ENV.fetch("GITHUB_REPO") %>/issues/new?labels=<%= IDEA_LABEL %>' class='btn btn-primary' style='margin: 25px 0px'>
     <%= fa_icon 'plus' %>
     Suggest a new idea
   </a>

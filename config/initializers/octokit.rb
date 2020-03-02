@@ -13,6 +13,9 @@ rescue Octokit::NotFound
   Octokit.add_label(ENV.fetch("GITHUB_REPO"), label, colour, description: description)
 end
 
+IDEA_LABEL = "groupthink::idea"
+PROPOSAL_LABEL = "groupthink::proposal"
+
 unless Rails.env.test?
   # Configure GitHub webhook automatically
   begin
@@ -44,6 +47,6 @@ unless Rails.env.test?
   }
   Octokit.edit_repository(ENV.fetch("GITHUB_REPO"), repo_options)
   # Set up labels
-  create_label_if_missing(label: "groupthink::proposal", colour: "d4c5f9", description: "Proposals to be voted on in Groupthink")
-  create_label_if_missing(label: "groupthink::idea", colour: "fbca04", description: "Ideas for future proposals")
+  create_label_if_missing(label: PROPOSAL_LABEL, colour: "d4c5f9", description: "Proposals to be voted on in Groupthink")
+  create_label_if_missing(label: IDEA_LABEL, colour: "fbca04", description: "Ideas for future proposals")
 end
