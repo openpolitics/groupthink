@@ -164,16 +164,15 @@ class EditController < ApplicationController
     end
 
     def open_pr(head, base, title, description)
-      pr = github.create_pull_request(
-        original_repo_path, base, head, title, description,
-        labels: ["groupthink::proposal"]
-      )
+      pr = github.create_pull_request(original_repo_path, base, head, title, description)
       Proposal.find_or_create_by!(
         number: pr.number,
         opened_at: Time.zone.now,
         title: title,
         proposer: @current_user
       )
+      # Set PR label directly using admin as other users might not be able to
+      Octokit.add_issue_labels(original_repo_path, pr.number, [PROPOSAL_LABEL])
     end
 
     def commit_file(repo, name, content, message, base_sha, branch_name)
