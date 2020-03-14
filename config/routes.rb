@@ -1,10 +1,8 @@
 # frozen_string_literal: true
-require 'sidekiq/web'
 
 Rails.application.routes.draw do
   authenticate :user, lambda { |u| u.admin? } do
     mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
-    mount Sidekiq::Web => '/sidekiq'
   end
 
   resources :users

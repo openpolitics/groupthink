@@ -33,6 +33,9 @@ RSpec:
 Layout/ClassStructure:
   Enabled: true
 
+Layout/LineLength:
+  Max: 100
+
 Metrics:
   Enabled: true
 
@@ -40,9 +43,6 @@ Metrics/BlockLength:
   Exclude:
     - 'spec/**/*.rb'
     - 'Guardfile'
-
-Metrics/LineLength:
-  Max: 100
 
 Performance/CaseWhenSplat:
   Enabled: true

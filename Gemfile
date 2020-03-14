@@ -60,7 +60,7 @@ gem "kaminari"
 # Custom application configuration
 gem "config"
 
-gem "sidekiq"
+gem "sucker_punch", "~> 2.0"
 
 # Postgres in production for Heroku
 group :production do
