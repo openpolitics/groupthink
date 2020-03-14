@@ -14,5 +14,4 @@ class ApplicationController < ActionController::Base
     def user_github_connection
       Octokit::Client.new(access_token: session[:github_token])
     end
-
 end
