@@ -40,8 +40,8 @@ class IdeasController < ApplicationController
   end
 
   def comment
-    user_github_connection.add_comment(ENV.fetch("GITHUB_REPO"), @idea['number'], params[:comment])
-    redirect_to idea_path(@idea['number'])
+    user_github_connection.add_comment(ENV.fetch("GITHUB_REPO"), @idea["number"], params[:comment])
+    redirect_to idea_path(@idea["number"])
   end
 
   private
