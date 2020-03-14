@@ -23,7 +23,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Install sqlite3
-        run: sudo apt-get install libsqlite3-dev
+        run: |
+          sudo apt update
+          sudo apt install libsqlite3-dev
       - uses: eregon/use-ruby-action@master
         with:
           ruby-version: "2.7"
