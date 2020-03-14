@@ -15,6 +15,26 @@
       <%= render partial: "shared/#{x[0]}", locals: x[1] %>
     <% end %>
 
+    <div style="clear: both">
+      <% if signed_in? %>
+        <div class='panel panel-primary' id="vote">
+          <div class="panel-heading">
+            Comment:
+          </div>
+          <div class='panel-body'>
+            <%= form_tag comment_idea_path(@idea['number']) do %>
+              <div class="form-group">
+                <%= text_area_tag :comment, "", {rows: 5, class: "form-control"} %>
+              </div>
+              <button type="submit" class="btn btn-primary">Submit</button>
+            <% end %>
+          </div>
+        </div>
+      <% else %>
+        <%= link_to ("Sign in to comment "+fa_icon("sign-in")).html_safe, user_github_omniauth_authorize_path, method: :post, class: "btn btn-primary" %>
+      <% end %>
+    </div>
+
   </div>
 
   <div class='col-md-3'>

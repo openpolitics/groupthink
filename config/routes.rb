@@ -21,6 +21,9 @@ Rails.application.routes.draw do
   end
 
   resources :ideas do
+    member do
+      post :comment
+    end
   end
 
   post "webhook", to: "proposals#webhook", as: :webhook

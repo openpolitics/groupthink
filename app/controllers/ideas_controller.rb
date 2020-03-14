@@ -4,13 +4,14 @@
 # Displays lists of submitted ideas, and individual idea pages.
 #
 class IdeasController < ApplicationController
+  before_action :get_idea, except: [:index]
+  before_action :authenticate_user!, only: [:comment]
+
   def index
     @ideas = Octokit.issues(ENV.fetch("GITHUB_REPO"), labels: "groupthink::idea")
   end
 
   def show
-    @idea = Octokit.issue(ENV.fetch("GITHUB_REPO"), params[:id].to_i)
-    raise ActiveRecord::RecordNotFound if @idea.nil?
     @activity = []
     @author = User.find_or_create_by!(login: @idea.user.login)
     # Add original description
@@ -37,4 +38,16 @@ class IdeasController < ApplicationController
     # Sort by time
     @activity.sort_by! { |a| a[1][:time] }
   end
+
+  def comment
+    github = Octokit::Client.new(access_token: session[:github_token])
+    github.add_comment(ENV.fetch("GITHUB_REPO"), @idea['number'], params[:comment])
+    redirect_to idea_path(@idea['number'])
+  end
+
+  private
+    def get_idea
+      @idea = Octokit.issue(ENV.fetch("GITHUB_REPO"), params[:id].to_i)
+      raise ActiveRecord::RecordNotFound if @idea.nil?
+    end
 end
