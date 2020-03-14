@@ -10,4 +10,9 @@ class ApplicationController < ActionController::Base
     def not_found_error
       render file: "public/404", status: :not_found
     end
+
+    def user_github_connection
+      Octokit::Client.new(access_token: session[:github_token])
+    end
+
 end

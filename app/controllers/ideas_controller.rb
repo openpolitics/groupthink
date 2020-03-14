@@ -40,8 +40,7 @@ class IdeasController < ApplicationController
   end
 
   def comment
-    github = Octokit::Client.new(access_token: session[:github_token])
-    github.add_comment(ENV.fetch("GITHUB_REPO"), @idea['number'], params[:comment])
+    user_github_connection.add_comment(ENV.fetch("GITHUB_REPO"), @idea['number'], params[:comment])
     redirect_to idea_path(@idea['number'])
   end
 

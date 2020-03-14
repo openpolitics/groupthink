@@ -38,7 +38,6 @@ class ProposalsController < ApplicationController
   end
 
   def comment
-    github = Octokit::Client.new(access_token: session[:github_token])
     comment = params[:comment]
     case params[:vote]
     when "yes"
@@ -50,7 +49,7 @@ class ProposalsController < ApplicationController
     when "block"
       comment += "\n\nVote: 🚫"
     end
-    github.add_comment(ENV.fetch("GITHUB_REPO"), @proposal.number, comment)
+    user_github_connection.add_comment(ENV.fetch("GITHUB_REPO"), @proposal.number, comment)
     redirect_to @proposal
   end
 
