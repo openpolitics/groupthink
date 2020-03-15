@@ -2,7 +2,7 @@
 
 require "rails_helper"
 
-RSpec.describe "edit/index.html.erb", type: :view do
+RSpec.describe "users/sessions/new.html.erb", type: :view do
   include Devise::Test::ControllerHelpers
 
   context "when logged out" do
