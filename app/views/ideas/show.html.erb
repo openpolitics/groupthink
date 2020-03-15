@@ -31,7 +31,7 @@
           </div>
         </div>
       <% else %>
-        <%= link_to ("Sign in to comment "+fa_icon("sign-in")).html_safe, user_github_omniauth_authorize_path, method: :post, class: "btn btn-primary" %>
+        <%= link_to ("#{t(:sign_in)} to comment "+fa_icon("sign-in")).html_safe, new_user_session_path, class: "btn btn-primary" %>
       <% end %>
     </div>
 

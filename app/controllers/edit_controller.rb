@@ -4,14 +4,11 @@
 # Allow users to propose new changes.
 #
 class EditController < ApplicationController
-  before_action :get_parameters, except: :index
-  before_action :check_logged_in, except: :index
+  before_action :get_parameters
+  before_action :check_logged_in
 
   extend Memoist
   GITHUB_REPO_REGEX = /github.com[:\/]([^\/]*)\/([^\.]*)/
-
-  def index
-  end
 
   def new
     @content = ""
@@ -60,8 +57,7 @@ class EditController < ApplicationController
   private
     def check_logged_in
       unless user_signed_in?
-        session[:original_path] = request.path
-        redirect_to action: :index
+        redirect_to new_user_session_path
       end
     end
 

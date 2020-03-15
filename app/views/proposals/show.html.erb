@@ -92,8 +92,8 @@
     <% if !signed_in? %>
       <div>
         <p>
-          <%= link_to ("Sign in to comment and vote "+fa_icon("sign-in")).html_safe,
-                user_github_omniauth_authorize_path, method: :post, class: 'btn btn-primary btn-block'
+          <%= link_to ("#{t(:sign_in)} to comment and vote "+fa_icon("sign-in")).html_safe,
+                new_user_session_path, class: 'btn btn-primary btn-block'
           %>
         </p>
       </div>
