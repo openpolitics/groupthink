@@ -17,7 +17,7 @@ class ApplicationController < ActionController::Base
     end
 
     def store_current_location
-      if !signed_in? && is_navigational_format?
+      if is_navigational_format?
         store_location_for(:user, request.url)
       end
     end
