@@ -21,13 +21,13 @@
 
 en:
   toggle_navigation: Toggle navigation
-  sign_in: Sign in with GitHub
+  sign_in: Sign in
   sign_out: Sign out
   submit_changes: Submit changes
   return: Return to site
   view: View your proposal
   view_all: View all proposals
-  signed_out_site_intro: To use this editor you need to log in with a free GitHub account. GitHub is a popular code-sharing site which hosts the content you want to edit.
+  signed_out_site_intro: To contribute you need to log in with a free GitHub account. GitHub is a popular code-sharing site which hosts the site content.
   signed_in_site_intro: There is no way at the moment to explore github content here. Please go to the project you want to edit on GitHub and follow a link to the editor. Thanks!
   cla: This project has a CLA (Contributor License Agreement). You may need to agree to it before your change can be accepted, if you haven't already.
   sign_cla: Accept CLA
