@@ -481,7 +481,7 @@ DEPENDENCIES
   letter_opener
   listen (~> 3.2)
   memoist
-  octokit (~> 4.17)
+  octokit (~> 4.18)
   omniauth-github
   omniauth-rails_csrf_protection (~> 0.1)
   paper_trail
