@@ -14,7 +14,7 @@ class User < ApplicationRecord
   has_many :interactions, dependent: :destroy
   has_many :participating, through: :interactions, source: :proposal
 
-  validates :login, presence: true, uniqueness: true
+  validates :login, presence: true, uniqueness: { scope: :provider }
   validates :avatar_url, presence: true
 
   before_validation :load_from_github, on: :create
