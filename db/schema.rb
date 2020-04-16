@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_09_09_205828) do
+ActiveRecord::Schema.define(version: 2020_04_16_214519) do
 
   create_table "interactions", force: :cascade do |t|
     t.integer "user_id", null: false
@@ -30,6 +30,7 @@ ActiveRecord::Schema.define(version: 2019_09_09_205828) do
     t.datetime "opened_at", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["number"], name: "index_proposals_on_number", unique: true
     t.index ["proposer_id"], name: "index_proposals_on_proposer_id"
   end
 
@@ -45,6 +46,7 @@ ActiveRecord::Schema.define(version: 2019_09_09_205828) do
     t.boolean "notify_new", default: true
     t.boolean "voter", default: false, null: false
     t.integer "role"
+    t.index ["login", "provider"], name: "index_users_on_login_and_provider", unique: true
   end
 
   create_table "versions", force: :cascade do |t|
