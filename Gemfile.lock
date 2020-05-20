@@ -368,7 +368,7 @@ GEM
       rexml
       ruby-progressbar (~> 1.7)
       unicode-display_width (>= 1.4.0, < 2.0)
-    rubocop-i18n (2.0.1)
+    rubocop-i18n (2.0.2)
       rubocop (~> 0.51)
     rubocop-performance (1.5.2)
       rubocop (>= 0.71.0)
