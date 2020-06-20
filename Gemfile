@@ -10,7 +10,7 @@ gem "rails", "~> 6.0"
 gem "puma", "~> 4.3"
 # Use SCSS for stylesheets
 gem "sassc-rails", "~> 2.1"
-gem "sassc", "~> 2.0"
+gem "sassc", "~> 2.4"
 gem "sprockets", "< 5"
 # Use Uglifier as compressor for JavaScript assets
 gem "uglifier", "~> 4.2"

@@ -388,9 +388,8 @@ GEM
       rubocop (>= 0.68.1)
     ruby-progressbar (1.10.1)
     safe_yaml (1.0.5)
-    sassc (2.0.1)
+    sassc (2.4.0)
       ffi (~> 1.9)
-      rake
     sassc-rails (2.1.2)
       railties (>= 4.0.0)
       sassc (>= 2.0)
@@ -504,7 +503,7 @@ DEPENDENCIES
   rubocop-rails
   rubocop-rails_config
   rubocop-rspec
-  sassc (~> 2.0)
+  sassc (~> 2.4)
   sassc-rails (~> 2.1)
   simplecov
   simplecov-lcov
