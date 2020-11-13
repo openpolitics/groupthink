@@ -157,7 +157,7 @@ GEM
     font-awesome-rails (4.7.0.5)
       railties (>= 3.2, < 6.1)
     formatador (0.2.5)
-    github-markup (3.0.4)
+    github-markup (3.0.5)
     globalid (0.4.2)
       activesupport (>= 4.2.0)
     guard (2.16.2)
