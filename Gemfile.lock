@@ -83,7 +83,8 @@ GEM
     config (2.2.3)
       deep_merge (~> 1.2, >= 1.2.1)
       dry-validation (~> 1.0, >= 1.0.0)
-    crack (0.4.4)
+    crack (0.4.5)
+      rexml
     crass (1.0.6)
     database_cleaner (1.8.5)
     deep_merge (1.2.1)
