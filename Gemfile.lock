@@ -157,7 +157,7 @@ GEM
       faraday-net_http (~> 1.0)
       multipart-post (>= 1.2, < 3)
       ruby2_keywords
-    faraday-net_http (1.0.0)
+    faraday-net_http (1.0.1)
     ffi (1.14.2)
     font-awesome-rails (4.7.0.6)
       railties (>= 3.2, < 6.2)
