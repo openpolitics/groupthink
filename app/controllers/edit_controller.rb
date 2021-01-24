@@ -49,7 +49,7 @@ class EditController < ApplicationController
     pull_from = forked ? "#{@current_user.login}:#{new_branch}" : branch_name
     @pr = open_pr(pull_from, @branch, @summary, @description)
     # Check for CLA
-    @cla_url = "https://www.clahub.com/agreements/#{original_repo_path}"
+    @cla_url = "#{ENV.fetch("SITE_URL")}/cla.html"
     r = Faraday.get @cla_url
     @has_cla = (r.status == 200)
   end
