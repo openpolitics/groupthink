@@ -11,21 +11,22 @@ inherit_gem:
     - config/rails.yml
 
 AllCops:
-  TargetRubyVersion: 2.6
+  NewCops: enable
+  TargetRubyVersion: 2.7
 
-GetText:
+I18n/GetText:
   Enabled: false
+
+I18n/RailsI18n:
+  Enabled: true
+  Exclude:
+    - 'spec/**/*.rb'
 
 Rails:
   Enabled: true
 
 Rails/SaveBang:
   Enabled: true
-
-RailsI18n:
-  Enabled: true
-  Exclude:
-    - 'spec/**/*.rb'
 
 RSpec:
   Enabled: true
