@@ -20,7 +20,7 @@ FactoryBot.define do
     end
   end
 
-  factory :user_with_github_data, class: User do
+  factory :user_with_github_data, class: "User" do
     login { Faker::Internet.user_name }
     provider { "github" }
   end
