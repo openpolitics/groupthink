@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_04_16_214519) do
+ActiveRecord::Schema.define(version: 2021_02_07_171429) do
 
   create_table "interactions", force: :cascade do |t|
     t.integer "user_id", null: false
@@ -47,6 +47,7 @@ ActiveRecord::Schema.define(version: 2020_04_16_214519) do
     t.boolean "voter", default: false, null: false
     t.integer "role"
     t.index ["login", "provider"], name: "index_users_on_login_and_provider", unique: true
+    t.boolean "cla_accepted", default: false, null: false
   end
 
   create_table "versions", force: :cascade do |t|
