@@ -13,6 +13,22 @@ It has two main functions:
 
 The system was originally implemented for the collaborative manifesto project at https://openpolitics.org.uk/manifesto. The canonical instance of this app for that project is https://votebot.openpolitics.org.uk
 
+## Development
+
+### Dependencies
+
+- [Ruby](https://www.ruby-lang.org/en/documentation/installation/) - check the required version in [Gemfile](./Gemfile)
+- Others tbc
+
+### Create and setup the database
+
+Run the following commands to create and setup the database.
+
+```
+bundle exec rake db:create
+bundle exec rake db:setup
+```
+
 ## Usage
 
 ... to be written ...

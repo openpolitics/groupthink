@@ -13,7 +13,7 @@ rescue Octokit::NotFound
   Octokit.add_label(ENV.fetch("GITHUB_REPO"), label, colour, description: description)
 end
 
-unless Rails.env.test?
+unless Rails.env.test? || Rails.env.development?
   # Configure GitHub webhook automatically
   begin
     webhook_url = "#{ENV.fetch("SITE_URL")}/webhook"
