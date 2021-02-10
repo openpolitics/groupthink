@@ -162,8 +162,8 @@ GEM
       ruby2_keywords
     faraday-net_http (1.0.1)
     ffi (1.14.2)
-    font-awesome-rails (4.7.0.6)
-      railties (>= 3.2, < 6.2)
+    font-awesome-rails (4.7.0.7)
+      railties (>= 3.2, < 7)
     formatador (0.2.5)
     github-markup (3.0.5)
     globalid (0.4.2)
