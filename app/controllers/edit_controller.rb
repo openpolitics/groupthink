@@ -48,10 +48,8 @@ class EditController < ApplicationController
     # open PR
     pull_from = forked ? "#{@current_user.login}:#{new_branch}" : branch_name
     @pr = open_pr(pull_from, @branch, @summary, @description)
-    # Check for CLA
-    @cla_url = "#{ENV.fetch("SITE_URL")}/cla.html"
-    r = Faraday.get @cla_url
-    @has_cla = (r.status == 200)
+    # Does the proposer need to sign a CLA?
+    @proposer_needs_to_sign_cla = current_user.try(:needs_to_sign_cla?)
   end
 
   private

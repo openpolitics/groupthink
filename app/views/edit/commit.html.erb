@@ -1,24 +1,20 @@
-<div class="alert alert-success">
+<div class="form-group alert alert-success">
   <%= fa_icon 'check-circle' %>
   <%= t 'help.success_title' %>
 </div>
 
-<div>
+<div class="form-group">
   <p>
     <%= t 'help.success' %>
   </p>
-  <% if @has_cla %>
-    <p>
-      <%= t :cla %>
-    </p>
-    <p>
-      <%= link_to "#{t(:view_cla)}".html_safe, @cla_url, class: 'btn btn-primary' %>
-    </p>
-  <% end %>
 </div>
 
-<div>
+<div class="form-group">
   <%= link_to "#{fa_icon('globe')} #{t(:return)}".html_safe, @return_to, class: 'btn btn-primary' if @return_to %>
   <%= link_to "#{fa_icon('code-fork')} #{t(:view)}".html_safe, proposal_path(@pr), class: 'btn btn-default' %>
   <%= link_to "#{fa_icon('list')} #{t(:view_all)}".html_safe, proposals_path, class: 'btn btn-default' %>
 </div>
+
+<% if @proposer_needs_to_sign_cla %>
+  <%= render partial: 'shared/cla_warning', locals: { user: current_user } %>
+<% end %>

@@ -95,4 +95,8 @@ class User < ApplicationRecord
   def to_param
     login
   end
+
+  def needs_to_sign_cla?
+    ENV["CLA_URL"].present? && !cla_accepted
+  end
 end

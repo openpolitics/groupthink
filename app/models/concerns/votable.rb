@@ -43,6 +43,7 @@ module Votable
     unless closed?
       set_vote_build_status
       set_time_build_status
+      set_cla_build_status
     end
   end
 

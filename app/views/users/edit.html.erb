@@ -28,3 +28,32 @@
     </div>
   </div>
 <% end %>
+
+<% if @has_cla %>
+  <h2>Contributor License Agreement</h2>
+
+  <p>
+    <%= t :cla %>
+  </p>
+
+  <% if @user.needs_to_sign_cla? %>
+    <%= form_for @user, html: {class: "form-horizontal", style: 'clear: right'} do |f| %>
+      <%= hidden_field_tag "cla_accepted", true %>
+
+      <div class="form-group">
+        <div class="col-sm-offset-2 col-sm-10">
+          <%= link_to "#{t(:view_cla)}".html_safe, ENV.fetch("CLA_URL"), class: 'btn btn-default', target: :_blank, rel: 'noopener noreferrer' %>
+          <%= f.submit class: "btn btn-primary", value: t(:sign_cla) %>
+        </div>
+      </div>
+    <% end %>
+  <% else %>
+    <div class="col-sm-offset-2 col-sm-10">
+      <%= fa_icon 'check' %>
+      You have signed the <a href='<%= ENV.fetch("CLA_URL")%>' target='_blank' rel='noopener noreferrer'>contributor license agreement</a>.
+    </div>
+  <% end %>
+
+  <span style="clear: both">&nbsp;</span>
+
+<% end %>

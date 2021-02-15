@@ -63,6 +63,17 @@ module GithubPullRequest
     end
   end
 
+  def set_cla_build_status
+    status = "groupthink/cla"
+    if has_cla?
+      if proposer_needs_to_sign_cla?
+        set_build_status(:pending, I18n.t("build_status.cla.pending"), status)
+      else
+        set_build_status(:success, I18n.t("build_status.cla.accepted"), status)
+      end
+    end
+  end
+
   def merge_pr!
     Octokit.merge_pull_request(ENV.fetch("GITHUB_REPO"), number)
     true
