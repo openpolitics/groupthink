@@ -60,7 +60,7 @@ gem "kaminari"
 # Custom application configuration
 gem "config"
 
-gem "sucker_punch", "~> 2.0"
+gem "sucker_punch", "~> 3.0"
 
 # Postgres in production for Heroku
 group :production do
