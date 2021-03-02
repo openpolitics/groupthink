@@ -38,6 +38,12 @@
   </div>
 </div>
 
+<% if @proposer_needs_to_sign_cla %>
+  <div class='row'>
+    <%= render partial: 'shared/cla_warning', locals: { user: @proposal.proposer } %>
+  </div>
+<% end %>
+
 <hr/>
 
 <div class='row'>

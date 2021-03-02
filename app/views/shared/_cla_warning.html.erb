@@ -1,0 +1,17 @@
+<div class="form-group alert alert-warning">
+  <%= fa_icon 'exclamation-circle' %>
+  <%= t 'cla_title' %>
+</div>
+
+<div class="form-group">
+  <p>
+    <%= t 'cla' %>
+  </p>
+  <p>
+    Please <%= link_to 'edit your profile', edit_user_path(user) %> and accept <a href='<%= ENV.fetch("CLA_URL")%>' target='_blank' rel='noopener noreferrer'>the license agreement</a> to unblock your proposal.
+  </p>
+</div>
+
+<div class="form-group">
+  <%= link_to "#{fa_icon('cog lg')} #{t(:edit_profile)}".html_safe, edit_user_path(user), class: 'btn btn-primary' %>
+</div>

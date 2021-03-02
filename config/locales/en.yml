@@ -27,9 +27,12 @@ en:
   return: Return to site
   view: View your proposal
   view_all: View all proposals
+  edit_profile: Edit profile
   signed_out_site_intro: To contribute you need to log in with a free GitHub account. GitHub is a popular code-sharing site which hosts the site content.
   signed_in_site_intro: There is no way at the moment to explore github content here. Please go to the project you want to edit on GitHub and follow a link to the editor. Thanks!
-  cla: This project has a CLA (Contributor License Agreement). You may need to agree to it before your change can be accepted, if you haven't already.
+  cla_title: Your proposal is blocked until you accept the contributor license agreement.
+  cla: This manifesto has a Contributor License Agreement (CLA) which you must accept before any of your proposals can be included.
+  sign_cla: Accept CLA
   view_cla: View CLA
   help:
     edit: Make your changes in the editor below, then hit "Submit changes" at the bottom.
@@ -71,3 +74,6 @@ en:
       too_old: "The change has been open for more than %{max_age} days, and should be closed (age: %{age}d)."
       too_new: "The change has not yet been open for %{min_age} days (age: %{age}d)."
       success: "The change has been open long enough to be merged (age: %{age}d)."
+    cla:
+      pending: The contributor license agreement has not been accepted.
+      accepted: The contributor license agreement has been accepted.

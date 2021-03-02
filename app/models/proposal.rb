@@ -52,6 +52,14 @@ class Proposal < ApplicationRecord
     age < Rules.min_age
   end
 
+  def has_cla?
+    ENV["CLA_URL"].present?
+  end
+
+  def proposer_needs_to_sign_cla?
+    proposer.try(:needs_to_sign_cla?)
+  end
+
   def update_state!
     state = pr_closed? ? closed_state : open_state
     update!(state: state)
@@ -90,7 +98,7 @@ class Proposal < ApplicationRecord
     def open_state
       return nil if pr_closed?
       return "dead" if too_old?
-      return "blocked" if blocked?
+      return "blocked" if blocked? || proposer_needs_to_sign_cla?
       if passed?
         return too_new? ? "agreed" : "passed"
       end

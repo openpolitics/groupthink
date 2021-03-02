@@ -21,6 +21,7 @@ module UserAdmin
         field :role
         field :author
         field :voter
+        field :cla_accepted
       end
     end
   end

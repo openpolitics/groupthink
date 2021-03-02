@@ -20,6 +20,8 @@ class ProposalsController < ApplicationController
     # Get activity list
     presenter = ProposalPresenter.new(@proposal)
     @activity = presenter.activity_log
+    # Does the proposer need to sign a CLA?
+    @proposer_needs_to_sign_cla = current_user.try(:needs_to_sign_cla?) && @is_author
   end
 
   def webhook

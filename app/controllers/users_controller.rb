@@ -26,10 +26,16 @@ class UsersController < ApplicationController
   end
 
   def edit
+    @has_cla = ENV["CLA_URL"].present?
   end
 
   def update
-    @user.update!(user_params)
+    if params.has_key?(:cla_accepted)
+      accept_cla
+    else
+      @user.update!(user_params)
+    end
+
     redirect_to edit_user_path(@user)
   end
 
@@ -47,5 +53,13 @@ private
 
   def user_params
     params.require(:user).permit(:email, :notify_new)
+  end
+
+  def accept_cla
+    @user.update!(cla_accepted: true)
+
+    @user.proposed.each do |pr|
+      UpdateProposalJob.perform_later pr.number
+    end
   end
 end
