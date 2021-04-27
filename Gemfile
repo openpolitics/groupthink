@@ -34,7 +34,7 @@ gem "jbuilder", "~> 2.11"
 # gem 'capistrano-rails', group: :development
 
 # Github
-gem "octokit", "~> 4.20"
+gem "octokit", "~> 4.21"
 
 # Bug tracking with bugsnag
 gem "bugsnag"
