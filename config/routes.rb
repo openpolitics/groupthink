@@ -2,7 +2,7 @@
 
 Rails.application.routes.draw do
   authenticate :user, lambda { |u| u.admin? } do
-    mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
+    mount RailsAdmin::Engine => "/admin", as: "rails_admin"
   end
 
   resources :users
@@ -28,7 +28,7 @@ Rails.application.routes.draw do
 
   post "webhook", to: "proposals#webhook", as: :webhook
 
-  constraints(path: /[^\?]+/) do
+  constraints(path: /[^?]+/) do
     get "edit/:branch/*path", to: "edit#edit", format: false
     get "new/:branch", to: "edit#new", format: false
   end

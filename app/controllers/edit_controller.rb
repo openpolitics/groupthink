@@ -8,7 +8,7 @@ class EditController < ApplicationController
   before_action :check_logged_in
 
   extend Memoist
-  GITHUB_REPO_REGEX = /github.com[:\/]([^\/]*)\/([^\.]*)/
+  GITHUB_REPO_REGEX = /github.com[:\/]([^\/]*)\/([^.]*)/
 
   def new
     @content = ""
