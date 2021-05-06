@@ -42,6 +42,8 @@ Metrics:
 
 Metrics/BlockLength:
   Exclude:
+    - 'config/environments/*.rb'
+    - 'config/routes.rb'
     - 'spec/**/*.rb'
     - 'Guardfile'
 
