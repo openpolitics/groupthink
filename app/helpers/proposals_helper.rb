@@ -32,14 +32,14 @@ module ProposalsHelper
   end
 
   def link_usernames(str)
-    str.scan(/(\s|^|\>)@(\w+)/).each do |match|
+    str.scan(/(\s|^|>)@(\w+)/).each do |match|
       str = str.gsub "@#{match[1]}", "<a href='/users/#{match[1]}'>@#{match[1]}</a>"
     end
     str.html_safe
   end
 
   def link_proposals(str)
-    str.scan(/(\s|^|\>)#(\d+)/).each do |match|
+    str.scan(/(\s|^|>)#(\d+)/).each do |match|
       str = str.gsub "##{match[1]}", "<a href='/proposals/#{match[1]}'>##{match[1]}</a>"
     end
     str.html_safe

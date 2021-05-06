@@ -1,5 +1,6 @@
-RailsAdmin.config do |config|
+# frozen_string_literal: true
 
+RailsAdmin.config do |config|
   # == Devise ==
   config.authenticate_with do
     warden.authenticate! scope: :user
@@ -10,7 +11,7 @@ RailsAdmin.config do |config|
   config.authorize_with :cancancan
 
   # == PaperTrail ==
-  config.audit_with :paper_trail, 'User', 'PaperTrail::Version'
+  config.audit_with :paper_trail, "User", "PaperTrail::Version"
 
   config.included_models = [ User, Proposal ]
 

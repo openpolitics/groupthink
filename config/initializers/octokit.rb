@@ -8,7 +8,7 @@ Octokit.auto_paginate = true
 # Set up repository for use by Groupthink
 
 def create_label_if_missing(label:, colour:, description:)
-  Octokit.label(ENV.fetch("GITHUB_REPO"),label)
+  Octokit.label(ENV.fetch("GITHUB_REPO"), label)
 rescue Octokit::NotFound
   Octokit.add_label(ENV.fetch("GITHUB_REPO"), label, colour, description: description)
 end
@@ -29,7 +29,7 @@ unless Rails.env.test?
         active: true,
       }
     )
-  rescue Octokit::UnprocessableEntity => e
+  rescue Octokit::UnprocessableEntity
     # The hook already exists, no problem
     nil
   end
@@ -45,10 +45,13 @@ unless Rails.env.test?
     }
     Octokit.edit_repository(ENV.fetch("GITHUB_REPO"), repo_options)
     # Set up labels
-    create_label_if_missing(label: "groupthink::proposal", colour: "d4c5f9", description: "Proposals to be voted on in Groupthink")
-    create_label_if_missing(label: "groupthink::idea", colour: "fbca04", description: "Ideas for future proposals")
-  rescue Octokit::UnprocessableEntity => e
-    # We couldn't set the repo settings, but we don't want this to kill startup, so carry on regardless
+    create_label_if_missing(label: "groupthink::proposal", colour: "d4c5f9",
+description: "Proposals to be voted on in Groupthink")
+    create_label_if_missing(label: "groupthink::idea", colour: "fbca04",
+description: "Ideas for future proposals")
+  rescue Octokit::UnprocessableEntity
+    # We couldn't set the repo settings, but we don't want this to kill
+    # startup, so carry on regardless
     nil
   end
 end

@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 # Be sure to restart your server when you modify this file.
 #
 # This file contains migration options to ease your Rails 6.0 upgrade.
@@ -16,7 +17,8 @@
 # It's best enabled when your entire app is migrated and stable on 6.0.
 # Rails.application.config.action_dispatch.use_cookies_with_metadata = true
 
-# Change the return value of `ActionDispatch::Response#content_type` to Content-Type header without modification.
+# Change the return value of `ActionDispatch::Response#content_type` to Content-Type
+# header without modification.
 # Rails.application.config.action_dispatch.return_only_media_type_on_content_type = false
 
 # Return false instead of self when enqueuing is aborted from a callback.
@@ -27,14 +29,15 @@
 # Rails.application.config.active_storage.queues.purge    = :active_storage_purge
 
 # When assigning to a collection of attachments declared via `has_many_attached`, replace existing
-# attachments instead of appending. Use #attach to add new attachments without replacing existing ones.
+# attachments instead of appending. Use #attach to add new attachments without replacing
+# existing ones.
 # Rails.application.config.active_storage.replace_on_assign_to_many = true
 
 # Use ActionMailer::MailDeliveryJob for sending parameterized and normal mail.
 #
 # The default delivery jobs (ActionMailer::Parameterized::DeliveryJob, ActionMailer::DeliveryJob),
-# will be removed in Rails 6.1. This setting is not backwards compatible with earlier Rails versions.
-# If you send mail in the background, job workers need to have a copy of
+# will be removed in Rails 6.1. This setting is not backwards compatible with earlier Rails
+# versions. If you send mail in the background, job workers need to have a copy of
 # MailDeliveryJob to ensure all delivery jobs are processed properly.
 # Make sure your entire app is migrated and stable on 6.0 before using this setting.
 # Rails.application.config.action_mailer.delivery_job = "ActionMailer::MailDeliveryJob"

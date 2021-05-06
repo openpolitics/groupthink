@@ -8,7 +8,7 @@ Devise.setup do |config|
   # confirmation, reset password and unlock tokens in the database.
   # Devise will use the `secret_key_base` as its `secret_key`
   # by default. You can change it below and use your own secret key.
-  # config.secret_key = 'ebb3ffbf6631db7f56f11450046c3fef0b733a970ab032a77b3abbc8115c11c9d46b10db3e2c7a7530277fb3b0d758624909aa6f3322396fd37d5ff1f847a61a'
+  # config.secret_key = 'ebb3ffbf6631d...'
 
   # ==> Mailer Configuration
   # Configure the e-mail address which will be shown in Devise::Mailer,
@@ -110,7 +110,7 @@ Devise.setup do |config|
   config.stretches = Rails.env.test? ? 1 : 11
 
   # Set up a pepper to generate the hashed password.
-  # config.pepper = '59ee7a0e303f82db85f434aabb7a5a5063cfa79648b51fc7f566cfe6f4b021bce1ffc0fdea39b229df9a261f53dbaf50d0b30863ebd14e82b43d5e9ee1e67b02'
+  # config.pepper = '59ee7a0e303f82db85f43...'
 
   # Send a notification email when the user's password is changed
   # config.send_password_change_notification = false
@@ -249,7 +249,8 @@ Devise.setup do |config|
   # ==> OmniAuth
   # Add a new OmniAuth provider. Check the wiki for more information on setting
   # up on your models and hooks.
-  config.omniauth :github, ENV.fetch("GITHUB_APP_ID"), ENV.fetch("GITHUB_APP_SECRET"), scope: "user:email,public_repo"
+  config.omniauth :github, ENV.fetch("GITHUB_APP_ID"), ENV.fetch("GITHUB_APP_SECRET"),
+scope: "user:email,public_repo"
 
   # ==> Warden configuration
   # If you want to use other strategies, that are not supported by Devise, or

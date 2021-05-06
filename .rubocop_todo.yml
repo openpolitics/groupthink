@@ -44,6 +44,7 @@ Metrics/ParameterLists:
 
 Style/DocumentationMethod:
   Exclude:
+    - 'db/migrate/*.rb'
     - 'spec/**/*.rb'
     - 'app/mailers/proposals_mailer.rb'
     - 'app/presenters/proposal_presenter.rb'
@@ -64,7 +65,13 @@ Style/DocumentationMethod:
     - 'app/controllers/ideas_controller.rb'
     - 'app/helpers/proposals_helper.rb'
     - 'app/helpers/application_helper.rb'
+    - 'config/initializers/octokit.rb'
     - 'lib/tasks/update.rake'
+
+Style/Documentation:
+  Exclude:
+    - 'db/migrate/*.rb'
+    - 'config/application.rb'
 
 Rails/OutputSafety:
   Exclude:
