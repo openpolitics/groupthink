@@ -69,7 +69,8 @@ class User < ApplicationRecord
   end
 
   def update_role_from_github
-    p = Octokit.permission_level(ENV.fetch("GITHUB_REPO"), login).permission rescue nil
+    p = Octokit.permission_level(Rails.application.config.groupthink[:github_repo],
+login).permission rescue nil
     case p
     when "admin"
       self.role = :admin
@@ -80,12 +81,13 @@ class User < ApplicationRecord
 
   def update_author_status_from_github
     # TODO fix autopagination not working here: https://github.com/openpolitics/groupthink/issues/176
-    @authors ||= Octokit.contributors(ENV.fetch("GITHUB_REPO"), per_page: 100)
+    @authors ||= Octokit.contributors(Rails.application.config.groupthink[:github_repo],
+      per_page: 100)
     self.author = !@authors.find { |x| x.login == login }.nil?
   end
 
   def can_vote?
-    voter || ((ENV.fetch("ALL_AUTHORS_CAN_VOTE", false) == "true") && author)
+    voter || ((Rails.application.config.groupthink[:all_authors_can_vote] == "true") && author)
   end
 
   def vote(proposal)

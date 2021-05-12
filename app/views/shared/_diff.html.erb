@@ -6,7 +6,7 @@
       - <%= link_to time_ago_in_words(proposal.submitted_at)+" ago", proposal.url %>
       <span class='pull-right'>
         <% if @is_author %>
-          <%= link_to fa_icon("pencil") + " Edit", "https://github.com/#{proposal.repo}/edit/#{proposal.branch}/#{file[:filename]}?pr=/#{ENV.fetch("GITHUB_REPO")}/pull/#{proposal.number}", :class => "btn btn-default btn-xs" %>
+          <%= link_to fa_icon("pencil") + " Edit", "https://github.com/#{proposal.repo}/edit/#{proposal.branch}/#{file[:filename]}?pr=/#{Rails.application.config.groupthink[:github_repo]}/pull/#{proposal.number}", :class => "btn btn-default btn-xs" %>
         <% end %>
         <a role="button" data-toggle="collapse" data-parent="#accordion" href="#<%= id %>" aria-expanded="true" aria-controls="<%= id %>">
           <%= fa_icon 'chevron-down' %>

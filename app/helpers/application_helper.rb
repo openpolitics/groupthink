@@ -5,8 +5,7 @@
 #
 module ApplicationHelper
   def bootstrap_url
-    ENV.fetch("BOOTSTRAP_CSS_URL",
-      "//maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css")
+    Rails.application.config.groupthink[:bootstrap_css_url]
   end
 
   def new_session_path(_scope)

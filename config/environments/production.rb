@@ -60,7 +60,9 @@ Rails.application.configure do
   # config.active_job.queue_name_prefix = "groupthink_production"
 
   config.action_mailer.perform_caching = false
-  config.action_mailer.default_url_options = { host: ENV.fetch("SITE_URL").split("/").last }
+  config.action_mailer.default_url_options = {
+    host: Rails.application.config.groupthink[:site_url].split("/").last
+  }
 
   # Ignore bad email addresses and do not raise email delivery errors.
   # Set this to true and configure the email server for immediate delivery to raise delivery errors.
@@ -70,7 +72,7 @@ Rails.application.configure do
   config.action_mailer.smtp_settings = {
     address:              ENV.fetch("SMTP_SERVER", "smtp.sendgrid.net"),
     port:                 587,
-    domain:               ENV.fetch("EMAIL_DOMAIN"),
+    domain:               Rails.application.config.groupthink[:email_domain],
     user_name:            ENV.fetch("SMTP_USERNAME", ENV.fetch("SENDGRID_USERNAME")),
     password:             ENV.fetch("SMTP_PASSWORD", ENV.fetch("SENDGRID_PASSWORD")),
     authentication:       "plain",

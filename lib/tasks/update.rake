@@ -2,7 +2,9 @@
 
 def update_prs!
   Rails.logger.info "Updating proposals"
-  Octokit.pull_requests(ENV.fetch("GITHUB_REPO"), state: "all").each do |pr|
+  Octokit.pull_requests(
+    Rails.application.config.groupthink[:github_repo],
+    state: "all").each do |pr|
     Rails.logger.info " - #{pr["number"]}: #{pr["title"]}"
     pr = Proposal.find_or_create_by!(number: pr["number"].to_i)
     pr.update_from_github!
@@ -20,7 +22,7 @@ def update_users!
     user.save! if user.changed?
   end
   Rails.logger.info "Updating new authors from GitHub"
-  Octokit.contributors(ENV.fetch("GITHUB_REPO")).each do |author|
+  Octokit.contributors(Rails.application.config.groupthink[:github_repo]).each do |author|
     params = { login: author["login"] }
     unless User.find_by(params)
       Rails.logger.info " - #{author["login"]}"

@@ -2,6 +2,6 @@
 
 # @!visibility private
 class ApplicationMailer < ActionMailer::Base
-  default from: "no-reply@#{ENV.fetch("EMAIL_DOMAIN")}"
+  default from: "no-reply@#{Rails.application.config.groupthink[:email_domain]}"
   layout "mailer"
 end

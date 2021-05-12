@@ -22,5 +22,5 @@ The OpenPolitics Team
   P.S. You are receiving this email because you are a contributor to the OpenPolitics
   Manifesto. If you don't want to receive notifications like this in future,
   please update your email preferences on
-  <a href="<%= ENV.fetch("SITE_URL") %>/users/<%= @recipient.login %>/edit">your settings page</a>.
+  <a href="<%= Rails.application.config.groupthink[:site_url] %>/users/<%= @recipient.login %>/edit">your settings page</a>.
 </p>

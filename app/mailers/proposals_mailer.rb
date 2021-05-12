@@ -5,7 +5,7 @@
 #
 class ProposalsMailer < ApplicationMailer
   def new_proposal(recipient, proposal)
-    default_url_options[:host] = ENV.fetch("SITE_URL")
+    default_url_options[:host] = Rails.application.config.groupthink[:site_url]
     @recipient = recipient
     @proposal = proposal
     mail to: recipient.email, subject: t("proposals_mailer.new.subject")

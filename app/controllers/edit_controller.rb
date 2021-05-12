@@ -49,7 +49,7 @@ class EditController < ApplicationController
     pull_from = forked ? "#{@current_user.login}:#{new_branch}" : branch_name
     @pr = open_pr(pull_from, @branch, @summary, @description)
     # Check for CLA
-    @cla_url = "#{ENV.fetch("SITE_URL")}/cla.html"
+    @cla_url = "#{Rails.application.config.groupthink[:site_url]}/cla.html"
     r = Faraday.get @cla_url
     @has_cla = (r.status == 200)
   end
@@ -78,11 +78,11 @@ class EditController < ApplicationController
     end
 
     def original_repo_path
-      ENV.fetch("GITHUB_REPO")
+      Rails.application.config.groupthink[:github_repo]
     end
 
     def user_repo_path
-      repo_name = ENV.fetch("GITHUB_REPO").split("/").last
+      repo_name = Rails.application.config.groupthink[:github_repo].split("/").last
       "#{current_user.login}/#{repo_name}"
     end
 
