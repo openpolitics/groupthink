@@ -34,7 +34,7 @@ gem "jbuilder", "~> 2.11"
 # gem 'capistrano-rails', group: :development
 
 group :development, :test do
-  gem 'dotenv-rails', require: 'dotenv/rails-now'
+  gem "dotenv-rails", require: "dotenv/rails-now"
 end
 
 # Custom application configuration
