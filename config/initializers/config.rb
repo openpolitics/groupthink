@@ -8,12 +8,15 @@ Config.setup do |config|
   config.env_converter = :downcase
   # config.env_parse_values = true
 
-  # Validate presence and type of specific config values. Check https://github.com/dry-rb/dry-validation for details.
-  #
-  # config.schema do
-  #   required(:name).filled
-  #   required(:age).maybe(:int?)
-  #   required(:email).filled(format?: EMAIL_REGEX)
-  # end
+  # Validate presence and type of specific config values.
+  # Check https://github.com/dry-rb/dry-validation for details.
+  config.schema do
+    required(:max_age)
+    required(:min_age)
+    required(:pass_threshold)
+    required(:yes_weight)
+    required(:no_weight)
+    required(:block_weight)
+  end
 
 end
