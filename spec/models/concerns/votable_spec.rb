@@ -30,7 +30,7 @@ RSpec.describe Votable, type: :model do
       GITHUB_REPO: "example/repo"
     }
     ClimateControl.modify env do
-      Rules.reload!
+      Settings.reload!
       example.run
     end
   end

@@ -45,11 +45,11 @@ class Proposal < ApplicationRecord
   end
 
   def too_old?
-    age >= Rules.max_age
+    age >= Settings.max_age
   end
 
   def too_new?
-    age < Rules.min_age
+    age < Settings.min_age
   end
 
   def update_state!
