@@ -17,6 +17,7 @@ Config.setup do |config|
     required(:yes_weight)
     required(:no_weight)
     required(:block_weight)
+    required(:block_threshold)
   end
 
 end
