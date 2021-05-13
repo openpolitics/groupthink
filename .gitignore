@@ -28,3 +28,7 @@ spec/examples.txt
 doc
 .vscode
 dump.rdb
+
+config/settings.local.yml
+config/settings/*.local.yml
+config/environments/*.local.yml
