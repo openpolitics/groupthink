@@ -1,10 +1,11 @@
 # frozen_string_literal: true
+
 Dotenv.load!
 
 Config.setup do |config|
-  config.const_name = 'Settings'
+  config.const_name = "Settings"
   config.use_env = true
-  config.env_prefix = ''
+  config.env_prefix = ""
   config.env_converter = :downcase
   # config.env_parse_values = true
 
@@ -19,5 +20,4 @@ Config.setup do |config|
     required(:block_weight)
     required(:block_threshold)
   end
-
 end
