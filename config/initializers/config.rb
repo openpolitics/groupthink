@@ -1,7 +1,4 @@
 # frozen_string_literal: true
-
-Dotenv.load!
-
 Config.setup do |config|
   config.const_name = "Settings"
   config.use_env = true
