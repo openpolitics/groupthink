@@ -104,7 +104,6 @@
   "addons": [
     "heroku-postgresql",
     "scheduler",
-    "heroku-redis:hobby-dev",
     "sendgrid:starter",
     "bugsnag:tauron2"
   ],
