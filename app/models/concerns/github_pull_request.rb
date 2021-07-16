@@ -9,7 +9,7 @@ module GithubPullRequest
   include GithubIssue
 
   def github_commits
-    Octokit.pull_request_commits(ENV.fetch("GITHUB_REPO"), number)
+    Octokit.pull_request_commits(Rails.application.config.groupthink[:github_repo], number)
   end
 
   def description
@@ -22,7 +22,7 @@ module GithubPullRequest
 
   def diff(sha = nil)
     sha ||= head_sha
-    Octokit.compare(ENV.fetch("GITHUB_REPO"), base_sha, sha).files
+    Octokit.compare(Rails.application.config.groupthink[:github_repo], base_sha, sha).files
   end
 
   def repo
@@ -34,7 +34,7 @@ module GithubPullRequest
   end
 
   def url
-    "https://github.com/#{ENV.fetch("GITHUB_REPO")}/pull/#{number}"
+    "https://github.com/#{Rails.application.config.groupthink[:github_repo]}/pull/#{number}"
   end
 
   def set_vote_build_status
@@ -64,7 +64,7 @@ module GithubPullRequest
   end
 
   def merge_pr!
-    Octokit.merge_pull_request(ENV.fetch("GITHUB_REPO"), number)
+    Octokit.merge_pull_request(Rails.application.config.groupthink[:github_repo], number)
     true
   rescue Octokit::MethodNotAllowed
     # PR couldn't be merged
@@ -73,7 +73,7 @@ module GithubPullRequest
 
   private
     def github_pr
-      @github_pr ||= Octokit.pull_request(ENV.fetch("GITHUB_REPO"), number)
+      @github_pr ||= Octokit.pull_request(Rails.application.config.groupthink[:github_repo], number)
     end
 
     def head_sha
@@ -89,8 +89,8 @@ module GithubPullRequest
     end
 
     def set_build_status(state, text, context)
-      Octokit.create_status(ENV.fetch("GITHUB_REPO"), sha, state.to_s,
-        target_url: "#{ENV.fetch("SITE_URL")}/proposals/#{number}",
+      Octokit.create_status(Rails.application.config.groupthink[:github_repo], sha, state.to_s,
+        target_url: "#{Rails.application.config.groupthink[:site_url]}/proposals/#{number}",
         description: text,
         context: context)
     end
@@ -104,8 +104,9 @@ module GithubPullRequest
     end
 
     def close_pr!
-      Octokit.add_comment(ENV.fetch("GITHUB_REPO"), number, I18n.t("help.resubmit"))
-      Octokit.close_pull_request(ENV.fetch("GITHUB_REPO"), number)
+      Octokit.add_comment(Rails.application.config.groupthink[:github_repo], number,
+I18n.t("help.resubmit"))
+      Octokit.close_pull_request(Rails.application.config.groupthink[:github_repo], number)
       true
     end
 

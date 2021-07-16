@@ -8,7 +8,8 @@ class IdeasController < ApplicationController
   before_action :authenticate_user!, only: [:comment]
 
   def index
-    @ideas = Octokit.issues(ENV.fetch("GITHUB_REPO"), labels: "groupthink::idea")
+    @ideas = Octokit.issues(Rails.application.config.groupthink[:github_repo],
+      labels: "groupthink::idea")
   end
 
   def show
@@ -23,7 +24,8 @@ class IdeasController < ApplicationController
       time: @idea.created_at
     }]
     # Add comments
-    comments = Octokit.issue_comments(ENV.fetch("GITHUB_REPO"), params[:id].to_i)
+    comments = Octokit.issue_comments(Rails.application.config.groupthink[:github_repo],
+      params[:id].to_i)
     @activity.concat(comments.map { |comment|
       ["comment", {
         body: comment.body,
@@ -40,13 +42,14 @@ class IdeasController < ApplicationController
   end
 
   def comment
-    user_github_connection.add_comment(ENV.fetch("GITHUB_REPO"), @idea["number"], params[:comment])
+    user_github_connection.add_comment(Rails.application.config.groupthink[:github_repo],
+      @idea["number"], params[:comment])
     redirect_to idea_path(@idea["number"])
   end
 
   private
     def get_idea
-      @idea = Octokit.issue(ENV.fetch("GITHUB_REPO"), params[:id].to_i)
+      @idea = Octokit.issue(Rails.application.config.groupthink[:github_repo], params[:id].to_i)
       raise ActiveRecord::RecordNotFound if @idea.nil?
     end
 end

@@ -12,7 +12,7 @@ module GithubIssue
   # @return [Array] A list of comments
   #
   def github_comments
-    Octokit.issue_comments(ENV.fetch("GITHUB_REPO"), number)
+    Octokit.issue_comments(Rails.application.config.groupthink[:github_repo], number)
   end
 
   private
@@ -22,6 +22,6 @@ module GithubIssue
     # @param [String] body The text of the comment to add
     #
     def github_add_comment(body)
-      Octokit.add_comment(ENV.fetch("GITHUB_REPO"), number, body)
+      Octokit.add_comment(Rails.application.config.groupthink[:github_repo], number, body)
     end
 end

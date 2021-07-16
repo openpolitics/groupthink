@@ -76,9 +76,9 @@ module Votable
 
     def post_instructions
       vars = {
-        site_url: ENV.fetch("SITE_URL"),
+        site_url: Rails.application.config.groupthink[:site_url],
         proposal_number: number,
-        repo: ENV.fetch("GITHUB_REPO"),
+        repo: Rails.application.config.groupthink[:github_repo],
         proposer: proposer.login,
       }.merge(Rules)
       github_add_comment [INSTRUCTION_HEADER, I18n.t("help.instruction_comment", vars)].join("\n")
