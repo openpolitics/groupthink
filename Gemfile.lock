@@ -197,7 +197,7 @@ GEM
     guard-rubocop (1.4.0)
       guard (~> 2.0)
       rubocop (< 2.0)
-    haml (5.2.1)
+    haml (5.2.2)
       temple (>= 0.8.0)
       tilt
     hashdiff (1.0.1)
