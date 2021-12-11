@@ -178,7 +178,7 @@ GEM
       railties (>= 3.2, < 7)
     formatador (0.3.0)
     github-markup (4.0.0)
-    globalid (0.5.2)
+    globalid (1.0.0)
       activesupport (>= 5.0)
     guard (2.18.0)
       formatador (>= 0.2.4)
