@@ -180,7 +180,7 @@ GEM
     ffi (1.15.5)
     font-awesome-rails (4.7.0.8)
       railties (>= 3.2, < 8.0)
-    formatador (0.3.0)
+    formatador (1.0.0)
     github-markup (4.0.0)
     globalid (1.0.0)
       activesupport (>= 5.0)
