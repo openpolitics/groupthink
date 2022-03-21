@@ -147,7 +147,7 @@ GEM
       mail (~> 2.7)
     erubi (1.10.0)
     execjs (2.8.1)
-    factory_bot (6.2.0)
+    factory_bot (6.2.1)
       activesupport (>= 5.0.0)
     factory_bot_rails (6.2.0)
       factory_bot (~> 6.2.0)
