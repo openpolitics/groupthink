@@ -459,7 +459,7 @@ GEM
     thor (1.2.1)
     tilt (2.0.10)
     timecop (0.9.5)
-    tins (1.31.0)
+    tins (1.31.1)
       sync
     turbolinks (5.2.1)
       turbolinks-source (~> 5.2)
