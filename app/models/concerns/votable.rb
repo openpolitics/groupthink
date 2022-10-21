@@ -12,9 +12,9 @@ module Votable
 
   def score
     weights = {
-      yes: Rules.yes_weight,
-      no: Rules.no_weight,
-      block: Rules.block_weight,
+      yes: Settings.yes_weight,
+      no: Settings.no_weight,
+      block: Settings.block_weight,
     }
     interactions.all.inject(0) do |sum, i|
       sum + (weights[i.last_vote.try(:to_sym)] || 0)
@@ -22,11 +22,11 @@ module Votable
   end
 
   def passed?
-    score >= Rules.pass_threshold
+    score >= Settings.pass_threshold
   end
 
   def blocked?
-    score < Rules.block_threshold
+    score < Settings.block_threshold
   end
 
   def count_votes!
@@ -80,7 +80,7 @@ module Votable
         proposal_number: number,
         repo: ENV.fetch("GITHUB_REPO"),
         proposer: proposer.login,
-      }.merge(Rules)
+      }.merge(Settings)
       github_add_comment [INSTRUCTION_HEADER, I18n.t("help.instruction_comment", vars)].join("\n")
     end
 end

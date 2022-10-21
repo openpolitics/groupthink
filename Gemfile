@@ -33,6 +33,13 @@ gem "jbuilder", "~> 2.11"
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
+group :development, :test do
+  gem "dotenv-rails", require: "dotenv/rails-now"
+end
+
+# Custom application configuration
+gem "config"
+
 # Github
 gem "octokit", "~> 4.25"
 
@@ -57,9 +64,6 @@ gem "rinku", require: "rails_rinku"
 
 gem "kaminari"
 
-# Custom application configuration
-gem "config"
-
 gem "sucker_punch", "~> 3.0"
 
 # Postgres in production for Heroku
@@ -77,7 +81,6 @@ group :development, :test do
   gem "simplecov-lcov"
   gem "rspec-rails"
   gem "rspec_junit_formatter" # For CircleCI test reporting
-  gem "dotenv-rails"
   gem "database_cleaner"
   gem "email_spec"
   gem "factory_bot_rails"

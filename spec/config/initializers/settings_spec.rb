@@ -2,7 +2,7 @@
 
 require "rails_helper"
 
-RSpec.describe Rules do
+RSpec.describe Settings do
   around do |example|
     env = {
       YES_WEIGHT: "1",
@@ -19,7 +19,7 @@ RSpec.describe Rules do
     end
   end
 
-  it "creates a global Rules object" do
+  it "creates a global Settings object" do
     expect(described_class).to be_present
   end
 
