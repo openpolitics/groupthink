@@ -70,7 +70,7 @@ module ProposalsHelper
   def chunk_diff(diff)
     # Parse all lines
     lines = [[:unchanged, ""]]
-    lines += diff.split("\n").map { |line| parse_diff_line(line) }.compact
+    lines += diff.split("\n").filter_map { |line| parse_diff_line(line) }
     # Detect groups where the line type changes
     grouped_lines = lines.slice_when { |before, after| before[0] != after[0] }
     # Merge grouped lines into a single chunk
