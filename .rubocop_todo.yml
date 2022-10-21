@@ -76,3 +76,9 @@ Style/Documentation:
 Rails/OutputSafety:
   Exclude:
     - 'app/helpers/proposals_helper.rb'
+
+RSpec/RSpec/VerifiedDoubleReference:
+  Exclude:
+    - 'spec/presenters/proposal_presenter_spec.rb'
+    - 'spec/models/proposal_spec.rb'
+    - 'spec/models/concerns/votable_spec.rb'
