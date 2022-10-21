@@ -10,9 +10,9 @@ RSpec.describe ProposalsMailer, type: :mailer do
   end
 
   describe "new_proposal" do
-    let(:proposer) { FactoryBot.create :user }
-    let(:voter) { FactoryBot.create :user, email: "voter@mydomain.com" }
-    let(:proposal) { FactoryBot.create :proposal, proposer: voter }
+    let(:proposer) { create :user }
+    let(:voter) { create :user, email: "voter@mydomain.com" }
+    let(:proposal) { create :proposal, proposer: voter }
     let(:mail) { described_class.new_proposal(voter, proposal) }
 
     it "sends email to right person" do
