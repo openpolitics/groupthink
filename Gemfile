@@ -97,7 +97,7 @@ group :development do
   gem "web-console"
   gem "listen", "~> 3.7"
   gem "spring"
-  gem "spring-watcher-listen", "~> 2.0"
+  gem "spring-watcher-listen", "~> 2.1"
   gem "letter_opener"
   gem "guard"
   gem "guard-rspec", require: false
