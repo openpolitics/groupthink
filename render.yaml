@@ -12,6 +12,10 @@ services:
       - 'votebot.openpolitics.org.uk'
     envVars:
       - fromGroup: settings
+      - key: DATABASE_URL
+        fromDatabase:
+          name: groupthink
+          property: connectionString
 
 databases:
   - name: groupthink
@@ -66,7 +70,3 @@ envVarGroups:
         sync: false
       - key: BUGSNAG_API_KEY
         sync: false
-      - key: DATABASE_URL
-        fromDatabase:
-          name: groupthink
-          property: connectionString
