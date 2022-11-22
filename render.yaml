@@ -11,6 +11,15 @@ services:
     domains:
       - 'votebot.openpolitics.org.uk'
     envVars:
+      - from: settings
+
+databases:
+  - name: groupthink
+    ipAllowList: []
+
+envVarGroups:
+  - name: settings
+    envVars:
       - key: GITHUB_APP_ID
         sync: false
       - key: GITHUB_OAUTH_TOKEN
@@ -67,7 +76,3 @@ services:
         fromDatabase:
           name: groupthink
           property: connectionString
-
-databases:
-  - name: groupthink
-    ipAllowList: []
