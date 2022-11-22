@@ -3,13 +3,11 @@
 # Schema documented at https://render.com/docs/yaml-spec
 services:
   - type: web
-    name: votebot
+    name: groupthink
     env: docker
     dockerfilePath: Dockerfile.render
     plan: free
     numInstances: 1
-    domains:
-      - 'votebot.openpolitics.org.uk'
     envVars:
       - fromGroup: settings
       - key: DATABASE_URL
