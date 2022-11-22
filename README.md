@@ -57,7 +57,7 @@ Keep hold of the generated token - you'll need it in a minute.
 
 ### Create a GitHub OAuth application
 
-Visit the [Developer applications page](https://github.com/settings/developers) on your GitHub account to set up user login via GitHub. Register a new application; in the homepage and callback URLs enter the URL of the application you are about to deploy. Yes, that's slightly tricky. It will be something like `https://your-unique-groupthink-app-name.herokuapp.com`. Make up the `your-unique-groupthink-app-name` part. The name of your project will probably do.
+Visit the [Developer applications page](https://github.com/settings/developers) on your GitHub account to set up user login via GitHub. Register a new application; in the homepage and callback URLs enter the URL of the application you are about to deploy. Yes, that's slightly tricky. It will be something like `https://your-unique-groupthink-app-name.onrender.com`. Make up the `your-unique-groupthink-app-name` part. The name of your project will probably do.
 
 Again, keep hold of the client ID and secret. You'll need them in the next step.
 
@@ -75,7 +75,7 @@ Enter the personal access token, client ID, and secret from the previous stage. 
 
 ### Configure the editor link on your site
 
-Go to the `_config.yml` file in your site's GitHub repository, and add the URL of your deployed Heroku app to the `groupthink_url` setting. It will be the same as what you put in above for the GitHub application homepage, i.e. `https://your-unique-groupthink-app-name.herokuapp.com`
+Go to the `_config.yml` file in your site's GitHub repository, and add the URL of your deployed Heroku app to the `groupthink_url` setting. It will be the same as what you put in above for the GitHub application homepage, i.e. `https://your-unique-groupthink-app-name.onrender.com`
 
 ### Enable the nightly tasks
 
