@@ -16,8 +16,8 @@ env:
   BLOCK_THRESHOLD: -1
   PROJECT_URL: https://openpolitics.org.uk/manifesto
   PROJECT_NAME: The OpenPolitics Manifesto
-  SENDGRID_USERNAME: foo
-  SENDGRID_PASSWORD: bar
+  SMTP_USERNAME: foo
+  SMTP_PASSWORD: bar
 jobs:
   test:
     runs-on: ubuntu-latest
