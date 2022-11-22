@@ -4,8 +4,9 @@
 services:
   - type: web
     name: groupthink
-    env: docker
-    dockerfilePath: Dockerfile.render
+    env: ruby
+    buildCommand: "./bin/render-build.sh"
+    startCommand: "bundle exec bin/rails server -p $PORT -e $RAILS_ENV"
     plan: free
     numInstances: 1
     envVars:
