@@ -56,8 +56,6 @@ envVarGroups:
         value: 7
       - key: MAX_AGE
         value: 90
-      - key: MIN_AGE
-        value: 7
       - key: PASS_THRESHOLD
         value: 2
       - key: BLOCK_THRESHOLD
