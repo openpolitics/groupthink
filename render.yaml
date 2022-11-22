@@ -11,7 +11,7 @@ services:
     domains:
       - 'votebot.openpolitics.org.uk'
     envVars:
-      - from: settings
+      - fromGroup: settings
 
 databases:
   - name: groupthink
@@ -36,13 +36,10 @@ envVarGroups:
         sync: false
       - key: PROJECT_LOGO
         sync: false
-        value:
       - key: FAVICON_URL
         sync: false
-        value:
       - key: EMAIL_DOMAIN
         sync: false
-        value: example.com
       - key: SMTP_SERVER
         sync: false
       - key: SMTP_USERNAME
@@ -69,7 +66,6 @@ envVarGroups:
         value: false
       - key: BOOTSTRAP_CSS_URL
         sync: false
-        value:
       - key: BUGSNAG_API_KEY
         sync: false
       - key: DATABASE_URL
