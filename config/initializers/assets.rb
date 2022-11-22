@@ -15,3 +15,4 @@ Rails.application.config.assets.version = "1.0"
 
 # Turn off concurrency in asset exporting, there's a bug: https://github.com/rails/sprockets/issues/581
 Rails.application.config.assets.export_concurrent = false
+Sprockets.export_concurrent = false

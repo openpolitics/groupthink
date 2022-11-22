@@ -57,17 +57,17 @@ Keep hold of the generated token - you'll need it in a minute.
 
 ### Create a GitHub OAuth application
 
-Visit the [Developer applications page](https://github.com/settings/developers) on your GitHub account to set up user login via GitHub. Register a new application; in the homepage and callback URLs enter the URL of the application you are about to deploy. Yes, that's slightly tricky. It will be something like `https://your-unique-groupthink-app-name.herokuapp.com`. Make up the `your-unique-groupthink-app-name` part. The name of your project will probably do.
+Visit the [Developer applications page](https://github.com/settings/developers) on your GitHub account to set up user login via GitHub. Register a new application; in the homepage and callback URLs enter the URL of the application you are about to deploy. Yes, that's slightly tricky. It will be something like `https://your-unique-groupthink-app-name.onrender.com`. Make up the `your-unique-groupthink-app-name` part. The name of your project will probably do.
 
 Again, keep hold of the client ID and secret. You'll need them in the next step.
 
 **Note:** if you created the manifesto repository in a GitHub organisation, the OAuth application should be owned by the same organisation. If not, users in the organisation will not be able to create new proposals unless they manually grant access to the organisation when they log in.
 
-### Deploy the code to Heroku
+### Deploy the code to Render
 
 Hit this big deploy button here:
 
-[![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy)
+[![Deploy to Render](https://render.com/images/deploy-to-render-button.svg)](https://render.com/deploy?repo=https://github.com/openpolitics/groupthink)
 
 Then, enter all the relevant details. Use the same app name you did in the step above, `your-unique-groupthink-app-name`. If it's taken, don't worry, you can go back and edit the GitHub application settings later.
 
@@ -75,7 +75,7 @@ Enter the personal access token, client ID, and secret from the previous stage. 
 
 ### Configure the editor link on your site
 
-Go to the `_config.yml` file in your site's GitHub repository, and add the URL of your deployed Heroku app to the `groupthink_url` setting. It will be the same as what you put in above for the GitHub application homepage, i.e. `https://your-unique-groupthink-app-name.herokuapp.com`
+Go to the `_config.yml` file in your site's GitHub repository, and add the URL of your deployed Heroku app to the `groupthink_url` setting. It will be the same as what you put in above for the GitHub application homepage, i.e. `https://your-unique-groupthink-app-name.onrender.com`
 
 ### Enable the nightly tasks
 

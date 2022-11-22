@@ -1,0 +1,64 @@
+# Schema documented at https://render.com/docs/yaml-spec
+services:
+  - type: web
+    name: groupthink-web
+    env: ruby
+    buildCommand: "./bin/render-build.sh"
+    startCommand: "bundle exec bin/rails server -p $PORT -e $RAILS_ENV"
+    plan: free
+    numInstances: 1
+    envVars:
+      - key: GITHUB_APP_ID
+        sync: false
+      - key: GITHUB_OAUTH_TOKEN
+        sync: false
+      - key: GITHUB_APP_SECRET
+        sync: false
+      - key: GITHUB_REPO
+        sync: false
+      - key: SITE_URL
+        sync: false
+      - key: PROJECT_URL
+        sync: false
+      - key: PROJECT_NAME
+        sync: false
+      - key: PROJECT_LOGO
+        sync: false
+      - key: FAVICON_URL
+        sync: false
+      - key: EMAIL_DOMAIN
+        sync: false
+      - key: SMTP_SERVER
+        sync: false
+      - key: SMTP_USERNAME
+        sync: false
+      - key: SMTP_PASSWORD
+        sync: false
+      - key: BLOCK_WEIGHT
+        value: -10
+      - key: YES_WEIGHT
+        value: 1
+      - key: NO_WEIGHT
+        value: -1
+      - key: MIN_AGE
+        value: 7
+      - key: MAX_AGE
+        value: 90
+      - key: PASS_THRESHOLD
+        value: 2
+      - key: BLOCK_THRESHOLD
+        value: -1
+      - key: ALL_AUTHORS_CAN_VOTE
+        value: false
+      - key: BOOTSTRAP_CSS_URL
+        sync: false
+      - key: BUGSNAG_API_KEY
+        sync: false
+      - key: DATABASE_URL
+        fromDatabase:
+          name: groupthink-postgres
+          property: connectionString
+
+databases:
+  - name: groupthink-postgres
+    ipAllowList: []
