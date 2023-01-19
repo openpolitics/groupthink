@@ -445,7 +445,7 @@ GEM
     tilt (2.0.11)
     timecop (0.9.5)
     timeout (0.3.1)
-    tins (1.31.1)
+    tins (1.32.1)
       sync
     turbolinks (5.2.1)
       turbolinks-source (~> 5.2)
