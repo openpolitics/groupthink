@@ -95,7 +95,7 @@ end
 
 group :development do
   gem "web-console"
-  gem "listen", "~> 3.7"
+  gem "listen", "~> 3.8"
   gem "spring"
   gem "spring-watcher-listen", "~> 2.1"
   gem "letter_opener"
