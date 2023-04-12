@@ -42,7 +42,7 @@ gem "bugsnag"
 # Devise and github for login
 gem "devise"
 gem "omniauth-github"
-gem "omniauth-rails_csrf_protection", "~> 0.1"
+gem "omniauth-rails_csrf_protection", "~> 1.0"
 gem "cancancan"
 gem "rails_admin"
 gem "paper_trail"
